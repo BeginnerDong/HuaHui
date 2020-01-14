@@ -1,0 +1,22 @@
+
+	/* 分公司公司 */
+	.companyList ul{align-items: flex-start;flex-wrap: wrap;}
+	.companyList li{width: 48%;background: #fff;box-sizing: border-box;padding: 40px 4%;text-align: right; margin-bottom:30px;height: 280px;font-size: 15px;}
+	.companyList li p{margin-bottom: 20px;padding-right: 40px;line-height: 24px;background: url(../images/contact-icon1.png) no-repeat top right/20px 20px;}
+	.companyList li p:last-child{margin-bottom: 0;}
+	.companyList li p.compay{background-image: url(../images/contact-icon1.png);font-size: 16px;font-weight: bold;}
+	.companyList li p.adrs{background-image: url(../images/contact-icon2.png)}
+	.companyList li p.phone{background-image: url(../images/contact-icon3.png)}
+	.companyList li p.zipCode{background-image: url(../images/contact-icon4.png)}
+	.companyList li p.fax{background-image: url(../images/contact-icon5.png)}
+	
+	.companyList li:nth-of-type(2n){margin-left: 4%;text-align: left;}
+	.companyList li:nth-of-type(2n) p{padding-left:40px;padding-right: 0;background-position: top left;}
+
+
+@media only screen and (max-width: 500px){
+	.companyList li{text-align: left;padding: 20px 4%;font-size: 12px;height: auto;min-height: 200px;margin-bottom: 15px;}
+	.companyList li p{background-position: 0px 2px!important;background-size: 18px 18px!important;padding-left:25px!important;padding-right: 0;margin-bottom: 10px;line-height: 20px;}
+	.companyList li p.compay{font-size: 14px;}
+}
+

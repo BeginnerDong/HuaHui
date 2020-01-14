@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<meta name="renderer" content="webkit">
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<title>首页</title>
+		<script type="text/javascript" src="./js/vue.js"></script>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/base.js"></script>
+		<script type="text/javascript" src="js/include.js"></script>
+		<script type="text/javascript" src="js/swiper.min.js"></script>
+		<link type="text/css" rel="stylesheet" href="css/public.css">
+		<link type="text/css" rel="stylesheet" href="css/index.css">
+		<link type="text/css" rel="stylesheet" href="css/swiper.min.css">
+		<link type="text/css" rel="stylesheet" href="css/ind-brand.css">
+	</head>
+
+<body>
+	<div id="app">
+		<include src="header.html"></include>
+		<include src="banner.html"></include>
+		
+		<!-- 案例新闻 -->
+		<div class="ind-dynamic pdb80 f5bj">
+			<div class="w1200">
+				<div class="pubtit flexRowBetween">
+					<div></div>
+					<div class="flexCenter">
+						<img class="icon" src="images/home-icon1.png" >
+						<h1 class="title">案例新闻</h1>
+					</div>
+					<div class="flexEnd more" @click="seltAnliNav">更多<img class="arrowR" src="images/home-icon2.png" ></div>
+					
+				</div>
+				<div class="item">
+					<a class="flexRowBetween" href="newsdetail.html">
+						<div class="texbox">
+							<div class="tit avoidOverflow">这届男篮输了，但希望还在，我们可以做的更好！</div>
+							<p class="form">这是来自小编的啐啐念</p>
+							<p class="text2 avoidOverflow4">随着终场哨响，中国男篮对尼日利亚队的比分定格在了73:86,这同时也意味着这届中国男篮带着留给球迷的遗憾结束了这次世界杯的征程。</p>
+						</div>
+						<div class="imgBox">
+							<img src="images/home-img2.png" >
+						</div>
+					</a>
+				</div>
+				<div class="item flexRowBetween">
+					<a class="flexRowBetween" href="newsdetail.html">
+						<div class="imgBox">
+							<img src="images/home-img3.png" >
+						</div>
+						<div class="texbox">
+							<div class="tit avoidOverflow">【快报】有一款扬声器，不至于优雅</div>
+							<p class="form"></p>
+							<p class="text2 avoidOverflow4">11月5日晚上，主席和其夫人在上海豫园会见法国总统马克龙和夫人布丽吉特，主席对马克龙总统再次访华并第一次来上海表示欢迎。</p>
+						</div>
+					</a>
+				</div>
+				<div class="item flexRowBetween">
+					<a class="flexRowBetween" href="newsdetail.html">
+						<div class="texbox">
+							<div class="tit avoidOverflow">华汇代理了Wysiwyg</div>
+							<p class="form"></p>
+							<p class="text2 avoidOverflow4">Wysiwyg是加拿大CAST Lighting公司推出一款集CAD,绘图，数据。可视化和虚拟显示控制功能的多合一灯光设计软件，改名称来源于what you see is what you get（所有即可得），这个名字可以看出开发商的指导思想和软件开发理念。</p>
+						</div>
+						<div class="imgBox">
+							<img src="images/home-img4.png" >
+						</div>
+					</a>
+				</div>
+			</div>
+		</div>
+		
+		<div class="black-bj" v-show="is_show"></div>
+		<div class="flexColumn anliSetNav" v-show="is_anliSetNav">
+			<a class="btn" :class="seltCurr==1?'on':''" @click="changeCurr('1')" :href="seltCurr==1?'newsCenter.html':''">新闻中心</a>
+			<a class="btn" :class="seltCurr==2?'on':''" @click="changeCurr('2')" :href="seltCurr==2?'anliCenter.html':''">案例中心</a>
+		</div>
+		
+		<div class="w1200">
+			<div class="pubtit flexRowBetween">
+				<div></div>
+				<div class="flexCenter">
+					<img class="icon" src="images/home-icon3.png" >
+					<h1 class="title">品牌介绍</h1>
+				</div>
+				<div><a class="flexEnd more" href="brand.html">更多<img class="arrowR" src="images/home-icon2.png" ></a></div>
+			</div>
+			
+			<div class="ind-brand pdb80">
+				<div class="item flexRowBetween">
+					<div class="half TwoPic">
+						<div class="box flexCenter">
+							<img class="logo" src="images/brand-img3.png" >
+							<p class="text center flexCenter">
+								<em>创立于1984年的L-Acoustics，由最初植根物理和基础声学领域，到研发出具有高功率的同轴系统，再到发明推出波阵面纠正技术（Wavefront Sculpture Techonlogy）和著名的V-DOSC系统，L-Acoustics在不断革新专业音频领域，并被赞誉为现代线声源阵列的鼻祖。</em></p>
+						</div>
+						<div class="box flexCenter">
+							<img class="logo" src="images/brand-img1.png" >
+							<p class="text center flexCenter"><em>创立于1984年的L-Acoustics，由最初植根物理和基础声学领域，到研发出具有高功率的同轴系统，再到发明推出波阵面纠正技术（Wavefront Sculpture Techonlogy）和著名的V-DOSC系统，L-Acoustics在不断革新专业音频领域，并被赞誉为现代线声源阵列的鼻祖。</em></p>
+						</div>
+					</div>
+					<div class="half onePic">
+						<div class="box flexCenter">
+							<img class="logo" class="" src="images/brand-img2.png" >
+							<p class="text center flexCenter"><em>创立于1984年的L-Acoustics，由最初植根物理和基础声学领域，到研发出具有高功率的同轴系统，再到发明推出波阵面纠正技术（Wavefront Sculpture Techonlogy）和著名的V-DOSC系统，L-Acoustics在不断革新专业音频领域，并被赞誉为现代线声源阵列的鼻祖。</em></p>
+						</div>
+					</div>
+				</div>
+				<div class="item flexRowBetween">
+					<div class="half onePic">
+						<div class="box flexCenter">
+							<img class="logo" class="" src="images/brand-img.png" >
+							<p class="text center flexCenter"><em>创立于1984年的L-Acoustics，由最初植根物理和基础声学领域，到研发出具有高功率的同轴系统，再到发明推出波阵面纠正技术（Wavefront Sculpture Techonlogy）和著名的V-DOSC系统，L-Acoustics在不断革新专业音频领域，并被赞誉为现代线声源阵列的鼻祖。</em></p>
+						</div>
+					</div>
+					<div class="half TwoPic">
+						<div class="box flexCenter">
+							<img class="logo" src="images/brand-img4.png" >
+							<p class="text center flexCenter"><em>创立于1984年的L-Acoustics，由最初植根物理和基础声学领域，到研发出具有高功率的同轴系统，再到发明推出波阵面纠正技术（Wavefront Sculpture Techonlogy）和著名的V-DOSC系统，L-Acoustics在不断革新专业音频领域，并被赞誉为现代线声源阵列的鼻祖。</em></p>
+						</div>
+						<div class="box flexCenter">
+							<img class="logo" src="images/brand-img5.png" >
+							<p class="text center flexCenter"><em>创立于1984年的L-Acoustics，由最初植根物理和基础声学领域，到研发出具有高功率的同轴系统，再到发明推出波阵面纠正技术（Wavefront Sculpture Techonlogy）和著名的V-DOSC系统，L-Acoustics在不断革新专业音频领域，并被赞誉为现代线声源阵列的鼻祖。</em></p>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		
+		<include src="footer.html"></include>
+		
+	</div>
+</body>
+
+	
+	<script type="text/javascript">
+		var app = new Vue({
+		    el: '#app',
+		    data:function(){
+		        return {
+		        	banner_index:0,
+					is_show:false,
+					wx_show:2,
+					mainData: [],
+					labelData: [],
+					is_anliSetNav:false,
+					seltCurr:0
+		        }
+		    },
+		    methods: {
+				seltAnliNav(){
+					const self = this;
+					self.is_show = !self.is_show;
+					self.is_anliSetNav = !self.is_anliSetNav
+				},
+				changeCurr(seltCurr){
+					const self = this;
+					if(seltCurr!=self.seltCurr){
+						self.seltCurr = seltCurr
+					}
+				},
+				getMainData: function(id){
+				    var self = this;
+				    var callback = function(res){
+				        console.log('getMainData', res);
+				        self.mainData.push.apply(self.mainData,res.info.data);
+				        for (var i = 0; i < self.mainData.length; i++) {
+				        	self[self.mainData[i].title] = self.mainData[i];
+				        };
+				        self.getNewsData()
+				    };
+					console.log('self.mainData',self.mainData)
+				    window.base.labelGet(postData, callback);
+				}
+				
+		    }
+		});
+	</script>
+	<style>
+		.anliSetNav{position: fixed;top: 50%;left: 50%;transform: translate(-50%,-50%);z-index: 41;}
+		.anliSetNav .btn{width: 150px;line-height: 50px;text-align: center;border: 1px solid #fff;border-radius: 8px;color: #fff;margin: 15px auto;font-size: 18px;}
+		.anliSetNav .btn.on{padding:5px 10px;}
+		
+		@media only screen and (max-width: 500px){
+			.anliSetNav .btn{width: 120px;line-height: 40px;font-size: 16px; border-radius: 5px;}
+			
+		}
+	</style>
+</html>

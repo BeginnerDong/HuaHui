@@ -1,0 +1,15 @@
+
+.orderNav{padding: 25px 0;}
+.orderNav .tt{ text-align: center; line-height:40px;box-sizing: border-box;margin: 0 3%;font-size: 16px; color: #666;}
+.orderNav .tt .icon{width: 24px;height: 24px;margin-right: 10px;}
+.orderNav .tt.on{ color: #222; font-weight: bold;}
+
+@media only screen and (max-width: 1000px){
+	.orderNav{padding: 15px 0;}
+}
+
+@media only screen and (max-width: 500px){
+	.orderNav{padding: 10px 0; flex-wrap: wrap;}
+	.orderNav .tt{font-size: 14px;margin: 0 4%;}
+	.orderNav .tt .icon{width: 18px;height: 18px;margin-right: 5px;}
+}

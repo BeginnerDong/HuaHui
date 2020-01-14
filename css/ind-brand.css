@@ -1,0 +1,39 @@
+
+
+/* Ʒ�ƽ��� */
+.ind-brand .item{align-items: flex-start;margin-bottom: 30px;flex-wrap: wrap;}
+.ind-brand .half{width: 48.5%;align-items: flex-start;}
+.ind-brand .box{width: 100%;background: #F5F5F5;position: relative;overflow: hidden;}
+.ind-brand .onePic .box{height: 700px;}
+.ind-brand .TwoPic .box{height: 335px;}
+.ind-brand .TwoPic .box:first-child{margin-bottom: 30px;}
+.ind-brand .TwoPic .box .logo{width: 220px;height: 220px;display: block;}
+.ind-brand .half .box .text{width: 100%;height: 100%;overflow: hidden;position: absolute;top: 100%;right: 0;bottom: 0;left: 0;background-image: linear-gradient(to bottom,rgba(0,0,0,0.2) , rgba(0,0,0,0.8));box-sizing: border-box;color: #fff;line-height: 32px;font-size: 18px;transition:all 0.5s  ease-in-out}
+.ind-brand .half .box .text em{position: absolute;bottom: 10px;left: 0;right: 0;display: block;width: 100%;padding:20px;box-sizing: border-box;}
+.ind-brand .onePic .box .logo{width: 280px;height: 280px;}
+.ind-brand .half .box:hover .text{top: 0;}
+
+@media only screen and (max-width: 1000px){
+	.ind-brand .item{margin-bottom: 20px;}
+	.ind-brand .half .box .text{height:70px;font-size: 13px;top: auto;}
+	.ind-brand .half .box .text em{bottom: 15px;overflow: hidden;text-overflow: ellipsis;display:-webkit-box;word-break:break-all;-webkit-box-orient:vertical; -webkit-line-clamp:2;line-height: 24px;padding: 0 4%;}
+	
+	.ind-brand .TwoPic .box{height: 210px;}
+	.ind-brand .TwoPic .box .logo{width: 135px;height: 135px;}
+	
+	.ind-brand .onePic .box{height: 450px;}
+	.ind-brand .onePic .box .logo{width:150px;height: 150px;}
+	.ind-brand .half .box:hover .text{top: auto;bottom: 0;}
+}
+
+@media only screen and (max-width: 500px){
+	.ind-brand .item{margin-bottom: 15px;}
+	.ind-brand .half .box .text{height:56px;font-size: 12px;}
+	.ind-brand .half .box .text em{bottom: 10px;line-height: 20px;}
+	
+	.ind-brand .TwoPic .box:first-child{margin-bottom: 15px;}
+	.ind-brand .TwoPic .box{height: 115px;}
+	.ind-brand .TwoPic .box .logo{width: 80px;height: 80px;}
+	.ind-brand .onePic .box{height: 245px;}
+	.ind-brand .onePic .box .logo{width: 90px;height: 90px;}
+}

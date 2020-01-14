@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<meta name="renderer" content="webkit">
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<title>详情</title>
+		<script type="text/javascript" src="./js/vue.js"></script>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/base.js"></script>
+		<script type="text/javascript" src="js/include.js"></script>
+		<script type="text/javascript" src="js/swiper.min.js"></script>
+		<link type="text/css" rel="stylesheet" href="css/public.css">
+		<link type="text/css" rel="stylesheet" href="css/swiper.min.css">
+		<link type="text/css" rel="stylesheet" href="css/orderNav.css">
+		<link type="text/css" rel="stylesheet" href="css/proDetail.css">
+		
+		<style>
+			.orderNav .tt.on{position: relative;color: #222;font-weight: bold;}
+			.orderNav .tt.on:after{content: '';width: 60px;height: 3px;background: #222222;position: absolute;bottom: 0;left: 50%;transform: translateX(-50%);}
+		</style>
+	</head>
+
+<body>
+	<div id="app">
+		<include src="header.html"></include>
+		
+		<div class="product-head w1200 flexRowBetween borderB1">
+			<div class="ll flexCenter">
+				<div class="view">
+					<div class="swiper-container">
+						<span class="arrow arrow-left"></span>
+						<span class="arrow arrow-right"></span>
+						<div class="swiper-wrapper">
+							<div class="swiper-slide flexCenter">
+								<img src="images/details-img4.jpg" alt="">
+							</div>
+							<div class="swiper-slide flexCenter">
+								<img src="images/details-img5.jpg" alt="">
+							</div>
+							<div class="swiper-slide flexCenter">
+								<img src="images/product-img6.png" alt="">
+							</div>
+							<div class="swiper-slide flexCenter">
+								<img src="images/product-img4.png" alt="">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="rr">
+				<h1 class="ftn title">标题DiGiCo SD7</h1>
+					<div class="preview">
+						<span class="arrow arrow-left"></span>
+						<span class="arrow arrow-right"></span>
+						<div class="swiper-container">
+							<div class="swiper-wrapper">
+								<div class="swiper-slide">
+									<img src="images/details-img4.jpg" alt="">
+								</div>
+								<div class="swiper-slide">
+									<img src="images/details-img5.jpg" alt="">
+								</div>
+								<div class="swiper-slide">
+									<img src="images/product-img6.png" alt="">
+								</div>
+								<div class="swiper-slide">
+									<img src="images/product-img4.png" alt="">
+								</div>
+							</div>
+						</div>
+					</div>
+				
+			</div>
+		</div>
+		<div class="borderB1"></div>
+		
+		<div class="w1100">
+			<div class="orderNav flexCenter">
+				<span class="tt flexCenter" :class="navCurr==1?'on':''" @click="changeNavCurr('1')">参数规格</span>
+				<span class="tt flexCenter" :class="navCurr==2?'on':''" @click="changeNavCurr('2')">视频</span>
+			</div>
+			<div class="xqCont">
+				<div class="xqPic" v-show="navCurr==1">
+					<img src="images/details-img1.jpg" >
+				</div>
+				
+				<div class="videoCont" v-show="navCurr==2">
+					<div><img src="images/details-img2.jpg" ></div>
+					<div class="flexRowBetween">
+						<p>DiGiCo SD系列教程01</p>
+						<p class="flexEnd red fs13">
+							<img style="width:17px;height: 20px;" src="images/details-icon.png" >
+							<em class="mgl10">下载</em>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="pdb80">
+			
+		</div>
+		
+		<include src="footer.html"></include>
+		
+	</div>
+</body>
+
+<script>
+		var app = new Vue({
+		    el: '#app',
+		    data:function(){
+		        return {
+		        	banner_index:0,
+					is_show:false,
+					wx_show:2,
+					mainData: [],
+					labelData: [],
+					navCurr:1
+		        }
+		    },
+		    methods: {
+				changeNavCurr(navCurr){
+					const self = this;
+					if(navCurr!=self.navCurr){
+						self.navCurr = navCurr
+					}
+				},
+				getMainData: function(id){
+				    var self = this;
+				    var callback = function(res){
+				        console.log('getMainData', res);
+				        self.mainData.push.apply(self.mainData,res.info.data);
+				        for (var i = 0; i < self.mainData.length; i++) {
+				        	self[self.mainData[i].title] = self.mainData[i];
+				        };
+				        self.getNewsData()
+				    };
+					console.log('self.mainData',self.mainData)
+				    window.base.labelGet(postData, callback);
+				}
+				
+		    }
+		});
+		
+		// 以下轮播图
+		var viewSwiper = new Swiper('.view .swiper-container', {
+			onSlideChangeStart: function() {
+				    updateNavPosition()
+			}
+		})
+		
+		$('.view .arrow-left,.preview .arrow-left').on('click', function(e) {
+			e.preventDefault()
+			if (viewSwiper.activeIndex == 0) {
+				viewSwiper.slideTo(viewSwiper.slides.length - 1, 1000);
+				return
+			}
+			viewSwiper.slidePrev()
+		})
+		$('.view .arrow-right,.preview .arrow-right').on('click', function(e) {
+			e.preventDefault()
+			if (viewSwiper.activeIndex == viewSwiper.slides.length - 1) {
+				viewSwiper.slideTo(0, 1000);
+				return
+			}
+			viewSwiper.slideNext()
+		})
+		
+		var previewSwiper = new Swiper('.preview .swiper-container', {
+			//visibilityFullFit: true,
+			slidesPerView: 'auto',
+			allowTouchMove: false,
+			onTap: function() {
+				    viewSwiper.slideTo(previewSwiper.clickedIndex)
+			}
+		})
+		
+		function updateNavPosition() {
+				$('.preview .active-nav').removeClass('active-nav')
+				var activeNav = $('.preview .swiper-slide').eq(viewSwiper.activeIndex).addClass('active-nav')
+				if (!activeNav.hasClass('swiper-slide-visible')) {
+					if (activeNav.index() > previewSwiper.activeIndex) {
+						var thumbsPerNav = Math.floor(previewSwiper.width / activeNav.width()) - 1
+						previewSwiper.slideTo(activeNav.index() - thumbsPerNav)
+					} else {
+						previewSwiper.slideTo(activeNav.index())
+					}
+				}
+			}
+	</script>
+</html>

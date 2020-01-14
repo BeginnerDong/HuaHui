@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<meta name="renderer" content="webkit">
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<title>联系我们</title>
+		<script type="text/javascript" src="./js/vue.js"></script>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/base.js"></script>
+		<script type="text/javascript" src="js/include.js"></script>
+		<link type="text/css" rel="stylesheet" href="css/public.css">
+		<link type="text/css" rel="stylesheet" href="css/about.css">
+		<link type="text/css" rel="stylesheet" href="css/companyList.css">
+	</head>
+
+<body>
+	<div id="app">
+		<include src="header.html"></include>
+		
+		<div class="f5bj">
+			<div class="w1200 pdb80">
+				<div class="pubtit flexCenter">
+					<img class="icon" src="images/contact-icon.png" >
+					<h1 class="title">分公司</h1>
+				</div>
+				<div class="companyList">
+					<ul class="flexRowBetween">
+						<li v-for="(item,index) in companyData" :key="index">
+							<p class="compay">{{item.compaytitle}}</p>
+							<p class="adrs">{{item.addrs}}</p>
+							<p class="phone">{{item.phone}}</p>
+							<p class="zipCode">{{item.zipCode}}</p>
+							<p class="fax">{{item.fax}}</p>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		
+		<div class="w1200 pdb80">
+			<div class="pubtit flexCenter">
+				<img class="icon" src="images/contact-icon6.png" >
+				<h1 class="title">在线留言</h1>
+			</div>
+			<div class="jianliMsg boxShaow">
+				<div>
+					<ul>
+						<li>
+							<span class="ll">姓名</span>
+							<div class="rr">
+								<input type="text" name="" value="" placeholder="请输入姓名" />
+							</div>
+						</li>
+						<li>
+							<span class="ll">电话</span>
+							<div class="rr">
+								<input type="text" name="" value="" placeholder="请输入联系电话" onkeyup="this.value=this.value.replace(/\D/g,'')" />
+							</div>
+						</li>
+						<li>
+							<span class="ll">自我评价</span>
+							<div class="rr">
+								<textarea style="padding: 0;" type="text" name="" value="" placeholder="请写出自身亮点，让HR第一眼关注你"></textarea>
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div class="submitbtn pdt40">
+					<button class="btn" type="button" style="width: 50%;">提交</button>
+				</div>
+			</div>
+		</div>
+		
+		<include src="footer.html"></include>
+		
+	</div>
+</body>
+
+	
+	<script type="text/javascript">
+		var app = new Vue({
+		    el: '#app',
+		    data:function(){
+		        return {
+		        	banner_index:0,
+					is_show:false,
+					wx_show:2,
+					mainData: [],
+					labelData: [],
+					companyData:[
+						{
+							compaytitle:'广州公司',
+							addrs:'广州市番禺区禺山西路363号联邦工业城',
+							phone:'020-84666123',
+							zipCode:'511490',
+							fax:'020-84664633'
+						},
+						{
+							compaytitle:'香港公司',
+							addrs:'香港葵涌梨木道73号海晖中心五楼505室',
+							phone:'00852-28939028',
+							fax:'00852-28931563'
+						},
+						{
+							compaytitle:'北京公司',
+							addrs:'北京市朝阳区百子湾路32号院苹果社区（北区）2号楼A座2509室',
+							phone:'010-58263030',
+							zipCode:'100022',
+							fax:'010-5876 9986'
+						},
+						{
+							compaytitle:'上海公司',
+							addrs:'上海市普陀区长征镇同普路1225弄13号楼一层',
+							phone:'021-62377366 021-6237266',
+							zipCode:'200333',
+							fax:'021-62377030'
+						},
+						{
+							compaytitle:'成都公司',
+							addrs:'四川省成都市龙泉驿区东洪路666号梵木创艺区A区2号馆一层',
+							phone:'021-62377366 021-6237266',
+							zipCode:'610110'
+						}
+					]
+		        }
+		    },
+		    methods: {
+				getMainData: function(id){
+				    var self = this;
+				    var callback = function(res){
+				        console.log('getMainData', res);
+				        self.mainData.push.apply(self.mainData,res.info.data);
+				        for (var i = 0; i < self.mainData.length; i++) {
+				        	self[self.mainData[i].title] = self.mainData[i];
+				        };
+				        self.getNewsData()
+				    };
+					console.log('self.mainData',self.mainData)
+				    window.base.labelGet(postData, callback);
+				}
+				
+		    }
+		});
+	</script>
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<meta name="renderer" content="webkit">
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<title>职位详情</title>
+		<script type="text/javascript" src="./js/vue.js"></script>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/base.js"></script>
+		<script type="text/javascript" src="js/include.js"></script>
+		<link type="text/css" rel="stylesheet" href="css/public.css">
+		
+	</head>
+
+<body>
+	<div id="app">
+		<include src="header.html"></include>
+		
+		<div class="f5bj jobName">
+			<div class="w1100 pdlr4 flexRowBetween">
+				<div class="JobTit">
+					<h1 class="name ftn fs20">职位职位职位</h1>
+					<p class="money">8千-1.5万</p>
+					<p class="lable pdb10">西安-未央区 3-5年 本科</p>
+					<p>2020-01-09至2020-01-30</p>
+				</div>
+				<div class="rr">
+					<button class="btn" type="button">投递简历</button>
+				</div>
+			</div>
+		</div>
+		<div>
+			<div class="w1100 pdlr4 jobCont">
+				
+				<!-- 职位亮点 -->
+				<div class="T-title flex">
+					<span>职位亮点</span>
+				</div>
+				<div class="jobLable flex">
+					<span>周末双休</span>
+					<span>周末双休</span>
+					<span>周末双休</span>
+					<span>周末双休</span>
+					<span>周末双休</span>
+				</div>
+				
+				<!-- 工作内容 -->
+				<div class="T-title flex">
+					<span>工作内容</span>
+				</div>
+				<div class="xqInfor color6">
+					<p>任职资格：</p>
+					<div class="cont">
+						<p>1、工程造价等相关专业；</p>
+						<p>2、三年以上(含三年)造价咨询行业经验；</p>
+						<p>3、持国家造价员证书、具备工程造价咨询工作经验者优先。</p>
+					</div>
+					
+					<p class="pdt20">职位要求：</p>
+					<div class="cont">
+						<p>1、熟练使用工程造价及审核软件；熟悉掌握软件图形算量；</p>
+						<p>2、能够独立完成专业造价编审工作。</p>
+					</div>
+				</div>
+				
+				<!-- 工作地点 -->
+				<div class="T-title flex">
+					<span>工作地点</span>
+				</div>
+				<div class="flex jobAddrs pdb40">
+					<img class="icon" src="images/recruitment-icon.jpg" >
+					<p>蓝溪国际大厦</p>
+				</div>
+				<div class="jobMap flexEnd">
+					<div class="map"><img src="images/recruitment-img.jpg" ></div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="pdb80"></div>
+			
+		<include src="footer.html"></include>
+	</div>
+</body>
+
+	
+	<script type="text/javascript">
+		var app = new Vue({
+		    el: '#app',
+		    data:function(){
+		        return {
+		        	banner_index:0,
+					is_show:false,
+					wx_show:2,
+					mainData: [],
+					labelData: []
+		        }
+		    },
+		    methods: {
+				getMainData: function(id){
+				    var self = this;
+				    var callback = function(res){
+				        console.log('getMainData', res);
+				        self.mainData.push.apply(self.mainData,res.info.data);
+				        for (var i = 0; i < self.mainData.length; i++) {
+				        	self[self.mainData[i].title] = self.mainData[i];
+				        };
+				        self.getNewsData()
+				    };
+					console.log('self.mainData',self.mainData)
+				    window.base.labelGet(postData, callback);
+				}
+		    }
+		});
+	</script>
+	<style type="text/css">
+		.jobName{padding: 50px 0;}
+		.jobName .money{margin: 30px 0 20px 0;color: #c11719;font-size: 20px;}
+		.jobName .rr .btn{width: 120px;height: 44px;line-height: 44px;text-align: center;background: #C11719;color: #fff;border-radius: 5px;font-size: 15px;}
+		.T-title{position: relative;margin: 50px 0 30px 0;}
+		.T-title::after{content: '';width: 100%;height: 1px;background: #eee;position: absolute;top: 50%;left: 0;transform: translateY(-50%);}
+		.T-title span{padding-right:20px;background: #fff; position: relative;z-index: 1;font-size: 20px;}
+		
+		.xqInfor .cont p{margin-top: 15px;}
+		
+		.jobLable{flex-wrap: wrap;}
+		.jobLable span{padding: 0 15px;line-height: 30px;background: #f5f5f5;margin:0 20px 15px 0;color: #666;}
+		
+		.jobAddrs{font-size: 16px;}
+		.jobAddrs .icon{width: 25px;height: 20px;margin-right: 10px;}
+		
+		.jobMap .map{width: 900px;height: 495px;overflow: hidden;background: #F5F5F5;}
+		.jobMap .map img{width: 100%;height: 100%;display: block;}
+		
+		@media screen and ( max-width: 1000px){
+			.jobName{padding: 30px 0;}
+			.jobMap .map{height: 405px;}
+		}
+		
+		@media screen and ( max-width: 500px){
+			
+			.jobName{padding: 20px 0;font-size: 12px;line-height: 20px;}
+			.jobName .name{font-size: 18px;}
+			.jobName .money{margin: 15px 0;}
+			.jobName .lable{padding-bottom: 5px;}
+			.T-title{ margin: 30px 0 20px 0}
+			.T-title span{font-size: 16px;}
+			.xqInfor .cont p{font-size: 12px;margin-top: 10px;}
+			.jobAddrs{font-size: 14px;}
+			.jobMap .map{height: 198px;}
+			
+			.jobName .rr .btn{width: 90px;height: 40px;line-height: 40px;font-size: 13px;}
+		}
+	</style>
+</html>

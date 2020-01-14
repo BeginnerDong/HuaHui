@@ -1,0 +1,145 @@
+<div id="head_app">
+	
+	<div class="head">
+		<div class="mobile-Btn flexCenter" @click="shownav">
+			<span class="flexColumn">
+				<em></em>
+				<em></em>
+				<em></em>
+			</span>
+		</div>
+		<div class="cont flexRowBetween w1200">
+			<div class="T-Logo"><img src="images/home-img0.png" ></div>
+			<div class="orderNavTwo flexRowBetween fs16" v-show="is_showNav">
+				<div class="tt" :class="currentUrl=='/index.html'?'on':''"><a href="index.html">首页</a></div>
+				<div class="tt" :class="currentUrl=='/aboutUs.html'?'on':''"><a href="aboutUs.html">关于华汇</a></div>
+				<div class="tt" :class="currentUrl=='/newsCenter.html'?'on':''"><a href="newsCenter.html">新闻中心</a></div>
+				<div class="tt" :class="currentUrl=='/brand.html'?'on':''"><a href="brand.html">品牌中心</a></div>
+				<div class="tt" :class="currentUrl=='/anliCenter.html'?'on':''"><a href="anliCenter.html">案例中心</a></div>
+				<div class="tt" :class="currentUrl=='/loadCenter.html'?'on':''"><a href="loadCenter.html">下载中心</a></div>
+				<div class="tt" :class="currentUrl=='/contactUs.html'?'on':''"><a href="contactUs.html">联系我们</a></div>
+			</div>
+			<div class="Rseach"><a href="seach.html"><img class="icon" src="images/home-icon.png" ></a></div>
+		</div>
+	</div>
+	<div class="black-bj2" v-show="is_show"></div>
+	<div class="headH"></div>
+	
+</div>
+
+
+<script type="text/javascript">
+	var head_app = new Vue({
+	    el: '#head_app',
+	    data:function(){
+	        return {
+	        	banner_index:0,
+	        	is_toggle:false,
+				currentUrl:'',
+				is_show:false,
+				searchItem:{
+					thirdapp_id:window.base.thirdapp_id,
+					title:''
+				},
+				bannerTimer:null,
+				is_showNav:true
+				
+	        }
+	    },
+	    created:function () {
+			var self = this;
+			// self.getMainData();
+			if(window.screen.width<500){
+				self.is_showNav = false
+			};
+	        var currentUrl = window.base.GetUrlRelativePath();
+		
+			var reg = /\/([^\/]+)\.html/i;
+			if(reg.exec(currentUrl)&&reg.exec(currentUrl)[0]){
+				self.currentUrl = reg.exec(currentUrl)[0];
+			}else{
+				self.currentUrl = '/index.html';
+			};
+			
+
+    		window.base.bus.$on('to_headBanner',(res)=>{	
+				if(res.mainImg){
+					 self.bannerData = res.mainImg
+					 return
+				};
+				console.log('res222',res)
+				this.searchItem.title = res.title;
+				
+	        	this.to_headBanner()
+		    });
+			
+			self.bannerTimer = setInterval(function(){
+				self.changeBanner('+');
+			},3000)
+	    },
+		
+		
+		destroyed() {
+			const self = this;
+			clearInterval(this.timer);        
+			self.bannerTimer = null;
+		},
+	    methods: {
+			shownav(){
+				const self = this;
+				self.is_showNav = !self.is_showNav;
+				self.is_show = !self.is_show;
+			}
+			
+	    }
+	});
+</script>
+
+<style>
+.black-bj2{z-index: 10;}
+
+.head{position: fixed;top: 0;left: 0;right: 0;z-index: 20;box-shadow: 0 1px 4px rgba(100, 100, 100, 0.1);width: 100%;box-sizing: border-box;background: #636363;}
+
+.head .cont{height: 60px;}
+
+.T-Logo{width:auto; height:42px; display: block;margin-right: 20px;}
+.T-Logo img{width: auto;height: 100%; display: block;}
+
+.orderNavTwo{width: 70%;}
+.orderNavTwo .w1200{align-items: flex-start;}
+.orderNavTwo .tt{ text-align: center; box-sizing: border-box;}
+.orderNavTwo .tt a{display: block;line-height: 44px;margin: 0 10px;color: #d5d5d5;}
+.orderNavTwo .tt.on a{ color: #fff; text-shadow: 0 0 10px rgba(255,255,255);}
+
+.Rseach .icon{width: 23px;height:23px;display: block;}
+
+.mobile-Btn{width: 30px;height: 30px;background: #000;border-radius: 5px;padding: 5px;box-sizing: border-box;display: none; position: absolute; top: 50%; right: 2%;transform: translateY(-50%);}
+.mobile-Btn em{width: 100%;height: 1px;background: #999;margin: 3px 0;}
+
+.headH{height: 60px;width: 100%;}
+/*以下自适应样式*/
+@media screen and ( max-width: 1000px){
+	.orderNavTwo{font-size: 14px;width: 75%;}
+	
+	.head .logoCont{padding: 10px 2%;}
+	.T-Logo{height: 40px;}
+	.Rphone .img{height: 18px!important;}
+	.Rphone span{font-size: 13px;}
+}
+
+@media screen and ( max-width: 500px){
+	
+	.T-Logo{height: 30px;}
+	.Rphone{display: none;}
+	.mobile-Btn{display: block;}
+	.head .cont{height: 50px;}
+	.headH{height: 50px;}
+	
+	.orderNavTwo{display: block;position: absolute;top: 50px;left: 0;right: 0;width: 100%;box-sizing: border-box;background: #3e3e3e;}
+	.orderNavTwo .tt{width: 100%;border-bottom: 1px solid #4a4a4a;}
+	
+	.head .cont{justify-content: flex-start;}
+	.Rseach{margin-left: 30px;}
+}
+
+</style>
