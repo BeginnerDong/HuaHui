@@ -75,10 +75,10 @@
 			</div>
 		</div>
 		
-		<div class="black-bj" v-show="is_show"></div>
+		<div class="black-bj" style="opacity: 0.6;" v-show="is_show"></div>
 		<div class="flexColumn anliSetNav" v-show="is_anliSetNav">
-			<a class="btn" :class="seltCurr==1?'on':''" @click="changeCurr('1')" :href="seltCurr==1?'newsCenter.html':''">新闻中心</a>
-			<a class="btn" :class="seltCurr==2?'on':''" @click="changeCurr('2')" :href="seltCurr==2?'anliCenter.html':''">案例中心</a>
+			<a class="btn" href="newsCenter.html">新闻中心</a>
+			<a class="btn" href="anliCenter.html">案例中心</a>
 		</div>
 		
 		<div class="w1200">
@@ -159,12 +159,6 @@
 					self.is_show = !self.is_show;
 					self.is_anliSetNav = !self.is_anliSetNav
 				},
-				changeCurr(seltCurr){
-					const self = this;
-					if(seltCurr!=self.seltCurr){
-						self.seltCurr = seltCurr
-					}
-				},
 				getMainData: function(id){
 				    var self = this;
 				    var callback = function(res){
@@ -185,7 +179,7 @@
 	<style>
 		.anliSetNav{position: fixed;top: 50%;left: 50%;transform: translate(-50%,-50%);z-index: 41;}
 		.anliSetNav .btn{width: 150px;line-height: 50px;text-align: center;border: 1px solid #fff;border-radius: 8px;color: #fff;margin: 15px auto;font-size: 18px;}
-		.anliSetNav .btn.on{padding:5px 10px;}
+		.anliSetNav .btn:hover{padding:5px 10px;font-size: 20px;}
 		
 		@media only screen and (max-width: 500px){
 			.anliSetNav .btn{width: 120px;line-height: 40px;font-size: 16px; border-radius: 5px;}
