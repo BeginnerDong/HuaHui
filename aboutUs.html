@@ -30,19 +30,16 @@
 				</div>
 				<div class="detailePag">
 					<div class="inforCont pdb80">
-						<p>广州华汇音响顾问有限公司创建于1997年，是一家专业从事音频产品代理、设计、销售、工程、培训及维保的集团化公司，是业界众多高端音频产品大中华区唯一总代理商。</p>
-						
-						<p>华汇公司长期坚持“两个融合”的经营理念，即坚持以国际音响尖端设备和技术与中国应用需求相融合、坚持将最先进的科技与最精美艺术相融合，以客户需求为导向，为每一位用户铸造高端的听觉盛宴与艺术享受，创建完善的技术支持与高效的售后服务响应体系。</p>
-						
-						<p>长期以来，公司积极引进国际先进的音频产品和技术，并与众多世界级品牌建立稳固合作关系，其中包括现代线声源扬声器的首创者法国L-Acoustics、现场数字调音台引领者英国DiGiCo以及电视播出领域全球顶尖的英国Calrec调音台等十几个世界著名品牌。公司先后参与并完成了国内外上千个项目，涵括了艺术中心、剧院剧场、节目演出、演播厅、多功能厅、文艺团体、院校、酒店、娱乐会所、租赁商等不同领域的专业扩声系统。经过多年的努力与积累，公司也打造了一支技艺精湛、经验丰富的专业技术队伍，为每一个项目的顺利实施提供了强有力的保障。</p>
-						<p>历经20多年的发展与创新，华汇已经成为专业音频领域高端产品与应用技术的领航者，并先后于香港、广州、北京、台湾、上海成立公司。在不断拓宽市场的同时，华汇公司也收获广大客户的极大肯定，在业内树立了良好的声誉。</p>
+						<div class="content ql-editor " style="clear: both;">
+							<p class="p1 " v-html="mainData.content"></p>
+						</div>
 					</div>
 				</div>
 				<div class="companyPic pr">
 					<div>
 						<ul class="flex">
-							<li><img src="images/about-img.jpg" ></li>
-							<li><img src="images/about-img.jpg" ></li>
+							<li v-for="item in mainData.mainImg" style="height:395px"><img :src="item.url" style="height: 100%;"></li>
+							<!-- <li><img src="images/about-img.jpg" ></li> -->
 						</ul>
 					</div>
 					<div class="ArrowIcon flexRowBetween">
@@ -60,24 +57,24 @@
 			</div>
 			<div class="MedalPic flexRowBetween">
 				<div class="half TwoPic">
-					<div class="box flexCenter">
-						<img class="pic" src="images/about-img2.jpg" >
+					<div class="box flexCenter" v-if="rewardData[0]">
+						<img class="pic" :src="rewardData&&rewardData[0]&&rewardData[0].mainImg&&rewardData[0].mainImg[0]?rewardData[0].mainImg[0].url:''" >
 						<p class="text center flexCenter">
-							<em>70周年国庆阅兵表彰</em>
+							<em>{{rewardData&&rewardData[0]?rewardData[0].title:''}}</em>
 						</p>
 					</div>
-					<div class="box flexCenter">
-						<img class="pic" src="images/about-img2.jpg" >
+					<div class="box flexCenter" v-if="rewardData[1]">
+						<img class="pic" :src="rewardData&&rewardData[1]&&rewardData[1].mainImg&&rewardData[1].mainImg[0]?rewardData[1].mainImg[0].url:''" >
 						<p class="text center flexCenter">
-							<em>周年国庆阅兵表彰</em>
+							<em>{{rewardData&&rewardData[1]?rewardData[1].title:''}}</em>
 						</p>
 					</div>
 				</div>
-				<div class="half onePic">
+				<div class="half onePic" v-if="rewardData[2]">
 					<div class="box flexCenter">
-						<img class="pic" class="" src="images/about-img3.jpg" >
+						<img class="pic" class="" :src="rewardData&&rewardData[2]&&rewardData[2].mainImg&&rewardData[2].mainImg[0]?rewardData[2].mainImg[0].url:''">
 						<p class="text center flexCenter">
-							<em>十佳优质音响工程<br>品牌供应单位</em>
+							<em>{{rewardData&&rewardData[2]?rewardData[2].title:''}}</em>
 						</p>
 					</div>
 				</div>
@@ -95,21 +92,12 @@
 				</div>
 				<div class="jobPin w1200">
 					<ul class="flexRowBetween">
-						<li>
-							<a href="recruitDetail.html">
+						<li v-for="(item,index) in recruitData">
+							<a :href="'recruitDetail.html?id='+item.id">
 								<div class="infor">
 									<img class="icon" src="images/about-icon4.png" >
-									<h2 class="tit">商务助理</h2>
-									<p>本科以上学历，英语过四级考级</p>
-								</div>
-							</a>
-						</li>
-						<li>
-							<a href="recruitDetail.html">
-								<div class="infor">
-									<img class="icon" src="images/about-icon3.png" >
-									<h2 class="tit">工程师</h2>
-									<p>本科以上学历，有丰富的现场安装或调试经验</p>
+									<h2 class="tit">{{item.title}}</h2>
+									<p>{{item.description}}</p>
 								</div>
 							</a>
 						</li>
@@ -129,31 +117,33 @@
 						<li>
 							<span class="ll">姓名</span>
 							<div class="rr">
-								<input type="text" name="" value="" placeholder="请输入姓名" />
+								<input type="text" name="" v-model="submitData.title" placeholder="请输入姓名" />
 							</div>
 						</li>
 						<li>
 							<span class="ll">电话</span>
 							<div class="rr">
-								<input type="text" name="" value="" placeholder="请输入联系电话" onkeyup="this.value=this.value.replace(/\D/g,'')" />
+								<input type="text" name="" v-model="submitData.phone" placeholder="请输入联系电话" onkeyup="this.value=this.value.replace(/\D/g,'')" />
 							</div>
 						</li>
 						<li>
 							<span class="ll">自我评价</span>
 							<div class="rr">
-								<textarea style="padding: 0;" type="text" name="" value="" placeholder="请写出自身亮点，让HR第一眼关注你"></textarea>
-							</div>
+								<textarea style="padding: 0;" type="text" name="" v-model="submitData.description" placeholder="请写出自身亮点，让HR第一眼关注你"></textarea>
+				 			</div>
 						</li>
 						<li>
-							<span class="ll">投递简历</span>
+							 <span class="ll">投递简历</span>
 							<div class="rr flex" style="flex-wrap: wrap;">
-								<div class="upImg"><img src="images/about-icon8.jpg" ></div>
+								<input class="" type="file" @change="uploadFile" enctype="multipart/form-data">
+									<!-- <img src="images/about-icon8.jpg" > -->
+								</input>
 							</div>
 						</li>
 					</ul>
 				</div>
 				<div class="submitbtn pdt30">
-					<button class="btn" type="button" style="width: 50%;">提交</button>
+					<button class="btn" type="button" style="width: 50%;"  @click="!isSending?JustaddMessage():''">提交</button>
 				</div>
 			</div>
 		</div>
@@ -172,24 +162,171 @@
 		        	banner_index:0,
 					is_show:false,
 					wx_show:2,
-					mainData: [],
-					labelData: []
+					mainData: {},
+					labelData: [],
+					rewardData:[],
+					recruitData:[],
+					submitData:{
+						title:'',
+						phone:'',
+						description:'',
+						mainImg:[],
+						type:1,
+						thirdapp_id:2
+					},
+					isSending:false
 		        }
 		    },
+			
+			created:function () {
+			    var self = this;
+				self.getMainData();
+				self.getRewardData();
+				self.getRecruitData()
+				
+			},
+			
 		    methods: {
-				getMainData: function(id){
-				    var self = this;
-				    var callback = function(res){
-				        console.log('getMainData', res);
-				        self.mainData.push.apply(self.mainData,res.info.data);
-				        for (var i = 0; i < self.mainData.length; i++) {
-				        	self[self.mainData[i].title] = self.mainData[i];
-				        };
-				        self.getNewsData()
-				    };
-					console.log('self.mainData',self.mainData)
-				    window.base.labelGet(postData, callback);
-				}
+				
+				uploadFile(e){
+					var self = this;
+					var file = e.target.files[0];
+					 	
+					var param = new FormData();
+					param.append('file',file,file.name);
+					param.append('thirdapp_id',2);
+					//param.append('token',localStorage.getItem('token'));
+				
+					console.log(self.item)
+					var callback = function (res) {
+						if(res.solely_code==100000&&res.info&&res.info.url){ 
+							self.submitData.mainImg = [];
+							self.submitData.mainImg.push({url:res.info.url,type:'file'})
+						}
+					};
+					var res = window.base.upLoadFile(param,callback);
+				},
+				
+				
+				getMainData() {
+					const self = this;
+					const postData = {};
+					postData.searchItem = {
+						thirdapp_id:2,
+						type:6
+					};
+					postData.getBefore = {
+						child:{
+							tableName:'Label',
+							middleKey:'menu_id',
+							key:'id',
+							searchItem:{
+								status:['in',[1]],
+								title:['in',['公司简介']]
+							},
+							condition:'in',
+						}
+					};
+					const callback = (res) => {
+						if (res.info.data.length > 0) {
+							self.mainData = res.info.data[0]
+						} 
+					};
+					window.base.articleGet(postData, callback);
+				},
+				
+				getRewardData() {
+					const self = this;
+					const postData = {};
+					postData.searchItem = {
+						thirdapp_id:2,
+						type:6
+					};
+					postData.getBefore = {
+						child:{
+							tableName:'Label',
+							middleKey:'menu_id',
+							key:'id',
+							searchItem:{
+								status:['in',[1]],
+								title:['in',['公司获奖']]
+							},
+							condition:'in',
+						}
+					};
+					postData.order = {
+						listorder:'desc'
+					};
+					const callback = (res) => {
+						if (res.info.data.length > 0) {
+							self.rewardData.push.apply(self.rewardData,res.info.data);
+						} else {
+							alert('没有数据')
+						};	
+					};
+					window.base.articleGet(postData, callback);
+				},
+				
+				getRecruitData() {
+					const self = this;
+					const postData = {};
+					postData.paginate = {
+						count: 0,
+						currentPage: 1,
+						pagesize: 2,
+						is_page: true,
+					};
+					postData.searchItem = {
+						thirdapp_id:2
+					};
+					postData.getBefore = {
+						child:{
+							tableName:'Label',
+							middleKey:'menu_id',
+							key:'id',
+							searchItem:{
+								status:['in',[1]],
+								title:['in',['招聘信息']]
+							},
+							condition:'in',
+						}
+					};
+					const callback = (res) => {
+						if (res.info.data.length > 0) {
+							self.recruitData.push.apply(self.recruitData,res.info.data);
+						}
+					};
+					window.base.articleGet(postData, callback);
+				},
+				
+				JustaddMessage() {
+					const self = this;
+					if(self.isSending){
+						return
+					};
+					const pass = window.base.checkComplete(self.submitData);
+					if (pass) {	
+						const postData = {};
+						postData.data = window.base.cloneForm(self.submitData)
+						const callback = (res) => {
+							if(res.solely_code==100000){
+								self.isSending = false;
+								alert(res.msg);
+								self.submitData = {
+									nama:'',
+									phone:'',
+									description:'',
+									mainImg:[],
+									type:1
+								}
+							}	
+						};
+						window.base.JustaddMessage(postData, callback);
+					} else {
+						self.isSending = false;
+						alert('请补全信息')
+					};
+				},
 				
 		    }
 		});

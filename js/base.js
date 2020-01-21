@@ -1,5 +1,5 @@
 window.base = {
-	g_restUrl: 'http://www.xianaxty.com/api/public/index.php/api/v1/',
+	g_restUrl: 'http://106.12.155.217/huahui/public/index.php/api/v1/',
 
 	thirdapp_id:2,
 	test:666,
@@ -72,6 +72,37 @@ window.base = {
 			onBridgeReady(param);
 		}
 
+	},
+	
+	upLoadFile:function(param,callback) {
+	    var that=this;
+	    $.ajax({ // $.post，告辞
+	        type: 'post',
+	        contentType: false, // 关关关！必须得 false
+	                            // 这个不关会扔一个默认值 application/x-www-form-urlencoded 过去，后端拿不到数据的！
+	                            // 而且你甚至不能传个字符串 'multipart/form-data'，后端一样拿不到数据！
+	        processData: false, // 关关关！重点
+	        url: 'http://106.12.155.217/huahui/public/index.php/api/v1/Base/FtpFile/upload',
+	        data: param,
+	        success:function(res){
+				callback && callback(res);
+	            /* if(res.solely_code==201000){
+	                var loca = window.location;
+	                window.location.href = loca.origin + loca.pathname;
+	            }else if(res.solely_code==200000){
+	                localStorage.removeItem('token');
+	                localStorage.removeItem('user_no');
+	                localStorage.removeItem('user_type');
+	                window.location.href = './login.html'
+	            }else{
+	                callback && callback(res);
+	            }; */
+	
+	        },
+	        error:function(res){
+	            callback && callback(res);
+	        }
+	    });
 	},
 
 	directPay: function(param, callback) {

@@ -1,7 +1,7 @@
 <div id="banner_app">
 	<div class="swiperBox">
-		<div class="banner" v-for="(item,index) in bannerData" v-show="index==banner_index" >
-			<img :src="item.banImgUrl" />
+		<div class="banner" v-for="(item,index) in bannerData" v-if="index==banner_index" >
+			<img :src="item.url" />
 		</div>
 		
 		<!-- 导航点 -->
@@ -28,7 +28,7 @@
 				],
 				searchItem:{
 					thirdapp_id:window.base.thirdapp_id,
-					title:''
+					title:'首页轮播图'
 				},
 				bannerTimer:null,
 				
@@ -46,7 +46,7 @@
 			};
 			
 
-    		window.base.bus.$on('to_headBanner',(res)=>{	
+    		/* window.base.bus.$on('to_headBanner',(res)=>{	
 				if(res.mainImg){
 					 self.bannerData = res.mainImg
 					 return
@@ -55,8 +55,8 @@
 				this.searchItem.title = res.title;
 				
 	        	this.to_headBanner()
-		    });
-			
+		    }); */
+			self.getMainData()
 			self.bannerTimer = setInterval(function(){
 				self.changeBanner('+');
 			},3000)
@@ -69,6 +69,24 @@
 			self.bannerTimer = null;
 		},
 	    methods: {
+			
+			getMainData: function(id){
+			    var self = this;
+			    var postData = {};
+			    postData.searchItem = window.base.cloneForm(self.searchItem);
+				
+			    var callback = function(res){
+			        if(res.info.data.length>0&&res.info.data[0]){
+						self.bannerData =res.info.data[0].mainImg;
+						console.log('self.bannerData',self.bannerData)
+			        };    
+					self.bannerTimer = setInterval(function(){
+						
+						self.changeBanner('+');
+					},10000)
+			    };
+			    window.base.labelGet(postData, callback);
+			},
 			
 			toBannerOne:function(e){
 				const self = this;

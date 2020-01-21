@@ -20,15 +20,15 @@
 	<div id="app">
 		<include src="header.html"></include>
 		
-		<div class="w1200 pdb80">
+		<div class="w1200 pdb80" style="padding-top: 80px;">
 			<div class="jobPin">
 				<ul class="flexRowBetween">
-					<li v-for="(item,index) in recruitData" :key="index">
-						<a href="recruitDetail.html">
+					<li v-for="(item,index) in mainData" :key="index">
+						<a :href="'recruitDetail.html?id='+item.id">
 							<div class="infor">
 								<img class="icon" src="images/about-icon4.png" >
-								<h2 class="tit">商务助理</h2>
-								<p>本科以上学历，英语过四级考级</p>
+								<h2 class="tit">{{item.title}}</h2>
+								<p>{{item.description}}</p>
 							</div>
 						</a>
 					</li>
@@ -36,13 +36,10 @@
 			</div>
 			
 			<div class="all-pages">
-				<span class="no-prev flexCenter"><img class="arrow" src="images/case-icon5.png"></span>
-				<span class="on">1</span>
-				<span>2</span>
-				<span>3</span>
-				<span>4</span>
-				<span>5</span>
-				<span class="next flexCenter"><img class="arrow" src="images/case-icon4.png"></span>
+				<span class="no-prev flexCenter" data-type="back" @click="changePage"><img class="arrow" src="images/case-icon5.png"></span>
+				<span v-for="item in pageArray" v-if="item == paginate.currentPage" class="on">{{item}}</span>
+				<span v-for="item in pageArray" v-if="item != paginate.currentPage">{{item}}</span>
+				<span class="next flexCenter" data-type="next" @click="changePage"><img class="arrow" src="images/case-icon4.png"></span>
 			</div>
 		</div>
 		<include src="footer.html"></include>
@@ -61,24 +58,74 @@
 					wx_show:2,
 					mainData: [],
 					labelData: [],
-					recruitData:[{},{},{},{},{},{},{},{}]
+					serviceData:[{},{},{},{}],
+					mainData:[],
+					paginate:{
+						count: 0,
+						currentPage: 1,
+						pagesize: 9,
+						is_page: true,
+					},
+					linkPage: [],
+					pageArray: [],
+					
+					allPages: 0,
 		        }
 		    },
+			
+			created () {
+			    const self = this;
+				self.getMainData();
+			},
+			
 		    methods: {
-				getMainData: function(id){
-				    var self = this;
-				    var callback = function(res){
-				        console.log('getMainData', res);
-				        self.mainData.push.apply(self.mainData,res.info.data);
-				        for (var i = 0; i < self.mainData.length; i++) {
-				        	self[self.mainData[i].title] = self.mainData[i];
-				        };
-				        self.getNewsData()
-				    };
-					console.log('self.mainData',self.mainData)
-				    window.base.labelGet(postData, callback);
-				}
 				
+				
+				getMainData() {
+					const self = this;
+					const postData = {};
+					postData.paginate = window.base.cloneForm(self.paginate);
+					postData.searchItem = {
+						thirdapp_id:2
+					};
+					postData.getBefore = {
+						child:{
+							tableName:'Label',
+							middleKey:'menu_id',
+							key:'id',
+							searchItem:{
+								status:['in',[1]],
+								title:['in',['招聘信息']]
+							},
+							condition:'in',
+						}
+					};
+					const callback = (res) => {
+						if (res.info.data.length > 0) {
+							self.mainData.push.apply(self.mainData,res.info.data);
+							self.paginate['count'] = res.info.total;
+							window.base.computePageArr(self);
+						} else {
+							alert('没有数据')
+						};	
+					};
+					window.base.articleGet(postData, callback);
+				},
+				
+				
+				
+				linkTo(e) {
+					var self = this;
+					console.log(e);
+					self.linkPage = window.base.getDataSet(e).page;
+					window.base.linkTo(self);
+				},
+				
+				changePage(e) {
+					var self = this;
+					var dataSet = window.base.getDataSet(e);
+					window.base.changePage(dataSet, self);
+				},
 		    }
 		});
 	</script>

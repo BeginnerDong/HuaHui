@@ -35,10 +35,10 @@
 						<span class="arrow arrow-left"></span>
 						<span class="arrow arrow-right"></span>
 						<div class="swiper-wrapper">
-							<div class="swiper-slide flexCenter">
-								<img src="images/details-img4.jpg" alt="">
+							<div class="swiper-slide flexCenter" v-for="item in mainData.mainImg">
+								<img :src="item.url" alt="">
 							</div>
-							<div class="swiper-slide flexCenter">
+							<!-- <div class="swiper-slide flexCenter">
 								<img src="images/details-img5.jpg" alt="">
 							</div>
 							<div class="swiper-slide flexCenter">
@@ -46,22 +46,22 @@
 							</div>
 							<div class="swiper-slide flexCenter">
 								<img src="images/product-img4.png" alt="">
-							</div>
+							</div> -->
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="rr">
-				<h1 class="ftn title">标题DiGiCo SD7</h1>
+				<h1 class="ftn title">{{mainData.title}}</h1>
 					<div class="preview">
 						<span class="arrow arrow-left"></span>
 						<span class="arrow arrow-right"></span>
 						<div class="swiper-container">
 							<div class="swiper-wrapper">
-								<div class="swiper-slide">
-									<img src="images/details-img4.jpg" alt="">
+								<div class="swiper-slide" v-for="item in mainData.mainImg">
+									<img :src="item.url" alt="">
 								</div>
-								<div class="swiper-slide">
+								<!-- <div class="swiper-slide">
 									<img src="images/details-img5.jpg" alt="">
 								</div>
 								<div class="swiper-slide">
@@ -69,7 +69,7 @@
 								</div>
 								<div class="swiper-slide">
 									<img src="images/product-img4.png" alt="">
-								</div>
+								</div> -->
 							</div>
 						</div>
 					</div>
@@ -85,7 +85,7 @@
 			</div>
 			<div class="xqCont">
 				<div class="xqPic" v-show="navCurr==1">
-					<img src="images/details-img1.jpg" >
+					<img :src="mainData.bannerImg&&mainData.bannerImg[0]?mainData.bannerImg[0].url:''" >
 				</div>
 				
 				<div class="videoCont" v-show="navCurr==2">
@@ -118,11 +118,17 @@
 		        	banner_index:0,
 					is_show:false,
 					wx_show:2,
-					mainData: [],
+					mainData: {},
 					labelData: [],
 					navCurr:1
 		        }
 		    },
+			
+			created () {
+			    const self = this;
+				self.getMainData();
+			},
+			
 		    methods: {
 				changeNavCurr(navCurr){
 					const self = this;
@@ -130,67 +136,96 @@
 						self.navCurr = navCurr
 					}
 				},
-				getMainData: function(id){
-				    var self = this;
-				    var callback = function(res){
-				        console.log('getMainData', res);
-				        self.mainData.push.apply(self.mainData,res.info.data);
-				        for (var i = 0; i < self.mainData.length; i++) {
-				        	self[self.mainData[i].title] = self.mainData[i];
-				        };
-				        self.getNewsData()
-				    };
-					console.log('self.mainData',self.mainData)
-				    window.base.labelGet(postData, callback);
-				}
+				
+				getMainData() {
+					const self = this;
+					const postData = {};
+					postData.searchItem = {
+						id: window.base.GetRequest().id,
+					};
+					const callback = (res) => {
+						if (res.info.data.length > 0) {
+							self.mainData = res.info.data[0]
+							$(window).load(function() {
+								self.viewSwiper = new Swiper('.view .swiper-container', {
+									onSlideChangeStart: function() {
+											
+									}
+								});
+								self.previewSwiper = new Swiper('.preview .swiper-container', {
+									//visibilityFullFit: true,
+									slidesPerView: 'auto',
+									allowTouchMove: false,
+									onTap: function() {
+										    self.viewSwiper.slideTo(self.previewSwiper.clickedIndex)
+									}
+								})
+								console.log('232',self.viewSwiper)
+								self.updateNavPosition()
+							});
+							
+							
+							
+							
+							$('.view .arrow-left,.preview .arrow-left').on('click', function(e) {
+								e.preventDefault()
+								
+								if (self.viewSwiper.activeIndex == 0) {
+									self.viewSwiper.slideTo(self.viewSwiper.slides.length - 1, 1000);
+									self.updateNavPosition()
+									return
+									
+								}
+								self.viewSwiper.slidePrev()
+								self.updateNavPosition()
+							})
+							$('.view .arrow-right,.preview .arrow-right').on('click', function(e) {
+								e.preventDefault()
+								if (self.viewSwiper.activeIndex == self.viewSwiper.slides.length - 1) {
+									console.log('self.viewSwiper.activeIndex',self.viewSwiper.activeIndex )
+									//self.viewSwiper.activeIndex = 0;
+									self.viewSwiper.slideTo(0, 1000);
+									self.updateNavPosition()
+									return
+								}
+								self.viewSwiper	.slideNext()
+								self.updateNavPosition()
+							})
+							
+						} else {
+							alert('没有数据')
+						};	
+					};
+					window.base.articleGet(postData, callback);
+				},
+				
+				updateNavPosition() {
+					const self = this;
+						$('.preview .active-nav').removeClass('active-nav')
+						console.log('24334',self.viewSwiper)
+						var activeNav = $('.preview .swiper-slide').eq(self.viewSwiper.activeIndex).addClass('active-nav')
+						if (!activeNav.hasClass('swiper-slide-visible')) {
+							if (activeNav.index() > self.previewSwiper.activeIndex) {
+								var thumbsPerNav = Math.floor(self.previewSwiper.width / activeNav.width()) - 1
+								self.previewSwiper.slideTo(activeNav.index() - thumbsPerNav)
+							} else {
+								self.previewSwiper.slideTo(activeNav.index())
+							}
+						}
+					},
+					
+					
 				
 		    }
 		});
 		
 		// 以下轮播图
-		var viewSwiper = new Swiper('.view .swiper-container', {
-			onSlideChangeStart: function() {
-				    updateNavPosition()
-			}
-		})
 		
-		$('.view .arrow-left,.preview .arrow-left').on('click', function(e) {
-			e.preventDefault()
-			if (viewSwiper.activeIndex == 0) {
-				viewSwiper.slideTo(viewSwiper.slides.length - 1, 1000);
-				return
-			}
-			viewSwiper.slidePrev()
-		})
-		$('.view .arrow-right,.preview .arrow-right').on('click', function(e) {
-			e.preventDefault()
-			if (viewSwiper.activeIndex == viewSwiper.slides.length - 1) {
-				viewSwiper.slideTo(0, 1000);
-				return
-			}
-			viewSwiper.slideNext()
-		})
 		
-		var previewSwiper = new Swiper('.preview .swiper-container', {
-			//visibilityFullFit: true,
-			slidesPerView: 'auto',
-			allowTouchMove: false,
-			onTap: function() {
-				    viewSwiper.slideTo(previewSwiper.clickedIndex)
-			}
-		})
 		
-		function updateNavPosition() {
-				$('.preview .active-nav').removeClass('active-nav')
-				var activeNav = $('.preview .swiper-slide').eq(viewSwiper.activeIndex).addClass('active-nav')
-				if (!activeNav.hasClass('swiper-slide-visible')) {
-					if (activeNav.index() > previewSwiper.activeIndex) {
-						var thumbsPerNav = Math.floor(previewSwiper.width / activeNav.width()) - 1
-						previewSwiper.slideTo(activeNav.index() - thumbsPerNav)
-					} else {
-						previewSwiper.slideTo(activeNav.index())
-					}
-				}
-			}
+		
+		
+		
+		
 	</script>
 </html>

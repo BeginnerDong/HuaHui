@@ -70,33 +70,47 @@
 			</div>
 			
 			<div class="orderNav flexCenter borderB1">
-				<span class="tt flexCenter" :class="curr==1?'on':''" @click="changeCurr('1')"><img class="icon" :src="curr==1?'images/download-icon4.png':'images/download-icon3.png'"/><em>资料</em></span>
-				<span class="tt flexCenter" :class="curr==2?'on':''" @click="changeCurr('2')"><img class="icon" :src="curr==2?'images/download-icon5.png':'images/download-icon1.png'"/><em>高清图</em></span>
-				<span class="tt flexCenter" :class="curr==3?'on':''" @click="changeCurr('3')"><img class="icon" :src="curr==3?'images/download-icon6.png':'images/download-icon2.png'"/><em>视频</em></span>
+				<span class="tt flexCenter" :class="curr==1?'on':''" @click="changeCurr('1')">
+					<img class="icon" :src="curr==1?'images/download-icon4.png':'images/download-icon3.png'"/>
+					<em>资料</em>
+				</span>
+				<span class="tt flexCenter" :class="curr==2?'on':''" @click="changeCurr('2')">
+					<img class="icon" :src="curr==2?'images/download-icon5.png':'images/download-icon1.png'"/>
+					<em>高清图</em>
+				</span>
+				<span class="tt flexCenter" :class="curr==3?'on':''" @click="changeCurr('3')">
+					<img class="icon" :src="curr==3?'images/download-icon6.png':'images/download-icon2.png'"/>
+					<em>视频</em>
+				</span>
 			</div>
 			
 			<!--  -->
 			<div class="brandNav flexCenter borderB1">
-				<div class="tt" :class="brandCurr==1?'on':''" @click="changeBrand('1')"><img class="brand" src="images/download-img.png"/></div>
-				<div class="tt" :class="brandCurr==2?'on':''" @click="changeBrand('2')"><img class="brand" src="images/download-img2.png"/></div>
+				<div class="tt" v-for="(item,index) in labelData" :class="brandCurrId==item.id?'on':''" @click="changeBrand(index)">
+					<img class="brand" :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''"/>
+				</div>
+				<!-- <div class="tt" :class="brandCurr==2?'on':''" @click="changeBrand('2')"><img class="brand" src="images/download-img2.png"/></div>
 				<div class="tt" :class="brandCurr==3?'on':''" @click="changeBrand('3')"><img class="brand" src="images/download-img3.png"/></div>
-				<div class="tt" :class="brandCurr==4?'on':''" @click="changeBrand('4')"><img class="brand" src="images/download-img1.png"/></div>
+				<div class="tt" :class="brandCurr==4?'on':''" @click="changeBrand('4')"><img class="brand" src="images/download-img1.png"/></div> -->
 			</div>
 			
 			<div class="downLoad flexRowBetween pdt50" style="align-items: flex-start;">
 				<div class="leftNav color6">
-					<span :class="navCurr==index?'on':''" @click="changeNavCurr(index)" v-for="(item,index) in leftNavData" :key="index">{{item}}</span>
+					<span :class="navCurrId==item.id?'on':''" 
+					@click="changeNavCurr(index)" v-for="(item,index) in leftNavData" :key="index">
+					{{item.title}}</span>
 				</div>
 				<div class="R-Cont">
 					
 					<!-- 材料列表 -->
 					<div class="cailiaoList" v-show="curr==1">
 						<ul>
-							<li class="flexRowBetween" v-for="(item,index) in cailiaoData" :key="index">
-								<p class="ll">X15 HIQ系统介绍</p>
+							<li class="flexRowBetween" v-for="(item,index) in mainData" :key="index">
+								<p class="ll">{{item.title}}</p>
 								<span class="rr flexEnd">
 									<img class="icon" src="images/download-icon7.png" >
-									<em>下载</em>
+									
+									<a download :href="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''">下载</a>
 								</span>
 							</li>
 						</ul>
@@ -105,11 +119,11 @@
 					<!-- 高清图列表 -->
 					<div class="HDPicBox" v-show="curr==2">
 						<ul class="flexRowBetween">
-							<li v-for="(item,index) in cHDPicData" :key="index">
-								<img class="pic" src="images/download-img12.jpg">
-								<div class="download">
+							<li v-for="(item,index) in mainData" :key="index">
+								<img class="pic" :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''">
+								<a download class="download" :href="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''">
 									<img class="icon" src="images/download-icon7.png" >
-								</div>
+								</a>
 							</li>
 						</ul>
 					</div>
@@ -117,8 +131,9 @@
 					<!-- 视频 -->
 					<div class="videoBox" v-show="curr==3">
 						<ul class="flexRowBetween">
-							<li v-for="(item,index) in videoData" :key="index">
-								<img class="video" src="images/download-img4.png" >
+							<li v-for="(item,index) in mainData" :key="index">
+								<iframe class="video" :src="item.description" frameborder="0" allowfullscreen="true" width="380" height="247"></iframe>
+							<!-- 	<img class="video" src="images/download-img4.png" > -->
 								<div class="download">
 									<img class="icon" src="images/download-icon7.1.png" >
 								</div>
@@ -141,50 +156,103 @@
 		    el: '#app',
 		    data:function(){
 		        return {
-					banner_index:0,
-					is_show:false,
-					wx_show:2,
 					mainData: [],
 					labelData: [],
 					curr:1,
-					brandCurr:1,
-					navCurr:0,
-					leftNavData:['X系列','P系列','K系列','ARCS系列','低音','Colinear source','功放'],
-					cailiaoData:[{},{},{},{},{},{},{}],
-					cHDPicData:[{},{},{},{},{},{},{}],
-					videoData:[{},{},{},{},{},{},{}]
+					brandCurrId:-1,
+					navCurrId:-1,
+					leftNavData:[],
+					searchItem:{
+						thirdapp_id:2,
+						type:2
+					},
+					brandCurr:0,
+					navCurr:0
 				}
 		    },
+			
+			created () {
+			    const self = this;
+				self.getLabelData();
+			},
+			
 		    methods: {
+				
 				changeCurr(curr){
 					const self = this;
 					if(curr!=self.curr){
-						self.curr = curr
+						self.labelData = [];
+						self.mainData = [];
+						self.leftNavData = [];
+						self.curr = curr;
+						self.searchItem.type = parseInt(self.curr)+1;
+						self.getLabelData()
 					}
 				},
+				
 				changeBrand(brandCurr){
 					const self = this;
 					if(brandCurr!=self.brandCurr){
-						self.brandCurr = brandCurr
+						self.brandCurr = brandCurr;
+						self.brandCurrId = self.labelData[index].id;
+						self.leftNavData = self.labelData[index].child;
+						self.navCurrId = self.labelData[index].child[0].id;
+						self.mainData = [];
+						self.getMainData()
 					}
 				},
+				
 				changeNavCurr(index){
 					const self = this;
-					self.navCurr = index
+					if(self.navCurr!=index){
+						self.navCurr = index;
+						self.navCurrId = self.leftNavData[index].id;
+						self.mainData = [];
+						self.getMainData()
+					}
 				},
-				getMainData: function(id){
-				    var self = this;
-				    var callback = function(res){
-				        console.log('getMainData', res);
-				        self.mainData.push.apply(self.mainData,res.info.data);
-				        for (var i = 0; i < self.mainData.length; i++) {
-				        	self[self.mainData[i].title] = self.mainData[i];
-				        };
-				        self.getNewsData()
-				    };
-					console.log('self.mainData',self.mainData)
-				    window.base.labelGet(postData, callback);
-				}
+				
+				getLabelData() {
+					const self = this;
+					const postData = {};
+					postData.searchItem = window.base.cloneForm(self.searchItem);
+					postData.order = {
+						listorder:'desc'
+					};
+					const callback = (res) => {
+						if (res.info.data.length > 0) {
+							self.labelData.push.apply(self.labelData,res.info.data);
+							self.brandCurrId = self.labelData[0].id;
+							self.leftNavData = self.labelData[0].child;
+							self.navCurrId = self.labelData[0].child[0].id;
+							self.getMainData()
+						} else {
+							
+						};
+					};
+					window.base.labelGet(postData, callback);
+				},
+				
+				getMainData() {
+					const self = this;
+					const postData = {};
+					//postData.paginate = window.base.cloneForm(self.paginate);
+					postData.searchItem = {
+						menu_id: self.navCurrId
+					};
+					postData.order = {
+						listorder:'desc'
+					};
+					const callback = (res) => {
+						if (res.info.data.length > 0) {
+							self.mainData.push.apply(self.mainData,res.info.data);
+							
+						} else {
+							alert('没有数据')
+						};	
+					};
+					window.base.articleGet(postData, callback);
+				},
 				
 		    }
 		});

@@ -24,25 +24,26 @@
 		<div class="pdlr2 pdb80">
 			<div class="ind-brand pdt30">
 				<div class="item flexRowBetween">
-					<div class="half TwoPic" v-for="(item,index) in brandData" :key="index">
-						<a href="product.html">
+					<div class="half TwoPic" v-for="(item,index) in mainData" :key="index">
+						<a :href="'product.html?id='+item.id">
 							<div class="box flexCenter">
-								<img class="logo" :src="item.logoUrl" >
-								<p class="text center flexCenter"><em>创立于1984年的L-Acoustics，由最初植根物理和基础声学领域，到研发出具有高功率的同轴系统，再到发明推出波阵面纠正技术（Wavefront Sculpture Techonlogy）和著名的V-DOSC系统，L-Acoustics在不断革新专业音频领域，并被赞誉为现代线声源阵列的鼻祖。</em></p>
+								<img class="logo" :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''" >
+								<p class="text center flexCenter"><em>
+									{{item.description}}
+								</em></p>
 							</div>
 						</a>
 					</div>
 				</div>
 			</div>
 			
+		
+			
 			<div class="all-pages">
-				<span class="no-prev flexCenter"><img class="arrow" src="images/case-icon5.png"></span>
-				<span class="on">1</span>
-				<span>2</span>
-				<span>3</span>
-				<span>4</span>
-				<span>5</span>
-				<span class="next flexCenter"><img class="arrow" src="images/case-icon4.png"></span>
+				<span class="no-prev flexCenter" data-type="back" @click="changePage"><img class="arrow" src="images/case-icon5.png"></span>
+				<span v-for="item in pageArray" v-if="item == paginate.currentPage" class="on">{{item}}</span>
+				<span v-for="item in pageArray" v-if="item != paginate.currentPage">{{item}}</span>
+				<span class="next flexCenter" data-type="next" @click="changePage"><img class="arrow" src="images/case-icon4.png"></span>
 			</div>
 		</div>
 		
@@ -69,23 +70,64 @@
 						{logoUrl:'images/brand-img.png'},
 						{logoUrl:'images/brand-img4.png'},
 						{logoUrl:'images/brand-img5.png'}
-					]
+					],
+					linkPage: [],
+					pageArray: [],
+					
+					allPages: 0,
+					paginate:{
+						count: 0,
+						currentPage: 1,
+						pagesize:6,
+						is_page: true,
+					},
 		        }
 		    },
+			
+			created () {
+			    const self = this;
+				self.getMainData();
+			},
+			
 		    methods: {
-				getMainData: function(id){
-				    var self = this;
-				    var callback = function(res){
-				        console.log('getMainData', res);
-				        self.mainData.push.apply(self.mainData,res.info.data);
-				        for (var i = 0; i < self.mainData.length; i++) {
-				        	self[self.mainData[i].title] = self.mainData[i];
-				        };
-				        self.getNewsData()
-				    };
-					console.log('self.mainData',self.mainData)
-				    window.base.labelGet(postData, callback);
-				}
+				
+				getMainData() {
+					const self = this;
+					const postData = {};
+					postData.paginate = window.base.cloneForm(self.paginate);
+					postData.searchItem = {
+						parentid:0,
+						type:5
+					};
+					postData.order = {
+						listorder:'desc'
+					};
+					const callback = (res) => {
+						if (res.info.data.length > 0) {
+							self.mainData.push.apply(self.mainData,res.info.data);
+							self.paginate['count'] = res.info.total;
+							window.base.computePageArr(self);
+						} else {
+							alert('没有数据')
+						};	
+					};
+					window.base.labelGet(postData, callback);
+				},
+				
+				
+				
+				linkTo(e) {
+					var self = this;
+					console.log(e);
+					self.linkPage = window.base.getDataSet(e).page;
+					window.base.linkTo(self);
+				},
+				
+				changePage(e) {
+					var self = this;
+					var dataSet = window.base.getDataSet(e);
+					window.base.changePage(dataSet, self);
+				},
 				
 		    }
 		});

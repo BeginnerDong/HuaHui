@@ -63,69 +63,77 @@
 
 <body>
 	<div id="app">
-		<include src="headerSeach.html"></include>
+		<div class="head">
+			<div class="cont flexRowBetween w1200">
+				<div class="T-Logo"><img src="images/home-img0.png" ></div>
+				<div class="seachInput flex fs16 white">
+					<a class="deltIcon" href="index.html">×</a>
+					<div class="input">
+						<input type="text" v-on:keyup.13="search" v-model="title" placeholder="请输入" />
+					</div>
+					<div class="Rseach">
+						<button class="btn" type="button" @click="goSearch"></button>
+					</div>
+					
+					<!-- <img class="icon" src="images/home-icon.png" > -->
+				</div>
+				<div class="R"></div>
+				
+			</div>
+		</div>
+		<div class="headH"></div>
 		
 		<div class="f5bj">
 			<div class="orderNav flexCenter borderB1">
 				<span class="tt" :class="curr==1?'on':''" @click="changeCurr('1')">文章</span>
-				<span class="tt" :class="curr==2?'on':''" @click="changeCurr('2')">图片</span>
-				<span class="tt" :class="curr==3?'on':''" @click="changeCurr('3')">视频</span>
-				<span class="tt" :class="curr==4?'on':''" @click="changeCurr('4')">资料</span>
-				<span class="tt" :class="curr==5?'on':''" @click="changeCurr('5')">品牌</span>
-				<span class="tt" :class="curr==6?'on':''" @click="changeCurr('6')">产品</span>
-				<span class="tt" :class="curr==7?'on':''" @click="changeCurr('7')">招聘</span>
+				<span class="tt" :class="curr==2?'on':''" @click="changeCurr('2')">资料</span>
+				<span class="tt" :class="curr==3?'on':''" @click="changeCurr('3')">图片</span>
+				<span class="tt" :class="curr==4?'on':''" @click="changeCurr('4')">视频</span>
+				<span class="tt" :class="curr==5?'on':''" @click="changeCurr('5')">产品</span>
+				<span class="tt" :class="curr==6?'on':''" @click="changeCurr('6')">招聘</span>
+				<span class="tt" :class="curr==7?'on':''" @click="changeCurr('7')">品牌</span>
 			</div>
 		</div>
 		
 		<div class="w1200 seachCont pdb80 pdt30">
 		
 			<!-- 案例新闻 -->
-			<div class="ind-dynamic" v-show="curr==1">
-				<div class="item">
-					<a class="flexRowBetween" href="newsdetail.html">
-						<div class="fxBj"></div>
-						<div class="texbox">
-							<div class="tit avoidOverflow">透过浙江卫视秋季盛典暨抖音奇妙看到每一个“你”</div>
-							<p class="form"></p>
-							<p class="text2 avoidOverflow4">抖音奇妙夜今年以“看见每个你”为主题，着力呈现抖音上的普通创作者，据介绍，本次晚会共有近百名抖音上的普通创作者登台、演出、普通人通过小屏走向大海。</p>
-						</div>
-						<div class="imgBox">
-							<img src="images/case-img.png" >
-						</div>
-					</a>
-				</div>
-				<div class="item flexRowBetween">
-					<a class="flexRowBetween" href="newsdetail.html">
-						<div class="imgBox">
-							<img src="images/case-img1.png" >
-						</div>
-						<div class="texbox">
-							<div class="tit avoidOverflow">【快报】有一款扬声器，不至于优雅</div>
-							<p class="form"></p>
-							<p class="text2 avoidOverflow4">11月5日晚上，主席和其夫人在上海豫园会见法国总统马克龙和夫人布丽吉特，主席对马克龙总统再次访华并第一次来上海表示欢迎。</p>
-						</div>
-					</a>
-				</div>
-				<div class="item flexRowBetween">
-					<a class="flexRowBetween" href="newsdetail.html">
-						<div class="texbox">
-							<div class="tit avoidOverflow">华汇代理了Wysiwyg</div>
-							<p class="form"></p>
-							<p class="text2 avoidOverflow4">Wysiwyg是加拿大CAST Lighting公司推出一款集CAD,绘图，数据。可视化和虚拟显示控制功能的多合一灯光设计软件，改名称来源于what you see is what you get（所有即可得），这个名字可以看出开发商的指导思想和软件开发理念。</p>
-						</div>
-						<div class="imgBox">
-							<img src="images/case-img2.png" >
-						</div>
-					</a>
+			<div class="ind-dynamic" v-if="curr==1">
+				
+				<div v-for="(item,index) in mainData">
+					<div class="item flexRowBetween" style="margin-bottom: 60px;" v-if="index%2==0">
+						<a class="flexRowBetween" :href="'newsdetail.html?id='+item.id">
+							<div class="texbox">
+								<div class="tit avoidOverflow">{{item.title}}</div>
+								<p class="form"></p>
+								<p class="text2 avoidOverflow4">{{item.description}}</p>
+							</div>
+							<div class="imgBox">
+								<img :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''" >
+							</div>
+						</a>
+					</div>
+					<div class="item flexRowBetween" style="margin-bottom: 60px;" v-if="index%2!=0">
+						<a class="flexRowBetween" :href="'newsdetail.html?id='+item.id">
+							<div class="imgBox">
+								<img :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''" >
+							</div>
+							<div class="texbox">
+								<div class="tit avoidOverflow">{{item.title}}</div>
+								<p class="form"></p>
+								<p class="text2 avoidOverflow4">{{item.description}}</p>
+							</div>
+						</a>
+					</div>
 				</div>
 			</div>
 			
 			
 			<!-- 高清图列表 -->
-			<div class="HDPicBox" v-show="curr==2">
+			<div class="HDPicBox" v-if="curr==3">
 				<ul class="flex">
-					<li v-for="(item,index) in cHDPicData" :key="index">
-						<img class="pic" src="images/download-img12.jpg">
+					<li v-for="(item,index) in mainData" :key="index">
+						<img class="pic" :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''">
 						<div class="download">
 							<img class="icon" src="images/download-icon7.png" >
 						</div>
@@ -134,9 +142,9 @@
 			</div>
 			
 			<!-- 视频 -->
-			<div class="videoBox" v-show="curr==3">
+			<div class="videoBox" v-if="curr==4">
 				<ul class="flex">
-					<li v-for="(item,index) in videoData" :key="index">
+					<li v-for="(item,index) in mainData" :key="index">
 						<img class="video" src="images/download-img4.png" >
 						<div class="download">
 							<img class="icon" src="images/download-icon7.1.png" >
@@ -145,10 +153,10 @@
 				</ul>
 			</div>
 			<!-- 材料列表 -->
-			<div class="cailiaoList" v-show="curr==4">
+			<div class="cailiaoList" v-if="curr==2">
 				<ul>
-					<li class="flexRowBetween" v-for="(item,index) in cailiaoData" :key="index">
-						<p class="ll">X15 HIQ系统介绍</p>
+					<li class="flexRowBetween" v-for="(item,index) in mainData" :key="index">
+						<p class="ll">{{item.title}}</p>
 						<span class="rr flexEnd">
 							<img class="icon" src="images/download-icon7.png" >
 							<em>下载</em>
@@ -158,13 +166,15 @@
 			</div>
 			
 			<!-- 品牌 -->
-			<div class="ind-brand" v-show="curr==5">
+			<div class="ind-brand" v-if="curr==7">
 				<div class="item flexRowBetween">
-					<div class="half TwoPic" v-for="(item,index) in brandData" :key="index">
+					<div class="half TwoPic" v-for="(item,index) in mainData" :key="index">
 						<a href="product.html">
 							<div class="box flexCenter">
-								<img class="logo" :src="item.logoUrl" >
-								<p class="text center flexCenter"><em>创立于1984年的L-Acoustics，由最初植根物理和基础声学领域，到研发出具有高功率的同轴系统，再到发明推出波阵面纠正技术（Wavefront Sculpture Techonlogy）和著名的V-DOSC系统，L-Acoustics在不断革新专业音频领域，并被赞誉为现代线声源阵列的鼻祖。</em></p>
+								<img class="logo" :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''" >
+								<p class="text center flexCenter"><em>
+								{{item.description}}
+								</em></p>
 							</div>
 						</a>
 					</div>
@@ -172,101 +182,32 @@
 			</div>
 			
 			<!-- 产品 -->
-			<div class="prodctCont center"  v-show="curr==6">
+			<div class="prodctCont center"  v-if="curr==5">
 				<ul class="flexRowBetween">
-					<li class="row">
+					<li class="row" v-for="(item,index) in mainData" :key="index">
 						<div class="infor">
 							<a href="productDeail.html">
-								<h1 class="tit">SDT7</h1>
+								<h1 class="tit">{{item.title}}</h1>
 								<div class="pic flexCenter">
-									<img src="images/product-img4.png">
+									<img :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''">
 								</div>
 							</a>
 						</div>
 					</li>
-					<li class="row">
-						<div class="infor">
-							<a href="productDeail.html">
-								<h1 class="tit">SDT7</h1>
-								<div class="pic flexCenter">
-									<img src="images/product-img7.png">
-								</div>
-							</a>
-						</div>
-					</li>
-					<li class="column">
-						<div class="infor">
-							<a href="productDeail.html">
-								<h1 class="tit">SXT</h1>
-								<div class="pic flexCenter">
-									<img src="images/product-img0.1.png">
-								</div>
-							</a>
-						</div>
-					</li>
-					<li class="column">
-						<div class="infor">
-							<a href="productDeail.html">
-								<h1 class="tit">SXT</h1>
-								<div class="pic flexCenter">
-									<img src="images/product-img0.png">
-								</div>
-							</a>
-						</div>
-					</li>
-					<li class="row">
-						<div class="infor">
-							<a href="productDeail.html">
-								<h1 class="tit">SDT7</h1>
-								<div class="pic flexCenter">
-									<img src="images/product-img6.png">
-								</div>
-							</a>
-						</div>
-					</li>
-					<li class="column">
-						<div class="infor">
-							<a href="productDeail.html">
-								<h1 class="tit">SXT</h1>
-								<div class="pic flexCenter">
-									<img src="images/product-img0.1.png">
-								</div>
-							</a>
-						</div>
-					</li>
-					<li class="column">
-						<div class="infor">
-							<a href="productDeail.html">
-								<h1 class="tit">SXT</h1>
-								<div class="pic flexCenter">
-									<img src="images/product-img0.1.png">
-								</div>
-							</a>
-						</div>
-					</li>
-					<li class="row">
-						<div class="infor">
-							<a href="productDeail.html">
-								<h1 class="tit">SDT7</h1>
-								<div class="pic flexCenter">
-									<img src="images/product-img6.png">
-								</div>
-							</a>
-						</div>
-					</li>
+					
 				</ul>
 			</div>
 			
 			
 			<!-- 招聘 -->
-			<div class="jobPin" v-show="curr==7">
+			<div class="jobPin" v-if="curr==6">
 				<ul class="flexRowBetween">
-					<li v-for="(item,index) in recruitData" :key="index">
+					<li v-for="(item,index) in mainData" :key="index">
 						<a href="recruitDetail.html">
 							<div class="infor">
 								<img class="icon" src="images/about-icon4.png" >
-								<h2 class="tit">商务助理</h2>
-								<p>本科以上学历，英语过四级考级</p>
+								<h2 class="tit">{{item.title}}</h2>
+								<p>{{item.description}}</p>
 							</div>
 						</a>
 					</li>
@@ -301,31 +242,161 @@
 						{logoUrl:'images/brand-img1.png'},
 						{logoUrl:'images/brand-img.png'}
 					],
-					recruitData:[{},{},{},{},{},{}]
+					recruitData:[{},{},{},{},{},{}],
+					title:'',
+					searchItem:{
+						thirdapp_id:2,
+						type:1
+					},
+					getBefore:{},
+					searchItemTwo:{
+						type:5,
+						parentid:0
+					}
 		        }
 		    },
 		    methods: {
+				
+				
+				submit(){
+					const self  = this;
+					/* if(self.title==''){
+						alert('请输入关键字搜索')
+						return
+					}; */
+					
+					if(self.curr!=7){
+						self.searchItem.title = ['LIKE', ['%' + self.title + '%']];
+						self.searchItem.type = self.curr;
+						if(self.curr==6){
+							self.getBefore = {
+								child:{
+									tableName:'Label',
+									middleKey:'menu_id',
+									key:'id',
+									searchItem:{
+										status:['in',[1]],
+										title:['in',['招聘信息']]
+									},
+									condition:'in',
+								}
+							}
+						}else{
+							self.getBefore = {}
+						};
+						self.mainData = [];
+						self.getMainData()
+					}else{
+						self.searchItemTwo.title = ['LIKE', ['%' + self.title + '%']];
+						self.mainData = [];
+						self.getBrandData()
+					}
+				},
+				
+				goSearch() {
+					const self = this;
+					if (self.title != '') {
+						self.submit()
+					} else {
+						alert('请输入标题搜索')
+					}
+				},
+				
+				search() {
+					const self = this;
+				
+					console.log(1231);
+					
+					console.log('event',event)
+					if (event.which == "13"){
+						if (self.title != '') {
+							self.submit()
+							
+						} else {
+							alert('请输入标题搜索')
+						}
+					}
+				},
+				
 				changeCurr(curr){
 					const self = this;
 					if(curr!=self.curr){
-						self.curr = curr
+						self.curr = curr;
+						self.submit()
 					}
 				},
-				getMainData: function(id){
+				
+				getMainData(){
 				    var self = this;
+				    var postData = {};
+				    postData.searchItem = window.base.cloneForm(self.searchItem);
+					if(JSON.stringify(self.getBefore)!="{}"){
+						postData.getBefore = window.base.cloneForm(self.getBefore)
+					};
+					postData.order = {
+						listorder:'desc'
+					};
 				    var callback = function(res){
-				        console.log('getMainData', res);
-				        self.mainData.push.apply(self.mainData,res.info.data);
-				        for (var i = 0; i < self.mainData.length; i++) {
-				        	self[self.mainData[i].title] = self.mainData[i];
-				        };
-				        self.getNewsData()
+				        if(res.info.data.length>0&&res.info.data[0]){
+							self.mainData.push.apply(self.mainData,res.info.data)
+				        };    
 				    };
-					console.log('self.mainData',self.mainData)
-				    window.base.labelGet(postData, callback);
-				}
+				    window.base.articleGet(postData, callback);
+				},
+				
+				getBrandData() {
+					const self = this;
+					const postData = {};
+					postData.searchItem = window.base.cloneForm(self.searchItemTwo)
+					postData.order = {
+						listorder:'desc'
+					};
+					const callback = (res) => {
+						if (res.info.data.length > 0) {
+							self.mainData.push.apply(self.mainData,res.info.data);
+						}	
+					};
+					window.base.labelGet(postData, callback);
+				},
 				
 		    }
 		});
 	</script>
+	<style>
+	.head{position: fixed;top: 0;left: 0;right: 0;z-index: 20;box-shadow: 0 1px 4px rgba(100, 100, 100, 0.1);width: 100%;box-sizing: border-box;background: #636363;}
+	
+	.head .cont{height: 60px;}
+	
+	.T-Logo{width:auto; height:42px; display: block;}
+	.T-Logo img{width: auto;height: 100%; display: block;}
+	
+	.seachInput{width: 50%;box-sizing: border-box;padding: 0 40px 0 30px;position: relative;}
+	.seachInput .deltIcon{font-size: 30px;position: absolute;left: 0;top: 2px;color: #FFF; display: block;}
+	.seachInput .input{width: 100%;box-sizing: border-box;}
+	.seachInput .input input{width: 100%;line-height: 30px;height: 30px;background: none;border-bottom: 1px solid #737373;color: #fff;font-size: 14px;}
+	
+	.Rseach{position: absolute; right: 0; top: 50%;transform: translateY(-50%);}
+	.Rseach .btn{width: 23px;height:23px;background: url(images/home-icon.png) no-repeat center center/100% 100%;}
+	
+	
+	.headH{height: 60px;width: 100%;}
+	/*以下自适应样式*/
+	@media screen and ( max-width: 1000px){
+		
+		.head .logoCont{padding: 10px 2%;}
+		.T-Logo{height: 40px;}
+	}
+	
+	@media screen and ( max-width: 500px){
+		
+		.T-Logo{height: 30px;}
+		.head .cont{height: 50px;}
+		.headH{height: 50px;}
+		
+		.seachInput{width: 60%;}
+		.Rseach{margin-left: 30px;}
+		.head .cont .R{display: none;}
+	}
+	
+	</style>
 </html>
