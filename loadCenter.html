@@ -65,8 +65,8 @@
 		
 		<div class="w1100 pdb80">
 			<div class="seachBox flexRowBetween">
-				<div class="input"><input type="text" placeholder="搜索"></div>
-				<div class="seachIcon"><button class="btn" type="button"></button></div>
+				<div class="input"><input type="text" v-on:keyup.13="search" v-model="title" placeholder="搜索"></div>
+				<div class="seachIcon"><button class="btn" type="button" @click="goSearch"></button></div>
 			</div>
 			
 			<div class="orderNav flexCenter borderB1">
@@ -167,7 +167,8 @@
 						type:2
 					},
 					brandCurr:0,
-					navCurr:0
+					navCurr:0,
+					title:''
 				}
 		    },
 			
@@ -177,6 +178,34 @@
 			},
 			
 		    methods: {
+				
+				goSearch() {
+					const self = this;
+					if (self.title != '') {
+						
+						self.mainData = [];
+						self.getMainData()
+					} else {
+						alert('请输入标题搜索')
+					}
+				},
+				
+				search() {
+					const self = this;
+				
+					console.log(1231);
+					
+					console.log('event',event)
+					if (event.which == "13"){
+						if (self.title != '') {
+							
+							self.mainData = [];
+							self.getMainData()
+						} else {
+							alert('请输入标题搜索')
+						}
+					}
+				},
 				
 				changeCurr(curr){
 					const self = this;
@@ -242,6 +271,9 @@
 					};
 					postData.order = {
 						listorder:'desc'
+					};
+					if(self.title!=''){
+						postData.searchItem.title = ['LIKE', ['%' + self.title + '%']];
 					};
 					const callback = (res) => {
 						if (res.info.data.length > 0) {
