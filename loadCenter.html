@@ -223,9 +223,9 @@
 					const self = this;
 					if(brandCurr!=self.brandCurr){
 						self.brandCurr = brandCurr;
-						self.brandCurrId = self.labelData[index].id;
-						self.leftNavData = self.labelData[index].child;
-						self.navCurrId = self.labelData[index].child[0].id;
+						self.brandCurrId = self.labelData[brandCurr].id;
+						self.leftNavData = self.labelData[brandCurr].child;
+						self.navCurrId = self.labelData[brandCurr].child[0].id;
 						self.mainData = [];
 						self.getMainData()
 					}
