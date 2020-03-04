@@ -84,52 +84,52 @@
 			<div class="ind-brand pdb80">
 				<div class="item flexRowBetween">
 					<div class="half TwoPic">
-						<div class="box flexCenter" v-if="brandData[0]">
-							<img class="logo" :src="brandData&&brandData[0]&&brandData[0].mainImg&&brandData[0].mainImg[0]?brandData[0].mainImg[0].url:''" >
+						<a class="box flexCenter" v-if="brandData[0]" :href="'product.html?id='+brandData[0].id">
+							<img class="logo"  :src="brandData&&brandData[0]&&brandData[0].mainImg&&brandData[0].mainImg[0]?brandData[0].mainImg[0].url:''" >
 							<p class="text center flexCenter">
 								<em>
 									{{brandData&&brandData[0]?brandData[0].description:''}}
 								</em>
 							</p>
-						</div>
-						<div class="box flexCenter" v-if="brandData[1]">
-							<img class="logo" :src="brandData&&brandData[1]&&brandData[1].mainImg&&brandData[1].mainImg[0]?brandData[1].mainImg[0].url:''" >
+						</a>
+						<a class="box flexCenter" v-if="brandData[1]" :href="'product.html?id='+brandData[1].id">
+							<img class="logo"  :src="brandData&&brandData[1]&&brandData[1].mainImg&&brandData[1].mainImg[0]?brandData[1].mainImg[0].url:''" >
 							<p class="text center flexCenter"><em>
 								{{brandData&&brandData[1]?brandData[1].description:''}}
 							</em></p>
-						</div>
+						</a>
 					</div>
 					<div class="half onePic">
-						<div class="box flexCenter" v-if="brandData[2]">
-							<img class="logo" class="" :src="brandData&&brandData[2]&&brandData[2].mainImg&&brandData[2].mainImg[0]?brandData[2].mainImg[0].url:''"  >
+						<a class="box flexCenter" v-if="brandData[2]" :href="'product.html?id='+brandData[2].id">
+							<img class="logo" :href="'product.html?id='+brandData[2].id" :src="brandData&&brandData[2]&&brandData[2].mainImg&&brandData[2].mainImg[0]?brandData[2].mainImg[0].url:''"  >
 							<p class="text center flexCenter"><em>
 								{{brandData&&brandData[2]?brandData[2].description:''}}
 							</em></p>
-						</div>
+						</a>
 					</div>
 				</div>
 				<div class="item flexRowBetween">
 					<div class="half onePic">
-						<div class="box flexCenter" v-if="brandData[3]">
-							<img class="logo" class="" :src="brandData&&brandData[3]&&brandData[3].mainImg&&brandData[3].mainImg[0]?brandData[3].mainImg[0].url:''" >
+						<a class="box flexCenter" v-if="brandData[3]" :href="'product.html?id='+brandData[3].id">
+							<img class="logo" :href="'product.html?id='+brandData[3].id" :src="brandData&&brandData[3]&&brandData[3].mainImg&&brandData[3].mainImg[0]?brandData[3].mainImg[0].url:''" >
 							<p class="text center flexCenter">
 								<em>{{brandData&&brandData[3]?brandData[3].description:''}}
 								</em>
 							</p>
-						</div>
+						</a>
 					</div>
 					<div class="half TwoPic">
-						<div class="box flexCenter" v-if="brandData[4]">
-							<img class="logo" :src="brandData&&brandData[4]&&brandData[4].mainImg&&brandData[4].mainImg[0]?brandData[4].mainImg[0].url:''" >
+						<a class="box flexCenter" v-if="brandData[4]" :href="'product.html?id='+brandData[4].id">
+							<img class="logo"  :href="'product.html?id='+brandData[4].id" :src="brandData&&brandData[4]&&brandData[4].mainImg&&brandData[4].mainImg[0]?brandData[4].mainImg[0].url:''" >
 							<p class="text center flexCenter"><em>
 							{{brandData&&brandData[4]?brandData[4].description:''}}
 							</em></p>
-						</div>
-						<div class="box flexCenter" v-if="brandData[5]">
-							<img class="logo" :src="brandData&&brandData[5]&&brandData[5].mainImg&&brandData[5].mainImg[0]?brandData[5].mainImg[0].url:''" >
+						</a>
+						<a class="box flexCenter" v-if="brandData[5]" :href="'product.html?id='+brandData[5].id">
+							<img class="logo" :href="'product.html?id='+brandData[5].id" :src="brandData&&brandData[5]&&brandData[5].mainImg&&brandData[5].mainImg[0]?brandData[5].mainImg[0].url:''" >
 							<p class="text center flexCenter"><em>
 							{{brandData&&brandData[5]?brandData[5].description:''}}</em></p>
-						</div>
+						</a>
 					</div>
 					
 				</div>
