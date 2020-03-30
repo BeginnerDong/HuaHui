@@ -1,6 +1,7 @@
 
 
 /* 招聘 */
+.jobPin{min-height: 200px; box-sizing: border-box;}
 .jobPin ul{flex-wrap: wrap;align-items: flex-start;}
 .jobPin li{width: 50%;box-sizing: border-box;padding-right: 100px;margin:20px 0;}
 .jobPin li:nth-of-type(2n){border-left: 1px solid #c3c3c3;padding-left:100px;padding-right: 0;}
@@ -16,6 +17,7 @@
 }
 
 @media only screen and (max-width: 500px){
+	.jobPin{min-height: 130px;}
 	.jobPin li .infor .tit{font-size: 15px;}
 	.jobPin li .infor{padding: 5px 0 10px 30px;}
 	.jobPin li .infor .icon{width: 20px;height: 20px;}

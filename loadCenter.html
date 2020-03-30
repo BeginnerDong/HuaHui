@@ -28,17 +28,17 @@
 		.brandNav .tt.on{position: relative;}
 		.brandNav .tt.on:after{content: '';width: 40px;height: 3px;background: #222222;position: absolute;bottom: 0;left: 50%;transform: translateX(-50%);}
 		
-		.leftNav{width: 23%;border: 1px solid #eee;background: #fafafa;}
-		.leftNav span{width: 100%;padding: 20px;border-bottom: 1px solid #eee;font-size: 16px; display: block;box-sizing: border-box;}
+		.leftNav{width: 23%;min-height: 61px;border: 1px solid #eee;background: #fafafa;}
+		.leftNav span{width: 100%;padding: 20px;border-bottom: 1px solid #eee;font-size: 16px; display: block;box-sizing: border-box;height: 61px;}
 		.leftNav span.on{position: relative;color: #222;font-weight: bold;}
 		.leftNav span.on:after{content: '';width: 3px;height: 100%;background: #222222;position: absolute;bottom: 0;left: 0;}
 		.leftNav span:last-child{border-bottom: 0;}
 		
-		.R-Cont{width: 72%;}
+		.R-Cont{width: 72%;min-height: 300px;}
 		
 		@media only screen and (max-width: 1024px){
-			.leftNav{width: 28%;}
-			.leftNav span{font-size: 14px;padding: 15px;}
+			.leftNav{width: 28%;min-height: 51px;}
+			.leftNav span{font-size: 14px;padding: 15px; height: 51px;}
 			.R-Cont{width: 68%;}
 			
 			.seachBox{width: 80%;margin: 30px auto 10px auto}

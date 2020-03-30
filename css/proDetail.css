@@ -2,6 +2,7 @@
 .xqCont{width: 900px;margin: 0 auto;}
 .xqPic img{width: 100%;height: auto;}
 .videoCont{width: 100%;box-sizing: border-box;}
+.videoCont .video{width: 100%;}
 .videoCont img{width: 100%;height: auto;display: block;}
 
 .product-head{padding: 50px 0 60px 0;align-items: flex-start;}
@@ -24,6 +25,7 @@
 .preview .arrow-right{right:0px;background-image: url(../images/details-icon2.png);}
 .preview img{width: 100%;height: 100%;display: block;}
 .preview .active-nav img{border: 1px solid #F00;box-sizing: border-box;}
+
 
 @media only screen and (max-width: 1024px){
 	.product-head{padding: 30px 4%;}

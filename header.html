@@ -9,7 +9,7 @@
 			</span>
 		</div>
 		<div class="cont flexRowBetween w1200">
-			<div class="T-Logo"><img src="images/home-img0.png" ></div>
+			<div class="T-Logo"><a href="index.html"><img src="images/home-img0.png" ></a></div>
 			<div class="orderNavTwo flexRowBetween fs16" v-show="is_showNav">
 				<div class="tt" :class="currentUrl=='/index.html'?'on':''"><a href="index.html">首页</a></div>
 				<div class="tt" :class="currentUrl=='/aboutUs.html'?'on':''"><a href="aboutUs.html">关于华汇</a></div>
@@ -49,7 +49,7 @@
 	    created:function () {
 			var self = this;
 			// self.getMainData();
-			if(window.screen.width<500){
+			if(window.screen.width<1000){
 				self.is_showNav = false
 			};
 	        var currentUrl = window.base.GetUrlRelativePath();
@@ -103,6 +103,7 @@
 .head .cont{height: 60px;}
 
 .T-Logo{width:auto; height:42px; display: block;margin-right: 20px;}
+.T-Logo a{width: 100%;height: 100%; display: block;}
 .T-Logo img{width: auto;height: 100%; display: block;}
 
 .orderNavTwo{width: 70%;}
@@ -122,24 +123,24 @@
 	.orderNavTwo{font-size: 14px;width: 75%;}
 	
 	.head .logoCont{padding: 10px 2%;}
-	.T-Logo{height: 40px;}
-	.Rphone .img{height: 18px!important;}
-	.Rphone span{font-size: 13px;}
-}
-
-@media screen and ( max-width: 500px){
-	
 	.T-Logo{height: 30px;}
 	.Rphone{display: none;}
+	/* .Rphone .img{height: 18px!important;}
+	.Rphone span{font-size: 13px;} */
 	.mobile-Btn{display: block;}
 	.head .cont{height: 50px;}
 	.headH{height: 50px;}
-	
 	.orderNavTwo{display: block;position: absolute;top: 50px;left: 0;right: 0;width: 100%;box-sizing: border-box;background: #3e3e3e;}
 	.orderNavTwo .tt{width: 100%;border-bottom: 1px solid #4a4a4a;}
 	
 	.head .cont{justify-content: flex-start;}
-	.Rseach{margin-left: 30px;}
+	.Rseach{margin-left: 30px; /* display: none; */}
+}
+
+@media screen and ( max-width: 500px){
+	
+	/* .T-Logo{height: 30px;} */
+	
 }
 
 </style>

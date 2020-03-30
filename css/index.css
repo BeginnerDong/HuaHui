@@ -1,7 +1,7 @@
 
 
 /* 企业动态 */
-.ind-dynamic .item{margin-bottom: 60px;position: relative;}
+.ind-dynamic .item{margin-bottom: 60px;position: relative;overflow: hidden;}
 .ind-dynamic .item a{align-items: flex-start;}
 .ind-dynamic .item .texbox{width:45%;margin-top: 20px;}
 .ind-dynamic .item .texbox .tit{font-size: 22px;line-height: 30px;}
