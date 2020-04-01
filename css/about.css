@@ -2,10 +2,13 @@
 /* 关于华汇 */
 /* .companyPic ul{margin-left: -30px;} */
 /* .companyPic li:first-child{margin-left: 0;} */
-.companyPic li{width: 49%;height: 390px;margin: 0 1%;}
+/* .companyPic li{width: 48%;height: 390px;margin: 0 1%;float: left;} */
+.swiper-container { width: 100%;height: 390px;position: relative;}
+.swiper-container ul{width: 100%;}
+.companyPic li{width: 48%;height: 100%;margin: 0 1%; text-align: center; font-size: 18px; background: #fff;display: -webkit-box;display: -ms-flexbox;display: -webkit-flex;display: flex;-webkit-box-pack: center;-ms-flex-pack: center;-webkit-justify-content: center;justify-content: center;-webkit-box-align: center;-ms-flex-align: center;-webkit-align-items: center;align-items: center;transition: 300ms;}
 .companyPic li img{width: 100%;height: 100%;}
-.companyPic .ArrowIcon{position: absolute;top: 50%;left:4%;right: 4%;transform: translateY(-50%);}
-.companyPic .ArrowIcon span{width: 30px;height: 30px;}
+.companyPic .ArrowIcon{position: absolute;top: 50%;left:4%;right: 4%;transform: translateY(-50%); z-index: 1;}
+.companyPic .ArrowIcon span{width: 35px;height: 35px;opacity: 1;background: none;}
 .companyPic .ArrowIcon span img{width: 100%;height: 100%;}
 
 /* 公司奖章 */
@@ -32,7 +35,7 @@
 .upImg img{width: 100%;height: 100%; display: block}
 
 @media only screen and (max-width: 1050px){
-	.companyPic li{height: 320px;}
+	.swiper-container{height: 320px;}
 }
 @media only screen and (max-width: 1000px){
 	.inforCont{padding-bottom: 15px!important;}
@@ -40,7 +43,7 @@
 	.MedalPic .onePic .box{height: 438px;}
 }
 @media only screen and (max-width: 780px){
-	.companyPic li{height: 240px;}
+	.swiper-container{height: 240px;}
 }
 @media only screen and (max-width: 500px){
 	.MedalPic .TwoPic .box:first-child{margin-bottom: 12px;}
@@ -57,11 +60,11 @@
 	
 }
 @media only screen and (max-width: 414px){
-	.companyPic li{height: 130px;}
+	.swiper-container{height: 130px;}
 }
 @media only screen and (max-width: 375px){
-	.companyPic li{height: 117px;}
+	.swiper-container{height: 117px;}
 }
 @media only screen and (max-width: 320px){
-	.companyPic li{height:100px;}
+	.swiper-container{height:100px;}
 }
