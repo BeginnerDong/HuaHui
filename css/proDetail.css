@@ -19,7 +19,7 @@
 .view .arrow-right{right: 10px;background-image: url(../images/icon-right.png);}
 .preview{width: 100%;position: absolute;box-sizing: border-box;padding: 0 35px;bottom: 10px;left: 0;right: 0;}
 .preview .swiper-container{width: 100%;height: 82px;overflow: hidden;}
-.preview .swiper-slide{width: 110px;height:68px;cursor:pointer;padding: 0 2px;}
+.preview .swiper-slide{width: 68px;height:68px;cursor:pointer;padding: 0 2px;}
 .preview .arrow{width: 26px;height: 26px;background: url(../images/details-icon1.png) no-repeat 0 0/100% 100%;position: absolute;top: 50%;transform: translateY(-50%);z-index: 10;}
 .preview .arrow-left{left: 0px;}
 .preview .arrow-right{right:0px;background-image: url(../images/details-icon2.png);}

@@ -120,7 +120,7 @@
 					<div class="HDPicBox" v-show="curr==2">
 						<ul class="flexRowBetween">
 							<li v-for="(item,index) in mainData" :key="index">
-								<img class="pic" :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''">
+								<img class="pic" :src="item.bannerImg&&item.bannerImg[0]?item.bannerImg[0].url:''">
 								<a download class="download" :href="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''">
 									<img class="icon" src="images/download-icon7.png" >
 								</a>
@@ -134,9 +134,9 @@
 							<li v-for="(item,index) in mainData" :key="index">
 								<iframe class="video" :src="item.description" frameborder="0" allowfullscreen="true" width="380" height="247"></iframe>
 							<!-- 	<img class="video" src="images/download-img4.png" > -->
-								<div class="download">
+								<a class="download" :href="item.description">
 									<img class="icon" src="images/download-icon7.1.png" >
-								</div>
+								</a>
 							</li>
 						</ul>
 					</div>

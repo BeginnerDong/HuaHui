@@ -144,11 +144,13 @@
 			<!-- 视频 -->
 			<div class="videoBox" v-if="curr==4">
 				<ul class="flex">
+					
 					<li v-for="(item,index) in mainData" :key="index">
-						<img class="video" src="images/download-img4.png" >
-						<div class="download">
+						<iframe class="video" :src="item.description" frameborder="0" allowfullscreen="true" width="380" height="247"></iframe>
+					<!-- 	<img class="video" src="images/download-img4.png" > -->
+						<a class="download" :href="item.description">
 							<img class="icon" src="images/download-icon7.1.png" >
-						</div>
+						</a>
 					</li>
 				</ul>
 			</div>
@@ -370,7 +372,7 @@
 	.T-Logo{width:auto; height:42px; display: block;}
 	.T-Logo a{width: 100%;height: 100%; display: block;}
 	.T-Logo img{width: auto;height: 100%; display: block;}
-	.seachCont{min-height: 200px;}
+	.seachCont{min-height: 500px;}
 	.seachInput{width: 50%;box-sizing: border-box;padding: 0 40px 0 30px;position: relative;}
 	.seachInput .deltIcon{font-size: 30px;position: absolute;left: 0;top: 2px;color: #FFF; display: block;}
 	.seachInput .input{width: 100%;box-sizing: border-box;}

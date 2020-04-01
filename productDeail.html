@@ -81,16 +81,19 @@
 		<div class="w1100">
 			<div class="orderNav flexCenter">
 				<span class="tt flexCenter" :class="navCurr==1?'on':''" @click="changeNavCurr('1')">参数规格</span>
-				<span class="tt flexCenter" :class="navCurr==2?'on':''" @click="changeNavCurr('2')">视频</span>
+				<span class="tt flexCenter" :class="navCurr==2?'on':''" @click="changeNavCurr('2')" v-if="mainData.description!=''">视频</span>
 			</div>
 			<div class="xqCont">
 				<div class="xqPic" v-show="navCurr==1">
-					<img :src="mainData.bannerImg&&mainData.bannerImg[0]?mainData.bannerImg[0].url:''" >
+					<img v-for="item in mainData.bannerImg" :src="item.url" >
 				</div>
 				
 				<div class="videoCont" v-show="navCurr==2">
 					<div>
-						<iframe class="video" :src="mainData.description" frameborder="0" allowfullscreen="true" width="900" height="500"></iframe>
+						<!-- <video width="900" height="500" controls>
+						    <source :src="mainData.description" type="video/mp4">
+						</video> -->
+						<iframe class="video" :src="mainData.description" frameborder="0"  allowfullscreen="true" width="900" height="500"></iframe>
 						<!-- <img src="images/details-img2.jpg" > -->
 					</div>
 					<div class="flexRowBetween">
@@ -160,7 +163,11 @@
 									slidesPerView: 'auto',
 									allowTouchMove: false,
 									onTap: function() {
+										
 										    self.viewSwiper.slideTo(self.previewSwiper.clickedIndex)
+											$('.preview .active-nav').removeClass('active-nav')
+											console.log('24334',self.viewSwiper)
+											var activeNav = $('.preview .swiper-slide').eq(self.viewSwiper.activeIndex).addClass('active-nav')
 									}
 								})
 								console.log('232',self.viewSwiper)
@@ -172,7 +179,7 @@
 							
 							$('.view .arrow-left,.preview .arrow-left').on('click', function(e) {
 								e.preventDefault()
-								
+								console.log('2321',self.viewSwiper)
 								if (self.viewSwiper.activeIndex == 0) {
 									self.viewSwiper.slideTo(self.viewSwiper.slides.length - 1, 1000);
 									self.updateNavPosition()
@@ -184,6 +191,7 @@
 							})
 							$('.view .arrow-right,.preview .arrow-right').on('click', function(e) {
 								e.preventDefault()
+								console.log('2322',self.viewSwiper)
 								if (self.viewSwiper.activeIndex == self.viewSwiper.slides.length - 1) {
 									console.log('self.viewSwiper.activeIndex',self.viewSwiper.activeIndex )
 									//self.viewSwiper.activeIndex = 0;
@@ -202,8 +210,9 @@
 					window.base.articleGet(postData, callback);
 				},
 				
-				updateNavPosition() {
+				updateNavPosition(e) {
 					const self = this;
+					
 						$('.preview .active-nav').removeClass('active-nav')
 						console.log('24334',self.viewSwiper)
 						var activeNav = $('.preview .swiper-slide').eq(self.viewSwiper.activeIndex).addClass('active-nav')

@@ -66,8 +66,7 @@
 			
 			<div class="all-pages mgt30">
 				<span class="no-prev flexCenter" data-type="back" @click="changePage"><img class="arrow" src="images/case-icon5.png"></span>
-				<span v-for="item in pageArray" v-if="item == paginate.currentPage" class="on">{{item}}</span>
-				<span v-for="item in pageArray" v-if="item != paginate.currentPage">{{item}}</span>
+				<span v-for="item in pageArray" :class="item == paginate.currentPage?'on':''" :data-page="item" @click="linkTo">{{item}}</span>
 				<span class="next flexCenter" data-type="next" @click="changePage"><img class="arrow" src="images/case-icon4.png"></span>
 			</div>
 		</div>
