@@ -203,16 +203,12 @@
 				self.getRecruitData()
 				
 			},
+			
 			mounted(){
-				var swiper = new Swiper('.swiper-container', {
-			        // loop: true,
-			        slidesPerView: 2,
-			        spaceBetween: 20,
-					pagination: '.swiper-pagination',
-					nextButton: '.swiper-button-next',
-					prevButton: '.swiper-button-prev'
-				})
+				
+				
 			},
+			
 		    methods: {
 				 
 				uploadFile(e){
@@ -257,6 +253,18 @@
 					const callback = (res) => {
 						if (res.info.data.length > 0) {
 							self.mainData = res.info.data[0]
+							window.onload = function(){
+								var swiper = new Swiper('.swiper-container', {
+								    loop: true,
+								    slidesPerView: 2,
+								    spaceBetween : 20,
+									pagination: '.swiper-pagination',
+									nextButton: '.swiper-button-next',
+									prevButton: '.swiper-button-prev',
+									
+								})
+							}
+							
 						} 
 					};
 					window.base.articleGet(postData, callback);
@@ -282,7 +290,7 @@
 						}
 					};
 					postData.order = {
-						listorder:'desc'
+						listorder:'asc'
 					};
 					const callback = (res) => {
 						if (res.info.data.length > 0) {

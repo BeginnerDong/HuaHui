@@ -29,7 +29,7 @@
 				</div>
 				<div class="companyList">
 					<ul class="flexRowBetween">
-						<li v-for="(item,index) in mainData" :key="index">
+						<li v-for="(item,index) in mainData" :key="index" :style="chooseId==item.id?'box-shadow: 0 0 4px #c11719':''">
 							<p class="compay">{{item.title}}</p>
 							<p class="adrs">{{item.address}}</p>
 							<p class="phone">{{item.phone}}</p>
@@ -99,12 +99,16 @@
 						type:2,
 						thirdapp_id:2
 					},
-					isSending:false
+					isSending:false,
+					chooseId:-1
 		        }
 		    },
 			
 		    created () {
 		        const self = this;
+				if(window.base.GetRequest().id){
+					self.chooseId = window.base.GetRequest().id
+				};
 		    	self.getMainData();
 		    },
 		    
@@ -130,7 +134,7 @@
 						}
 					};
 		    		postData.order = {
-		    			listorder:'desc'
+		    			listorder:'asc'
 		    		};
 		    		const callback = (res) => {
 		    			if (res.info.data.length > 0) {

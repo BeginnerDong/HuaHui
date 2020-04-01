@@ -82,6 +82,10 @@
 					<img class="icon" :src="curr==3?'images/download-icon6.png':'images/download-icon2.png'"/>
 					<em>视频</em>
 				</span>
+				<span class="tt flexCenter" :class="curr==4?'on':''" @click="changeCurr('4')">
+					<img class="icon" :src="curr==3?'images/download-icon6.png':'images/download-icon2.png'"/>
+					<em>软件</em>
+				</span>
 			</div>
 			
 			<!--  -->
@@ -132,11 +136,25 @@
 					<div class="videoBox" v-show="curr==3">
 						<ul class="flexRowBetween">
 							<li v-for="(item,index) in mainData" :key="index">
-								<iframe class="video" :src="item.description" frameborder="0" allowfullscreen="true" width="380" height="247"></iframe>
+								<img class="pic" :src="item.video&&item.video[0]?item.video[0].url:''">
 							<!-- 	<img class="video" src="images/download-img4.png" > -->
 								<a class="download" :href="item.description">
 									<img class="icon" src="images/download-icon7.1.png" >
 								</a>
+							</li>
+						</ul>
+					</div>
+					
+					<!-- 软件列表 -->
+					<div class="cailiaoList" v-show="curr==4">		
+						<ul>
+							<li class="flexRowBetween" v-for="(item,index) in mainData" :key="index">
+								<p class="ll">{{item.title}}</p>
+								<span class="rr flexEnd">
+									<img class="icon" src="images/download-icon7.png" >
+									
+									<a download :href="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''">下载</a>
+								</span>
 							</li>
 						</ul>
 					</div>
@@ -174,7 +192,11 @@
 			
 			created () {
 			    const self = this;
-				self.getLabelData();
+				if(window.base.GetRequest().id){
+					self.changeCurr(window.base.GetRequest().id)
+				}else{
+					self.getLabelData();
+				}
 			},
 			
 		    methods: {
@@ -198,7 +220,6 @@
 					console.log('event',event)
 					if (event.which == "13"){
 						if (self.title != '') {
-							
 							self.mainData = [];
 							self.getMainData()
 						} else {
@@ -214,7 +235,12 @@
 						self.mainData = [];
 						self.leftNavData = [];
 						self.curr = curr;
-						self.searchItem.type = parseInt(self.curr)+1;
+						if(self.curr==4){
+							self.searchItem.type = 7;
+						}else{
+							self.searchItem.type = parseInt(self.curr)+1;
+						}
+						
 						self.getLabelData()
 					}
 				},
@@ -223,11 +249,15 @@
 					const self = this;
 					if(brandCurr!=self.brandCurr){
 						self.brandCurr = brandCurr;
+						self.mainData = [];
 						self.brandCurrId = self.labelData[brandCurr].id;
 						self.leftNavData = self.labelData[brandCurr].child;
-						self.navCurrId = self.labelData[brandCurr].child[0].id;
-						self.mainData = [];
-						self.getMainData()
+						if(self.labelData[brandCurr].child){
+							
+							self.navCurrId = self.labelData[brandCurr].child[0].id;
+	
+							self.getMainData()
+						}
 					}
 				},
 				
@@ -246,15 +276,18 @@
 					const postData = {};
 					postData.searchItem = window.base.cloneForm(self.searchItem);
 					postData.order = {
-						listorder:'desc'
+						listorder:'asc'
 					};
 					const callback = (res) => {
 						if (res.info.data.length > 0) {
 							self.labelData.push.apply(self.labelData,res.info.data);
 							self.brandCurrId = self.labelData[0].id;
-							self.leftNavData = self.labelData[0].child;
-							self.navCurrId = self.labelData[0].child[0].id;
-							self.getMainData()
+							if(self.labelData[0].child){
+								self.leftNavData = self.labelData[0].child;
+								self.navCurrId = self.labelData[0].child[0].id;
+								self.mainData = [];
+								self.getMainData()
+							}
 						} else {
 							
 						};
@@ -270,7 +303,7 @@
 						menu_id: self.navCurrId
 					};
 					postData.order = {
-						listorder:'desc'
+						listorder:'asc'
 					};
 					if(self.title!=''){
 						postData.searchItem.title = ['LIKE', ['%' + self.title + '%']];

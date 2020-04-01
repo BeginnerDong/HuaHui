@@ -66,9 +66,9 @@
 			</div>
 			
 			<div class="all-pages mgt30">
-				<span class="no-prev flexCenter" data-type="back" @click="changePage"><img class="arrow" src="images/case-icon5.png"></span>
+				<span class="no-prev flexCenter" ><img data-type="back" @click="changePage" class="arrow" src="images/case-icon5.png"></span>
 				<span v-for="item in pageArray" :class="item == paginate.currentPage?'on':''" :data-page="item" @click="linkTo">{{item}}</span>
-				<span class="next flexCenter" data-type="next" @click="changePage"><img class="arrow" src="images/case-icon4.png"></span>
+				<span class="next flexCenter" ><img class="arrow" data-type="next" @click="changePage" src="images/case-icon4.png"></span>
 			</div>
 		</div>
 		
@@ -134,7 +134,7 @@
 						},
 					};
 					postData.order = {
-						listorder:'desc'
+						listorder:'asc'
 					};
 					const callback = (res) => {
 						if (res.info.data.length > 0) {
@@ -158,7 +158,7 @@
 						menu_id: self.currId
 					};
 					postData.order = {
-						listorder:'desc'
+						listorder:'asc'
 					};
 					const callback = (res) => {
 						if (res.info.data.length > 0) {

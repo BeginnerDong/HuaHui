@@ -336,7 +336,7 @@
 						postData.getBefore = window.base.cloneForm(self.getBefore)
 					};
 					postData.order = {
-						listorder:'desc'
+						listorder:'asc'
 					};
 				    var callback = function(res){
 				        if(res.info.data.length>0&&res.info.data[0]){
@@ -351,7 +351,7 @@
 					const postData = {};
 					postData.searchItem = window.base.cloneForm(self.searchItemTwo)
 					postData.order = {
-						listorder:'desc'
+						listorder:'asc'
 					};
 					const callback = (res) => {
 						if (res.info.data.length > 0) {
