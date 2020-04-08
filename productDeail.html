@@ -93,8 +93,8 @@
 						<!-- <video width="900" height="500" controls>
 						    <source :src="mainData.description" type="video/mp4">
 						</video> -->
-						<iframe class="video" :src="mainData.description" frameborder="0"  allowfullscreen="true" width="900" height="500"></iframe>
-						<!-- <img src="images/details-img2.jpg" > -->
+						<!-- <iframe class="video" :src="mainData.description" frameborder="0"  allowfullscreen="true" width="900" height="500"></iframe> -->
+						<a  :href="mainData.description"><img :src="mainData.video&&mainData.video[0]?mainData.video[0].url:''" /></a>
 					</div>
 					<div class="flexRowBetween">
 						<!-- <p>DiGiCo SD系列教程01</p>

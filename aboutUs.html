@@ -253,19 +253,25 @@
 					const callback = (res) => {
 						if (res.info.data.length > 0) {
 							self.mainData = res.info.data[0]
-							window.onload = function(){
+							
 								var swiper = new Swiper('.swiper-container', {
-								    loop: true,
+								   // loop: true,
+								   initialSlide:0,
 								    slidesPerView: 2,
 								    spaceBetween : 20,
+									
 									pagination: '.swiper-pagination',
 									nextButton: '.swiper-button-next',
 									prevButton: '.swiper-button-prev',
 									
+									observer: true,//修改swiper自己或子元素时，自动初始化swiper
+									observeParents: true,//修改swiper的父元素时，自动初始化swiper
 								})
-							}
 							
-						} 
+								setTimeout(() => {
+									swiper.slideTo(0, 50, false);
+								}, 50);
+					} 
 					};
 					window.base.articleGet(postData, callback);
 				},

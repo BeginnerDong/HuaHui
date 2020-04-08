@@ -1,7 +1,7 @@
 <div id="banner_app">
 	<div class="swiperBox">
 		<div class="banner" v-for="(item,index) in bannerData" v-if="index==banner_index" >
-			<img :src="item.url" />
+			<a :href="item.url"><img :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''" /></a>
 		</div>
 		
 		<!-- 导航点 -->
@@ -23,8 +23,7 @@
 				shownav:true,
 				is_show:false,
 				bannerData:[
-					{banImgUrl:"images/banner.png"},
-					{banImgUrl:"images/news-img6.jpg"}
+					
 				],
 				searchItem:{
 					thirdapp_id:window.base.thirdapp_id,
@@ -59,7 +58,7 @@
 			self.getMainData()
 			self.bannerTimer = setInterval(function(){
 				self.changeBanner('+');
-			},3000)
+			},5000)
 	    },
 		
 		
@@ -74,10 +73,20 @@
 			    var self = this;
 			    var postData = {};
 			    postData.searchItem = window.base.cloneForm(self.searchItem);
-				
+				postData.getAfter = {
+					child:{
+						tableName:'Label',
+						middleKey:'id',
+						key:'parentid',
+						searchItem:{
+							status:1
+						},
+						condition:'='
+					}
+				};
 			    var callback = function(res){
 			        if(res.info.data.length>0&&res.info.data[0]){
-						self.bannerData =res.info.data[0].mainImg;
+						self.bannerData =res.info.data[0].child;
 						console.log('self.bannerData',self.bannerData)
 			        };    
 					self.bannerTimer = setInterval(function(){

@@ -61,14 +61,19 @@
 							</div>
 						</a>
 					</div>
+					
+				</div>
+				<div class="flexRowBetween anliSet">
+					<a class="btn" href="newsCenter.html">公司动态</a>
+					<a class="btn" href="anliCenter.html">经典案例</a>
 				</div>
 			</div>
 		</div>
 		
-		<div class="black-bj" style="opacity: 0.6;" v-show="is_show"></div>
+		<div class="black-bj" style="opacity: 0.6;" v-show="is_show" @click="seltAnliNav"></div>
 		<div class="flexColumn anliSetNav" v-show="is_anliSetNav">
-			<a class="btn" href="newsCenter.html">新闻中心</a>
-			<a class="btn" href="anliCenter.html">案例中心</a>
+			<a class="btn" href="newsCenter.html">公司动态</a>
+			<a class="btn" href="anliCenter.html">经典案例</a>
 		</div>
 		
 		<div class="w1200">
@@ -226,10 +231,13 @@
 		.anliSetNav{position: fixed;top: 50%;left: 50%;transform: translate(-50%,-50%);z-index: 41;}
 		.anliSetNav .btn{width: 150px;line-height: 50px;text-align: center;border: 1px solid #fff;border-radius: 8px;color: #fff;margin: 15px auto;font-size: 18px;}
 		.anliSetNav .btn:hover{padding:5px 10px;font-size: 20px;}
-		
+		.anliSet .btn{width: 150px;line-height: 50px;text-align: center;border: 1px solid ;border-radius: 8px;margin: 15px auto;font-size: 18px;}
+		.anliSet .btn:hover{font-size: 20px;}
 		@media only screen and (max-width: 500px){
 			.anliSetNav .btn{width: 120px;line-height: 40px;font-size: 16px; border-radius: 5px;}
-			
+			.anliSet .btn{width: 120px;line-height: 40px;font-size: 16px; border-radius: 5px;}
 		}
+		
+		
 	</style>
 </html>

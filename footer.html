@@ -38,6 +38,10 @@
 		<div class="R-logo" @click="toTop">
 			<img class="logo" src="images/home-img1.png">
 		</div>
+		
+		<div v-if="showIcon" style="position: fixed;bottom: 5%;right: 5%;" @click="toTop">
+			<img class="logo" src="images/top.png">
+		</div>
 	</div>
 </div>
 <script type="text/javascript">
@@ -46,7 +50,7 @@
 	    data:function(){
 	        return {
 	        	
-				
+				showIcon:false
 	        }
 	    },
 	    created:function () {
@@ -57,12 +61,25 @@
 		destroyed() {
 			
 		},
+		
+		mounted: function () {
+		    window.addEventListener('scroll', this.handleScroll);
+		},
 	    methods: {
 			
+			handleScroll: function(){
+				const self = this;
+				var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+				
+				if(scrollTop>200){
+					self.showIcon = true
+				}
+			},
+			
 			toTop(){                                         //3
-			 
+				const self = this;
 				timer=setInterval(function(){                               //6
-		 
+					
 					var dtop=document.documentElement.scrollTop;            //4
 		 
 					var speed=Math.floor(-dtop/10);                         //8
@@ -70,9 +87,11 @@
 					document.documentElement.scrollTop = dtop+speed;        //5、document.documentElement.scrollTop -= dtop;
 																			//9
 		 
-					if(dtop==0){                                            //7
+					if(dtop==0){             
+						
 						clearInterval(timer);
 					}
+					self.showIcon = false;
 				},30)   
 			}
 			
