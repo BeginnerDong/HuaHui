@@ -14,7 +14,27 @@
 				<div class="tt" :class="currentUrl=='/index.html'?'on':''"><a href="index.html">首页</a></div>
 				<div class="tt" :class="currentUrl=='/aboutUs.html'?'on':''"><a href="aboutUs.html">关于华汇</a></div>
 				<div class="tt" :class="currentUrl=='/newsCenter.html'?'on':''"><a href="newsCenter.html">公司动态</a></div>
-				<div class="tt" :class="currentUrl=='/brand.html'?'on':''"><a href="brand.html">品牌中心</a></div>
+				<div class="tt pr"  :class="currentUrl=='/brand.html'?'on':''">
+					<a href="#">品牌中心</a>
+					<div class="Asamll">
+						<div class="Achild">
+							<div class="Aname"><a class="link" href="#">一级菜单<em class="pdl5">&gt;</em></a></div>
+							<div class="Bsamll">
+								<a class="Bchild" href="#">二级菜单</a>
+								<a class="Bchild" href="#">二级菜单</a>
+								<a class="Bchild" href="#">二级菜单</a>
+							</div>
+						</div>
+						<div class="Achild">
+							<div class="Aname"><a class="link" href="#">一级菜单<em class="pdl5">&gt;</em></a></div>
+							<div class="Bsamll">
+								<a class="Bchild" href="#">二级菜单</a>
+								<a class="Bchild" href="#">二级菜单</a>
+								<a class="Bchild" href="#">二级菜单</a>
+							</div>
+						</div>
+					</div>
+				</div>
 				<div class="tt" :class="currentUrl=='/anliCenter.html'?'on':''"><a href="anliCenter.html">经典案例</a></div>
 				<div class="tt" :class="currentUrl=='/loadCenter.html'?'on':''"><a href="loadCenter.html">下载中心</a></div>
 				<div class="tt" :class="currentUrl=='/contactUs.html'?'on':''"><a href="contactUs.html">联系我们</a></div>
@@ -96,6 +116,20 @@
 </script>
 
 <style>
+/* 二级导航 */
+.Asamll{width: 150px;position: absolute;left: 50%;top:100%;transform: translateX(-50%);background: rgba(0,0,0,0.8);color: #fff;text-align: left; display: none;}
+.Asamll .Achild{line-height: 50px;height: 50px;position: absolute;width: 100%;position: relative;font-size: 14px;box-sizing: border-box;}
+.Aname{padding: 0 15px;box-sizing: border-box;}
+.Aname>.link{ color: #eee;width: 100%; display: block;}
+.Asamll .Achild .Aname:hover,.Bsamll .Bchild:hover{background: #555; color: #fff;}
+.Asamll .Achild .Aname:hover .link{color: #fff;}
+.Asamll .Achild .Aname em{font-size: 13px;}
+.Bsamll{position: absolute;left: 100%;top: 0;width: 150px;background: rgba(0,0,0,0.8);border-left: 1px solid #555; display:none;}
+.Bsamll .Bchild{color: #fff;display: block;font-size: 14px;padding: 0 15px;box-sizing: border-box;color: #eee;}
+
+.orderNavTwo .tt:hover .Asamll{display: block;}
+.Asamll .Achild:hover .Bsamll{display: block;}
+
 .black-bj2{z-index: 10;}
 
 .head{position: fixed;top: 0;left: 0;right: 0;z-index: 20;box-shadow: 0 1px 4px rgba(100, 100, 100, 0.1);width: 100%;box-sizing: border-box;background: #636363;}
@@ -109,8 +143,8 @@
 .orderNavTwo{width: 70%;}
 .orderNavTwo .w1200{align-items: flex-start;}
 .orderNavTwo .tt{ text-align: center; box-sizing: border-box;}
-.orderNavTwo .tt a{display: block;line-height: 44px;margin: 0 10px;color: #d5d5d5;}
-.orderNavTwo .tt.on a{ color: #fff; text-shadow: 0 0 10px rgba(255,255,255);}
+.orderNavTwo .tt>a{display: block;line-height: 60px;margin: 0 10px;color: #d5d5d5;}
+.orderNavTwo .tt.on>a{ color: #fff; text-shadow: 0 0 10px rgba(255,255,255);}
 
 .Rseach .icon{width: 23px;height:23px;display: block;}
 
@@ -118,9 +152,12 @@
 .mobile-Btn em{width: 100%;height: 1px;background: #999;margin: 3px 0;}
 
 .headH{height: 60px;width: 100%;}
+
+
+
+
 /*以下自适应样式*/
 @media screen and ( max-width: 1000px){
-	.orderNavTwo{font-size: 14px;width: 75%;}
 	
 	.head .logoCont{padding: 10px 2%;}
 	.T-Logo{height: 30px;}
@@ -130,11 +167,16 @@
 	.mobile-Btn{display: block;}
 	.head .cont{height: 50px;}
 	.headH{height: 50px;}
-	.orderNavTwo{display: block;position: absolute;top: 50px;left: 0;right: 0;width: 100%;box-sizing: border-box;background: #3e3e3e;}
+	.orderNavTwo{display: block;position: absolute;top: 50px;left: auto;right: 0;width: 33%;box-sizing: border-box;background: #3e3e3e;font-size: 14px;}
 	.orderNavTwo .tt{width: 100%;border-bottom: 1px solid #4a4a4a;}
-	
+	.orderNavTwo .tt>a{line-height: 44px;}
 	.head .cont{justify-content: flex-start;}
 	.Rseach{margin-left: 30px; /* display: none; */}
+	
+	/* 二级导航 */
+	.Asamll{width: 100%;left: auto;transform:initial;right: 100%;top: 0;}
+	.Bsamll{width: 100%;left: auto;right: 100%;border-left:0;border-right: 1px solid #555;  }
+	.Asamll .Achild{font-size: 13px;}
 }
 
 @media screen and ( max-width: 500px){
