@@ -7,11 +7,11 @@
 .ind-dynamic .item .texbox .tit{font-size: 22px;line-height: 30px;}
 .ind-dynamic .item .texbox .form{font-size: 16px; padding: 15px 0 10px 0; color: #444;line-height: 20px;}
 .ind-dynamic .item .texbox .text2{color: #666;line-height: 22px;}
-.ind-dynamic .item .imgBox{width: 50%;height: 223px;}
-.ind-dynamic .item .imgBox img{width: 100%;height: 100%;}
+.ind-dynamic .item .imgBox{width: 50%;height: 223px;overflow: hidden;}
+.ind-dynamic .item .imgBox img{width: 100%;height: 100%;transition: all 0.8s;}
 .ind-dynamic .item:last-child{margin-bottom: 0;}
 
-.ind-dynamic .item .imgBox:hover{transform: scale(1.1);}
+.ind-dynamic .item .imgBox:hover img{transform: scale(1.1);}
 
 
 /*以下自适应样式*/

@@ -18,8 +18,12 @@
 	</head>
 	<style>
 		.fxBj{position: absolute;top:0;right: 0;bottom: 0;left: 0;background: rgba(0,0,0,0.3);}
-		.orderNav{justify-content: flex-start;}
+		/* .orderNav{justify-content: flex-start;} */
 		.ind-dynamic{min-height:200px;}
+		
+		.FixOrderNav{left: 0;top:15%;position: fixed;width: 120px;background-color: #fff;border-radius: 3px;box-shadow: 2px 0 5px rgba(0,0,0,0.2);padding: 0 10px; z-index: 6;}
+		.FixOrderNav .tt{width: 100%;line-height: 60px;border-bottom: 1px solid #eee;}
+		.FixOrderNav .tt .icon{width: 24px;height: 24px; margin-right: 10px;}
 	</style>
 
 <body>
@@ -27,7 +31,16 @@
 		<include src="header.html"></include>
 		
 		<div class="w1200 pdb80">
-			<div class="orderNav flexCenter borderB1">
+			<div class="orderNav flexCenter borderB1" id="orderNav" v-show="!isCollapse">
+				<span class="tt flexCenter" v-for="item in labelData"
+				:class="currId==item.id?'on':''" @click="changeCurr(item.id)">
+					<img class="icon" :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''"/>
+					<em>{{item.title}}</em>
+				</span>
+			</div>
+			
+			<!-- 侧边导航显示 -->
+			<div class="orderNav FixOrderNav center" id="orderNav" v-show="isCollapse">
 				<span class="tt flexCenter" v-for="item in labelData"
 				:class="currId==item.id?'on':''" @click="changeCurr(item.id)">
 					<img class="icon" :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''"/>
@@ -99,6 +112,7 @@
 						pagesize: 4,
 						is_page: true,
 					},
+					isCollapse:false
 		        }
 		    },
 			
@@ -106,9 +120,19 @@
 			    const self = this;
 				self.getLabelData();
 			},
-			
+			mounted () {
+				window.addEventListener('scroll', this.handleScroll)
+			},
 		    methods: {
-				
+				handleScroll() {
+					var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+					var offsetTop = document.querySelector('#orderNav').offsetTop
+					if (scrollTop > offsetTop) {
+					this.isCollapse = true
+					} else {
+					this.isCollapse = false
+					}
+				},
 				changeCurr(id){
 					const self = this;
 					self.currId = id;
