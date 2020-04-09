@@ -15,22 +15,17 @@
 				<div class="tt" :class="currentUrl=='/aboutUs.html'?'on':''"><a href="aboutUs.html">关于华汇</a></div>
 				<div class="tt" :class="currentUrl=='/newsCenter.html'?'on':''"><a href="newsCenter.html">公司动态</a></div>
 				<div class="tt pr"  :class="currentUrl=='/brand.html'?'on':''">
-					<a href="#">品牌中心</a>
+					<a href="brand.html">品牌中心</a>
 					<div class="Asamll">
-						<div class="Achild">
-							<div class="Aname"><a class="link" href="#">一级菜单<em class="pdl5">&gt;</em></a></div>
-							<div class="Bsamll">
-								<a class="Bchild" href="#">二级菜单</a>
-								<a class="Bchild" href="#">二级菜单</a>
-								<a class="Bchild" href="#">二级菜单</a>
+						<div class="Achild" v-for="(item,index) in brandData" :key="id">
+							<div class="Aname">
+								<a class="link" :href="'product.html?id='+item.id">{{item.title}}
+									<em class="pdl5" v-if="item.child&&item.child.length>0">&gt;</em>
+								</a>
 							</div>
-						</div>
-						<div class="Achild">
-							<div class="Aname"><a class="link" href="#">一级菜单<em class="pdl5">&gt;</em></a></div>
 							<div class="Bsamll">
-								<a class="Bchild" href="#">二级菜单</a>
-								<a class="Bchild" href="#">二级菜单</a>
-								<a class="Bchild" href="#">二级菜单</a>
+								<a v-for="(c_item,c_index) in item.child" :href="'product.html?id='+item.id+'&childId='+c_item.id+'&behavior='+c_item.behavior" :key="id" class="Bchild" 
+								>{{c_item.title}}</a>
 							</div>
 						</div>
 					</div>
@@ -62,13 +57,14 @@
 					title:''
 				},
 				bannerTimer:null,
-				is_showNav:true
+				is_showNav:true,
+				brandData:[]
 				
 	        }
 	    },
 	    created:function () {
 			var self = this;
-			// self.getMainData();
+			self.getBrandData();
 			if(window.screen.width<1000){
 				self.is_showNav = false
 			};
@@ -105,11 +101,46 @@
 			self.bannerTimer = null;
 		},
 	    methods: {
+			
 			shownav(){
 				const self = this;
 				self.is_showNav = !self.is_showNav;
 				self.is_show = !self.is_show;
-			}
+			},
+			
+			getBrandData() {
+				const self = this;
+				const postData = {};
+				
+				postData.searchItem = {
+					parentid:0,
+					type:5
+				};
+				postData.order = {
+					listorder:'asc'
+				};
+				postData.getAfter = {
+					child:{
+						tableName:'Label',
+						middleKey:'id',
+						key:'parentid',
+						searchItem:{
+							status:1
+						},
+						condition:'=',
+						order:{
+							listorder:'asc'
+						}
+					}
+				};
+				const callback = (res) => {
+					if (res.info.data.length > 0) {
+						self.brandData.push.apply(self.brandData,res.info.data);
+					} 
+					console.log('brandData',brandData)
+				};
+				window.base.labelGet(postData, callback);
+			},
 			
 	    }
 	});

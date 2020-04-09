@@ -85,6 +85,10 @@
 			
 			created () {
 			    const self = this;
+				console.log('222',window.base.GetRequest().childId)
+				if(window.base.GetRequest().childId){
+					self.changeCurr(window.base.GetRequest().childId,window.base.GetRequest().behavior)
+				}
 				self.getLabelData();
 			},
 			
@@ -111,9 +115,13 @@
 					const callback = (res) => {
 						if (res.info.data.length > 0) {
 							self.labelData.push.apply(self.labelData,res.info.data);
-							self.currId = self.labelData[0].id;
-							self.behavior = self.labelData[0].behavior
-							self.getMainData()
+							
+							if(!window.base.GetRequest().childId){
+								self.currId = self.labelData[0].id;
+								self.behavior = self.labelData[0].behavior
+								self.getMainData()
+							}
+							
 						} else {
 							
 						};
@@ -138,9 +146,7 @@
 							self.mainData.push.apply(self.mainData,res.info.data);
 							self.paginate['count'] = res.info.total;
 							window.base.computePageArr(self);
-						} else {
-							alert('没有数据')
-						};	
+						}
 					};
 					window.base.articleGet(postData, callback);
 				},
