@@ -22,8 +22,13 @@
 		.ind-dynamic{min-height:200px;}
 		
 		.FixOrderNav{left: 0;top:15%;position: fixed;width: 120px;background-color: #fff;border-radius: 3px;box-shadow: 2px 0 5px rgba(0,0,0,0.2);padding: 0 10px; z-index: 6;}
-		.FixOrderNav .tt{width: 100%;line-height: 60px;border-bottom: 1px solid #eee;}
+		.FixOrderNav .tt{width: 100%;line-height: 60px;border-bottom: 1px solid #eee;margin: 0;}
+		.FixOrderNav .tt:last-child{border-bottom: 0;}
 		.FixOrderNav .tt .icon{width: 24px;height: 24px; margin-right: 10px;}
+		@media only screen and (max-width: 500px){
+			.FixOrderNav{width: 88px;}
+			.FixOrderNav .tt .icon{width: 18px;height: 18px;margin-right: 6px;}
+		}
 	</style>
 
 <body>
