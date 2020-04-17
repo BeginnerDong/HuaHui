@@ -7,9 +7,9 @@
 .swiper-container ul{width: 100%;}
 .companyPic li{width: 48%;height: 100%; text-align: center; font-size: 18px; background: #fff;display: -webkit-box;display: -ms-flexbox;display: -webkit-flex;display: flex;-webkit-box-pack: center;-ms-flex-pack: center;-webkit-justify-content: center;justify-content: center;-webkit-box-align: center;-ms-flex-align: center;-webkit-align-items: center;align-items: center;transition: 300ms;}
 .companyPic li img{width: 100%;height: 100%;}
-.companyPic .ArrowIcon{position: absolute;top: 50%;left:4%;right: 4%;transform: translateY(-50%); z-index: 1;}
-.companyPic .ArrowIcon span{width: 35px;height: 35px;opacity: 1;background: none;}
-.companyPic .ArrowIcon span img{width: 100%;height: 100%;}
+.ArrowIcon{position: absolute;top: 50%;left:4%;right: 4%;transform: translateY(-50%); z-index: 1;}
+.ArrowIcon span{width: 35px;height: 35px;opacity: 1;background: none;}
+.ArrowIcon span img{width: 100%;height: 100%;}
 
 /* 公司奖章 */
 .MedalPic{align-items: flex-start;margin-bottom: 30px;flex-wrap: wrap;}
@@ -50,7 +50,7 @@
 	.MedalPic .TwoPic .box{height: 101px;}
 	.MedalPic .onePic .box{height: 214px;}
 	
-	.MedalPic .half .box .text em{font-size: 12px;line-height: 20px;padding: 10px 4%;}
+	.MedalPic .half .box .text em{font-size: 12px;line-height: 16px;padding: 0px 4%;}
 	
 	.jianliMsg{width: 95%;}
 	.jianliMsg li{padding: 15px 0;font-size: 13px;}

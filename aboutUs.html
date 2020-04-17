@@ -19,6 +19,25 @@
 		<link type="text/css" rel="stylesheet" href="css/jobPin.css">
 		<link type="text/css" rel="stylesheet" href="css/swiper.min.css">
 	</head>
+	<style>
+		.MedalPic{margin-bottom: 0;}
+		.MedalPic .TwoPic .box{height: 240px;}
+		.MedalPic .half{width: auto;}
+		.MedalPic .TwoPic .box:first-child{margin-bottom: 0;}
+		
+		@media only screen and (max-width: 1024px){
+			.MedalPic .TwoPic .box{height: 195px;}
+		}
+		@media only screen and (max-width: 768px){
+			.MedalPic .TwoPic .box{height: 145px;}
+		}
+		@media only screen and (max-width: 420px){
+			.MedalPic .TwoPic .box{height: 78px;}
+		}
+		@media only screen and (max-width: 375px){
+			.MedalPic .TwoPic .box{height: 68px;}
+		}
+	</style>
 
 <body>
 	
@@ -50,17 +69,12 @@
 								<li class="swiper-slide"><img src="images/about-img.jpg"></li> -->
 						    </ul>
 							
-							
 							<!--左右箭头 -->
 							<div class="ArrowIcon flexRowBetween">
 								<span class="swiper-button-prev"><img class="icon" src="images/about-icon6.png" ></span>
 								<span  class="swiper-button-next"><img class="icon" src="images/about-icon7.png" ></span>
 							</div>
 						</div>
-						<!-- <ul class="oh">
-							<li v-for="item in mainData.mainImg"><img :src="item.url"></li>
-							<li><img src="images/about-img.jpg" ></li>
-						</ul> -->
 					</div>
 				</div>
 			</div>
@@ -71,7 +85,26 @@
 				<img class="icon" src="images/about-icon1.png" >
 				<h1 class="title">公司获奖</h1>
 			</div>
-			<div class="MedalPic flexRowBetween">
+			<div class="MedalPic pr oh">
+				<!-- Swiper -->
+				<div class="swiper-container2">
+					<ul class="half TwoPic swiper-wrapper">
+						<li class="box swiper-slide" v-for="item in rewardData">
+							<img class="pic" :src="item.mainImg[0].url">
+							<p class="text center flexCenter">
+								<em>{{item.title}}</em>
+							</p>
+						</li>
+					</ul>
+					
+					<!--左右箭头 -->
+					<div class="ArrowIcon flexRowBetween">
+						<span class="btn swiper-button-prev"><img class="icon" src="images/about-icon6.png" ></span>
+						<span  class="btn swiper-button-next"><img class="icon" src="images/about-icon7.png" ></span>
+					</div>
+				</div>
+			</div>
+			<!-- <div class="MedalPic flexRowBetween">
 				<div class="half TwoPic">
 					<div class="box flexCenter" v-if="rewardData[0]">
 						<img class="pic" :src="rewardData&&rewardData[0]&&rewardData[0].mainImg&&rewardData[0].mainImg[0]?rewardData[0].mainImg[0].url:''" >
@@ -94,7 +127,7 @@
 						</p>
 					</div>
 				</div>
-			</div>
+			</div> -->
 		</div>
 		<div class="f5bj pdb80">
 			<div class="w1200">
@@ -260,6 +293,18 @@
 								    slidesPerView: 2,
 								    spaceBetween : 20,
 									
+									pagination: '.swiper-pagination',
+									nextButton: '.swiper-button-next',
+									prevButton: '.swiper-button-prev',
+									
+									observer: true,//修改swiper自己或子元素时，自动初始化swiper
+									observeParents: true,//修改swiper的父元素时，自动初始化swiper
+								})
+								var swiper = new Swiper('.swiper-container2', {
+								   // loop: true,
+								   initialSlide:0,
+								    slidesPerView: 3,
+								    spaceBetween : 10,
 									pagination: '.swiper-pagination',
 									nextButton: '.swiper-button-next',
 									prevButton: '.swiper-button-prev',

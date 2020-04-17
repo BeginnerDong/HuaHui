@@ -25,9 +25,40 @@
 		.FixOrderNav .tt{width: 100%;line-height: 60px;border-bottom: 1px solid #eee;margin: 0;}
 		.FixOrderNav .tt:last-child{border-bottom: 0;}
 		.FixOrderNav .tt .icon{width: 24px;height: 24px; margin-right: 10px;}
+		
+		.ind-dynamic .item{margin-bottom: 80px;}
+		.ind-dynamic .item .texbox{width:33%;margin-top: 20px;box-sizing: border-box;}
+		.ind-dynamic .item .texbox .tit{font-size: 22px;line-height: 30px;}
+		.ind-dynamic .item .imgBox{width: 65%;height: 308px;}
+		
+		
+		@media only screen and (max-width: 1024px){
+			.ind-dynamic .item{margin-bottom: 60px;}
+			.ind-dynamic .item .imgBox{height: 252px;}
+		}
+		@media only screen and (max-width: 768px){
+			.ind-dynamic .item{margin-bottom: 50px;}
+			.ind-dynamic .item .texbox{width: 37%;margin-top: 0;}
+			.ind-dynamic .item .imgBox{width: 60%;height: 174px;}
+			.ind-dynamic .item .texbox .tit{font-size: 16px;line-height: 30px;}
+			.ind-dynamic .item .texbox .text2{font-size: 14px;line-height: 22px;}
+		}
+		/* @media only screen and (max-width: 414px){
+			
+		}
+		@media only screen and (max-width: 375px){
+			
+		} */
 		@media only screen and (max-width: 500px){
+			.ind-dynamic .item{margin-bottom: 30px;}
+			.ind-dynamic .item .texbox{width: 40%;}
+			.ind-dynamic .item .imgBox{width: 58%;height: 98px;}
+			.ind-dynamic .item .texbox .text2{font-size: 14px;line-height: 22px;}
+			
 			.FixOrderNav{width: 88px;}
 			.FixOrderNav .tt .icon{width: 18px;height: 18px;margin-right: 6px;}
+			.ind-dynamic .item .texbox .tit{font-size: 14px;line-height: 20px}
+			.ind-dynamic .item .texbox .text2{font-size: 12px; line-height: 20px;}
 		}
 	</style>
 
@@ -54,29 +85,29 @@
 			</div>
 		
 			<!-- 案例新闻 -->
-			<div class="ind-dynamic w1200 pdt40">
+			<div class="ind-dynamic pdt40">
 				<div v-for="(item,index) in mainData">
-					<div class="item flexRowBetween" style="margin-bottom: 60px;" v-if="index%2==0">
+					<div class="item flexRowBetween" v-if="index%2==0">
 						<a class="flexRowBetween" :href="'newsdetail.html?id='+item.id">
 							<div class="texbox">
-								<div class="tit avoidOverflow">{{item.title}}</div>
+								<div class="tit">{{item.title}}</div>
 								<p class="form"></p>
-								<p class="text2 avoidOverflow4">{{item.description}}</p>
+								<p class="text2">{{item.description}}</p>
 							</div>
 							<div class="imgBox">
 								<img :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''" >
 							</div>
 						</a>
 					</div>
-					<div class="item flexRowBetween" style="margin-bottom: 60px;" v-if="index%2!=0">
+					<div class="item flexRowBetween" v-if="index%2!=0">
 						<a class="flexRowBetween" :href="'newsdetail.html?id='+item.id">
 							<div class="imgBox">
 								<img :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''" >
 							</div>
 							<div class="texbox">
-								<div class="tit avoidOverflow">{{item.title}}</div>
+								<div class="tit">{{item.title}}</div>
 								<p class="form"></p>
-								<p class="text2 avoidOverflow4">{{item.description}}</p>
+								<p class="text2">{{item.description}}</p>
 							</div>
 						</a>
 					</div>
@@ -114,7 +145,7 @@
 					paginate:{
 						count: 0,
 						currentPage: 1,
-						pagesize: 4,
+						pagesize: 2,
 						is_page: true,
 					},
 					isCollapse:false

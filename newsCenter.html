@@ -35,29 +35,29 @@
 			</div>
 		
 			<!-- 案例新闻 -->
-			<div class="ind-dynamic w1200 pdt40">
+			<div class="ind-dynamic pdt40">
 				<div v-for="(item,index) in mainData">
-					<div class="item flexRowBetween" style="margin-bottom: 60px;" v-if="index%2==0">
+					<div class="item flexRowBetween" v-if="index%2==0">
 						<a class="flexRowBetween" :href="'newsdetail.html?id='+item.id">
 							<div class="texbox">
-								<div class="tit avoidOverflow">{{item.title}}</div>
+								<div class="tit">{{item.title}}</div>
 								<p class="form"></p>
-								<p class="text2 avoidOverflow4">{{item.description}}</p>
+								<p class="text2">{{item.description}}</p>
 							</div>
 							<div class="imgBox">
 								<img :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''" >
 							</div>
 						</a>
 					</div>
-					<div class="item flexRowBetween" style="margin-bottom: 60px;" v-if="index%2!=0">
+					<div class="item flexRowBetween" v-if="index%2!=0">
 						<a class="flexRowBetween" :href="'newsdetail.html?id='+item.id">
 							<div class="imgBox">
 								<img :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''" >
 							</div>
 							<div class="texbox">
-								<div class="tit avoidOverflow">{{item.title}}</div>
+								<div class="tit">{{item.title}}</div>
 								<p class="form"></p>
-								<p class="text2 avoidOverflow4">{{item.description}}</p>
+								<p class="text2">{{item.description}}</p>
 							</div>
 						</a>
 					</div>
