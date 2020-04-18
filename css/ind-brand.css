@@ -31,7 +31,7 @@
 	.ind-brand .half .box .text{height:56px;font-size: 12px;}
 	.ind-brand .half .box .text em{bottom: 10px;line-height: 20px;}
 	
-	.ind-brand .TwoPic .box:first-child{margin-bottom: 15px;}
+	.ind-brand .TwoPic .box:first-child{margin-bottom: 10px;}
 	.ind-brand .TwoPic .box{height: 115px;}
 	.ind-brand .TwoPic .box .logo{width: 80px;height: 80px;}
 	.ind-brand .onePic .box{height: 245px;}

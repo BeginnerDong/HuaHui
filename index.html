@@ -87,6 +87,20 @@
 			</div>
 			
 			<div class="ind-brand pdb80">
+				<div class="item oh">
+					<div class="half TwoPic" v-for="(item,index) in brandData" :key="index">
+						<a :href="'product.html?id='+item.id">
+							<div class="box flexCenter">
+								<img class="logo" :src="item.mainImg[0].url" >
+								<p class="text center flexCenter">
+									<em>{{item.description}}</em>
+								</p>
+							</div>
+						</a>
+					</div>
+				</div>
+			</div>
+			<!-- <div class="ind-brand pdb80">
 				<div class="item flexRowBetween">
 					<div class="half TwoPic">
 						<a class="box flexCenter" v-if="brandData[0]" :href="'product.html?id='+brandData[0].id">
@@ -138,7 +152,7 @@
 					</div>
 					
 				</div>
-			</div>
+			</div> -->
 		</div>
 		
 		<include src="footer.html"></include>
@@ -238,6 +252,33 @@
 			.anliSet .btn{width: 120px;line-height: 40px;font-size: 16px; border-radius: 5px;}
 		}
 		
+		.ind-brand .half{float: left;width: 32%;margin-right: 2%;}
+		.ind-brand .half:nth-of-type(3n){margin-right: 0;}
+		.ind-brand .TwoPic .box{height: 330px;}
+		.ind-brand .TwoPic .box .logo{width: 170px;height: 170px;}
 		
+		@media only screen and (max-width: 1024px){
+			.ind-brand .TwoPic .box{height: 241px;}
+			.ind-brand .TwoPic .box .logo{width: 110px;height: 110px;}
+		}
+		@media only screen and (max-width: 768px){
+			.ind-brand .TwoPic .box{height: 180px;}
+			.ind-brand .TwoPic .box .logo{width: 90px;height: 90px;}
+		}
+		@media only screen and (max-width: 500px){
+			.ind-brand .half{width: 49%;}
+			.ind-brand .half:nth-of-type(3n){margin-right: 2%;}
+			.ind-brand .half:nth-of-type(2n){margin-right: 0!important;}
+			.ind-brand .TwoPic .box{height: 150px;}
+			.ind-brand .TwoPic .box .logo{width: 70px;height: 70px;}
+		}
+		@media only screen and (max-width: 375px){
+			.ind-brand .TwoPic .box{height: 135px;}
+			.ind-brand .TwoPic .box .logo{width: 65px;height: 65px;}
+		}
+		@media only screen and (max-width: 320px){
+			.ind-brand .TwoPic .box{height: 115px;}
+			.ind-brand .TwoPic .box .logo{width: 55px;height: 55px;}
+		}
 	</style>
 </html>
