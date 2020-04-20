@@ -1,42 +1,58 @@
 
 <div class="footer" id="footer_app">
-	<div class="w1100 flexRowBetween pdlr4">
-		<div class="footNav">
-			<ul class="flexRowBetween">
-				<li>
-					<h1>关于华汇</h1>
-					<p><a href="aboutUs.html">公司简介</a></p>
-					<p><a href="recruit.html">招聘信息</a></p>
-					<p><a href="#">人才储备</a></p>
-					<p><a href="aboutUs.html">公司获奖</a></p>
-				</li>
-				<li>
-					<h1>合作伙伴</h1>
-					<p><a href="https://www.l-acoustics.com/">L-Acoustics</a></p>
-					<p><a href="http://www.digico.biz/">DiGiCo</a></p>
-					<p><a href="https://calrec.com/">Calrec</a></p>
-					<p><a href="http://blacktrax.cast-soft.com/">BlackTrax</a></p>
-					<p><a href="https://cast-soft.com/wysiwyg-lighting-design/">Wysiwyg</a></p>
-				</li>
-				<li>
-					<h1>下载中心</h1>
-					<p><a href="loadCenter.html?id=4">软件下载</a></p>
-					<p><a href="loadCenter.html?id=1">参数表下载</a></p>
-					<p><a href="loadCenter.html?id=2">图片下载</a></p>
-					<p><a href="loadCenter.html?id=3">视频下载</a></p>
-				</li>
-				<li>
-					<h1>地方公司</h1>
-					
-					<p><a href="contactUs.html?id=11">广州</a></p>
-					<p><a href="contactUs.html?id=12">香港</a></p>
-					<p><a href="contactUs.html?id=13">北京</a></p>
-					<p><a href="contactUs.html?id=14">上海</a></p>
-				</li>
-			</ul>
+	<div class="cont w1200 flexRowBetween">
+		<div class="ewmBox clearfix center flexRowBetween">
+			<div class="tt">
+				<img src="images/footer-img1.jpg">
+				<p>公众号二维码</p>
+			</div>
+			<div class="tt">
+				<img src="images/footer-img2.jpg">
+				<p>微博二维码</p>
+			</div>
+			<div class="tt">
+				<img src="images/footer-img3.jpg">
+				<p>直播二维码</p>
+			</div>
 		</div>
-		<div class="R-logo" @click="toTop">
-			<img class="logo" src="images/home-img1.png">
+		<div class="Rcont flexRowBetween">
+			<div class="footNav">
+				<ul class="flexRowBetween">
+					<li>
+						<h1>关于华汇</h1>
+						<p><a href="aboutUs.html">公司简介</a></p>
+						<p><a href="recruit.html">招聘信息</a></p>
+						<!-- <p><a href="#">人才储备</a></p>
+						<p><a href="aboutUs.html">公司获奖</a></p> -->
+					</li>
+					<li>
+						<h1>合作伙伴</h1>
+						<p><a href="https://www.l-acoustics.com/">L-Acoustics</a></p>
+						<p><a href="http://www.digico.biz/">DiGiCo</a></p>
+						<p><a href="https://calrec.com/">Calrec</a></p>
+						<p><a href="http://blacktrax.cast-soft.com/">BlackTrax</a></p>
+						<p><a href="https://cast-soft.com/wysiwyg-lighting-design/">Wysiwyg</a></p>
+					</li>
+					<li>
+						<h1>下载中心</h1>
+						<p><a href="loadCenter.html?id=4">软件下载</a></p>
+						<p><a href="loadCenter.html?id=1">参数表下载</a></p>
+						<p><a href="loadCenter.html?id=2">图片下载</a></p>
+						<p><a href="loadCenter.html?id=3">视频下载</a></p>
+					</li>
+					<li>
+						<h1>地方公司</h1>
+						
+						<p><a href="contactUs.html?id=11">广州</a></p>
+						<p><a href="contactUs.html?id=12">香港</a></p>
+						<p><a href="contactUs.html?id=13">北京</a></p>
+						<p><a href="contactUs.html?id=14">上海</a></p>
+					</li>
+				</ul>
+			</div>
+			<div class="R-logo" @click="toTop">
+				<img class="logo" src="images/home-img1.png">
+			</div>
 		</div>
 		
 		<div v-if="showIcon" style="position: fixed;bottom: 5%;right: 5%;" @click="toTop">
@@ -103,15 +119,27 @@
 	
 	/* 页脚 */
 	.footer{background: #f0f0f0; padding: 60px 0;}
+	.footer .cont{align-items: flex-start;}
 	
-	.footer .footNav{width: 70%;}
+	.ewmBox{width: 30%;}
+	.ewmBox .tt{float: left;margin-right: 10px;}
+	.ewmBox .tt:last-child{margin-right: 0;}
+	.ewmBox .tt img{width: 95px;height: 95px;margin: 0 auto;}
+	.ewmBox .tt p{font-size: 13px;padding: 5px 0;}
+	
+	.footer .Rcont{width: 65%;}
+	.footer .footNav{width: 64%;}
 	.footer .footNav ul{align-items: flex-start;flex-wrap: wrap;}
 	.footer .footNav li h1{font-size: 16px;}
 	.footer .footNav li p{margin-top: 15px;font-size: 14px;}
 	
 	.footer .footNav a{color: #666;}
 	.footer .footNav a:hover{color: #333;}
-	.footer .R-logo .logo{width: 155px;height: 100px; display: block;}
+	
+	.footer .R-logo{width: 30%;}
+	.footer .R-logo .logo{width: 155px;height: 100px; display: block;margin: 40px auto}
+	
+	
 	
 	@media only screen and (max-width: 1024px){
 		.footer{padding: 40px 0;}
@@ -121,15 +149,30 @@
 		.footer .footMsg .ll .ewm{width: 80px;height: 80px;}
 		
 	}
-	@media only screen and (max-width: 500px){
-		.footer{padding: 20px 0;}
-		.footer .w1100{flex-wrap: wrap;}
+	@media only screen and (max-width:768px){
+		.ewmBox{flex-wrap: wrap;width: 20%;}
+		.ewmBox .tt{margin-right: 0;}
+		
+		.footer .Rcont{width: 78%;flex-wrap: wrap;}
 		.footer .footNav{width: 100%;}
+		.footer .R-logo{width: 100%;padding-top: 20px;}
+		
+	}
+	@media only screen and (max-width: 500px){
+		.ewmBox{width: 23%;}
+		.ewmBox .tt img{width: 70px;height: 70px;}
+		.footer .Rcont{width: 76%;}
+		.ewmBox .tt p{font-size: 12px;padding: 0 0 10px;}
+		
+		.footer{padding: 20px 0;}
+		/* .footer .w1200{flex-wrap: wrap;} */
+		.footer .footNav{width: 100%;}
+		/* .footer .footNav li{width: 50%;} */
 		.footer .footNav li h1{font-size: 14px;}
 		.footer .footNav li p{margin-top: 5px;font-size: 12px;}
 		
 		/* .footer .footNav ul{display: block;} */
-		.footer .R-logo{width: 100%;padding-top: 30px;}
+		.footer .R-logo{width: 100%;padding-top: 50px;}
 		.footer .R-logo .logo{width: 93px;height: 60px;margin: 0 auto;}
 	}
 </style>
