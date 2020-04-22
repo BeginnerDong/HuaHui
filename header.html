@@ -10,21 +10,21 @@
 		</div>
 		<div class="cont flexRowBetween w1200">
 			<div class="T-Logo"><a href="index.html"><img src="images/home-img0.png" ></a></div>
-			<div class="orderNavTwo flexRowBetween fs16" v-show="is_showNav">
+			<div class="orderNavTwo flexRowBetween fs16" >
 				<div class="tt" :class="currentUrl=='/index.html'?'on':''"><a href="index.html">首页</a></div>
 				<div class="tt" :class="currentUrl=='/aboutUs.html'?'on':''"><a href="aboutUs.html">关于华汇</a></div>
 				<div class="tt" :class="currentUrl=='/newsCenter.html'?'on':''"><a href="newsCenter.html">公司动态</a></div>
 				<div class="tt pr"  :class="currentUrl=='/brand.html'?'on':''">
 					<a href="brand.html">品牌中心</a>
 					<div class="Asamll">
-						<div class="Achild" v-for="(item,index) in brandData" :key="id">
+						<div class="Achild" v-for="(item,index) in brandData" :key="item.id">
 							<div class="Aname">
 								<a class="link" :href="'product.html?id='+item.id">{{item.title}}
 									<em class="pdl5" v-if="item.child&&item.child.length>0">&gt;</em>
 								</a>
 							</div>
 							<div class="Bsamll">
-								<a v-for="(c_item,c_index) in item.child" :href="'product.html?id='+item.id+'&childId='+c_item.id+'&behavior='+c_item.behavior" :key="id" class="Bchild" 
+								<a v-for="(c_item,c_index) in item.child" :href="'product.html?id='+item.id+'&childId='+c_item.id+'&behavior='+c_item.behavior" :key="c_item.id" class="Bchild" 
 								>{{c_item.title}}</a>
 							</div>
 						</div>
@@ -37,7 +37,7 @@
 			<div class="Rseach"><a href="seach.html"><img class="icon" src="images/home-icon.png" ></a></div>
 		</div>
 	</div>
-	<div class="black-bj2" v-show="is_show"></div>
+	<div class="black-bj2" ></div>
 	<div class="headH"></div>
 	
 </div>
@@ -57,7 +57,7 @@
 					title:''
 				},
 				bannerTimer:null,
-				is_showNav:true,
+				is_showNav:false,
 				brandData:[]
 				
 	        }
@@ -66,7 +66,14 @@
 			var self = this;
 			self.getBrandData();
 			if(window.screen.width<1000){
-				self.is_showNav = false
+				// self.is_showNav = true;
+				// self.is_show = false
+				$(".orderNavTwo").css('display','none');
+				// $(".black-bj2").css('display','none');
+			}else{
+				// self.is_showNav = false;
+				// self.is_show = true
+				
 			};
 	        var currentUrl = window.base.GetUrlRelativePath();
 		
@@ -104,8 +111,16 @@
 			
 			shownav(){
 				const self = this;
-				self.is_showNav = !self.is_showNav;
-				self.is_show = !self.is_show;
+				
+				if($(".orderNavTwo").css('display')=='none'){
+					$(".orderNavTwo").show()
+					$(".black-bj2").show()
+				}else{
+					$(".orderNavTwo").hide()
+					$(".black-bj2").hide()
+				}
+				// self.is_showNav = !self.is_showNav;
+				// self.is_show = !self.is_show;
 			},
 			
 			getBrandData() {
@@ -137,7 +152,6 @@
 					if (res.info.data.length > 0) {
 						self.brandData.push.apply(self.brandData,res.info.data);
 					} 
-					console.log('brandData',brandData)
 				};
 				window.base.labelGet(postData, callback);
 			},
@@ -161,7 +175,7 @@
 .orderNavTwo .tt:hover .Asamll{display: block;}
 .Asamll .Achild:hover .Bsamll{display: block;}
 
-.black-bj2{z-index: 10;}
+.black-bj2{z-index: 10;display: none;}
 
 .head{position: fixed;top: 0;left: 0;right: 0;z-index: 20;box-shadow: 0 1px 4px rgba(100, 100, 100, 0.1);width: 100%;box-sizing: border-box;background: #636363;}
 
@@ -199,7 +213,7 @@
 	.mobile-Btn{display: block;}
 	.head .cont{height: 50px;}
 	.headH{height: 50px;}
-	.orderNavTwo{display: block;position: absolute;top: 50px;left: auto;right: 0;width: 33%;box-sizing: border-box;background: #3e3e3e;font-size: 14px;}
+	.orderNavTwo{position: absolute;flex-wrap: wrap;top: 50px;left: auto;right: 0;width: 33%;box-sizing: border-box;background: #3e3e3e;font-size: 14px; display: none;}
 	.orderNavTwo .tt{width: 100%;border-bottom: 1px solid #4a4a4a;}
 	.orderNavTwo .tt>a{line-height: 44px;}
 	.head .cont{justify-content: flex-start;}
