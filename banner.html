@@ -56,9 +56,7 @@
 	        	this.to_headBanner()
 		    }); */
 			self.getMainData()
-			self.bannerTimer = setInterval(function(){
-				self.changeBanner('+');
-			},5000)
+			
 	    },
 		
 		
@@ -92,7 +90,7 @@
 					self.bannerTimer = setInterval(function(){
 						
 						self.changeBanner('+');
-					},10000)
+					},5000)
 			    };
 			    window.base.labelGet(postData, callback);
 			},
@@ -138,7 +136,8 @@
 /*网站banner*/
 .swiperBox{  position: relative; width: 100%; height:800px; overflow: hidden;}
 .swiperBox .banner{ width: 100%; height: 100%;}
-.swiperBox .banner img{ height: 100%;width: 100%; display: block;}
+.swiperBox .banner a{width: 100%;height: 100%;}
+.swiperBox .banner img{width:auto; height: 100%; display: block;position: relative;left: 50%;transform: translateX(-50%);}
 
 .swiperBox .arrowIon{position: absolute;top:45%;z-index:50;cursor: pointer; padding: 20px 15px; background: rgba(0,0,0,0.3); border-radius: 4px;}
 .swiperBox .arrowIon.prev{right:30px;}
@@ -149,6 +148,11 @@
 .banBtnNav span.active{ background: #a5a5a5;}
 
 /* banner 各种屏幕自适应 */
+
+@media only screen and (max-width: 1920px){
+	.swiperBox .banner img{width:100%;}
+	.swiperBox{height: 800px;}
+}
 @media only screen and (max-width: 1600px){.swiperBox{height: 667px;}}
 @media only screen and (max-width: 1440px){.swiperBox{height: 600px;}}
 @media only screen and (max-width: 1366px){.swiperBox{height: 570px;}}
@@ -160,7 +164,7 @@
 	.swiperBox{height:320px;}
 }
 @media only screen and (max-width: 500px){
-	.swiperBox{height: 156px;}
+	.swiperBox{ height:156px;}
 }
 
 </style>
