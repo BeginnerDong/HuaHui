@@ -133,10 +133,10 @@
 			<div class="HDPicBox" v-if="curr==3">
 				<ul class="flex">
 					<li v-for="(item,index) in mainData" :key="index">
-						<img class="pic" :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''">
-						<div class="download">
+						<img class="pic" :src="item.bannerImg&&item.bannerImg[0]?item.bannerImg[0].url:''">
+						<a download class="download" :href="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''">
 							<img class="icon" src="images/download-icon7.png" >
-						</div>
+						</a>
 					</li>
 				</ul>
 			</div>
@@ -146,7 +146,8 @@
 				<ul class="flex">
 					
 					<li v-for="(item,index) in mainData" :key="index">
-						<iframe class="video" :src="item.description" frameborder="0" allowfullscreen="true" width="380" height="247"></iframe>
+						<img class="pic" :src="item.video&&item.video[0]?item.video[0].url:''">
+						<!-- <iframe class="video" :src="item.description" frameborder="0" allowfullscreen="true" width="380" height="247"></iframe> -->
 					<!-- 	<img class="video" src="images/download-img4.png" > -->
 						<a class="download" :href="item.description">
 							<img class="icon" src="images/download-icon7.1.png" >
@@ -159,10 +160,10 @@
 				<ul>
 					<li class="flexRowBetween" v-for="(item,index) in mainData" :key="index">
 						<p class="ll">{{item.title}}</p>
-						<span class="rr flexEnd">
+						<a class="rr flexEnd" download :href="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''">
 							<img class="icon" src="images/download-icon7.png" >
 							<em>下载</em>
-						</span>
+						</a>
 					</li>
 				</ul>
 			</div>
@@ -171,7 +172,7 @@
 			<div class="ind-brand" v-if="curr==7">
 				<div class="item flexRowBetween">
 					<div class="half TwoPic" v-for="(item,index) in mainData" :key="index">
-						<a href="product.html">
+						<a :href="'product.html?id='+item.id">
 							<div class="box flexCenter">
 								<img class="logo" :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''" >
 								<p class="text center flexCenter"><em>
@@ -188,7 +189,7 @@
 				<ul class="flexRowBetween">
 					<li class="row" v-for="(item,index) in mainData" :key="index">
 						<div class="infor">
-							<a href="productDeail.html">
+							<a :href="'productDeail.html?id='+item.id">
 								<h1 class="tit">{{item.title}}</h1>
 								<div class="pic flexCenter">
 									<img :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''">
@@ -205,7 +206,7 @@
 			<div class="jobPin" v-if="curr==6">
 				<ul class="flexRowBetween">
 					<li v-for="(item,index) in mainData" :key="index">
-						<a href="recruitDetail.html">
+						<a :href="'recruitDetail.html?id='+item.id">
 							<div class="infor">
 								<img class="icon" src="images/about-icon4.png" >
 								<h2 class="tit">{{item.title}}</h2>
@@ -303,6 +304,8 @@
 						alert('请输入标题搜索')
 					}
 				},
+				
+				
 				
 				search() {
 					const self = this;
