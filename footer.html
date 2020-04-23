@@ -60,7 +60,9 @@
 		</div>
 	</div>
 </div>
+<script type="text/javascript" src="js/vconsole.min.js"></script>
 <script type="text/javascript">
+	
 	var footer_app = new Vue({
 	    el: '#footer_app',
 	    data:function(){
@@ -94,7 +96,7 @@
 			
 			toTop(){                                         //3
 				const self = this;
-				timer=setInterval(function(){                               //6
+				timer = setInterval(function(){                               //6
 					
 					var dtop=document.documentElement.scrollTop;            //4
 		 

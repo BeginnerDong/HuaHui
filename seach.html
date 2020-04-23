@@ -255,7 +255,8 @@
 					searchItemTwo:{
 						type:5,
 						parentid:0
-					}
+					},
+					canSearch:true
 		        }
 		    },
 		    methods: {
@@ -263,6 +264,7 @@
 				
 				submit(){
 					const self  = this;
+					
 					/* if(self.title==''){
 						alert('请输入关键字搜索')
 						return
@@ -301,6 +303,7 @@
 					if (self.title != '') {
 						self.submit()
 					} else {
+						self.canSearch = true;
 						alert('请输入标题搜索')
 					}
 				},
@@ -309,15 +312,20 @@
 				
 				search() {
 					const self = this;
-				
+					console.log(self.canSearch)
+					if(!self.canSearch){
+						console.log(222)
+						return
+					};
 					console.log(1231);
-					
+					self.canSearch = false;
 					console.log('event',event)
 					if (event.which == "13"){
 						if (self.title != '') {
 							self.submit()
 							
 						} else {
+							self.canSearch = true;
 							alert('请输入标题搜索')
 						}
 					}
@@ -345,6 +353,7 @@
 				        if(res.info.data.length>0&&res.info.data[0]){
 							self.mainData.push.apply(self.mainData,res.info.data)
 				        };    
+						self.canSearch = true;
 				    };
 				    window.base.articleGet(postData, callback);
 				},
@@ -360,6 +369,7 @@
 						if (res.info.data.length > 0) {
 							self.mainData.push.apply(self.mainData,res.info.data);
 						}	
+						self.canSearch = true;
 					};
 					window.base.labelGet(postData, callback);
 				},
