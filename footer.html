@@ -1,4 +1,3 @@
-
 <div class="footer" id="footer_app">
 	<div class="cont w1200 flexRowBetween">
 		<div class="ewmBox clearfix center flexRowBetween">
@@ -42,7 +41,7 @@
 					</li>
 					<li>
 						<h1>地方公司</h1>
-						
+
 						<p><a href="contactUs.html?id=11">广州</a></p>
 						<p><a href="contactUs.html?id=12">香港</a></p>
 						<p><a href="contactUs.html?id=13">北京</a></p>
@@ -54,128 +53,259 @@
 				<img class="logo" src="images/home-img1.png">
 			</div>
 		</div>
-		
-		<div v-if="showIcon" style="position: fixed;bottom: 5%;right: 5%;" @click="toTop">
+
+		<a class="back-top" style="display: none;" @click="toTop">
 			<img class="logo" src="images/top.png">
-		</div>
+		</a>
 	</div>
 </div>
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/vconsole.min.js"></script>
 <script type="text/javascript">
 	
-	var footer_app = new Vue({
-	    el: '#footer_app',
-	    data:function(){
-	        return {
-	        	
-				showIcon:false
-	        }
-	    },
-	    created:function () {
-			
-	    },
-		
-		
-		destroyed() {
-			
-		},
-		
-		mounted: function () {
-		    window.addEventListener('scroll', this.handleScroll);
-		},
-	    methods: {
-			
-			handleScroll: function(){
-				const self = this;
-				var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-				
-				if(scrollTop>200){
-					self.showIcon = true
+</script>
+<script type="text/javascript">
+	$(function() {
+
+		$(window).scroll(function() {
+			if ($(window).scrollTop() <= 200) {
+				if ($(".back-top").css("display") != "none") {
+					$(".back-top").slideUp("normal"); //缓慢下降隐藏
 				}
-			},
-			
-			toTop(){                                         //3
-				const self = this;
-				timer = setInterval(function(){                               //6
-					
-					var dtop=document.documentElement.scrollTop;            //4
-		 
-					var speed=Math.floor(-dtop/10);                         //8
-		 
-					document.documentElement.scrollTop = dtop+speed;        //5、document.documentElement.scrollTop -= dtop;
-																			//9
-		 
-					if(dtop==0){             
-						
-						clearInterval(timer);
-					}
-					self.showIcon = false;
-				},30)   
+			} else {
+				if ($(".back-top").css("display") == "none") {
+					$(".back-top").slideDown("normal"); //缓慢上升显示
+				}
 			}
+		});
+		
+		
+	});
+	
+	var footer_app = new Vue({
+		el: '#footer_app',
+		data: function() {
+			return {
+
+				showIcon: false
+			}
+		},
+		created: function() {
+
+		},
+
+
+		destroyed() {
+
+		},
+
+		mounted: function() {
+			//window.addEventListener('scroll', this.handleScroll);
+		},
+		methods: {
+
 			
-	    }
+
+			toTop() { //3
+				const self = this;
+				
+				console.log($("body"))
+				$("html,body").animate({
+					scrollTop: 0
+				}, "slow"); //回到顶部
+				
+			}
+
+		}
 	});
 </script>
 
 <style type="text/css">
-	
 	/* 页脚 */
-	.footer{background: #f0f0f0; padding: 60px 0;}
-	.footer .cont{align-items: flex-start;}
-	
-	.ewmBox{width: 30%;}
-	.ewmBox .tt{float: left;margin-right: 10px;}
-	.ewmBox .tt:last-child{margin-right: 0;}
-	.ewmBox .tt img{width: 95px;height: 95px;margin: 0 auto;}
-	.ewmBox .tt p{font-size: 13px;padding: 5px 0;}
-	
-	.footer .Rcont{width: 65%;}
-	.footer .footNav{width: 64%;}
-	.footer .footNav ul{align-items: flex-start;flex-wrap: wrap;}
-	.footer .footNav li h1{font-size: 16px;}
-	.footer .footNav li p{margin-top: 15px;font-size: 14px;}
-	
-	.footer .footNav a{color: #666;}
-	.footer .footNav a:hover{color: #333;}
-	
-	.footer .R-logo{width: 30%;}
-	.footer .R-logo .logo{width: 155px;height: 100px; display: block;margin: 40px auto}
-	
-	
-	
-	@media only screen and (max-width: 1024px){
-		.footer{padding: 40px 0;}
-		.footer .footNav{font-size: 14px;}
-		.footer .footMsg .ll{width: 75%;}
-		.footer .footMsg .ll .text{font-weight: normal;font-size: 12px;padding-right: 15px;}
-		.footer .footMsg .ll .ewm{width: 80px;height: 80px;}
+	.back-top {
+		position: fixed;
+		right: 5%;
+		bottom: 5%;
 		
 	}
-	@media only screen and (max-width:768px){
-		.ewmBox{flex-wrap: wrap;width: 20%;}
-		.ewmBox .tt{margin-right: 0;}
-		
-		.footer .Rcont{width: 78%;flex-wrap: wrap;}
-		.footer .footNav{width: 100%;}
-		.footer .R-logo{width: 100%;padding-top: 20px;}
-		
+
+	.footer {
+		background: #f0f0f0;
+		padding: 60px 0;
 	}
-	@media only screen and (max-width: 500px){
-		.ewmBox{width: 23%;}
-		.ewmBox .tt img{width: 70px;height: 70px;}
-		.footer .Rcont{width: 76%;}
-		.ewmBox .tt p{font-size: 12px;padding: 0 0 10px;}
-		
-		.footer{padding: 20px 0;}
+
+	.footer .cont {
+		align-items: flex-start;
+	}
+
+	.ewmBox {
+		width: 30%;
+	}
+
+	.ewmBox .tt {
+		float: left;
+		margin-right: 10px;
+	}
+
+	.ewmBox .tt:last-child {
+		margin-right: 0;
+	}
+
+	.ewmBox .tt img {
+		width: 95px;
+		height: 95px;
+		margin: 0 auto;
+	}
+
+	.ewmBox .tt p {
+		font-size: 13px;
+		padding: 5px 0;
+	}
+
+	.footer .Rcont {
+		width: 65%;
+	}
+
+	.footer .footNav {
+		width: 64%;
+	}
+
+	.footer .footNav ul {
+		align-items: flex-start;
+		flex-wrap: wrap;
+	}
+
+	.footer .footNav li h1 {
+		font-size: 16px;
+	}
+
+	.footer .footNav li p {
+		margin-top: 15px;
+		font-size: 14px;
+	}
+
+	.footer .footNav a {
+		color: #666;
+	}
+
+	.footer .footNav a:hover {
+		color: #333;
+	}
+
+	.footer .R-logo {
+		width: 30%;
+	}
+
+	.footer .R-logo .logo {
+		width: 155px;
+		height: 100px;
+		display: block;
+		margin: 40px auto
+	}
+
+
+
+	@media only screen and (max-width: 1024px) {
+		.footer {
+			padding: 40px 0;
+		}
+
+		.footer .footNav {
+			font-size: 14px;
+		}
+
+		.footer .footMsg .ll {
+			width: 75%;
+		}
+
+		.footer .footMsg .ll .text {
+			font-weight: normal;
+			font-size: 12px;
+			padding-right: 15px;
+		}
+
+		.footer .footMsg .ll .ewm {
+			width: 80px;
+			height: 80px;
+		}
+
+	}
+
+	@media only screen and (max-width:768px) {
+		.ewmBox {
+			flex-wrap: wrap;
+			width: 20%;
+		}
+
+		.ewmBox .tt {
+			margin-right: 0;
+		}
+
+		.footer .Rcont {
+			width: 78%;
+			flex-wrap: wrap;
+		}
+
+		.footer .footNav {
+			width: 100%;
+		}
+
+		.footer .R-logo {
+			width: 100%;
+			padding-top: 20px;
+		}
+
+	}
+
+	@media only screen and (max-width: 500px) {
+		.ewmBox {
+			width: 23%;
+		}
+
+		.ewmBox .tt img {
+			width: 70px;
+			height: 70px;
+		}
+
+		.footer .Rcont {
+			width: 76%;
+		}
+
+		.ewmBox .tt p {
+			font-size: 12px;
+			padding: 0 0 10px;
+		}
+
+		.footer {
+			padding: 20px 0;
+		}
+
 		/* .footer .w1200{flex-wrap: wrap;} */
-		.footer .footNav{width: 100%;}
+		.footer .footNav {
+			width: 100%;
+		}
+
 		/* .footer .footNav li{width: 50%;} */
-		.footer .footNav li h1{font-size: 14px;}
-		.footer .footNav li p{margin-top: 5px;font-size: 12px;}
-		
+		.footer .footNav li h1 {
+			font-size: 14px;
+		}
+
+		.footer .footNav li p {
+			margin-top: 5px;
+			font-size: 12px;
+		}
+
 		/* .footer .footNav ul{display: block;} */
-		.footer .R-logo{width: 100%;padding-top: 50px;}
-		.footer .R-logo .logo{width: 93px;height: 60px;margin: 0 auto;}
+		.footer .R-logo {
+			width: 100%;
+			padding-top: 50px;
+		}
+
+		.footer .R-logo .logo {
+			width: 93px;
+			height: 60px;
+			margin: 0 auto;
+		}
 	}
 </style>
-
