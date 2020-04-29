@@ -10,6 +10,7 @@
 .product-head .ll img{width: 80%;height: auto; max-height: 100%; display: block;}
 .product-head .rr{width:50%;height: 450px;position: relative;padding-bottom:100px;box-sizing: border-box;}
 .product-head .rr .title{padding-top: 10px;font-size: 20px;line-height: 30px;}
+.product-head .rr .text2{font-size: 15px;line-height: 26px;padding-top:20px;}
 
 /* 轮播 */
 .view{width: 100%;height: 100%;}
@@ -45,13 +46,14 @@
 	.product-head .ll{height: 220px;width: 100%;border: 0;}
 	.product-head .rr{height: 350px;width: 100%;}
 	
-	.xqCont{width: 96%;}
-	.product-head .rr{height: auto;padding-top: 100px;padding-bottom:10px;}
-	.product-head .rr .preview{top: auto;bottom: 35px;padding: 10px 20px;}
+	.xqCont{width: 100%;box-sizing: border-box;}
+	.product-head .rr{height: auto;padding-top: 140px;padding-bottom:10px;}
+	.product-head .rr .preview{top:15px;/* bottom: 35px; */padding: 10px 20px;height: 120px;box-sizing: border-box;}
 	.preview .arrow{width: 20px;height: 20px;}
 	.preview .swiper-container{height: auto;}
 	.preview .swiper-slide{width: 83px;/* height: 51px; */}
 	.preview .arrow-left{left: -5px;}
 	.preview .arrow-right{right: -5px;}
-	.product-head .rr .title{padding-top: 0;font-size: 16px;line-height: 20px;}
+	.product-head .rr .title{padding-top: 0;font-size: 18px;line-height: 20px;}
+	.product-head .rr .text2 {font-size: 14px;line-height: 22px;padding-top: 15px;}
 }

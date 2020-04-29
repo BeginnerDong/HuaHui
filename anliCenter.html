@@ -29,8 +29,10 @@
 		.ind-dynamic .item{margin-bottom: 80px;}
 		.ind-dynamic .item .texbox{width:33%;margin-top: 20px;box-sizing: border-box;}
 		.ind-dynamic .item .texbox .tit{font-size: 22px;line-height: 30px;}
-		.ind-dynamic .item .imgBox{width: 65%;height: 308px;}
+		.ind-dynamic .item .imgBox{width: 65%;height: 308px;position: relative;}
 		
+		.fixArrow{position: absolute;top: 0;left: 0;z-index: 2;width: 20%;height: 100%;background: url(images/BigArrow-icon3.png) 0 0/100% 100%;}
+		.ind-dynamic>div:nth-of-type(2n) .fixArrow{left: auto;right: 0;background-image: url(images/BigArrow-icon4.png);}
 		
 		@media only screen and (max-width: 1024px){
 			.ind-dynamic .item{margin-bottom: 60px;}
@@ -95,6 +97,7 @@
 								<p class="text2">{{item.description}}</p>
 							</div>
 							<div class="imgBox">
+								<div class="fixArrow"></div>
 								<img :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''" >
 							</div>
 						</a>
@@ -102,6 +105,7 @@
 					<div class="item flexRowBetween" v-if="index%2!=0">
 						<a class="flexRowBetween" :href="'newsdetail.html?id='+item.id">
 							<div class="imgBox">
+								<div class="fixArrow"></div>
 								<img :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''" >
 							</div>
 							<div class="texbox">
