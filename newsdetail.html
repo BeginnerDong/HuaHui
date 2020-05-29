@@ -14,14 +14,24 @@
 		<script type="text/javascript" src="js/include.js"></script>
 		<link type="text/css" rel="stylesheet" href="css/public.css">
 		<link type="text/css" rel="stylesheet" href="css/detail.css">	
+		<link type="text/css" rel="stylesheet" href="css/orderNav.css">
 	</head>
 	<style type="text/css">
 		.detailePag{min-height: 350px;box-sizing: border-box;}
+		
 	</style>
 
 <body>
 	<div id="app">
 		<include src="header.html"></include>
+		
+		<!-- 侧边导航显示 -->
+		<div class="orderNav FixOrderNav center" id="orderNav">
+			<span class="tt flexCenter" v-for="item in labelData" :class="currId==item.id?'on':''" @click="changeCurr(item.id)">
+				<img class="icon" :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''"/>
+				<em>{{item.title}}</em>
+			</span>
+		</div>
 		
 		<div class="detailePag pdb80">
 			<div class="w1200">
@@ -60,11 +70,50 @@
 			created () {
 			    const self = this;
 				self.getMainData();
+				self.getLabelData();
 			},
 			
 			
 		    methods: {
-				
+				changeCurr(id){
+					const self = this;
+					self.currId = id;
+					self.mainData = [];
+					self.getMainData()
+				},
+				getLabelData() {
+					const self = this;
+					const postData = {};
+					postData.searchItem = {
+						thirdapp_id: 2
+					};
+					postData.getBefore = {
+						caseData: {
+							tableName: 'Label',
+							searchItem: {
+								title: ['in', ['案例中心']],
+							},
+							middleKey: 'parentid',
+							key: 'id',
+							condition: 'in',
+						},
+					};
+					postData.order = {
+						listorder:'asc'
+					};
+					const callback = (res) => {
+						if (res.info.data.length > 0) {
+							self.labelData.push.apply(self.labelData,res.info.data);
+							self.currId = self.labelData[0].id;
+							self.getMainData()
+						} else {
+							
+						};
+						
+						
+					};
+					window.base.labelGet(postData, callback);
+				},
 				getMainData() {
 					const self = this;
 					const postData = {};

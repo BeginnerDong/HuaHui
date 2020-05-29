@@ -232,7 +232,7 @@ textarea{width: 100%;padding: 10px; box-sizing: border-box;font-size: 14px;color
 
 /* 页码 */
 .all-pages{ padding:30px 0; text-align:center;}
-.all-pages span{ display:inline-block; margin:0 5px; padding:0 14px; height:32px; vertical-align:middle; white-space:nowrap; text-align:center; font-size:15px; line-height:32px; color:#666;  background:#fff;  border-radius: 3px; cursor: pointer;}
+.all-pages span{ display:inline-block; margin:0 10px; padding:0 5px; height:32px; vertical-align:middle; white-space:nowrap; text-align:center; font-size:15px; line-height:32px; color:#666;  background:#fff;  border-radius: 3px; cursor: pointer;}
 .all-pages span .arrow{width: 12px;height: 12px;display: initial;}
 .all-pages span:hover{ color:#c11719;}
 .all-pages span.on{ color:#c11719; position: relative;}
@@ -257,6 +257,6 @@ textarea{width: 100%;padding: 10px; box-sizing: border-box;font-size: 14px;color
 	.pubtit .more{font-size: 12px;}
 	.pubtit .icon {width: 25px;height: 25px;margin-right: 10px;}
 	
-	.all-pages a, .all-pages span{padding: 0 10px;line-height: 28px;height: 28px;font-size: 12px;}
+	.all-pages a, .all-pages span{padding: 0 5px;line-height: 28px;height: 28px;}
 }
 

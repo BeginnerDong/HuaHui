@@ -89,7 +89,24 @@
 				<div><a class="flexEnd more" href="brand.html">更多<img class="arrowR" src="images/home-icon2.png" ></a></div>
 			</div>
 			
-			<div class="ind-brand pdb80">
+			<div class="ind-brandTwo flexRowBetween pdb80">
+				<div class="left flexRowBetween">
+					<div class="child" v-for="(item,index) in brandData" :key="index">
+						<a  :href="'product.html?id='+item.id">
+							<img class="logo" :src="item.mainImg[0].url" >
+						</a>
+					</div>
+					<div class="child">
+						<img class="logo" src="images/home-img7.png" >
+					</div>
+					<div class="child">
+						<img class="logo" src="images/home-img7.png" >
+					</div>
+				</div>
+				<div class="right flexCenter"><img class="w" src="images/home-img-07.jpg" ></div>
+			</div>
+			
+			<!-- <div class="ind-brand pdb80">
 				<div class="item oh">
 					<div class="half TwoPic" v-for="(item,index) in brandData" :key="index">
 						<a :href="'product.html?id='+item.id">
@@ -102,7 +119,7 @@
 						</a>
 					</div>
 				</div>
-			</div>
+			</div> -->
 			<!-- <div class="ind-brand pdb80">
 				<div class="item flexRowBetween">
 					<div class="half TwoPic">
@@ -178,6 +195,7 @@
 					seltCurr:0,
 					artData:[],
 					brandData:[],
+					brandIconData:7
 					
 		        }
 		    },
@@ -250,6 +268,18 @@
 		.anliSetNav .btn:hover{padding:5px 10px;font-size: 20px;}
 		.anliSet .btn{width: 150px;line-height: 50px;text-align: center;border: 1px solid ;border-radius: 8px;margin: 15px auto;font-size: 18px;}
 		.anliSet .btn:hover{font-size: 20px;}
+		
+		
+		.ind-brandTwo{ align-items: flex-start;}
+		.ind-brandTwo .left{width: 45%;flex-wrap: wrap;}
+		.ind-brandTwo .left .child{width:50%;margin-bottom: 40px;box-sizing: border-box;}
+		.ind-brandTwo .left .child:nth-child(7),.ind-brandTwo .left .child:nth-child(8){margin-bottom: 0;}
+		.ind-brandTwo .left .child .logo{width: 110px;height: 110px;margin: 0 auto;}
+		
+		.ind-brandTwo .right{width: 55%;}
+		.ind-brandTwo .right img{width: 100%;}
+		
+		
 		@media only screen and (max-width: 500px){
 			.anliSetNav .btn{width: 120px;line-height: 40px;font-size: 16px; border-radius: 5px;}
 			.anliSet .btn{width: 120px;line-height: 40px;font-size: 16px; border-radius: 5px;}
@@ -263,10 +293,18 @@
 		@media only screen and (max-width: 1024px){
 			.ind-brand .TwoPic .box{height: 241px;}
 			.ind-brand .TwoPic .box .logo{width: 110px;height: 110px;}
+			
+			.ind-brandTwo .left .child{margin-bottom: 30px;}
+			.ind-brandTwo .left .child .logo { width: 90px;height: 90px;}
 		}
 		@media only screen and (max-width: 768px){
 			.ind-brand .TwoPic .box{height: 180px;}
 			.ind-brand .TwoPic .box .logo{width: 90px;height: 90px;}
+			
+			.ind-brandTwo .left{width: 40%;}
+			.ind-brandTwo .right{width:60%;}
+			.ind-brandTwo .left .child{margin-bottom: 25px;}
+			.ind-brandTwo .left .child .logo { width: 75px;height:75px;}
 		}
 		@media only screen and (max-width: 500px){
 			.ind-brand .half{width: 49%;}
@@ -274,6 +312,13 @@
 			.ind-brand .half:nth-of-type(2n){margin-right: 0!important;}
 			.ind-brand .TwoPic .box{height: 150px;}
 			.ind-brand .TwoPic .box .logo{width: 70px;height: 70px;}
+			
+			.flexRowBetween{flex-wrap: wrap;}
+			.ind-brandTwo .left{width: 100%; justify-content: flex-start;}
+			.ind-brandTwo .left .child{width: 33.33%;}
+			.ind-brandTwo .left .child .logo { width: 70px;height: 70px;}
+			.ind-brandTwo .right{width:100%;display: none;}
+			.ind-brandTwo .left .child:nth-child(7), .ind-brandTwo .left .child:nth-child(8){ margin-bottom: 25px;}
 		}
 		@media only screen and (max-width: 375px){
 			.ind-brand .TwoPic .box{height: 135px;}

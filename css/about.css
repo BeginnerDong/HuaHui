@@ -29,7 +29,7 @@
 /* 人才储备 */
 .jianliMsg{width: 80%;padding: 0 4%;margin: 0 auto;box-sizing: border-box; padding-bottom: 40px; border-radius: 5px;}
 .jianliMsg li{padding: 25px 4%;border-bottom: 1px solid #eee;display:flex;}
-.jianliMsg li .ll{width: 15%;}
+.jianliMsg li .ll{width: 15%;font-size: 16px;}
 .jianliMsg li .rr{width: 85%;}
 .upImg{width: 100px;height: 100px;display: block;margin-right: 10px;overflow: hidden;}
 .upImg img{width: 100%;height: 100%; display: block}
@@ -54,7 +54,7 @@
 	
 	.jianliMsg{width: 95%;}
 	.jianliMsg li{padding: 15px 0;font-size: 13px;}
-	.jianliMsg li .ll{width: 25%;}
+	.jianliMsg li .ll{width: 25%; font-size: 13px;}
 	.jianliMsg li .rr{width: 75%;}
 	.jianliMsg .submitbtn .btn{width: 86%!important;}
 	

@@ -21,11 +21,6 @@
 		/* .orderNav{justify-content: flex-start;} */
 		.ind-dynamic{min-height:200px;}
 		
-		.FixOrderNav{left: 0;top:15%;position: fixed;width: 120px;background-color: #fff;border-radius: 3px;box-shadow: 2px 0 5px rgba(0,0,0,0.2);padding: 0 10px; z-index: 6;}
-		.FixOrderNav .tt{width: 100%;line-height: 60px;border-bottom: 1px solid #eee;margin: 0;}
-		.FixOrderNav .tt:last-child{border-bottom: 0;}
-		.FixOrderNav .tt .icon{width: 24px;height: 24px; margin-right: 10px;}
-		
 		.ind-dynamic .item{margin-bottom: 80px;}
 		.ind-dynamic .item .texbox{width:33%;margin-top: 20px;box-sizing: border-box;}
 		.ind-dynamic .item .texbox .tit{font-size: 22px;line-height: 30px;}
@@ -57,8 +52,6 @@
 			.ind-dynamic .item .imgBox{width: 58%;height: 98px;}
 			.ind-dynamic .item .texbox .text2{font-size: 14px;line-height: 22px;}
 			
-			.FixOrderNav{width: 88px;}
-			.FixOrderNav .tt .icon{width: 18px;height: 18px;margin-right: 6px;}
 			.ind-dynamic .item .texbox .tit{font-size: 14px;line-height: 20px}
 			.ind-dynamic .item .texbox .text2{font-size: 12px; line-height: 20px;}
 		}
@@ -69,16 +62,16 @@
 		<include src="header.html"></include>
 		
 		<div class="w1200 pdb80">
-			<div class="orderNav flexCenter borderB1" id="orderNav" v-show="!isCollapse">
+			<!-- <div class="orderNav flexCenter borderB1" id="orderNav" v-show="!isCollapse">
 				<span class="tt flexCenter" v-for="item in labelData"
 				:class="currId==item.id?'on':''" @click="changeCurr(item.id)">
 					<img class="icon" :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''"/>
 					<em>{{item.title}}</em>
 				</span>
-			</div>
+			</div> -->
 			
 			<!-- 侧边导航显示 -->
-			<div class="orderNav FixOrderNav center" id="orderNav" v-show="isCollapse">
+			<div class="orderNav FixOrderNav center" id="orderNav">
 				<span class="tt flexCenter" v-for="item in labelData"
 				:class="currId==item.id?'on':''" @click="changeCurr(item.id)">
 					<img class="icon" :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''"/>
@@ -164,15 +157,15 @@
 				window.addEventListener('scroll', this.handleScroll)
 			},
 		    methods: {
-				handleScroll() {
-					var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
-					var offsetTop = document.querySelector('#orderNav').offsetTop
-					if (scrollTop > offsetTop) {
-					this.isCollapse = true
-					} else {
-					this.isCollapse = false
-					}
-				},
+				// handleScroll() {
+				// 	var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+				// 	var offsetTop = document.querySelector('#orderNav').offsetTop
+				// 	if (scrollTop > offsetTop) {
+				// 	this.isCollapse = true
+				// 	} else {
+				// 	this.isCollapse = false
+				// 	}
+				// },
 				changeCurr(id){
 					const self = this;
 					self.currId = id;

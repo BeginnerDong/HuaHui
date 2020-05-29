@@ -1,0 +1,38 @@
+
+/* 联系我们 */
+
+
+
+/* 公司信息 */
+.companyMsg{padding-top:80px;}
+.companyMsg .item{align-items: flex-start;}
+.companyMsg .pic{width: 50%;float: left;}
+.companyMsg .pic img{width: 100%;}
+.companyMsg .infor{width: 50%;padding: 40px 4%; float: right;box-sizing: border-box;font-size: 16px;}
+.companyMsg .infor p{margin-bottom:30px;padding-left: 40px;line-height: 24px;background: url(images/contact-icon1.png) no-repeat top left/20px 20px;}
+.companyMsg .infor p:last-child{margin-bottom: 0;}
+.companyMsg .infor p.compay{background-image: url(images/contact-icon1.png);font-size: 16px;font-weight: bold;}
+.companyMsg .infor p.adrs{background-image: url(images/contact-icon2.png)}
+.companyMsg .infor p.phone{background-image: url(images/contact-icon3.png)}
+.companyMsg .infor p.zipCode{background-image: url(images/contact-icon4.png)}
+.companyMsg .infor p.fax{background-image: url(images/contact-icon5.png)}
+
+@media only screen and (max-width: 1200px){
+	.companyMsg .infor{font-size: 14px;}
+	.companyMsg .infor p{margin-bottom: 25px;}
+}
+@media only screen and (max-width: 768px){
+	.companyMsg .infor{font-size: 14px;padding: 15px 2%;}
+	.companyMsg .infor p{margin-bottom: 16px;padding-left: 30px;}
+}
+@media only screen and (max-width:500px){
+	
+	.jianliMsg li .ll{width: 15%;}
+	
+	.companyMsg .item{padding: 10px;box-sizing: border-box;}
+	.companyMsg .pic{width: 40%;}
+	.companyMsg .infor{width: 58%;font-size: 12px;padding: 0px 2%;}
+	.companyMsg .infor p{margin-bottom: 5px;padding-left: 25px;background-size: 15px 15px;background-position-y: 5px;}
+	.companyMsg .infor p.compay{font-size: 13px;}
+}
+

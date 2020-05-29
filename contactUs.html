@@ -15,15 +15,110 @@
 		<link type="text/css" rel="stylesheet" href="css/public.css">
 		<link type="text/css" rel="stylesheet" href="css/about.css">
 		<link type="text/css" rel="stylesheet" href="css/companyList.css">
+		<link type="text/css" rel="stylesheet" href="css/contactUs.css">
 	</head>
+	<style>
+		/* banner */
+		.fsbanner .item{width: 12.5%;height:920px;float: left; overflow: hidden;position: relative;}
+		.fsbanner .item .pic{/* width: 100%;*/height: 100%; position: absolute;left: 0;top: 0;}
+		.fsbanner .bj{position: absolute;left: 0;top: 0;right: 0;bottom: 0;background-color: rgba(0,0,0,0.5);z-index: 2;}
+		.fsbanner .item.on .pic.big{display: none;}
+		.fsbanner .name{font-size: 56px; -webkit-writing-mode: vertical-rl;writing-mode: vertical-rl;position: absolute;left: 50%;top: 50%;transform: translate(-50%,-50%);line-height: 50px;letter-spacing: 30px;}
+		
+		.fsbanner .item.on{padding: 30px 0;width: 16%;}
+		.fsbanner .item.on .pic.samll{display: none;}
+		.fsbanner .item.on .pic.big{display: block;}
+		.fsbanner .item.on .pic{width: 100%;height: 100%;right: 0;bottom: 0!important;}
+		.fsbanner .item.on .name{font-size: 70px;}
+		
+		@media only screen and (max-width: 1600px){
+			.fsbanner .item{height: 800px;}
+		}
+		@media only screen and (max-width: 1440px){
+			.fsbanner .item{height: 720px;}
+		}
+		@media only screen and (max-width: 1366px){
+			.fsbanner .item{height: 670px;}
+		}
+		@media only screen and (max-width:1280px){
+			.fsbanner .item{height: 610px;}
+			.fsbanner .name {font-size: 44px;}
+			.fsbanner .item.on .name{font-size: 54px;}
+		}
+		@media only screen and (max-width:1024px){
+			.fsbanner .item{height: 470px;}
+			.fsbanner .name {font-size: 34px; letter-spacing: 18px;}
+			.fsbanner .item.on .name{font-size: 40px;}
+		}
+		@media only screen and (max-width:768px){
+			.fsbanner .item{height: 400px;}
+			.fsbanner .item.on {padding: 20px 0;}
+			.fsbanner .name {font-size: 30px; letter-spacing: 10px;}
+			.fsbanner .item.on .name{font-size: 36px;}
+		}
+		
+		@media only screen and (max-width:500px){
+			.fsbanner{flex-wrap: wrap;}
+			.fsbanner .item{height: 60px;width: 100%;}
+			.fsbanner .item.on {padding: 20px 0;}
+			.fsbanner .name {font-size: 20px; letter-spacing: 10px;    -webkit-writing-mode: initial; writing-mode: initial;}
+			.fsbanner .item .pic{width: 100%; height: auto;right: 0;top: 50%;transform: translateY(-50%);}
+			.fsbanner .item.on .name{font-size: 20px;}
+		}
+		
+	</style>
 
 <body>
 	<div id="app">
 		<include src="header.html"></include>
 		
+		<div class="fsbanner white oh flexRowBetween">
+			<div class="item pr" :class="bannerCurr==index?'on':''" v-for="(item,index) in fsbannerData" :key="index" @mousemove="changeBannerCurr(index)" @mouseleave="changeLeave(index)">
+				<img class="pic" :src="item.imgUrl" >
+				<div class="bj"><p class="name">{{item.title}}</p></div>
+				
+			</div>
+			<!-- <div class="item pr" >
+				<img src="images/contact-usl-img1.jpg" >
+				<div class="bj"></div>
+				<p class="name">上海</p>
+			</div>
+			<div class="item pr" >
+				<img src="images/contact-usl-img2.jpg" >
+				<div class="bj"></div>
+				<p class="name">广州</p>
+			</div>
+			<div class="item pr" >
+				<img src="images/contact-usl-img3.jpg" >
+				<div class="bj"></div>
+				<p class="name">成都</p>
+			</div>
+			<div class="item pr" >
+				<img src="images/contact-usl-img4.jpg" >
+				<div class="bj"></div>
+				<p class="name">香港</p>
+			</div>
+			<div class="item pr" >
+				<img src="images/contact-usl-img5.jpg" >
+				<div class="bj"></div>
+				<p class="name">台北</p>
+			</div>
+			<div class="item pr" >
+				<img src="images/contact-usl-img6.jpg" >
+				<div class="bj"></div>
+				<p class="name">杭州</p>
+			</div>
+			<div class="item pr" >
+				<img src="images/contact-usl-img7.jpg" >
+				<div class="bj"></div>
+				<p class="name">更多</p>
+			</div>
+			 -->
+		</div>
+		
 		<div class="f5bj">
 			<div class="w1200 pdb80">
-				<div class="pubtit flexCenter">
+				<!-- <div class="pubtit flexCenter">
 					<img class="icon" src="images/contact-icon.png" >
 					<h1 class="title">地方公司</h1>
 				</div>
@@ -37,6 +132,19 @@
 							<p class="fax">{{item.fax}}</p>
 						</li>
 					</ul>
+				</div> -->
+				
+				<div class="companyMsg clearfix">
+					<div class="item clearfix whiteBj flexRowBetween">
+						<div class="pic"><img src="images/contact-usl-img8.jpg" ></div>
+						<div class="infor">
+							<p class="compay">上海公司</p>
+							<p class="adrs">上海市普陀区长征镇同普路1225弄13号楼一层</p>
+							<p class="phone"><em class="mgr10">021-62377366</em><em>021-62377266</em></p>
+							<p class="zipCode">200333</p>
+							<p class="fax">021-62377030</p>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -100,7 +208,18 @@
 						thirdapp_id:2
 					},
 					isSending:false,
-					chooseId:-1
+					chooseId:-1,
+					fsbannerData:[
+						{imgUrl:'images/contact-usl-img-01.jpg',title:'北京'},
+						{imgUrl:'images/contact-usl-img1.jpg',title:'上海'},
+						{imgUrl:'images/contact-usl-img2.jpg',title:'广州'},
+						{imgUrl:'images/contact-usl-img3.jpg',title:'成都'},
+						{imgUrl:'images/contact-usl-img4.jpg',title:'香港'},
+						{imgUrl:'images/contact-usl-img5.jpg',title:'台北'},
+						{imgUrl:'images/contact-usl-img6.jpg',title:'杭州'},
+						{imgUrl:'images/contact-usl-img7.jpg',title:'更多'}
+					],
+					bannerCurr:-1
 		        }
 		    },
 			
@@ -113,7 +232,14 @@
 		    },
 		    
 		    methods: {
-		    	
+		    	changeBannerCurr(index){
+					const self = this;
+					self.bannerCurr = index
+				},
+				changeLeave(index){
+					const self = this;
+					self.bannerCurr = -1
+				},
 		    	getMainData() {
 		    		const self = this;
 		    		const postData = {};
