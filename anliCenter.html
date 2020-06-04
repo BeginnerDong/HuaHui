@@ -83,7 +83,7 @@
 			<div class="ind-dynamic pdt40">
 				<div v-for="(item,index) in mainData">
 					<div class="item flexRowBetween" v-if="index%2==0">
-						<a class="flexRowBetween" :href="'newsdetail.html?id='+item.id">
+						<a class="flexRowBetween" :href="'newsdetail.html?id='+item.id+'&type=case'">
 							<div class="texbox">
 								<div class="tit">{{item.title}}</div>
 								<p class="form"></p>
@@ -96,7 +96,7 @@
 						</a>
 					</div>
 					<div class="item flexRowBetween" v-if="index%2!=0">
-						<a class="flexRowBetween" :href="'newsdetail.html?id='+item.id">
+						<a class="flexRowBetween" :href="'newsdetail.html?id='+item.id+'&type=case'">
 							<div class="imgBox">
 								<div class="fixArrow"></div>
 								<img :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''" >
@@ -153,9 +153,12 @@
 			    const self = this;
 				self.getLabelData();
 			},
+			
 			mounted () {
+				
 				window.addEventListener('scroll', this.handleScroll)
 			},
+			
 		    methods: {
 				// handleScroll() {
 				// 	var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
@@ -196,8 +199,13 @@
 					const callback = (res) => {
 						if (res.info.data.length > 0) {
 							self.labelData.push.apply(self.labelData,res.info.data);
-							self.currId = self.labelData[0].id;
-							self.getMainData()
+							if(window.base.GetRequest().menu_id){
+								self.currId = window.base.GetRequest().menu_id;
+								self.getMainData()
+							}else{
+								self.currId = self.labelData[0].id;
+								self.getMainData()
+							}
 						} else {
 							
 						};

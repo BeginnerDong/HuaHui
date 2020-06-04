@@ -196,7 +196,8 @@
 					self.changeCurr(window.base.GetRequest().id)
 				}else{
 					self.getLabelData();
-				}
+				};
+				
 			},
 			
 		    methods: {
@@ -282,12 +283,21 @@
 					const callback = (res) => {
 						if (res.info.data.length > 0) {
 							self.labelData.push.apply(self.labelData,res.info.data);
-							self.brandCurrId = self.labelData[0].id;
+							
 							if(self.labelData[0].child){
 								self.leftNavData = self.labelData[0].child;
-								self.navCurrId = self.labelData[0].child[0].id;
-								self.mainData = [];
-								self.getMainData()
+								
+								if(window.base.GetRequest().menu_id){
+									self.brandCurrId = window.base.GetRequest().parent;
+									self.navCurrId = window.base.GetRequest().menu_id;
+									self.mainData = [];
+									self.getMainData()
+								}else{
+									self.brandCurrId = self.labelData[0].id;
+									self.navCurrId = self.labelData[0].child[0].id;
+									self.mainData = [];
+									self.getMainData()
+								}
 							}
 						} else {
 							

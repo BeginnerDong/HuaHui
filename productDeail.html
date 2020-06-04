@@ -53,7 +53,7 @@
 			</div>
 			<div class="rr">
 				<h1 class="ftn title">{{mainData.title}}</h1>
-				<p class="text2 fs16">付货款的是否符合过分过分的借口说你发的健康说后方可说胡椒粉肯定说女方说教程吃发货的首付款</p>
+				<p class="text2 fs16">{{mainData.description}}</p>
 					<div class="preview">
 						<span class="arrow arrow-left"></span>
 						<span class="arrow arrow-right"></span>
@@ -106,6 +106,9 @@
 					</div>
 				</div>
 			</div>
+			<div class="anliSetNav" @click="toLoad">
+				<a class="btn" >下载</a>
+			</div>
 		</div>
 		
 		<div class="pdb80">
@@ -137,6 +140,24 @@
 			},
 			
 		    methods: {
+				
+				toLoad(){
+					const self = this;
+					const postData = {};
+					postData.searchItem = {
+						id: self.mainData.id,
+					};
+					
+					const callback = (res) => {
+						if (res.solely_code == 100000) {
+							window.location.href = 'loadCenter.html?menu_id='+res.info.menu_id+'&parent='+res.info.parent_id
+						} else {
+							alert('无对应可下载项目')
+						};	
+					};
+					window.base.getParent(postData, callback);
+				},
+				
 				changeNavCurr(navCurr){
 					const self = this;
 					if(navCurr!=self.navCurr){
@@ -150,6 +171,7 @@
 					postData.searchItem = {
 						id: window.base.GetRequest().id,
 					};
+					
 					const callback = (res) => {
 						if (res.info.data.length > 0) {
 							self.mainData = res.info.data[0]
@@ -241,4 +263,11 @@
 		
 		
 	</script>
+	<style>
+		.anliSetNav{position: fixed;top: 50%;right: 20px;transform: translate(-50%,-50%);z-index: 41;}
+		.anliSetNav .btn{padding:5px 10px;width: 150px;line-height: 50px;text-align: center;border: 1px solid black;border-radius: 8px;color: black;margin: 15px auto;font-size: 18px;}
+		.anliSetNav .btn:hover{padding:5px 10px;font-size: 20px;}
+		.anliSet .btn{width: 150px;line-height: 50px;text-align: center;border: 1px solid ;border-radius: 8px;margin: 15px auto;font-size: 18px;}
+		.anliSet .btn:hover{font-size: 20px;}
+	</style>
 </html>

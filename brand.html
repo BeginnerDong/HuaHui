@@ -131,7 +131,7 @@
 			<div class="brandNav center pr">
 				<div class="cont clearfix color6 swiper-container" style="flex-wrap: nowrap;">
 					<div class="swiper-wrapper ">
-						<div class="swiper-slide child"  v-for="(item,index) in mainData" :key="index">
+						<div class="swiper-slide child" @mouseenter="enter(index)" @mouseleave="leave()"  v-for="(item,index) in mainData" :key="index">
 							<a :href="'product.html?id='+item.id">
 								<img :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''" >
 							</a>
@@ -148,7 +148,7 @@
 				<div class="arrow next"><img src="images/icon-right.png" ></div>
 			</div>
 			<div class="brandNavPic">
-				<img class="w" src="images/brandl-img-01.jpg" >
+				<img class="w" :src="mainData[index]&&mainData[index].bannerImg&&mainData[index].bannerImg[0]?mainData[index].bannerImg[0].url:''" >
 			</div>
 		</div>
 		
@@ -223,7 +223,7 @@
 					linkPage: [],
 					pageArray: [],
 					brandData:5,
-					
+					index:3,
 					allPages: 0,
 					paginate:{
 						count: 0,
@@ -240,6 +240,20 @@
 			},
 			
 		    methods: {
+				
+				enter(index){
+					const self = this;
+					console.log(index)
+					if(self.index!=index){
+						self.index = index;
+					}
+				},
+				
+				leave(){
+					const self = this;
+					console.log(2323)
+					self.index = 3;
+				},
 				
 				getMainData() {
 					const self = this;
@@ -259,7 +273,7 @@
 							self.mainData.push.apply(self.mainData,res.info.data);
 							self.paginate['count'] = res.info.total;
 							window.base.computePageArr(self);
-							var swiper = new Swiper('.brandNav .cont', {
+							self.swiper = new Swiper('.brandNav .cont', {
 									 //loop : true,
 								// pagination: '.swiper-pagination',
 								nextButton: '.brandNav .next',
@@ -269,7 +283,11 @@
 								paginationClickable: true,
 								observer: true,//修改swiper自己或子元素时，自动初始化swiper
 								observeParents: true,//修改swiper的父元素时，自动初始化swiper
-								initialSlide:3
+								initialSlide:3,
+								onSlideChangeEnd: function(swiper){
+								  //alert(swiper.activeIndex) //切换结束时，告诉我现在是第几个slide
+								  self.index = self.swiper.activeIndex
+								}
 							});
 							
 						} else {

@@ -26,7 +26,7 @@
 		<include src="header.html"></include>
 		
 		<!-- 侧边导航显示 -->
-		<div class="orderNav FixOrderNav center" id="orderNav">
+		<div class="orderNav FixOrderNav center" id="orderNav" v-if="type&&type!=''">
 			<span class="tt flexCenter" v-for="item in labelData" :class="currId==item.id?'on':''" @click="changeCurr(item.id)">
 				<img class="icon" :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''"/>
 				<em>{{item.title}}</em>
@@ -63,24 +63,28 @@
 					is_show:false,
 					wx_show:2,
 					mainData: {},
-					labelData: []
+					labelData: [],
+					type:''
 		        }
 		    },
 			
 			created () {
 			    const self = this;
+				if(window.base.GetRequest().type){
+					self.type =  window.base.GetRequest().type
+				};
 				self.getMainData();
 				self.getLabelData();
 			},
 			
 			
 		    methods: {
+				
 				changeCurr(id){
 					const self = this;
-					self.currId = id;
-					self.mainData = [];
-					self.getMainData()
+					window.location.href = 'anliCenter.html?menu_id='+id
 				},
+				
 				getLabelData() {
 					const self = this;
 					const postData = {};
@@ -104,7 +108,7 @@
 					const callback = (res) => {
 						if (res.info.data.length > 0) {
 							self.labelData.push.apply(self.labelData,res.info.data);
-							self.currId = self.labelData[0].id;
+							
 							self.getMainData()
 						} else {
 							
@@ -123,6 +127,7 @@
 					const callback = (res) => {
 						if (res.info.data.length > 0) {
 							self.mainData = res.info.data[0]
+							self.currId = self.mainData.menu_id;
 						} else {
 							alert('没有数据')
 						};	
