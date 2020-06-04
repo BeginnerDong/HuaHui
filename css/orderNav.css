@@ -9,19 +9,24 @@
 .FixOrderNav .tt:last-child{border-bottom: 0;}
 .FixOrderNav .tt .icon{width: 24px;height: 24px; margin-right: 10px;}
 
+.orderNavTop{display: none;}
 
 @media only screen and (max-width: 1000px){
 	.orderNav{padding: 15px 0;}
 }
 
 @media only screen and (max-width: 500px){
-	.orderNav{ flex-wrap: wrap;}
+	.orderNav{ flex-wrap: wrap;display: none;}
 	.orderNav .tt{font-size: 14px;margin: 0 4%;}
 	.orderNav .tt .icon{width: 18px;height: 18px;margin-right: 5px;}
 	
 	.FixOrderNav{width: 92px;}
 	.FixOrderNav span.tt{margin: 0;font-size: 13px;line-height: 50px}
 	.FixOrderNav .tt .icon{width: 18px;height: 18px;margin-right: 6px;}
+	
+	.orderNavTop{display: block;width: 80%;left: 10%;top: 50px;display: flex;}
+	.orderNavTop .tt{width: 33.3%;height: 40px;}
+	.ind-dynamic{padding-top: 100px;}
 }
 
 

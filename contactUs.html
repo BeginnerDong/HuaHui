@@ -59,7 +59,7 @@
 		
 		@media only screen and (max-width:500px){
 			.fsbanner{flex-wrap: wrap;}
-			.fsbanner .item{height: 60px;width: 100%;}
+			.fsbanner .item{height: 60px;width: 100%!important;}
 			.fsbanner .item.on {padding: 20px 0;}
 			.fsbanner .name {font-size: 20px; letter-spacing: 10px;    -webkit-writing-mode: initial; writing-mode: initial;}
 			.fsbanner .item .pic{width: 100%; height: auto;right: 0;top: 50%;transform: translateY(-50%);}
@@ -102,7 +102,7 @@
 				
 				<div class="companyMsg clearfix">
 					<div class="item clearfix whiteBj flexRowBetween">
-						<div class="pic"><img :src="mainData.mainImg&&mainData.mainImg[0]?mainData.mainImg[0].url:''" ></div>
+						<div class="pic"><img :src="mainData.mainImg&&mainData.mainImg[0]?mainData.mainImg[0].url:'images/contact-usl-img8.jpg'" ></div>
 						<div class="infor">
 							<p class="compay">{{mainData[index]?mainData[index].title:''}}</p>
 							<p class="adrs">{{mainData[index]?mainData[index].address:''}}</p>
@@ -235,6 +235,7 @@
 		    			if (res.info.data.length > 0) {
 		    				self.mainData.push.apply(self.mainData,res.info.data);
 							self.cityWidth = 100/self.mainData.length;
+							console.log(self.mianData)
 		    			} else {
 		    				alert('没有数据')
 		    			};	

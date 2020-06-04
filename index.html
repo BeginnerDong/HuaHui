@@ -33,7 +33,7 @@
 						<img class="icon" src="images/home-icon1.png" >
 						<h1 class="title">案例新闻</h1>
 					</div>
-					<div class="flexEnd more" @click="seltAnliNav">更多<img class="arrowR" src="images/home-icon2.png" ></div>
+					<div class="flexEnd more moreBox" @click="seltAnliNav">更多<img class="arrowR" src="images/home-icon2.png" ></div>
 				</div>
 				<div class="ind-dynamic">
 					<div v-for="(item,index) in artData">
@@ -86,7 +86,7 @@
 					<img class="icon" src="images/home-icon3.png" >
 					<h1 class="title">品牌介绍</h1>
 				</div>
-				<div><a class="flexEnd more" href="brand.html">更多<img class="arrowR" src="images/home-icon2.png" ></a></div>
+				<div class="moreBox"><a class="flexEnd more" href="brand.html">更多<img class="arrowR" src="images/home-icon2.png" ></a></div>
 			</div>
 			
 			<div class="ind-brandTwo flexRowBetween pdb80">
@@ -255,12 +255,14 @@
 			.ind-brand .TwoPic .box{height: 150px;}
 			.ind-brand .TwoPic .box .logo{width: 70px;height: 70px;}
 			
-			.flexRowBetween{flex-wrap: wrap;}
+			.flexRowBetween{flex-wrap: wrap;justify-content: center;}
 			.ind-brandTwo .left{width: 100%; justify-content: flex-start;}
 			.ind-brandTwo .left .child{width: 50%;}
 			.ind-brandTwo .left .child .logo { width: 70px;height: 70px;}
 			.ind-brandTwo .right{width:100%;display: none;}
 			.ind-brandTwo .left .child:nth-child(7), .ind-brandTwo .left .child:nth-child(8){ margin-bottom: 25px;}
+			
+			.moreBox{position: absolute;right: 15px;}
 		}
 		@media only screen and (max-width: 375px){
 			.ind-brand .TwoPic .box{height: 135px;}

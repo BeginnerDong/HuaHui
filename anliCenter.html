@@ -78,6 +78,15 @@
 					<em>{{item.title}}</em>
 				</span>
 			</div>
+			
+			<!-- 手机端顶部导航显示 -->
+			<div class="orderNav FixOrderNav center orderNavTop" id="orderNav">
+				<span class="tt flexCenter" v-for="item in labelData"
+				:class="currId==item.id?'on':''" @click="changeCurr(item.id)">
+					<img class="icon" :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''"/>
+					<em>{{item.title}}</em>
+				</span>
+			</div>
 		
 			<!-- 案例新闻 -->
 			<div class="ind-dynamic pdt40">

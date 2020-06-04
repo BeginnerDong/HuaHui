@@ -13,7 +13,16 @@
 			<div class="orderNavTwo pc flexRowBetween fs16" >
 				<div class="tt" :class="currentUrl=='/index.html'?'on':''"><a href="index.html">首页</a></div>
 				<div class="tt" :class="currentUrl=='/aboutUs.html'?'on':''"><a href="aboutUs.html">关于华汇</a></div>
-				<div class="tt" :class="currentUrl=='/anliCenter.html'?'on':''"><a href="anliCenter.html">经典案例</a></div>
+				<div class="tt" :class="currentUrl=='/anliCenter.html'?'on':''">
+					<a href="anliCenter.html">经典案例</a>
+					<div class="Asamll AnliLabel">
+						<div class="Achild" v-for="(item,index) in labelData" :key="item.id">
+							<div class="Aname">
+								<div class="link">{{item.title}}</div>
+							</div>
+						</div>
+					</div>
+				</div>
 				<div class="tt pr"  :class="currentUrl=='/brand.html'?'on':''">
 					<a href="brand.html">品牌中心</a>
 					<div class="Asamll">
@@ -42,7 +51,16 @@
 		<div class="orderNavTwo mobile flexRowBetween fs16" v-show="is_showNav">
 			<div class="tt" :class="currentUrl=='/index.html'?'on':''"><a href="index.html">首页</a></div>
 			<div class="tt" :class="currentUrl=='/aboutUs.html'?'on':''"><a href="aboutUs.html">关于华汇</a></div>
-			<div class="tt" :class="currentUrl=='/anliCenter.html'?'on':''"><a href="anliCenter.html">经典案例</a></div>
+			<div class="tt" :class="currentUrl=='/anliCenter.html'?'on':''">
+				<a href="anliCenter.html">经典案例</a>
+				<div class="Asamll AnliLabel">
+					<div class="Achild" v-for="(item,index) in labelData" :key="item.id">
+						<div class="Aname">
+							<div class="link">{{item.title}}</div>
+						</div>
+					</div>
+				</div>
+			</div>
 			<div class="tt pr"  :class="currentUrl=='/brand.html'?'on':''">
 				<a href="brand.html">品牌中心</a>
 				<div class="Asamll">
@@ -86,13 +104,15 @@
 				},
 				bannerTimer:null,
 				is_showNav:false,
-				brandData:[]
+				brandData:[],
+				labelData:[]
 				
 	        }
 	    },
 	    created:function () {
 			var self = this;
 			self.getBrandData();
+			self.getLabelData();
 			// if(window.screen.width<1000){
 			// 	// self.is_showNav = true;
 			// 	// self.is_show = false
@@ -136,7 +156,7 @@
 			self.bannerTimer = null;
 		},
 	    methods: {
-			
+				
 			shownav(){
 				const self = this;
 				// if($(".orderNavTwo.mobile").css('display')=='none'){
@@ -183,6 +203,34 @@
 				window.base.labelGet(postData, callback);
 			},
 			
+			getLabelData() {
+				const self = this;
+				const postData = {};
+				postData.searchItem = {
+					thirdapp_id: 2
+				};
+				postData.getBefore = {
+					caseData: {
+						tableName: 'Label',
+						searchItem: {
+							title: ['in', ['案例中心']],
+						},
+						middleKey: 'parentid',
+						key: 'id',
+						condition: 'in',
+					},
+				};
+				postData.order = {
+					listorder:'asc'
+				};
+				const callback = (res) => {
+					if (res.info.data.length > 0) {
+						self.labelData.push.apply(self.labelData,res.info.data);
+					}
+				};
+				window.base.labelGet(postData, callback);
+			}
+			
 	    }
 	});
 </script>
@@ -190,6 +238,7 @@
 <style>
 /* 二级导航 */
 .Asamll{width: 150px;position: absolute;left: 50%;top:100%;transform: translateX(-50%);background:#fff;color: #222;text-align: left; display: none;box-shadow: 0px 0px 5px rgba(0,0,0,0.15);}
+.AnliLabel{left: 43.5%;}
 .Asamll .Achild{line-height: 50px;height: 50px;position: absolute;width: 100%;position: relative;font-size: 14px;box-sizing: border-box;border-bottom: 1px solid #e1e1e1;}
 .Aname{padding: 0 15px;box-sizing: border-box;}
 .Aname>.link{ color: #222;width: 100%; display: block;}
@@ -252,6 +301,8 @@
 	.Asamll{width: 100%;left: auto;transform:initial;right: 100%;top: 0;}
 	.Bsamll{width: 100%;left: auto;right: 100%;border-left:0;border-right: 1px solid #555;  }
 	.Asamll .Achild{font-size: 13px;}
+	
+	.AnliLabel{top: 29%;}
 	
 	.orderNavTwo.pc{display: none;}
 	.orderNavTwo.mobile{display: block;}
