@@ -238,7 +238,7 @@
 <style>
 /* 二级导航 */
 .Asamll{width: 150px;position: absolute;left: 50%;top:100%;transform: translateX(-50%);background:#fff;color: #222;text-align: left; display: none;box-shadow: 0px 0px 5px rgba(0,0,0,0.15);}
-.AnliLabel{left: 43.5%;}
+.AnliLabel{left: 45%;}
 .Asamll .Achild{line-height: 50px;height: 50px;position: absolute;width: 100%;position: relative;font-size: 14px;box-sizing: border-box;border-bottom: 1px solid #e1e1e1;}
 .Aname{padding: 0 15px;box-sizing: border-box;}
 .Aname>.link{ color: #222;width: 100%; display: block;}
@@ -285,6 +285,10 @@
 
 
 /*以下自适应样式*/
+@media screen and ( max-width: 1440px) {
+	.AnliLabel{left: 43.5%;}
+}
+
 @media screen and ( max-width: 1000px){
 	
 	.head .logoCont{padding: 10px 2%;}
