@@ -285,16 +285,21 @@
 							self.labelData.push.apply(self.labelData,res.info.data);
 							
 							if(self.labelData[0].child){
-								self.leftNavData = self.labelData[0].child;
+								
 								
 								if(window.base.GetRequest().menu_id){
 									self.brandCurrId = window.base.GetRequest().parent;
 									self.navCurrId = window.base.GetRequest().menu_id;
+									self.brandCurr = window.base.findItemInTwoArray(self.labelData,'id',self.navCurrId);
+									console.log('self.brandCurr',self.brandCurr)
+									self.leftNavData = self.labelData[self.brandCurr].child;
+									self.title = window.base.GetRequest().title;
 									self.mainData = [];
 									self.getMainData()
 								}else{
 									self.brandCurrId = self.labelData[0].id;
 									self.navCurrId = self.labelData[0].child[0].id;
+									self.leftNavData = self.labelData[0].child;
 									self.mainData = [];
 									self.getMainData()
 								}

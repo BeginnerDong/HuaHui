@@ -1287,6 +1287,19 @@ window.base = {
 		return false;
 
 	},
+	
+	findItemInTwoArray:function(array, fieldName, field) {
+		console.log('field',field)
+		for (var i = 0; i < array.length; i++) {
+			for (var j = 0; j < array[i].child.length; j++) {
+				if (array[i].child[j][fieldName] == field) {
+					return i;
+				}
+			}	
+		};
+		return false;
+	
+	},
 
 	setItemInArray:function(array, item, fieldName, type) {
 		if(!type)type = 'push';
