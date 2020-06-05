@@ -263,7 +263,7 @@
 						if(self.index+i < 0 || self.index+i > self.mainData.length-1) return;
 						self.index = self.index+i;
 						console.log(self.index)
-						if(self.index == 5 && i == 1){
+						if(self.index == self.mainData.length-1 && i == 1){
 							$('.itemBox .brandItem').eq(0).css({display:'none'})
 						}else if(self.index == 0 && i == -1){
 							$('.itemBox .brandItem').eq(0).css({display:'block'})
@@ -302,23 +302,6 @@
 							self.mainData.push.apply(self.mainData,res.info.data);
 							self.paginate['count'] = res.info.total;
 							window.base.computePageArr(self);
-							self.swiper = new Swiper('.brandNav .cont', {
-									 //loop : true,
-								// pagination: '.swiper-pagination',
-								nextButton: '.brandNav .next',
-								prevButton: '.brandNav .prev',
-								slidesPerView:5,
-								// centeredSlides: true,
-								paginationClickable: true,
-								observer: true,//修改swiper自己或子元素时，自动初始化swiper
-								observeParents: true,//修改swiper的父元素时，自动初始化swiper
-								initialSlide:0,
-								onSlideChangeEnd: function(swiper){
-								  //alert(swiper.activeIndex) //切换结束时，告诉我现在是第几个slide
-								  self.index = self.swiper.activeIndex
-								}
-							});
-							
 						} else {
 							alert('没有数据')
 						};	
