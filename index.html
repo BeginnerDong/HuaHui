@@ -44,16 +44,16 @@
 									<p class="form"></p>
 									<p class="text2">{{item.description}}</p>
 								</div>
+								<div class="fixArrow"></div>
 								<div class="imgBox">
-									<div class="fixArrow"></div>
 									<img :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''" >
 								</div>
 							</a>
 						</div>
 						<div class="item flexRowBetween" v-if="index%2!=0">
 							<a class="flexRowBetween" :href="'newsdetail.html?id='+item.id">
+								<div class="fixArrow"></div>
 								<div class="imgBox">
-									<div class="fixArrow"></div>
 									<img :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''" >
 								</div>
 								<div class="texbox">
