@@ -13,9 +13,9 @@
 			<div class="orderNavTwo pc flexRowBetween fs16" >
 				<div class="tt" :class="currentUrl=='/index.html'?'on':''"><a href="index.html">首页</a></div>
 				<div class="tt" :class="currentUrl=='/aboutUs.html'?'on':''"><a href="aboutUs.html">关于华汇</a></div>
-				<div class="tt" :class="currentUrl=='/anliCenter.html'?'on':''">
+				<div class="tt pr" :class="currentUrl=='/anliCenter.html'?'on':''">
 					<a href="anliCenter.html">经典案例</a>
-					<div class="Asamll AnliLabel">
+					<div class="Asamll">
 						<div class="Achild" v-for="(item,index) in labelData" :key="item.id">
 							<div class="Aname">
 								<a class="link" :href="'anliCenter.html?menu_id='+item.id">{{item.title}}</a>
@@ -285,13 +285,6 @@
 
 
 /*以下自适应样式*/
-@media screen and ( max-width: 1600px) {
-	.AnliLabel{left: 44.4%;}
-}
-
-@media screen and ( max-width: 1440px) {
-	.AnliLabel{left: 43.5%;}
-}
 
 @media screen and ( max-width: 1000px){
 	
@@ -309,8 +302,6 @@
 	.Asamll{width: 100%;left: auto;transform:initial;right: 100%;top: 0;}
 	.Bsamll{width: 100%;left: auto;right: 100%;border-left:0;border-right: 1px solid #555;  }
 	.Asamll .Achild{font-size: 13px;}
-	
-	.AnliLabel{top: 29%;}
 	
 	.orderNavTwo.pc{display: none;}
 	.orderNavTwo.mobile{display: block;}
