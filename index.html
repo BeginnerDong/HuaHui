@@ -96,6 +96,11 @@
 							<img class="logo" :src="item.mainImg[0].url" >
 						</a>
 					</div>
+					<div class="child" @mouseenter="enter(index)" @mouseleave="leave()" >
+						<a  href="#">
+							<div class="more">更 多</div>
+						</a>
+					</div>
 				</div>
 				<div class="right flexCenter"><img class="w" style="height: 530px;" :src="brandData[index]&&brandData[index].bannerImg&&brandData[index].bannerImg[0]?brandData[index].bannerImg[0].url:''" ></div>
 			</div>
@@ -221,6 +226,8 @@
 		.ind-brandTwo .right{width: 55%;}
 		.ind-brandTwo .right img{width: 100%;}
 		
+		.ind-brandTwo .more{width: 110px;height: 50px;margin: auto;border: 2px solid #d6191c;border-radius: 10px;font-size: 20px;text-align: center;line-height: 50px;color: #D6191C;}
+		
 		
 		@media only screen and (max-width: 500px){
 			.anliSetNav .btn{width: 120px;line-height: 40px;font-size: 16px; border-radius: 5px;}
@@ -240,6 +247,7 @@
 			.ind-brandTwo .right{display: none;}
 			.ind-brandTwo .left .child{margin-bottom: 50px;width: 33.33%;}
 			.ind-brandTwo .left .child .logo { width: 90px;height: 90px;}
+			.ind-brandTwo .more{width: 90px;height: 50px;line-height: 50px;}
 		}
 		@media only screen and (max-width: 768px){
 			.ind-brand .TwoPic .box{height: 180px;}
@@ -247,6 +255,7 @@
 			
 			.ind-brandTwo .left .child{margin-bottom: 25px;}
 			.ind-brandTwo .left .child .logo { width: 75px;height:75px;}
+			.ind-brandTwo .more{width: 75px;height: 40px;line-height: 40px;}
 		}
 		@media only screen and (max-width: 500px){
 			.ind-brand .half{width: 49%;}
@@ -258,10 +267,12 @@
 			.flexRowBetween{flex-wrap: wrap;justify-content: center;}
 			.footNav ul{justify-content:space-between;}
 			.ind-brandTwo .left{width: 100%; justify-content: flex-start;}
-			.ind-brandTwo .left .child{width: 50%;}
+			.ind-brandTwo .left .child{width: 33.3%;}
 			.ind-brandTwo .left .child .logo { width: 70px;height: 70px;}
 			.ind-brandTwo .right{width:100%;display: none;}
 			.ind-brandTwo .left .child:nth-child(7), .ind-brandTwo .left .child:nth-child(8){ margin-bottom: 25px;}
+			
+			.ind-brandTwo .more{width: 70px;height: 35px;line-height: 35px;margin-top: 10px;}
 			
 			.moreBox{position: absolute;right: 15px;}
 			

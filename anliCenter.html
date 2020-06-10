@@ -31,6 +31,7 @@
 		.ind-dynamic>div:nth-of-type(2n) .fixArrow{left: auto;right: 34.8%;background-image: url(images/BigArrow-icon4.png);}
 		
 		@media only screen and (max-width: 1024px){
+			.ind-dynamic{margin-top: 70px;}
 			.ind-dynamic .item{margin-bottom: 60px;}
 			.ind-dynamic .item .imgBox{height: 252px;}
 		}
@@ -51,6 +52,7 @@
 			
 		} */
 		@media only screen and (max-width: 500px){
+			.ind-dynamic{margin-top: 100px;}
 			.ind-dynamic .item{margin-bottom: 30px;}
 			.ind-dynamic .item .texbox{width: 40%;}
 			.ind-dynamic .item .imgBox{width: 58%;height: 98px;}
@@ -59,8 +61,8 @@
 			.ind-dynamic .item .texbox .tit{font-size: 14px;line-height: 20px}
 			.ind-dynamic .item .texbox .text2{font-size: 12px; line-height: 20px;}
 			
-			.fixArrow{left: 41.5%;}
-			.ind-dynamic>div:nth-of-type(2n) .fixArrow{right: 41.5%;}
+			.fixArrow{left: 42%;}
+			.ind-dynamic>div:nth-of-type(2n) .fixArrow{right: 42%;}
 		}
 	</style>
 
@@ -78,7 +80,7 @@
 			</div> -->
 			
 			<!-- 侧边导航显示 -->
-			<div class="orderNav FixOrderNav center" id="orderNav">
+			<div class="orderNav FixOrderNav center orderNavLeft" id="orderNav">
 				<span class="tt flexCenter" v-for="item in labelData"
 				:class="currId==item.id?'on':''" @click="changeCurr(item.id)">
 					<img class="icon" :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''"/>
@@ -101,9 +103,9 @@
 					<div class="item flexRowBetween" v-if="index%2==0">
 						<a class="flexRowBetween" :href="'newsdetail.html?id='+item.id+'&type=case'">
 							<div class="texbox">
-								<div class="tit">{{item.title}}</div>
+								<div class="tit avoidOverflow">{{item.title}}</div>
 								<p class="form"></p>
-								<p class="text2">{{item.description}}</p>
+								<p class="text2 avoidOverflow7">{{item.description}}</p>
 							</div>
 							<div class="fixArrow"></div>
 							<div class="imgBox">
@@ -118,9 +120,9 @@
 								<img :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''" >
 							</div>
 							<div class="texbox">
-								<div class="tit">{{item.title}}</div>
+								<div class="tit avoidOverflow">{{item.title}}</div>
 								<p class="form"></p>
-								<p class="text2">{{item.description}}</p>
+								<p class="text2 avoidOverflow7">{{item.description}}</p>
 							</div>
 						</a>
 					</div>

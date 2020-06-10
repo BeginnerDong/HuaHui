@@ -24,6 +24,8 @@
 		.ind-dynamic>div:nth-of-type(2n) .fixArrow{background-image: url(images/BigArrow-icon4.png);}
 		
 		.ind-dynamic .item .imgBox .imgIcon{height: 100%;width: 100px;position: absolute;margin: 0;}
+		
+		
 	</style>
 
 <body>
@@ -31,14 +33,14 @@
 		<include src="header.html"></include>
 		
 		<div class="w1200 pdb80">
-			<div class="orderNav flexCenter borderB1">
+			<!-- <div class="orderNav flexCenter borderB1">
 				<span class="tt flexCenter" v-for="item in labelData" 
 				:class="currId==item.id?'on':''" @click="changeCurr(item.id)">
 					<img class="icon" :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''"/>
 					<em>{{item.title}}</em>
 				</span>
 				
-			</div>
+			</div> -->
 		
 			<!-- 案例新闻 -->
 			<div class="ind-dynamic pdt40">

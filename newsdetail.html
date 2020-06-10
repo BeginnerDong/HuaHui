@@ -17,8 +17,19 @@
 		<link type="text/css" rel="stylesheet" href="css/orderNav.css">
 	</head>
 	<style type="text/css">
-		.detailePag{min-height: 350px;box-sizing: border-box;}
+		.detailePag{min-height: 350px;box-sizing: border-box;margin-top: 50px;}
+		.orderNavTop{display: flex;width: 100%;top: 6.4%;}
 		
+		@media only screen and (max-width: 1024px){
+			.orderNavTop{top: 6.2%;}
+		}
+		@media only screen and (max-width: 1024px){
+			.detailePag{margin-top: 30px;}
+		}
+		@media only screen and (max-width: 500px){
+			.detailePag{margin-top: 80px;}
+			.orderNavTop{width: 100%;left: 0;}
+		}
 	</style>
 
 <body>
@@ -26,8 +37,17 @@
 		<include src="header.html"></include>
 		
 		<!-- 侧边导航显示 -->
-		<div class="orderNav FixOrderNav center" id="orderNav" v-if="type&&type!=''">
+		<!-- <div class="orderNav FixOrderNav center" id="orderNav" v-if="type&&type!=''">
 			<span class="tt flexCenter" v-for="item in labelData" :class="currId==item.id?'on':''" @click="changeCurr(item.id)">
+				<img class="icon" :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''"/>
+				<em>{{item.title}}</em>
+			</span>
+		</div> -->
+		
+		<!-- 手机端顶部导航显示 -->
+		<div class="orderNav FixOrderNav center orderNavTop" id="orderNav">
+			<span class="tt flexCenter" v-for="item in labelData"
+			:class="currId==item.id?'on':''" @click="changeCurr(item.id)">
 				<img class="icon" :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''"/>
 				<em>{{item.title}}</em>
 			</span>

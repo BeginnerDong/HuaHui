@@ -84,7 +84,7 @@
 	<div id="app">
 		<div class="head">
 			<div class="cont flexRowBetween w1200">
-				<div class="T-Logo"><a href="index.html"><img src="images/home-img0.png" ></a></div>
+				<div class="T-Logo"><a href="index.html"><img src="images/home-img1.png" ></a></div>
 				<div class="seachInput flex fs16 white">
 					<a class="deltIcon" href="index.html">×</a>
 					<div class="input">
@@ -110,7 +110,7 @@
 				<span class="tt" :class="curr==4?'on':''" @click="changeCurr('4')">视频</span>
 				<span class="tt" :class="curr==5?'on':''" @click="changeCurr('5')">产品</span>
 				<span class="tt" :class="curr==6?'on':''" @click="changeCurr('6')">招聘</span>
-				<span class="tt" :class="curr==7?'on':''" @click="changeCurr('7')">品牌</span>
+				<!-- <span class="tt" :class="curr==7?'on':''" @click="changeCurr('7')">品牌</span> -->
 			</div>
 		</div>
 		
@@ -130,6 +130,7 @@
 							<div class="imgBox">
 								<img :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''" >
 							</div>
+							<div class="fixArrow"></div>
 						</a>
 					</div>
 					<div class="item flexRowBetween" style="margin-bottom: 60px;" v-if="index%2!=0">
@@ -142,6 +143,7 @@
 								<p class="form"></p>
 								<p class="text2 avoidOverflow4">{{item.description}}</p>
 							</div>
+							<div class="fixArrow"></div>
 						</a>
 					</div>
 				</div>
@@ -397,7 +399,7 @@
 		});
 	</script>
 	<style>
-	.head{position: fixed;top: 0;left: 0;right: 0;z-index: 20;box-shadow: 0 1px 4px rgba(100, 100, 100, 0.1);width: 100%;box-sizing: border-box;background: #636363;}
+	.head{position: fixed;top: 0;left: 0;right: 0;z-index: 20;box-shadow: 0 1px 4px rgba(100, 100, 100, 0.1);width: 100%;box-sizing: border-box;background-color: #fff;}
 	
 	.head .cont{height: 60px;}
 	
@@ -406,16 +408,24 @@
 	.T-Logo img{width: auto;height: 100%; display: block;}
 	.seachCont{min-height: 500px;}
 	.seachInput{width: 50%;box-sizing: border-box;padding: 0 40px 0 30px;position: relative;}
-	.seachInput .deltIcon{font-size: 30px;position: absolute;left: 0;top: 2px;color: #FFF; display: block;}
+	.seachInput .deltIcon{font-size: 30px;position: absolute;left: 0;top: 2px;color: #818181; display: block;}
 	.seachInput .input{width: 100%;box-sizing: border-box;}
-	.seachInput .input input{width: 100%;line-height: 30px;height: 30px;background: none;border-bottom: 1px solid #737373;color: #fff;font-size: 14px;}
+	.seachInput .input input{width: 100%;line-height: 30px;height: 30px;background: none;border-bottom: 1px solid #737373;color: #666;font-size: 14px;}
 	
 	.Rseach{position: absolute; right: 0; top: 50%;transform: translateY(-50%);}
 	.Rseach .btn{width: 23px;height:23px;background: url(images/home-icon.png) no-repeat center center/100% 100%;}
 	
+	.fixArrow{position: absolute;top: -4px;left: 49.9%;z-index: 2;width: 10%;height: 103%;background: url(images/BigArrow-icon3.png) 0 0/100% 100%;}
+	.ind-dynamic>div:nth-of-type(2n) .fixArrow{left: auto;right: 49.9%;background-image: url(images/BigArrow-icon4.png);}
+	
 	
 	.headH{height: 60px;width: 100%;}
 	/*以下自适应样式*/
+	@media screen and ( max-width: 1024px){
+		.fixArrow{left: 45%;}
+		.ind-dynamic>div:nth-of-type(2n) .fixArrow{right: 45%;}
+	}
+	
 	@media screen and ( max-width: 1000px){
 		
 		.head .logoCont{padding: 10px 2%;}
@@ -433,5 +443,8 @@
 		.head .cont .R{display: none;}
 	}
 	
+	@media screen and ( max-width: 375px){
+		.fixArrow{width: 13%;}
+	}
 	</style>
 </html>

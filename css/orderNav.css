@@ -12,17 +12,19 @@
 .orderNavTop{display: none;}
 
 @media only screen and (max-width: 1024px){
-	.orderNav{display: none;}
+	/* .orderNav{display: none;} */
+	.orderNavLeft{display: none;}
 	.orderNavTop{width: 80%;left: 10%;top: 60px;display: flex;}
 	.orderNavTop .tt{width: 33.3%;height: 40px;}
-	.ind-dynamic{padding-top: 85px;}
+	.ind-dynamic{padding-top: 30px;}
 }
 
 @media only screen and (max-width: 768px){
-	.orderNav{display: none;}
+	/* .orderNav{display: none;} */
+	.orderNavLeft{display: none;}
 	.orderNavTop{width: 80%;left: 10%;top: 50px;display: flex;}
 	.orderNavTop .tt{width: 33.3%;height: 40px;}
-	.ind-dynamic{padding-top: 75px;}
+	.ind-dynamic{padding-top: 0px;}
 }
 
 @media only screen and (max-width: 500px){
@@ -36,7 +38,7 @@
 	
 	.orderNavTop{width: 80%;left: 10%;top: 50px;display: flex;flex-wrap: wrap;}
 	.orderNavTop .tt{width: 33.3%;height: 40px;}
-	.ind-dynamic{padding-top: 100px;}
+	.ind-dynamic{padding-top: 0;}
 }
 
 

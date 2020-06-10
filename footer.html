@@ -26,11 +26,13 @@
 					</li>
 					<li>
 						<h1>合作伙伴</h1>
-						<p><a href="https://www.l-acoustics.com/">L-Acoustics</a></p>
-						<p><a href="http://www.digico.biz/">DiGiCo</a></p>
-						<p><a href="https://calrec.com/">Calrec</a></p>
-						<p><a href="http://blacktrax.cast-soft.com/">BlackTrax</a></p>
-						<p><a href="https://cast-soft.com/wysiwyg-lighting-design/">Wysiwyg</a></p>
+						<div class="liCon">
+							<p><a href="https://www.l-acoustics.com/">L-Acoustics</a></p>
+							<p><a href="http://www.digico.biz/">DiGiCo</a></p>
+							<p><a href="https://calrec.com/">Calrec</a></p>
+							<p><a href="http://blacktrax.cast-soft.com/">BlackTrax</a></p>
+							<p><a href="https://cast-soft.com/wysiwyg-lighting-design/">Wysiwyg</a></p>
+						</div>
 					</li>
 					<!-- <li>
 						<h1>下载中心</h1>
@@ -39,14 +41,14 @@
 						<p><a href="loadCenter.html?id=2">图片下载</a></p>
 						<p><a href="loadCenter.html?id=3">视频下载</a></p>
 					</li> -->
-					<li>
+					<!-- <li>
 						<h1>地方公司</h1>
 
 						<p><a href="contactUs.html?id=11">广州</a></p>
 						<p><a href="contactUs.html?id=12">香港</a></p>
 						<p><a href="contactUs.html?id=13">北京</a></p>
 						<p><a href="contactUs.html?id=14">上海</a></p>
-					</li>
+					</li> -->
 				</ul>
 			</div>
 			<div class="R-logo" @click="toTop">
@@ -168,12 +170,16 @@
 	}
 
 	.footer .footNav {
-		width: 56%;
+		width: 60%;
 	}
 
 	.footer .footNav ul {
 		align-items: flex-start;
 		flex-wrap: wrap;
+	}
+	
+	.footer .footNav li{
+		width: 30%;
 	}
 
 	.footer .footNav li h1 {
@@ -203,8 +209,22 @@
 		display: block;
 		margin: 40px auto
 	}
+	
+	.footer .footNav li:nth-child(2){width: 70%;}
+	.footer .liCon{display: flex;flex-wrap: wrap;width: 100%;}
+	.footer .liCon p{width: 50%;}
 
 
+	@media only screen and (max-width: 1280px) {
+		.ewmBox{width: 40%;}
+		.footer .Rcont{width:55%;}
+		.footer .footNav{width: 60%;}
+		.footer .R-logo{width: 40%;}
+	}
+	
+	@media only screen and (max-width: 1217px){
+		.w1200{width: 100%!important;}
+	}
 
 	@media only screen and (max-width: 1024px) {
 		.footer {
@@ -235,7 +255,7 @@
 	@media only screen and (max-width:768px) {
 		.ewmBox {
 			flex-wrap: wrap;
-			width: 20%;
+			width: 32%;
 		}
 
 		.ewmBox .tt {
@@ -243,33 +263,46 @@
 		}
 
 		.footer .Rcont {
-			width: 78%;
-			flex-wrap: wrap;
+			width: 65%;
+			align-items: start;
 		}
 
 		.footer .footNav {
-			width: 100%;
+			width: 70%;
+			margin-top: 20px;
 		}
 
 		.footer .R-logo {
-			width: 100%;
+			width: 40%;
 			padding-top: 20px;
 		}
 
 	}
+	
+	@media only screen and (max-width:620px){
+		/* .footer .cont{flex-direction: column;} */
+		.ewmBox{flex-wrap: wrap;width: 30%;}
+		.footer .Rcont{width: 70%;margin-top: 20px;flex-wrap: wrap;}
+		.footer .footNav{width: 100%;}
+		.footer .R-logo{width: 100%;}
+	}
 
 	@media only screen and (max-width: 500px) {
+		.footer .cont{flex-wrap: wrap;}
 		.ewmBox {
-			width: 25%;
+			width: 100%;
+			justify-content: space-around!important;
 		}
 
 		.ewmBox .tt img {
 			width: 70px;
 			height: 70px;
 		}
-
+		
 		.footer .Rcont {
-			width: 72%;
+			width: 100%;
+			flex-wrap: nowrap;
+			margin-top: 0;
 		}
 
 		.ewmBox .tt p {
@@ -283,7 +316,8 @@
 
 		/* .footer .w1200{flex-wrap: wrap;} */
 		.footer .footNav {
-			width: 100%;
+			width: 65%;
+			margin-left: 20px;
 		}
 
 		/* .footer .footNav li{width: 50%;} */
@@ -298,7 +332,7 @@
 
 		/* .footer .footNav ul{display: block;} */
 		.footer .R-logo {
-			width: 100%;
+			width: 30%;
 			padding-top: 50px;
 		}
 
@@ -306,6 +340,16 @@
 			width: 93px;
 			height: 60px;
 			margin: 0 auto;
+		}
+	}
+	
+	@media only screen and (max-width: 320px){
+		.footer .footNav {
+			width: 90%;
+		}
+		.footer .Rcont{flex-direction: column;align-items: center;}
+		.footer .R-logo .logo{
+			width: 80%;
 		}
 	}
 </style>
