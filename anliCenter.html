@@ -81,6 +81,11 @@
 			
 			<!-- 侧边导航显示 -->
 			<div class="orderNav FixOrderNav center orderNavLeft" id="orderNav">
+				<span class="tt flexCenter" 
+				:class="currId==-1?'on':''" @click="changeCurr(-1)">
+					<img class="icon" src=""/>
+					<em>全部</em>
+				</span>
 				<span class="tt flexCenter" v-for="item in labelData"
 				:class="currId==item.id?'on':''" @click="changeCurr(item.id)">
 					<img class="icon" :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''"/>
@@ -90,6 +95,11 @@
 			
 			<!-- 手机端顶部导航显示 -->
 			<div class="orderNav FixOrderNav center orderNavTop" id="orderNav">
+				<span class="tt flexCenter"
+				:class="currId==-1?'on':''" @click="changeCurr(-1)">
+					<img class="icon" src=""/>
+					<em>全部</em>
+				</span>
 				<span class="tt flexCenter" v-for="item in labelData"
 				:class="currId==item.id?'on':''" @click="changeCurr(item.id)">
 					<img class="icon" :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''"/>
@@ -196,6 +206,7 @@
 				
 				getLabelData() {
 					const self = this;
+					self.idArray = [];
 					const postData = {};
 					postData.searchItem = {
 						thirdapp_id: 2
@@ -217,11 +228,15 @@
 					const callback = (res) => {
 						if (res.info.data.length > 0) {
 							self.labelData.push.apply(self.labelData,res.info.data);
+							for (var i = 0; i < self.labelData.length; i++) {
+								self.idArray.push(self.labelData[i].id)
+							};
 							if(window.base.GetRequest().menu_id){
 								self.currId = window.base.GetRequest().menu_id;
 								self.getMainData()
 							}else{
-								self.currId = self.labelData[0].id;
+								
+								//self.currId = self.labelData[0].id;
 								self.getMainData()
 							}
 						} else {
@@ -238,7 +253,12 @@
 					const postData = {};
 					postData.paginate = window.base.cloneForm(self.paginate);
 					postData.searchItem = {
-						menu_id: self.currId
+						thirdapp_id: 2
+					};
+					if(self.currId>0){
+						postData.searchItem.menu_id= self.currId
+					}else{
+						postData.searchItem.menu_id = ['in',self.idArray]
 					};
 					postData.order = {
 						listorder:'asc'

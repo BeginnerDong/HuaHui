@@ -280,6 +280,15 @@
 					canSearch:true
 		        }
 		    },
+			
+			created() {
+				const self = this;
+				if(window.base.GetRequest().title){
+					self.title = window.base.GetRequest().title;
+					self.goSearch()
+				}
+			},
+			
 		    methods: {
 				
 				

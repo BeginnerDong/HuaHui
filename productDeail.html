@@ -17,28 +17,42 @@
 		<link type="text/css" rel="stylesheet" href="css/swiper.min.css">
 		<link type="text/css" rel="stylesheet" href="css/orderNav.css">
 		<link type="text/css" rel="stylesheet" href="css/proDetail.css">
-		
+
 		<style>
-			.orderNav .tt.on{position: relative;color: #222;font-weight: bold;}
-			.orderNav .tt.on:after{content: '';width: 60px;height: 3px;background: #222222;position: absolute;bottom: 0;left: 50%;transform: translateX(-50%);}
+			.orderNav .tt.on {
+				position: relative;
+				color: #222;
+				font-weight: bold;
+			}
+
+			.orderNav .tt.on:after {
+				content: '';
+				width: 60px;
+				height: 3px;
+				background: #222222;
+				position: absolute;
+				bottom: 0;
+				left: 50%;
+				transform: translateX(-50%);
+			}
 		</style>
 	</head>
 
-<body>
-	<div id="app">
-		<include src="header.html"></include>
-		
-		<div class="product-head w1200 flexRowBetween borderB1">
-			<div class="ll flexCenter">
-				<div class="view">
-					<div class="swiper-container">
-						<span class="arrow arrow-left"></span>
-						<span class="arrow arrow-right"></span>
-						<div class="swiper-wrapper">
-							<div class="swiper-slide flexCenter" v-for="item in mainData.mainImg">
-								<img :src="item.url" alt="">
-							</div>
-							<!-- <div class="swiper-slide flexCenter">
+	<body>
+		<div id="app">
+			<include src="header.html"></include>
+
+			<div class="product-head w1200 flexRowBetween borderB1">
+				<div class="ll flexCenter">
+					<div class="view">
+						<div class="swiper-container">
+							<span class="arrow arrow-left"></span>
+							<span class="arrow arrow-right"></span>
+							<div class="swiper-wrapper">
+								<div class="swiper-slide flexCenter" v-for="item in mainData.mainImg">
+									<img :src="item.url" alt="">
+								</div>
+								<!-- <div class="swiper-slide flexCenter">
 								<img src="images/details-img5.jpg" alt="">
 							</div>
 							<div class="swiper-slide flexCenter">
@@ -47,13 +61,13 @@
 							<div class="swiper-slide flexCenter">
 								<img src="images/product-img4.png" alt="">
 							</div> -->
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			<div class="rr">
-				<h1 class="ftn title">{{mainData.title}}</h1>
-				<p class="text2 fs16">{{mainData.description}}</p>
+				<div class="rr">
+					<h1 class="ftn title">{{mainData.title}}</h1>
+					<p class="text2 fs16">{{mainData.small_title}}</p>
 					<div class="preview">
 						<span class="arrow arrow-left"></span>
 						<span class="arrow arrow-right"></span>
@@ -74,111 +88,112 @@
 							</div>
 						</div>
 					</div>
-				
-			</div>
-		</div>
-		<div class="borderB1"></div>
-		
-		<div class="w1100">
-			<div class="orderNav flexCenter">
-				<span class="tt flexCenter" :class="navCurr==1?'on':''" @click="changeNavCurr('1')">参数规格</span>
-				<span class="tt flexCenter" :class="navCurr==2?'on':''" @click="changeNavCurr('2')" v-if="mainData.description!=''">视频</span>
-			</div>
-			<div class="xqCont">
-				<div class="xqPic" v-show="navCurr==1">
-					<img v-for="item in mainData.bannerImg" :src="item.url" >
+
 				</div>
-				
-				<div class="videoCont" v-show="navCurr==2">
-					<div>
-						<!-- <video width="900" height="500" controls>
+			</div>
+			<div class="borderB1"></div>
+
+			<div class="w1100">
+				<div class="orderNav flexCenter">
+					<span class="tt flexCenter" :class="navCurr==1?'on':''" @click="changeNavCurr('1')">参数规格</span>
+					<span class="tt flexCenter" :class="navCurr==2?'on':''" @click="changeNavCurr('2')" v-if="mainData.description!=''">视频</span>
+				</div>
+				<div class="xqCont">
+					<div class="xqPic" v-show="navCurr==1">
+						<img v-for="item in mainData.bannerImg" :src="item.url">
+					</div>
+
+					<div class="videoCont" v-show="navCurr==2">
+						<div>
+							<!-- <video width="900" height="500" controls>
 						    <source :src="mainData.description" type="video/mp4">
 						</video> -->
-						<!-- <iframe class="video" :src="mainData.description" frameborder="0"  allowfullscreen="true" width="900" height="500"></iframe> -->
-						<a  :href="mainData.description"><img :src="mainData.video&&mainData.video[0]?mainData.video[0].url:''" /></a>
-					</div>
-					<div class="flexRowBetween">
-						<!-- <p>DiGiCo SD系列教程01</p>
+							<!-- <iframe class="video" :src="mainData.description" frameborder="0"  allowfullscreen="true" width="900" height="500"></iframe> -->
+							<a :href="mainData.description"><img :src="mainData.video&&mainData.video[0]?mainData.video[0].url:''" /></a>
+						</div>
+						<div class="flexRowBetween">
+							<!-- <p>DiGiCo SD系列教程01</p>
 						<p class="flexEnd red fs13">
 							<img style="width:17px;height: 20px;" src="images/details-icon.png" >
 							<em class="mgl10">下载</em>
 						</p> -->
+						</div>
 					</div>
 				</div>
+				<div class="anliSetNav" @click="toLoad">
+					<a class="btn">下载</a>
+				</div>
 			</div>
-			<div class="anliSetNav" @click="toLoad">
-				<a class="btn" >下载</a>
-			</div>
-		</div>
-		
-		<div class="pdb80">
-			
-		</div>
-		
-		<include src="footer.html"></include>
-		
-	</div>
-</body>
 
-<script>
+			<div class="pdb80">
+
+			</div>
+
+			<include src="footer.html"></include>
+
+		</div>
+	</body>
+
+	<script>
 		var app = new Vue({
-		    el: '#app',
-		    data:function(){
-		        return {
-		        	banner_index:0,
-					is_show:false,
-					wx_show:2,
+			el: '#app',
+			data: function() {
+				return {
+					banner_index: 0,
+					is_show: false,
+					wx_show: 2,
 					mainData: {},
 					labelData: [],
-					navCurr:1
-		        }
-		    },
-			
-			created () {
-			    const self = this;
+					navCurr: 1
+				}
+			},
+
+			created() {
+				const self = this;
 				self.getMainData();
 			},
-			
-		    methods: {
-				
-				toLoad(){
+
+			methods: {
+
+				toLoad() {
 					const self = this;
 					const postData = {};
 					postData.searchItem = {
 						id: self.mainData.id,
 					};
-					
+
 					const callback = (res) => {
 						if (res.solely_code == 100000) {
-							window.location.href = 'loadCenter.html?menu_id='+res.info.menu_id+'&parent='+res.info.parent_id+'&title='+self.mainData.title
+							window.location.href = 'loadCenter.html?menu_id=' + res.info.menu_id + '&parent=' + res.info.parent_id +
+								'&title=' + self.mainData.title
 						} else {
 							alert('无对应可下载项目')
-						};	
+						};
 					};
 					window.base.getParent(postData, callback);
 				},
-				
-				changeNavCurr(navCurr){
+
+				changeNavCurr(navCurr) {
 					const self = this;
-					if(navCurr!=self.navCurr){
+					if (navCurr != self.navCurr) {
 						self.navCurr = navCurr
 					}
 				},
-				
+
 				getMainData() {
 					const self = this;
 					const postData = {};
 					postData.searchItem = {
 						id: window.base.GetRequest().id,
 					};
-					
+
 					const callback = (res) => {
 						if (res.info.data.length > 0) {
 							self.mainData = res.info.data[0]
 							$(window).load(function() {
 								self.viewSwiper = new Swiper('.view .swiper-container', {
 									onSlideChangeStart: function() {
-											
+
 									}
 								});
 								self.previewSwiper = new Swiper('.preview .swiper-container', {
@@ -186,88 +201,114 @@
 									slidesPerView: 'auto',
 									allowTouchMove: false,
 									onTap: function() {
-										
-										    self.viewSwiper.slideTo(self.previewSwiper.clickedIndex)
-											$('.preview .active-nav').removeClass('active-nav')
-											console.log('24334',self.viewSwiper)
-											var activeNav = $('.preview .swiper-slide').eq(self.viewSwiper.activeIndex).addClass('active-nav')
+
+										self.viewSwiper.slideTo(self.previewSwiper.clickedIndex)
+										$('.preview .active-nav').removeClass('active-nav')
+										console.log('24334', self.viewSwiper)
+										var activeNav = $('.preview .swiper-slide').eq(self.viewSwiper.activeIndex).addClass('active-nav')
 									}
 								})
-								console.log('232',self.viewSwiper)
+								console.log('232', self.viewSwiper)
 								self.updateNavPosition()
 							});
-							
-							
-							
-							
+
+
+
+
 							$('.view .arrow-left,.preview .arrow-left').on('click', function(e) {
 								e.preventDefault()
-								console.log('2321',self.viewSwiper)
+								console.log('2321', self.viewSwiper)
 								if (self.viewSwiper.activeIndex == 0) {
 									self.viewSwiper.slideTo(self.viewSwiper.slides.length - 1, 1000);
 									self.updateNavPosition()
 									return
-									
+
 								}
 								self.viewSwiper.slidePrev()
 								self.updateNavPosition()
 							})
 							$('.view .arrow-right,.preview .arrow-right').on('click', function(e) {
 								e.preventDefault()
-								console.log('2322',self.viewSwiper)
+								console.log('2322', self.viewSwiper)
 								if (self.viewSwiper.activeIndex == self.viewSwiper.slides.length - 1) {
-									console.log('self.viewSwiper.activeIndex',self.viewSwiper.activeIndex )
+									console.log('self.viewSwiper.activeIndex', self.viewSwiper.activeIndex)
 									//self.viewSwiper.activeIndex = 0;
 									self.viewSwiper.slideTo(0, 1000);
 									self.updateNavPosition()
 									return
 								}
-								self.viewSwiper	.slideNext()
+								self.viewSwiper.slideNext()
 								self.updateNavPosition()
 							})
-							
+
 						} else {
 							alert('没有数据')
-						};	
+						};
 					};
 					window.base.articleGet(postData, callback);
 				},
-				
+
 				updateNavPosition(e) {
 					const self = this;
-					
-						$('.preview .active-nav').removeClass('active-nav')
-						console.log('24334',self.viewSwiper)
-						var activeNav = $('.preview .swiper-slide').eq(self.viewSwiper.activeIndex).addClass('active-nav')
-						if (!activeNav.hasClass('swiper-slide-visible')) {
-							if (activeNav.index() > self.previewSwiper.activeIndex) {
-								var thumbsPerNav = Math.floor(self.previewSwiper.width / activeNav.width()) - 1
-								self.previewSwiper.slideTo(activeNav.index() - thumbsPerNav)
-							} else {
-								self.previewSwiper.slideTo(activeNav.index())
-							}
+
+					$('.preview .active-nav').removeClass('active-nav')
+					console.log('24334', self.viewSwiper)
+					var activeNav = $('.preview .swiper-slide').eq(self.viewSwiper.activeIndex).addClass('active-nav')
+					if (!activeNav.hasClass('swiper-slide-visible')) {
+						if (activeNav.index() > self.previewSwiper.activeIndex) {
+							var thumbsPerNav = Math.floor(self.previewSwiper.width / activeNav.width()) - 1
+							self.previewSwiper.slideTo(activeNav.index() - thumbsPerNav)
+						} else {
+							self.previewSwiper.slideTo(activeNav.index())
 						}
-					},
-					
-					
-				
-		    }
+					}
+				},
+
+
+
+			}
 		});
-		
+
 		// 以下轮播图
-		
-		
-		
-		
-		
-		
-		
 	</script>
 	<style>
-		.anliSetNav{position: fixed;top: 50%;right: 20px;transform: translate(-50%,-50%);z-index: 41;}
-		.anliSetNav .btn{padding:5px 10px;width: 150px;line-height: 50px;text-align: center;border: 1px solid black;border-radius: 8px;color: black;margin: 15px auto;font-size: 18px;}
-		.anliSetNav .btn:hover{padding:5px 10px;font-size: 20px;}
-		.anliSet .btn{width: 150px;line-height: 50px;text-align: center;border: 1px solid ;border-radius: 8px;margin: 15px auto;font-size: 18px;}
-		.anliSet .btn:hover{font-size: 20px;}
+		.anliSetNav {
+			position: fixed;
+			top: 50%;
+			right: 20px;
+			transform: translate(-50%, -50%);
+			z-index: 1;
+		}
+
+		.anliSetNav .btn {
+			padding: 5px 10px;
+			width: 150px;
+			line-height: 50px;
+			text-align: center;
+			border: 1px solid black;
+			border-radius: 8px;
+			color: black;
+			margin: 15px auto;
+			font-size: 18px;
+		}
+
+		.anliSetNav .btn:hover {
+			padding: 5px 10px;
+			font-size: 20px;
+		}
+
+		.anliSet .btn {
+			width: 150px;
+			line-height: 50px;
+			text-align: center;
+			border: 1px solid;
+			border-radius: 8px;
+			margin: 15px auto;
+			font-size: 18px;
+		}
+
+		.anliSet .btn:hover {
+			font-size: 20px;
+		}
 	</style>
 </html>

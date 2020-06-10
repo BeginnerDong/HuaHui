@@ -30,6 +30,8 @@
 		
 		<div class="w1100">
 			<div class="orderNav flexCenter borderB1">
+				<span class="tt flexCenter" :class="currId==-1?'on':''"
+				@click="changeCurr(-1,0)">全部</span>
 				<span class="tt flexCenter" :class="currId==item.id?'on':''" 
 				@click="changeCurr(item.id,item.behavior)" v-for="(item,index) in labelData" :key="index">{{item.title}}</span>
 			</div>
@@ -101,14 +103,22 @@
 				
 				changeCurr(id,behavior){
 					const self = this;
+					
 					self.currId = id;
 					self.behavior = behavior;
 					self.mainData = [];
+					self.paginate = {
+						count: 0,
+						currentPage: 1,
+						pagesize: 6,
+						is_page: true,
+					},
 					self.getMainData()
 				},
 				
 				getLabelData() {
 					const self = this;
+					self.idArray = [];
 					const postData = {};
 					postData.searchItem = {
 						thirdapp_id: 2,
@@ -120,10 +130,12 @@
 					const callback = (res) => {
 						if (res.info.data.length > 0) {
 							self.labelData.push.apply(self.labelData,res.info.data);
-							
+							for (var i = 0; i < self.labelData.length; i++) {
+								self.idArray.push(self.labelData[i].id)
+							};
 							if(!window.base.GetRequest().childId){
-								self.currId = self.labelData[0].id;
-								self.behavior = self.labelData[0].behavior
+								//self.currId = self.labelData[0].id;
+								self.behavior = 0
 								self.getMainData()
 							}
 							
@@ -141,7 +153,12 @@
 					const postData = {};
 					postData.paginate = window.base.cloneForm(self.paginate);
 					postData.searchItem = {
-						menu_id: self.currId
+						thirdapp_id: 2
+					};
+					if(self.currId>0){
+						postData.searchItem.menu_id= self.currId
+					}else{
+						postData.searchItem.menu_id = ['in',self.idArray]
 					};
 					postData.order = {
 						listorder:'asc'

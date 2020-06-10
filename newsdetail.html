@@ -45,7 +45,12 @@
 		</div> -->
 		
 		<!-- 手机端顶部导航显示 -->
-		<div class="orderNav FixOrderNav center orderNavTop" id="orderNav">
+		<div class="orderNav FixOrderNav center orderNavTop" id="orderNav" v-if="currId!=5">
+			<span class="tt flexCenter"
+			:class="currId==-1?'on':''" @click="changeCurr(-1)">
+				<img class="icon" src=""/>
+				<em>全部</em>
+			</span>
 			<span class="tt flexCenter" v-for="item in labelData"
 			:class="currId==item.id?'on':''" @click="changeCurr(item.id)">
 				<img class="icon" :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''"/>
@@ -84,15 +89,15 @@
 					wx_show:2,
 					mainData: {},
 					labelData: [],
-					type:''
+					menu_id:''
 		        }
 		    },
 			
 			created () {
 			    const self = this;
-				if(window.base.GetRequest().type){
+				/* if(window.base.GetRequest().type){
 					self.type =  window.base.GetRequest().type
-				};
+				}; */
 				self.getMainData();
 				self.getLabelData();
 			},
@@ -102,7 +107,11 @@
 				
 				changeCurr(id){
 					const self = this;
-					window.location.href = 'anliCenter.html?menu_id='+id
+					if(id>0){
+						window.location.href = 'anliCenter.html?menu_id='+id
+					}else{
+						window.location.href = 'anliCenter.html'
+					}
 				},
 				
 				getLabelData() {
@@ -148,6 +157,7 @@
 						if (res.info.data.length > 0) {
 							self.mainData = res.info.data[0]
 							self.currId = self.mainData.menu_id;
+							window.base.bus.$emit('to_headBanner',self.currId);
 						} else {
 							alert('没有数据')
 						};	

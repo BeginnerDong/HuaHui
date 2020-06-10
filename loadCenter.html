@@ -206,13 +206,14 @@
 				
 				goSearch() {
 					const self = this;
-					if (self.title != '') {
+					window.location.href = 'seach.html?title='+self.title
+					/* if (self.title != '') {
 						
 						self.mainData = [];
 						self.getMainData()
 					} else {
 						alert('请输入标题搜索')
-					}
+					} */
 				},
 				
 				search() {
@@ -257,7 +258,7 @@
 						self.brandCurrId = self.labelData[brandCurr].id;
 						self.leftNavData = self.labelData[brandCurr].child;
 						if(self.labelData[brandCurr].child){
-							
+							self.navCurr = 0;
 							self.navCurrId = self.labelData[brandCurr].child[0].id;
 	
 							self.getMainData()

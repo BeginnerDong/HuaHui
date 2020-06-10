@@ -13,7 +13,7 @@
 			<div class="orderNavTwo pc flexRowBetween fs16" >
 				<div class="tt" :class="currentUrl=='/index.html'?'on':''"><a href="index.html">首页</a></div>
 				<div class="tt" :class="currentUrl=='/aboutUs.html'?'on':''"><a href="aboutUs.html">关于华汇</a></div>
-				<div class="tt pr" :class="currentUrl=='/anliCenter.html'?'on':''">
+				<div class="tt pr" :class="currentUrl=='/anliCenter.html'||(menu_id!=5&&menu_id!=0)?'on':''">
 					<a href="anliCenter.html">经典案例</a>
 					<div class="Asamll">
 						<div class="Achild" v-for="(item,index) in labelData" :key="item.id">
@@ -39,7 +39,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="tt" :class="currentUrl=='/newsCenter.html'?'on':''"><a href="newsCenter.html">公司动态</a></div>
+				<div class="tt" :class="currentUrl=='/newsCenter.html'||menu_id==5?'on':''"><a href="newsCenter.html">公司动态</a></div>
 				
 				<div class="tt" :class="currentUrl=='/loadCenter.html'?'on':''"><a href="loadCenter.html">下载中心</a></div>
 				<div class="tt" :class="currentUrl=='/contactUs.html'?'on':''"><a href="contactUs.html">联系我们</a></div>
@@ -51,7 +51,7 @@
 		<div class="orderNavTwo mobile flexRowBetween fs16" v-show="is_showNav">
 			<div class="tt" :class="currentUrl=='/index.html'?'on':''"><a href="index.html">首页</a></div>
 			<div class="tt" :class="currentUrl=='/aboutUs.html'?'on':''"><a href="aboutUs.html">关于华汇</a></div>
-			<div class="tt" :class="currentUrl=='/anliCenter.html'?'on':''">
+			<div class="tt" :class="currentUrl=='/anliCenter.html'||(menu_id!=5&&menu_id!=0)?'on':''">
 				<a href="anliCenter.html">经典案例</a>
 				<div class="Asamll AnliLabel">
 					<div class="Achild" v-for="(item,index) in labelData" :key="item.id">
@@ -77,7 +77,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="tt" :class="currentUrl=='/newsCenter.html'?'on':''"><a href="newsCenter.html">公司动态</a></div>
+			<div class="tt" :class="currentUrl=='/newsCenter.html'?'on':''||menu_id==5"><a href="newsCenter.html">公司动态</a></div>
 			
 			<div class="tt" :class="currentUrl=='/loadCenter.html'?'on':''"><a href="loadCenter.html">下载中心</a></div>
 			<div class="tt" :class="currentUrl=='/contactUs.html'?'on':''"><a href="contactUs.html">联系我们</a></div>
@@ -105,8 +105,8 @@
 				bannerTimer:null,
 				is_showNav:false,
 				brandData:[],
-				labelData:[]
-				
+				labelData:[],
+				menu_id:0
 	        }
 	    },
 	    created:function () {
@@ -134,14 +134,10 @@
 			
 
     		window.base.bus.$on('to_headBanner',(res)=>{	
-				if(res.mainImg){
-					 self.bannerData = res.mainImg
-					 return
+				if(res){
+					 self.menu_id = res
 				};
-				console.log('res222',res)
-				this.searchItem.title = res.title;
 				
-	        	this.to_headBanner()
 		    });
 			
 			/* self.bannerTimer = setInterval(function(){
