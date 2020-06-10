@@ -15,7 +15,7 @@
 	/* .orderNav{display: none;} */
 	.orderNavLeft{display: none;}
 	.orderNavTop{width: 80%;left: 10%;top: 60px;display: flex;}
-	.orderNavTop .tt{width: 33.3%;height: 40px;}
+	.orderNavTop .tt{width: 25%;height: 40px;}
 	.ind-dynamic{padding-top: 30px;}
 }
 
@@ -23,7 +23,7 @@
 	/* .orderNav{display: none;} */
 	.orderNavLeft{display: none;}
 	.orderNavTop{width: 80%;left: 10%;top: 50px;display: flex;}
-	.orderNavTop .tt{width: 33.3%;height: 40px;}
+	/* .orderNavTop .tt{width: 33.3%;height: 40px;} */
 	.ind-dynamic{padding-top: 0px;}
 }
 
@@ -37,8 +37,8 @@
 	.FixOrderNav .tt .icon{width: 18px;height: 18px;margin-right: 6px;}
 	
 	.orderNavTop{width: 80%;left: 10%;top: 50px;display: flex;flex-wrap: wrap;}
-	.orderNavTop .tt{width: 33.3%;height: 40px;}
-	.ind-dynamic{padding-top: 0;}
+	/* .orderNavTop .tt{width: 33.3%;height: 40px;} */
+	/* .ind-dynamic{padding-top: 0;} */
 }
 
 

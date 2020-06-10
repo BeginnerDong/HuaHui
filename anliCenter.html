@@ -35,7 +35,15 @@
 			.ind-dynamic .item{margin-bottom: 60px;}
 			.ind-dynamic .item .imgBox{height: 252px;}
 		}
+		@media only screen and (max-width: 1000px){
+			.orderNavTop{top: 50px;}
+		}
+		@media only screen and (max-width: 980px){
+			.orderNavTop{width: 90%;left: 5%;display: flex;flex-wrap: wrap;}
+			.orderNavTop .tt{width: 25%;height: 40px;}
+		}
 		@media only screen and (max-width: 768px){
+			.ind-dynamic{margin-top: 90px;}
 			.ind-dynamic .item{margin-bottom: 50px;}
 			.ind-dynamic .item .texbox{width: 37%;margin-top: 0;}
 			.ind-dynamic .item .imgBox{width: 60%;height: 174px;}
@@ -64,6 +72,9 @@
 			.fixArrow{left: 42%;}
 			.ind-dynamic>div:nth-of-type(2n) .fixArrow{right: 42%;}
 		}
+		@media only screen and (max-width: 320px){
+			.orderNavTop{width: 100%;left: 0;}
+		}
 	</style>
 
 <body>
@@ -83,7 +94,7 @@
 			<div class="orderNav FixOrderNav center orderNavLeft" id="orderNav">
 				<span class="tt flexCenter" 
 				:class="currId==-1?'on':''" @click="changeCurr(-1)">
-					<img class="icon" src=""/>
+					<img class="icon" src="images/case-icon11.png"/>
 					<em>全部</em>
 				</span>
 				<span class="tt flexCenter" v-for="item in labelData"
@@ -97,7 +108,7 @@
 			<div class="orderNav FixOrderNav center orderNavTop" id="orderNav">
 				<span class="tt flexCenter"
 				:class="currId==-1?'on':''" @click="changeCurr(-1)">
-					<img class="icon" src=""/>
+					<img class="icon" src="images/case-icon11.png"/>
 					<em>全部</em>
 				</span>
 				<span class="tt flexCenter" v-for="item in labelData"
