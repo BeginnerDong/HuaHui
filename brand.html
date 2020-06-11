@@ -73,7 +73,7 @@
 		/*  */
 		.w90{margin: 0 5%;}
 		.brandNavPic{height: 700px;width: 100%;}
-		.brandNavPic img{width: auto;height: 100%;display: block;min-height: 100px;margin: 0 auto;}
+		.brandNavPic img{width: 100%;height: 100%;display: block;min-height: 100px;margin: 0 auto;}
 		
 		.brandNav{position: relative;overflow: hidden;padding:0 3%;margin: 30px 0;height: 190px;}
 		.brandNav .arrow{padding: 0 10px;position: absolute;top: 50%;transform: translateY(-50%);}
@@ -274,10 +274,14 @@
 						if(self.index+i < 0 || self.index+i > self.mainData.length-1) return;
 						self.index = self.index+i;
 						console.log(self.index)
-						if(self.index == self.mainData.length-1 && i == 1){
-							$('.itemBox .brandItem').eq(0).css({display:'none'})
-						}else if(self.index == 0 && i == -1){
-							$('.itemBox .brandItem').eq(0).css({display:'block'})
+						if(self.index >= 5 && i == 1){
+							for(var i=0;i<=self.mainData.length-1;i++){
+								if(i <= self.index-5){$('.itemBox .brandItem').eq(i).css({display:'none'})}
+							}
+						}else if(self.index <= self.mainData.length-5 && i == -1){
+							for(var i=0;i<=self.mainData.length-1;i++){
+								if(i >= self.index){$('.itemBox .brandItem').eq(i).css({display:'block'})}
+							}
 						}
 					},
 				
