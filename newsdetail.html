@@ -17,8 +17,14 @@
 		<link type="text/css" rel="stylesheet" href="css/orderNav.css">
 	</head>
 	<style type="text/css">
-		.detailePag{min-height: 350px;box-sizing: border-box;margin-top: 50px;}
-		.orderNavTop{display: flex;width: 90%;top: 60px;margin-left: 5%;}
+		.detailePag{min-height: 350px;box-sizing: border-box;}
+		.orderNavTop{display: none;width: 90%;top: 60px;margin-left: 5%;}
+		
+		@media only screen and (max-width: 1400px){
+			.orderNav{display: none;}
+			.orderNavTop{display: flex;}
+			.detailePag{margin-top: 30px;}
+		}
 		
 		@media only screen and (max-width: 1024px){
 			.orderNavTop{width: 100%;margin-left: 0;left: 0;}
@@ -43,12 +49,18 @@
 		<include src="header.html"></include>
 		
 		<!-- 侧边导航显示 -->
-		<!-- <div class="orderNav FixOrderNav center" id="orderNav" v-if="type&&type!=''">
-			<span class="tt flexCenter" v-for="item in labelData" :class="currId==item.id?'on':''" @click="changeCurr(item.id)">
+		<div class="orderNav FixOrderNav center orderNavLeft" id="orderNav">
+			<span class="tt flexCenter" 
+			:class="currId==-1?'on':''" @click="changeCurr(-1)">
+				<img class="icon" src="images/case-icon11.png"/>
+				<em>全部</em>
+			</span>
+			<span class="tt flexCenter" v-for="item in labelData"
+			:class="currId==item.id?'on':''" @click="changeCurr(item.id)">
 				<img class="icon" :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''"/>
 				<em>{{item.title}}</em>
 			</span>
-		</div> -->
+		</div>
 		
 		<!-- 手机端顶部导航显示 -->
 		<div class="orderNav FixOrderNav center orderNavTop" id="orderNav" v-if="currId!=5">
