@@ -40,7 +40,7 @@
 						<div class="item flexRowBetween" v-if="index%2==0">
 							<a class="flexRowBetween" :href="'newsdetail.html?id='+item.id">
 								<div class="texbox">
-									<div class="tit">{{item.title}}</div>
+									<div class="tit avoidOverflow">{{item.title}}</div>
 									<p class="form"></p>
 									<p class="text2">{{item.description}}</p>
 								</div>
@@ -96,11 +96,11 @@
 							<img class="logo" :src="item.mainImg[0].url" >
 						</a>
 					</div>
-					<div class="child" @mouseenter="enter(index)" @mouseleave="leave()" >
+					<!-- <div class="child" @mouseenter="enter(index)" @mouseleave="leave()" >
 						<a  href="brand.html">
 							<div class="more">更 多</div>
 						</a>
-					</div>
+					</div> -->
 				</div>
 				<div class="right flexCenter"><img class="w" style="height: 530px;" :src="brandData[index]&&brandData[index].bannerImg&&brandData[index].bannerImg[0]?brandData[index].bannerImg[0].url:''" ></div>
 			</div>

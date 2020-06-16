@@ -23,12 +23,11 @@
 		@media only screen and (max-width: 1400px){
 			.orderNav{display: none;}
 			.orderNavTop{display: flex;}
-			.detailePag{margin-top: 30px;}
+			.dynamic{margin-top: 30px;}
 		}
 		
 		@media only screen and (max-width: 1024px){
 			.orderNavTop{width: 100%;margin-left: 0;left: 0;}
-			.detailePag{margin-top: 30px;}
 		}
 		@media only screen and (max-width: 1000px){
 			.orderNavTop{top: 50px;}
@@ -36,10 +35,10 @@
 		@media only screen and (max-width: 980px){
 			.orderNavTop{width: 90%;left: 5%;display: flex;flex-wrap: wrap;}
 			.orderNavTop .tt{width: 25%;height: 40px;}
-			.detailePag{margin-top: 70px;}
+			.dynamic{margin-top: 70px;}
 		}
 		@media only screen and (max-width: 500px){
-			.detailePag{margin-top: 80px;}
+			.dynamic{margin-top: 80px;}
 			.orderNavTop{width: 100%;left: 0;}
 		}
 	</style>
@@ -49,7 +48,7 @@
 		<include src="header.html"></include>
 		
 		<!-- 侧边导航显示 -->
-		<div class="orderNav FixOrderNav center orderNavLeft" id="orderNav">
+		<!-- <div class="orderNav FixOrderNav center orderNavLeft" id="orderNav">
 			<span class="tt flexCenter" 
 			:class="currId==-1?'on':''" @click="changeCurr(-1)">
 				<img class="icon" src="images/case-icon11.png"/>
@@ -60,7 +59,7 @@
 				<img class="icon" :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''"/>
 				<em>{{item.title}}</em>
 			</span>
-		</div>
+		</div> -->
 		
 		<!-- 手机端顶部导航显示 -->
 		<div class="orderNav FixOrderNav center orderNavTop" id="orderNav" v-if="currId!=5">
@@ -76,7 +75,7 @@
 			</span>
 		</div>
 		
-		<div class="detailePag pdb80">
+		<div class="detailePag pdb80" :class="dynamic">
 			<div class="w1200">
 				<div class="topTit">
 					<h1 class="title center ftn">{{mainData.title}}</h1>	
@@ -107,7 +106,8 @@
 					wx_show:2,
 					mainData: {},
 					labelData: [],
-					menu_id:''
+					menu_id:'',
+					dynamic:''
 		        }
 		    },
 			
@@ -118,6 +118,8 @@
 				}; */
 				self.getMainData();
 				self.getLabelData();
+				console.log(window.location.href.split('&').length)
+				if(window.location.href.split('&').length>1){self.dynamic = 'dynamic'}
 			},
 			
 			
