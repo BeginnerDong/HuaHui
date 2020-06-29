@@ -165,7 +165,7 @@
 				<div class="cont clearfix color6 brandItemBox">
 					<div class="itemBox">
 						<div class="brandItem child" @mouseenter="enter(i)" @mouseleave="leave(i)"  v-for="(item,i) in mainData" :key="i" :class="i==index?'brandItem-active':''">
-							<a :href="'product.html?id='+item.id">
+							<a :href="'product.html?id='+item.id+'&behavior='+item.behavior">
 								<img :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''" >
 							</a>
 						</div>

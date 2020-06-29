@@ -92,7 +92,7 @@
 			<div class="ind-brandTwo flexRowBetween pdb80">
 				<div class="left flexRowBetween">
 					<div class="child" @mouseenter="enter(index)" @mouseleave="leave()" v-for="(item,index) in brandData" :key="index">
-						<a  :href="'product.html?id='+item.id">
+						<a  :href="'product.html?id='+item.id+'&behavior='+item.behavior">
 							<img class="logo" :src="item.mainImg[0].url" >
 						</a>
 					</div>
@@ -102,7 +102,7 @@
 						</a>
 					</div> -->
 				</div>
-				<div class="right flexCenter"><img class="w" style="height: 530px;" :src="brandData[index]&&brandData[index].bannerImg&&brandData[index].bannerImg[0]?brandData[index].bannerImg[0].url:''" ></div>
+				<div class="right flexCenter"><img class="w" style="height: 530px;" :src="brandData[index]&&brandData[index].headImg&&brandData[index].headImg[0]?brandData[index].headImg[0].url:''" ></div>
 			</div>
 			
 		</div>
@@ -188,7 +188,7 @@
 					postData.paginate = {
 					    count: 0, 
 					    currentPage: 1, 
-					    pagesize:6, 
+					    pagesize:8, 
 					    is_page: true, 
 					};
 					postData.searchItem = {

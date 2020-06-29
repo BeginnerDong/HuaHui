@@ -93,6 +93,7 @@
 			created () {
 			    const self = this;
 				console.log('222',window.base.GetRequest().childId)
+				self.behavior = window.base.GetRequest().behavior;
 				if(window.base.GetRequest().childId){
 					self.changeCurr(window.base.GetRequest().childId,window.base.GetRequest().behavior)
 				}
@@ -105,7 +106,7 @@
 					const self = this;
 					
 					self.currId = id;
-					self.behavior = behavior;
+					
 					self.mainData = [];
 					self.paginate = {
 						count: 0,
@@ -134,13 +135,11 @@
 								self.idArray.push(self.labelData[i].id)
 							};
 							if(!window.base.GetRequest().childId){
-								//self.currId = self.labelData[0].id;
-								self.behavior = 0
 								self.getMainData()
 							}
 							
 						} else {
-							
+							self.getMainData()
 						};
 						
 						
@@ -157,6 +156,8 @@
 					};
 					if(self.currId>0){
 						postData.searchItem.menu_id= self.currId
+					}else if(self.idArray.length==0){
+						postData.searchItem.menu_id = window.base.GetRequest().id
 					}else{
 						postData.searchItem.menu_id = ['in',self.idArray]
 					};

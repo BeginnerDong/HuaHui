@@ -108,7 +108,7 @@
 				<span class="tt" :class="curr==2?'on':''" @click="changeCurr('2')">资料</span>
 				<span class="tt" :class="curr==3?'on':''" @click="changeCurr('3')">图片</span>
 				<span class="tt" :class="curr==4?'on':''" @click="changeCurr('4')">视频</span>
-				<span class="tt" :class="curr==4?'on':''" @click="changeCurr('7')">软件</span>
+				<span class="tt" :class="curr==7?'on':''" @click="changeCurr('7')">软件</span>
 				<span class="tt" :class="curr==5?'on':''" @click="changeCurr('5')">产品</span>
 				<span class="tt" :class="curr==6?'on':''" @click="changeCurr('6')">招聘</span>
 				<!-- <span class="tt" :class="curr==7?'on':''" @click="changeCurr('7')">品牌</span> -->
@@ -178,7 +178,7 @@
 				</ul>
 			</div>
 			<!-- 材料列表 -->
-			<div class="cailiaoList" v-if="curr==2">
+			<div class="cailiaoList" v-if="curr==2||curr==7">
 				<ul>
 					<li class="flexRowBetween" v-for="(item,index) in mainData" :key="index">
 						<p class="ll">{{item.title}}</p>
@@ -191,7 +191,7 @@
 			</div>
 			
 			<!-- 品牌 -->
-			<div class="ind-brand" v-if="curr==7">
+			<!-- <div class="ind-brand" v-if="curr==7">
 				<div class="item flexRowBetween">
 					<div class="half TwoPic" v-for="(item,index) in mainData" :key="index">
 						<a :href="'product.html?id='+item.id">
@@ -204,7 +204,7 @@
 						</a>
 					</div>
 				</div>
-			</div>
+			</div> -->
 			
 			<!-- 产品 -->
 			<div class="prodctCont center"  v-if="curr==5">
@@ -286,8 +286,15 @@
 				const self = this;
 				if(window.base.GetRequest().title){
 					self.title = window.base.GetRequest().title;
+					if(window.base.GetRequest().curr==4){
+						self.curr = 7
+					}else{
+						self.curr = parseInt(window.base.GetRequest().curr)+1;
+					};
+					self.searchItem.type = self.curr
 					self.goSearch()
 				}
+				
 			},
 			
 		    methods: {
@@ -301,32 +308,28 @@
 						return
 					}; */
 					
-					if(self.curr!=7){
-						self.searchItem.title = ['LIKE', ['%' + self.title + '%']];
-						self.searchItem.type = self.curr;
-						if(self.curr==6){
-							self.getBefore = {
-								child:{
-									tableName:'Label',
-									middleKey:'menu_id',
-									key:'id',
-									searchItem:{
-										status:['in',[1]],
-										title:['in',['招聘信息']]
-									},
-									condition:'in',
-								}
+					
+					self.searchItem.title = ['LIKE', ['%' + self.title + '%']];
+					self.searchItem.type = self.curr;
+					if(self.curr==6){
+						self.getBefore = {
+							child:{
+								tableName:'Label',
+								middleKey:'menu_id',
+								key:'id',
+								searchItem:{
+									status:['in',[1]],
+									title:['in',['招聘信息']]
+								},
+								condition:'in',
 							}
-						}else{
-							self.getBefore = {}
-						};
-						self.mainData = [];
-						self.getMainData()
+						}
 					}else{
-						self.searchItemTwo.title = ['LIKE', ['%' + self.title + '%']];
-						self.mainData = [];
-						self.getBrandData()
-					}
+						self.getBefore = {}
+					};
+					self.mainData = [];
+					self.getMainData()
+					
 				},
 				
 				goSearch() {

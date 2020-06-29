@@ -28,12 +28,12 @@
 					<div class="Asamll">
 						<div class="Achild" v-for="(item,index) in brandData" :key="item.id">
 							<div class="Aname">
-								<a class="link" :href="'product.html?id='+item.id">{{item.title}}
+								<a class="link" :href="'product.html?id='+item.id+'&behavior='+item.behavior">{{item.title}}
 									<em class="pdl5" v-if="item.child&&item.child.length>0">&gt;</em>
 								</a>
 							</div>
 							<div class="Bsamll">
-								<a v-for="(c_item,c_index) in item.child" :href="'product.html?id='+item.id+'&childId='+c_item.id+'&behavior='+c_item.behavior" :key="c_item.id" class="Bchild" 
+								<a v-for="(c_item,c_index) in item.child" :href="'product.html?id='+item.id+'&childId='+c_item.id+'&behavior='+item.behavior" :key="c_item.id" class="Bchild" 
 								>{{c_item.title}}</a>
 							</div>
 						</div>
@@ -66,12 +66,12 @@
 				<div class="Asamll">
 					<div class="Achild" v-for="(item,index) in brandData" :key="item.id">
 						<div class="Aname">
-							<a class="link" :href="'product.html?id='+item.id">{{item.title}}
+							<a class="link" :href="'product.html?id='+item.id+'&behavior='+item.behavior">{{item.title}}
 								<em class="pdl5" v-if="item.child&&item.child.length>0">&gt;</em>
 							</a>
 						</div>
 						<div class="Bsamll">
-							<a v-for="(c_item,c_index) in item.child" :href="'product.html?id='+item.id+'&childId='+c_item.id+'&behavior='+c_item.behavior" :key="c_item.id" class="Bchild" 
+							<a v-for="(c_item,c_index) in item.child" :href="'product.html?id='+item.id+'&childId='+c_item.id+'&behavior='+item.behavior" :key="c_item.id" class="Bchild" 
 							>{{c_item.title}}</a>
 						</div>
 					</div>

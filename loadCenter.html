@@ -206,7 +206,7 @@
 				
 				goSearch() {
 					const self = this;
-					window.location.href = 'seach.html?title='+self.title
+					window.location.href = 'seach.html?title='+self.title+'&curr='+self.curr
 					/* if (self.title != '') {
 						
 						self.mainData = [];
@@ -224,8 +224,7 @@
 					console.log('event',event)
 					if (event.which == "13"){
 						if (self.title != '') {
-							self.mainData = [];
-							self.getMainData()
+							window.location.href = 'seach.html?title='+self.title+'&curr='+self.curr
 						} else {
 							alert('请输入标题搜索')
 						}
