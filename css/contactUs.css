@@ -6,9 +6,9 @@
 /* 公司信息 */
 .companyMsg{padding-top:80px;}
 .companyMsg .item{align-items: center;height: 300px;}
-.companyMsg .pic{width: 50%;float: left;overflow: hidden;height: 100%;}
+.companyMsg .pic{width: 50%;float: left;overflow: hidden;height: 100%;display: flex;align-items: center;}
 .companyMsg .pic img{height: aotu;width: 100%;}
-.companyMsg .infor{width: 50%;padding: 40px 4%; float: right;box-sizing: border-box;font-size: 16px;height: 100%;}
+.companyMsg .infor{width: 50%;padding: 40px 4%; float: right;box-sizing: border-box;font-size: 16px;}
 .companyMsg .infor p{margin-bottom:30px;padding-left: 40px;line-height: 24px;background: url(../images/contact-icon1.png) no-repeat top left/20px 20px;}
 .companyMsg .infor p:last-child{margin-bottom: 0;}
 .companyMsg .infor p.compay{background-image: url(../images/contact-icon1.png);font-size: 16px;font-weight: bold;}
