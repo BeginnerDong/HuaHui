@@ -21,43 +21,38 @@
 		/* banner */
 		/* .fsbanner{min-height: 670px;} */
 		
-		.fsbanner .item{width: 12.5%;height:700px;float: left; overflow: hidden;position: relative;}
-		.fsbanner .item .pic{width: 100%;height: 100%; position: absolute;left: 0;top: 0;}
+		.fsbanner .item{float: left; overflow: hidden;position: relative;}
+		.fsbanner .item .pic{width: 100%; height: auto; /* position: absolute;left: 0;top: 0; */}
 		.fsbanner .bj{position: absolute;left: 0;top: 0;right: 0;bottom: 0;background-color: rgba(0,0,0,0.5);z-index: 2;}
 		.fsbanner .item.on .pic.big{display: none;}
-		.fsbanner .name{font-size: 56px; -webkit-writing-mode: vertical-rl;writing-mode: vertical-rl;position: absolute;left: 50%;top: 50%;transform: translate(-50%,-50%);line-height: 50px;letter-spacing: 27px;}
+		.fsbanner .name{font-size: 60px; -webkit-writing-mode: vertical-rl;writing-mode: vertical-rl;position: absolute;left: 50%;top: 50%;transform: translate(-50%,-50%);line-height: 50px;letter-spacing: 27px;height: 100%;text-align: center;}
 		
-		.fsbanner .item.on{width: 16%;padding: 30px;}
+		.fsbanner .item.on{padding: 26px;}
 		.fsbanner .item.on .pic.samll{display: none;}
 		.fsbanner .item.on .pic.big{display: block;}
-		.fsbanner .item.on .pic{right: 0;bottom: 0!important;}
-		.fsbanner .item.on .name{font-size: 65px;}
+		.fsbanner .item.on .pic{transform: scale(1.3);}
+		.fsbanner .item.on .name{font-size: 70px;}
 		
-		@media only screen and (max-width: 1600px){
-			.fsbanner .item{height: 730px;}
-		}
 		@media only screen and (max-width: 1440px){
-			.fsbanner .item{height: 720px;}
-		}
-		@media only screen and (max-width: 1366px){
-			.fsbanner .item{height: 670px;}
-			.fsbanner .item.on .name{font-size: 65px;letter-spacing: 25px;}
+			.fsbanner .name {font-size: 43px;}
+			.fsbanner .item.on .name{font-size:54px;letter-spacing: 25px;}
+			.fsbanner .item.on .pic{transform: scale(1.35);}
 		}
 		@media only screen and (max-width:1280px){
-			.fsbanner .item{height: 610px;}
-			.fsbanner .name {font-size: 44px;}
-			.fsbanner .item.on .name{font-size: 54px;}
+			.fsbanner .name {font-size: 38px;}
+			.fsbanner .item.on .name{font-size: 46px;}
+			.fsbanner .item.on .pic{transform: scale(1.45);}
 		}
 		@media only screen and (max-width:1024px){
-			.fsbanner .item{height: 470px;}
 			.fsbanner .name {font-size: 34px; letter-spacing: 18px;}
 			.fsbanner .item.on .name{font-size: 40px;}
+			.fsbanner .item.on{width: 16%;padding: 20px;}
 		}
+		
 		@media only screen and (max-width:768px){
-			.fsbanner .item{height: 400px;}
-			.fsbanner .item.on {padding: 20px 0;}
-			.fsbanner .name {font-size: 30px; letter-spacing: 10px;}
-			.fsbanner .item.on .name{font-size: 34px;letter-spacing: 20px;}
+			.fsbanner .item.on {padding: 14px;}
+			.fsbanner .name {font-size: 25px; letter-spacing: 10px;}
+			.fsbanner .item.on .name{font-size: 30px;letter-spacing: 20px;}
 		}
 		
 		@media only screen and (max-width:500px){
