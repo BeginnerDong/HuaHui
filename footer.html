@@ -1,19 +1,26 @@
 <div class="footer" id="footer_app">
 	<div class="cont w1200 flexRowBetween">
-		<div class="ewmBox clearfix center flexRowBetween">
-			<div class="tt">
-				<img src="images/footer-img1.jpg">
-				<p>公众号二维码</p>
+		<div class="ewm1">
+			<div v-for="(item,index) in mData" :key="index">
+				<img :src="item&&item.mainImg&&item.mainImg[0]&&item.mainImg[0]&&item.mainImg[0].url" class="img1" @click="showEwm(item&&item.bannerImg&&item.bannerImg[0]&&item.bannerImg[0]&&item.bannerImg[0].url)">
 			</div>
-			<div class="tt">
-				<img src="images/footer-img2.jpg">
-				<p>微博二维码</p>
-			</div>
-			<div class="tt">
-				<img src="images/footer-img3.jpg">
-				<p>直播二维码</p>
+			
+				<div class="ewmShow" @click="showEwm(0)" >
+					<img :src="ewmUrl" class="">
+				</div>
+			
+<!-- 			<img src="images/icon-05.png" class="img1">
+			<img src="images/icon-06.png" class="img1"> -->
+			
+		</div>
+		
+		<div class="ewmBox clearfix center flexRowBetween ewm2">
+			<div class="tt" v-for="(item,index) in pcData" :key="index">
+				<img :src="item.mainImg[0].url" class="img1">
+				<img :src="item.bannerImg[0].url" class="img2">
 			</div>
 		</div>
+		
 		<div class="Rcont flexRowBetween">
 			<div class="footNav">
 				<ul class="flexRowBetween">
@@ -51,14 +58,22 @@
 					</li> -->
 				</ul>
 			</div>
-			<div class="R-logo" @click="toTop">
+			<!-- <div class="R-logo" @click="toTop">
 				<img class="logo" src="images/home-img1.png">
-			</div>
+			</div> -->
 		</div>
+		
+		<div class="footerLogo">
+			<img src="images/home-logo.png" >
+		</div>
+		
 
-		<a class="back-top" style="display: none;" @click="toTop">
+		<!-- <a class="back-top" style="display: none;" @click="toTop">
 			<img class="logo" src="images/top.png">
-		</a>
+		</a> -->
+	</div>
+	<div class="copy">
+		CopyRight ©2014 华汇音响官文有限公司 版权所有 &nbsp;&nbsp;&nbsp;&nbsp;粤ICP备12041784号-1
 	</div>
 </div>
 
@@ -90,11 +105,20 @@
 		data: function() {
 			return {
 
-				showIcon: false
+				showIcon: false,
+				searchItem:{
+					type:1
+				},
+				pcData:[],
+				mData:[],
+				show:false,
+				ewmUrl:''
 			}
 		},
 		created: function() {
-
+			const self = this;
+			self.getPcData();
+			self.getMData();
 		},
 
 
@@ -107,7 +131,18 @@
 		},
 		methods: {
 
-			
+			showEwm(item){
+				const self = this;
+				if(item==0){
+					$('.ewmShow').css({display:'none'})
+					console.log(111111)
+				}else{
+					self.ewmShow = !self.ewmShow;
+					self.ewmUrl = item;
+					$('.ewmShow').css({display:'block'})
+					console.log(2222)
+				}
+			},
 
 			toTop() { //3
 				const self = this;
@@ -117,13 +152,42 @@
 					scrollTop: 0
 				}, "slow"); //回到顶部
 				
-			}
+			},
+			
+			getPcData: function(id){
+			    var self = this;
+			    var postData = {};
+				self.searchItem.parentid = '109';
+			    postData.searchItem = window.base.cloneForm(self.searchItem);
+			    var callback = function(res){
+			        if(res.info.data.length>0&&res.info.data[0]){
+						self.pcData =res.info.data;
+						console.log('self.pcData',self.pcData)
+			        };    
+			    };
+			    window.base.labelGet(postData, callback);
+			},
+			
+			getMData: function(id){
+			    var self = this;
+			    var postData = {};
+				self.searchItem.parentid = '110';
+			    postData.searchItem = window.base.cloneForm(self.searchItem);
+			    var callback = function(res){
+			        if(res.info.data.length>0&&res.info.data[0]){
+						self.mData =res.info.data;
+			        };    
+			    };
+			    window.base.labelGet(postData, callback);
+			},
 
 		}
 	});
 </script>
 
 <style type="text/css">
+	
+	
 	/* 页脚 */
 	.back-top {
 		position: fixed;
@@ -133,13 +197,20 @@
 	}
 
 	.footer {
-		background: #f0f0f0;
-		padding: 60px 0;
+		background: #252525;
+		color: #fff;
+		padding: 60px 0 0;
+		position: relative;
+		z-index: 100;
 	}
 
 	.footer .cont {
 		align-items: flex-start;
 	}
+	
+	.ewm1{display: none;position: relative;}
+	.ewmShow{position: fixed;top: 0;left: 0;right: 0;bottom: 0;background-color: rgba(0,0,0,0.4);display: none;}
+	.ewmShow img{width: 300px;height: 300px;margin: auto;position: absolute;top: 0;left: 0;right: 0;bottom: 0;}
 
 	.ewmBox {
 		width: 30%;
@@ -153,10 +224,16 @@
 	.ewmBox .tt:last-child {
 		margin-right: 0;
 	}
+	
+	.ewmBox .tt .img1{
+		width: 27rpx;
+		height: 23rpx;
+		margin-bottom: 10px;
+	}
 
-	.ewmBox .tt img {
-		width: 95px;
-		height: 95px;
+	.ewmBox .tt .img2 {
+		width: 87px;
+		height: 96px;
 		margin: 0 auto;
 	}
 
@@ -166,11 +243,11 @@
 	}
 
 	.footer .Rcont {
-		width: 60%;
+		width: 40%;
 	}
 
 	.footer .footNav {
-		width: 60%;
+		/* width: 60%; */
 	}
 
 	.footer .footNav ul {
@@ -196,7 +273,7 @@
 	}
 
 	.footer .footNav a:hover {
-		color: #333;
+		color: #fff;
 	}
 
 	.footer .R-logo {
@@ -213,12 +290,14 @@
 	.footer .footNav li:nth-child(2){width: 70%;}
 	.footer .liCon{display: flex;flex-wrap: wrap;width: 100%;}
 	.footer .liCon p{width: 50%;}
+	
+	.footer .copy{padding: 20px 0;font-size: 12px;color: #777;border-top: 1px solid #777;text-align: center;margin-top: 130px;}
 
 
 	@media only screen and (max-width: 1280px) {
 		.ewmBox{width: 40%;margin-left: 3%;}
 		.footer .Rcont{width:55%;}
-		.footer .footNav{width: 60%;}
+		/* .footer .footNav{width: 60%;} */
 		.footer .R-logo{width: 40%;}
 	}
 	
@@ -251,6 +330,23 @@
 		}
 
 	}
+	
+	
+	@media only screen and (max-width:800px){
+		.footer .copy{padding: 20px;margin-top: 40px;}
+		.footer{margin-bottom: 0;padding: 30px 0 0;}
+		.footer .cont{display: block; padding: 0 20px;}
+		.ewm2{display: none;}
+		.ewm1{display: flex;margin: 0;}
+		.ewm1 .img1{width: 45px;margin-right: 50px;margin-bottom: 30px;}
+		.footer .footNav ul{display: block;}
+		.footer .footNav li h1{font-size: 24px;}
+		.footer .footNav li{margin-top: 30px;width: 100%;}
+		.footer .footNav li:nth-child(1){margin-top: 0;}
+		.footer .footNav li p{width: 100%;font-size: 20px;}
+		.footerLogo{display: none;}
+	}
+	
 
 	@media only screen and (max-width:768px) {
 		.ewmBox {
@@ -288,7 +384,12 @@
 	}
 
 	@media only screen and (max-width: 500px) {
-		.footer .cont{flex-wrap: wrap;}
+		.footer .copy{padding: 20px;margin-top: 40px;}
+		.footer{margin-bottom: 0;padding: 30px 0 0;}
+		.footer .cont{flex-wrap: wrap;justify-content: flex-start;padding: 0 20px;}
+		.ewm2{display: none;}
+		.ewm1{display: flex;margin: 0;}
+		.ewm1 .img1{width: 30px;margin-right: 40px;margin-bottom: 10px;}
 		.ewmBox {
 			width: 100%;
 			justify-content: space-around!important;
@@ -310,17 +411,16 @@
 			padding: 0 0 10px;
 		}
 
-		.footer {
-			padding: 20px 0;
-		}
 
 		/* .footer .w1200{flex-wrap: wrap;} */
 		.footer .footNav {
-			width: 65%;
-			margin-left: 20px;
+			/* width: 30%; */
+			margin-left: 0;
 		}
 
-		/* .footer .footNav li{width: 50%;} */
+		.footer .footNav ul{display: block;line-height: 30px;}
+		.footer .liCon p{width: 100%;}
+		.footer .footNav li:nth-child(2){margin-top: 10px;}
 		.footer .footNav li h1 {
 			font-size: 14px;
 		}

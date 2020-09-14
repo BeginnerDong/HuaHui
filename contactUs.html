@@ -16,16 +16,18 @@
 		<link type="text/css" rel="stylesheet" href="css/about.css">
 		<link type="text/css" rel="stylesheet" href="css/companyList.css">
 		<link type="text/css" rel="stylesheet" href="css/contactUs.css">
+		<link type="text/css" rel="stylesheet" href="css/animate.css">
 	</head>
 	<style>
 		/* banner */
 		/* .fsbanner{min-height: 670px;} */
+		.mb70{margin-bottom: 70px;}
 		
-		.fsbanner .item{float: left; overflow: hidden;position: relative;}
-		.fsbanner .item .pic{width: 100%; height: auto; /* position: absolute;left: 0;top: 0; */}
+		.fsbanner .item{float: left; overflow: hidden;position: relative;transition: all 0.5s;}
+		.fsbanner .item .pic{width: 100%; height: auto; /* position: absolute;left: 0;top: 0; */transition: all 0.5s;}
 		.fsbanner .bj{position: absolute;left: 0;top: 0;right: 0;bottom: 0;background-color: rgba(0,0,0,0.5);z-index: 2;}
 		.fsbanner .item.on .pic.big{display: none;}
-		.fsbanner .name{font-size: 60px; -webkit-writing-mode: vertical-rl;writing-mode: vertical-rl;position: absolute;left: 50%;top: 50%;transform: translate(-50%,-50%);line-height: 50px;letter-spacing: 27px;height: 100%;text-align: center;}
+		.fsbanner .name{font-size: 60px; -webkit-writing-mode: vertical-rl;writing-mode: vertical-rl;position: absolute;left: 50%;top: 50%;transform: translate(-50%,-50%);line-height: 50px;letter-spacing: 27px;height: 100%;text-align: center;transition: all 0.5s;}
 		
 		.fsbanner .item.on{padding: 26px;}
 		.fsbanner .item.on .pic.samll{display: none;}
@@ -80,8 +82,8 @@
 			
 		</div>
 		
-		<div class="f5bj">
-			<div class="w1200 pdb80">
+		<div class="">
+			<div class="w1660 pdb80">
 				<!-- <div class="pubtit flexCenter">
 					<img class="icon" src="images/contact-icon.png" >
 					<h1 class="title">地方公司</h1>
@@ -100,8 +102,8 @@
 				
 				<div class="companyMsg clearfix">
 					<div class="item clearfix whiteBj flexRowBetween">
-						<div class="pic"><img :src="mainData[index]&&mainData[index].bannerImg&&mainData[index].bannerImg[0]?mainData[index].bannerImg[0].url:'images/contact-usl-img8.jpg'" ></div>
-						<div class="infor">
+						<div class="pic LL"><img :src="mainData[index]&&mainData[index].bannerImg&&mainData[index].bannerImg[0]?mainData[index].bannerImg[0].url:'images/contact-usl-img8.jpg'" ></div>
+						<div class="infor RR">
 							<p class="compay">{{mainData[index]?mainData[index].title:''}}</p>
 							<p class="adrs">{{mainData[index]?mainData[index].address:''}}</p>
 							<p class="phone">{{mainData[index]?mainData[index].phone:''}}</p>
@@ -113,12 +115,15 @@
 			</div>
 		</div>
 		
-		<div class="w1200 pdb80">
-			<div class="pubtit flexCenter">
+		<div class="w1660 pdb80 bto">
+			<!-- <div class="pubtit flexCenter">
 				<img class="icon" src="images/contact-icon6.png" >
 				<h1 class="title">在线留言</h1>
+			</div> -->
+			<div class="allH1 mb70">
+				<h1><span>在线留言</span> Message</h1>
 			</div>
-			<div class="jianliMsg boxShaow">
+			<div class="jianliMsg boxShaow w1200 LL">
 				<div>
 					<ul>
 						<li>
@@ -142,7 +147,7 @@
 					</ul>
 				</div>
 				<div class="submitbtn pdt40">
-					<button class="btn" type="button" style="width: 50%;" @click="!isSending?JustaddMessage():''">提交</button>
+					<button class="moreBtn" type="button" style="width: 164px;" @click="!isSending?JustaddMessage():''">提交</button>
 				</div>
 			</div>
 		</div>
@@ -151,7 +156,21 @@
 		
 	</div>
 </body>
-
+<script type="text/javascript">
+		$(window).scroll(function(){
+			if($('.item').offset().top*0.3 + $('.item').height() < ($(window).scrollTop() + $(window).height()) ){
+				$('.item .LL').addClass('animated fadeInLeft');
+				$('.item .RR').addClass('animated fadeInRight');
+			}
+			
+			if($('.bto').offset().top + $('.bto').height()*0.35 < ($(window).scrollTop() + $(window).height()) &&
+			$('.bto').offset().top + $('.bto').height()*0.35 > ($(window).scrollTop() + $(window).height())-50){
+				// console.log('高度',$('.'+one).height()*0.35)
+				$('.bto .LL').addClass('animated fadeInUp');
+			}
+			
+		})
+</script>
 	
 	<script type="text/javascript">
 		var app = new Vue({

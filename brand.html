@@ -18,158 +18,60 @@
 		<link type="text/css" rel="stylesheet" href="css/brand.css">
 		
 	</head>
-	<style type="text/css">
-		.head{border-bottom: 2px solid#d6d6d6;box-shadow: initial!important;}
-		.ind-brand .half{float: left;width: 32%;margin-right: 2%;}
-		.ind-brand .half:nth-of-type(3n){margin-right: 0;}
-		.ind-brand .TwoPic .box{height: 451px;}
-		.ind-brand .TwoPic .box .logo{width: 260px;height: 260px;}
-		
-		#head_app{margin-top: -20px;}
-		
-		
-		@media only screen and (max-width: 1600px){
-			.ind-brand .TwoPic .box{height: 376px;}
-			.ind-brand .TwoPic .box .logo{width: 180px;height: 180px;}
-		}
-		@media only screen and (max-width: 1440px){
-			.ind-brand .TwoPic .box{height: 338px;}
-			.ind-brand .TwoPic .box .logo{width: 150px;height: 150px;}
-		}
-		@media only screen and (max-width: 1366px){
-			.ind-brand .TwoPic .box{height: 321px;}
-			.ind-brand .TwoPic .box .logo{width: 140px;height: 140px;}
-		}
-		@media only screen and (max-width: 1280px){
-			.ind-brand .TwoPic .box{height: 301px;}
-			.ind-brand .TwoPic .box .logo{width: 130px;height: 130px;}
-		}
-		@media only screen and (max-width: 1024px){
-			.ind-brand .TwoPic .box{height: 241px;}
-			.ind-brand .TwoPic .box .logo{width: 110px;height: 110px;}
-		}
-		@media only screen and (max-width: 768px){
-			.ind-brand .TwoPic .box{height: 180px;}
-			.ind-brand .TwoPic .box .logo{width: 80px;height: 80px;}
-		}
-		@media only screen and (max-width: 500px){
-			.ind-brand .half{width: 49%;}
-			.ind-brand .half:nth-of-type(3n){margin-right: 2%;}
-			.ind-brand .half:nth-of-type(2n){margin-right: 0!important;}
-			.ind-brand .TwoPic .box{height: 150px;}
-			.ind-brand .TwoPic .box .logo{width: 70px;height: 70px;}
-			.brandNav .child.brandItem-active:before{content: '';display: none;}
-		}
-		@media only screen and (max-width: 375px){
-			.ind-brand .TwoPic .box{height: 135px;}
-			.ind-brand .TwoPic .box .logo{width: 65px;height: 65px;}
-		}
-		@media only screen and (max-width: 320px){
-			.ind-brand .TwoPic .box{height: 115px;}
-			.ind-brand .TwoPic .box .logo{width: 55px;height: 55px;}
-		}
-		
-		
-		/*  */
-		.w90{margin: 0 5%;}
-		.brandNavPic{height: 700px;width: 100%;}
-		.brandNavPic img{width: 100%;height: 100%;display: block;min-height: 100px;margin: 0 auto;}
-		
-		.brandNav{position: relative;overflow: hidden;padding:0 3%;margin: 30px 0;height: 190px;}
-		.brandNav .arrow{padding: 0 10px;position: absolute;top: 50%;transform: translateY(-50%);}
-		.brandNav .arrow img{width: 18px;height: 30px;display: block;}
-		.brandNav .arrow.prev{left: -10px;}
-		.brandNav .arrow.next{right: -10px;}
-		.brandNav .child{width: 20%;float: left;font-size: 16px;padding: 30px 2%;box-sizing: border-box;}
-		.brandNav .child img{width: 130px;height: 130px;margin: 0 auto;}
-		.brandNav .child .name{margin-bottom: 10px;}
-		.brandNav .child.on{position: relative;color: #222;}
-		.brandNav .child.on:before{content: '';width: 40px;height: 6px;background: #e3041f;position: absolute;left: 50%;transform: translateX(-50%);bottom: 0px;}
-		
-		/* .brandNav .swiper-slide-active{transform: scale(1);color: #222;} */
-		.brandNav .child.brandItem-active:before{content: '';width: 40px;height: 6px;background: #e3041f;position: absolute;left: 50%;transform: translateX(-50%);bottom: 0px;}
-		
-		.brandNav .brandItemBox{height: 100%;display: flex;overflow: hidden;}
-		.brandNav .brandItem{flex-shrink: 0;position: relative;width: 20%;}
-		.brandNav .itemBox{width: 120%;}
-		
-		@media only screen and (max-width: 1600px){
-			.brandNavPic{height: 600px;}
-		}
-		@media only screen and (max-width: 1400px){
-			.brandNavPic{height: 550px;}
-		}
-		@media only screen and (max-width: 1366px){
-			.brandNavPic{height: 530px;}
-			.brandNav .child img{width: 110px;height: 110px;}
-		}
-		@media only screen and (max-width: 1280px){
-			.brandNavPic{height: 500px;}
-		}
-		@media only screen and (max-width: 1100px){
-			.brandNavPic{height: 400px;}
-			.brandNav .child img{width: 100px;height: 100px;}
-		}
-		
-		@media only screen and (max-width: 1024px){
-			.w90{margin: 0 2%;}
-			.brandNav{margin-top:10px;height: 160px;}
-			.brandNav .child img{width: 100px;height: 100px;}
-			
-			.brandNavPic{display: none;}
-		}
-		@media only screen and (max-width: 768px){
-			.w90{margin: 0 2%;}
-			.brandNav{margin-bottom:20px;height: 120px;}
-			.brandNav .child img{width: 75px;height: 75px;}
-			.brandNav .child{padding: 20px 0;}
-		}
-		@media only screen and (max-width: 500px){
-			.brandNav{height: auto;margin-bottom: 0;}
-			.brandNav .child{padding: 0;margin: 20px 0;width: 33.33%!important;}
-			.brandNav .child img{width: 70px;height: 70px;}
-			
-			.brandNav .child.swiper-slide-active:before{width: 30px;height: 3px;}
-			
-			.brandNav .arrow{display: none;}
-			.brandNav .arrow img {width: 12px;height: 20px;}
-			.brandNav .cont{flex-wrap: wrap;}
-			.brandNav .swiper-wrapper{display: block!important;transform:initial!important;}
-			.brandNav .child.swiper-slide-active:before{display: none;}
-			
-			.brandNavPic{display: none;}
-			.brandNavPic img{min-height: 100px;}
-		}
-		
-		/* @media only screen and (max-width: 500px){
-			.brandNav .child img{width: 42px;height: 42px;}
-		} */
-	</style>
-
 <body>
 	<div id="app">
 		<include src="header.html"></include>
-		<include src="banner.html"></include>
+		<!-- <include src="banner.html"></include> -->
 		
-		<div class="borderB1"></div>
-		
-		<div class="w90 pdb80">
-			<div class="brandNav center pr">
-				<!-- <div class="cont clearfix color6 swiper-container" style="flex-wrap: nowrap;">
-					<div class="swiper-wrapper ">
-						<div class="swiper-slide child" @mouseenter="enter(index)" @mouseleave="leave()"  v-for="(item,index) in mainData" :key="index">
-							<a :href="'product.html?id='+item.id">
-								<img :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''" >
-							</a>
-						</div>
-						<div class="swiper-slide child"  v-for="(item,index) in brandData" :key="index">
-							<a >
-								<img src="images/brandl-img-01.jpg" >
-							</a>
+		<div class="itemBox flexCenter">
+			<div class="brandItem" @mouseenter="enter(i)" @mouseleave="leave(i)" :class="i==index?'on':''" v-for="(item,i) in mainData" :key="i">
+				<a :href="'product.html?id='+item.id+'&behavior='+item.behavior">
+					<img :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''" >
+				</a>
+			</div>
+		</div>
+		<div class="brandNav flex">
+			<!-- <div class="brandNavPic" v-for="(item,i) in mainData" :key="i" @mouseenter="active(i)" @mouseleave="noActive(i)">
+				<img class="w" :src="item.bannerImg[0].url" >
+			</div> -->
+			<div class="brandNavPic brandNavPic1"
+			@mouseenter="active(index)" @mouseleave="noActive(index)" v-for="(item,index) in mainData" :key="index"
+			:style="{backgroundImage:'url('+ item.headImg[0].url +')'}">
+				<!-- <img class="w" :src="mainData[index]&&mainData[index].headImg&&mainData[index].headImg[0]?mainData[index].headImg[0].url:''" > -->
+				<div class="navMask flexCenter">
+					<div class="b-w flexCenter">
+						<div class="b-wCon">
+							<h1 class="avoidOverflow">{{item.title}}</h1>
+							<p class="avoidOverflow3">{{item.description}}</p>
 						</div>
 					</div>
-				</div> -->
-				<!-- 轮播效果 -->
+				</div>
+			</div>
+		</div>
+		
+		<div class="brandNavM">
+			<!-- <div class="brandNavPic" v-for="(item,i) in mainData" :key="i" @mouseenter="active(i)" @mouseleave="noActive(i)">
+				<img class="w" :src="item.bannerImg[0].url" >
+			</div> -->
+			<div class="brandNavPic"
+			 v-for="(item,index) in mainData" :key="index">
+				<img class="w" :src="mainData[index]&&mainData[index].headImg&&mainData[index].headImg[0]?mainData[index].headImg[0].url:''" >
+				<div class="navMask flexCenter">
+					<div class="b-w flexCenter">
+						<div class="b-wCon">
+							<h1 class="avoidOverflow">{{item.title}}</h1>
+							<p class="avoidOverflow3">{{item.description}}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+		
+		<!-- <div class="w90 pdb80">
+			<div class="brandNav center pr">
+				轮播效果
 				<div class="cont clearfix color6 brandItemBox">
 					<div class="itemBox">
 						<div class="brandItem child" @mouseenter="enter(i)" @mouseleave="leave(i)"  v-for="(item,i) in mainData" :key="i" :class="i==index?'brandItem-active':''">
@@ -179,14 +81,14 @@
 						</div>
 					</div>
 				</div>
-				<!-- 左右按钮 -->
+				左右按钮
 				<div class="arrow prev" @click="btn(-1)"><img src="images/icon-left.png" ></div>
 				<div class="arrow next" @click="btn(1)"><img src="images/icon-right.png" ></div>
 			</div>
 			<div class="brandNavPic">
 				<img class="w" :src="mainData[index]&&mainData[index].bannerImg&&mainData[index].bannerImg[0]?mainData[index].bannerImg[0].url:''" >
 			</div>
-		</div>
+		</div> -->
 		
 		
 		<!-- <div class="pdlr2 pdb80">
@@ -216,36 +118,7 @@
 		
 	</div>
 </body>
-<!-- 
-<script type="text/javascript">
-	window.onload = function () {
-	   $(function(){
-		   
-		  //  var swiper = new Swiper('.brandNav .cont', {
-				// pagination: '.swiper-pagination',
-				// nextButton: '.brandNav .prev',
-				// prevButton: '.brandNav .next',
-				// slidesPerView: 5,
-		  //  });
-		  var swiper = new Swiper('.brandNav .cont', {
-		  			pagination: '.swiper-pagination',
-		  			nextButton: '.brandNav .next',
-		  			prevButton: '.brandNav .prev',
-		  			slidesPerView:5,
-		  			centeredSlides: true,
-		  			paginationClickable: true,
-		  			// spaceBetween: 30,
-		  			observer:true,//修改swiper自己或子元素时，自动初始化swiper
-		  			observeParents:true,//修改swiper的父元素时，自动初始化swiper
-		  			//initialSlide: 0  //第一张图显示位置
-					// slidesPerGroup:1,
-		  });
-		   
-	   }); 
-	}
-	
-</script> -->
-	
+
 	<script type="text/javascript">
 		var app = new Vue({
 		    el: '#app',
@@ -267,6 +140,7 @@
 						pagesize:6,
 						is_page: true,
 					},
+					bannerTimer:null
 		        }
 		    },
 			
@@ -276,35 +150,93 @@
 			},
 			
 		    methods: {
+				
+				autoBanner(){
+					const self = this;
+					self.bannerTimer = setInterval(function(){
+						self.changeBanner('+');
+					},3000)
+				},
+				
+				//自动轮播
+				changeBanner: function(type) {
+					var self = this;
+					if(type=='+'){
+						self.index += 1;
+					}else if((type=='-')){
+						self.index -= 1;
+					};
 					
-					btn(i){
+					if(self.index<0){
+						self.index = self.mainData.length-1
+					};
+					if(self.index==self.mainData.length){
+						self.index = 0
+					};
+					
+					for(var i=0; i<self.mainData.length; i++){
+						if(i == self.index){
+							$('.brandNavPic1 .navMask').eq(i).css({opacity:'1'});
+						}else{
+							$('.brandNavPic1 .navMask').eq(i).css({opacity:'0'});
+						}
+					}
+					$('.brandNavPic1').eq(self.index).css({width:'65%'}).siblings().css({width:'8.33%'});
+				},
+					
+					active(index){
 						const self = this;
-						if(self.index+i < 0 || self.index+i > self.mainData.length-1) return;
-						self.index = self.index+i;
-						console.log(self.index)
-						if(self.index >= 5 && i == 1){
-							for(var i=0;i<=self.mainData.length-1;i++){
-								if(i <= self.index-5){$('.itemBox .brandItem').eq(i).css({display:'none'})}
+						self.index = index;
+						clearInterval(self.bannerTimer);
+						for(var i=0; i<self.mainData.length; i++){
+							if(i == index){
+								$('.brandNavPic1 .navMask').eq(i).css({opacity:'1'});
+							}else{
+								$('.brandNavPic1 .navMask').eq(i).css({opacity:'0'});
 							}
-						}else if(self.index <= self.mainData.length-5 && i == -1){
-							for(var i=0;i<=self.mainData.length-1;i++){
-								if(i >= self.index){$('.itemBox .brandItem').eq(i).css({display:'block'})}
-							}
+						}
+						$('.brandNavPic1').eq(index).css({width:'65%'}).siblings().css({width:'8.33%'});
+					},
+					
+					noActive(i){
+						const self = this;
+						self.autoBanner();
+						for(var i=0; i<self.mainData.length; i++){
+							$('.brandNavPic1').eq(i).css({width:'16.66%'});
+							$('.brandNavPic1 .navMask').eq(i).css({opacity:'0'});
 						}
 					},
 				
+					
+					// btn(i){
+					// 	const self = this;
+					// 	if(self.index+i < 0 || self.index+i > self.mainData.length-1) return;
+					// 	self.index = self.index+i;
+					// 	console.log(self.index)
+					// 	if(self.index >= 5 && i == 1){
+					// 		for(var i=0;i<=self.mainData.length-1;i++){
+					// 			if(i <= self.index-5){$('.itemBox .brandItem').eq(i).css({display:'none'})}
+					// 		}
+					// 	}else if(self.index <= self.mainData.length-5 && i == -1){
+					// 		for(var i=0;i<=self.mainData.length-1;i++){
+					// 			if(i >= self.index){$('.itemBox .brandItem').eq(i).css({display:'block'})}
+					// 		}
+					// 	}
+					// },
+				
 				enter(index){
 					const self = this;
-					console.log(index)
+					clearInterval(self.bannerTimer);
 					if(self.index!=index){
 						self.index = index;
 					}
+					self.active(index);
 				},
 				
 				leave(index){
 					const self = this;
-					console.log(2323)
 					self.index = index;
+					self.noActive(index);
 				},
 				
 				getMainData() {
@@ -325,6 +257,8 @@
 							self.mainData.push.apply(self.mainData,res.info.data);
 							self.paginate['count'] = res.info.total;
 							window.base.computePageArr(self);
+							
+							self.autoBanner();
 						} else {
 							alert('没有数据')
 						};	
@@ -337,10 +271,10 @@
 				
 				linkTo(item) {
 					var self = this;
-					console.log(item);
+					// console.log(item);
 					self.linkPage = item;
 					window.base.linkTo(self);
-					console.log(self.pageArray)
+					// console.log(self.pageArray)
 				},
 				
 				changePage(e) {

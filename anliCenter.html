@@ -15,6 +15,7 @@
 		<link type="text/css" rel="stylesheet" href="css/public.css">
 		<link type="text/css" rel="stylesheet" href="css/index.css">
 		<link type="text/css" rel="stylesheet" href="css/orderNav.css">
+		<link type="text/css" rel="stylesheet" href="css/animate.css">
 	</head>
 	<style>
 		.fxBj{position: absolute;top:0;right: 0;bottom: 0;left: 0;background: rgba(0,0,0,0.3);}
@@ -30,17 +31,23 @@
 		.fixArrow{position: absolute;top: -4px;left: 34.8%;z-index: 2;width: 15%;height: 103%;background: url(images/BigArrow-icon3.png) 0 0/100% 100%;}
 		.ind-dynamic>div:nth-of-type(2n) .fixArrow{left: auto;right: 34.8%;background-image: url(images/BigArrow-icon4.png);}
 		
+		.news2{display: none;}
+		
 		@media only screen and (max-width: 1024px){
 			.ind-dynamic{margin-top: 70px;}
 			.ind-dynamic .item{margin-bottom: 60px;}
 			.ind-dynamic .item .imgBox{height: 252px;}
 		}
 		@media only screen and (max-width: 1000px){
-			.orderNavTop{top: 50px;}
+			.orderNavTop{top: 80px;}
 		}
 		@media only screen and (max-width: 980px){
 			.orderNavTop{width: 90%;left: 5%;display: flex;flex-wrap: wrap;}
 			.orderNavTop .tt{width: 25%;height: 40px;}
+		}
+		@media only screen and (max-width: 800px){
+			.news2{display: block;}
+			.news1{display: none;}
 		}
 		@media only screen and (max-width: 768px){
 			.ind-dynamic{margin-top: 90px;}
@@ -74,6 +81,8 @@
 			
 			.fixArrow{left: 42%;}
 			.ind-dynamic>div:nth-of-type(2n) .fixArrow{right: 42%;}
+			
+			.orderNavTop{top: 50px;}
 		}
 		@media only screen and (max-width: 320px){
 			.orderNavTop{width: 100%;left: 0;}
@@ -84,7 +93,7 @@
 	<div id="app">
 		<include src="header.html"></include>
 		
-		<div class="w1200 pdb80">
+		<div class="pdb80 pdt40">
 			<!-- <div class="orderNav flexCenter borderB1" id="orderNav" v-show="!isCollapse">
 				<span class="tt flexCenter" v-for="item in labelData"
 				:class="currId==item.id?'on':''" @click="changeCurr(item.id)">
@@ -122,7 +131,7 @@
 			</div>
 		
 			<!-- 案例新闻 -->
-			<div class="ind-dynamic pdt40">
+			<!-- <div class="ind-dynamic pdt40">
 				<div v-for="(item,index) in mainData">
 					<div class="item flexRowBetween" v-if="index%2==0">
 						<a class="flexRowBetween" :href="'newsdetail.html?id='+item.id+'&type=case'">
@@ -151,7 +160,49 @@
 						</a>
 					</div>
 				</div>
+			</div> -->
+			
+			
+			<div class="news w1660 news1" v-for="(item,index) in mainData">
+				
+				<div class="newsItem flexRowBetween" v-if="index%2==0" :id="index==0?'news1':'news3'">
+					<div class="L LL">
+						<img :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''" >
+					</div>
+					<div class="R RR">
+						<h1>{{item.title}}</h1>
+						<p class="avoidOverflow5">{{item.description}}</p>
+						<a class="moreBtn"  :href="'newsdetail.html?id='+item.id+'&type=case'">READ MORE ></a>
+					</div>
+				</div>
+				<div class="newsItem flexRowBetween" v-if="index%2!=0" :id="index==1?'news2':'news4'">
+					<div class="R LL">
+						<h1>{{item.title}}</h1>
+						<p class="avoidOverflow5">{{item.description}}</p>
+						<div class="moreBtn">READ MORE ></div>
+					</div>
+					<div class="L RR">
+						<img src="images/home-img03.png" >
+					</div>
+				</div>
 			</div>
+			
+			
+			
+			<div class="news w1660 news2" v-for="(item,index) in mainData">
+				
+				<div class="newsItem flexRowBetween" >
+					<div class="L ">
+						<img :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''" >
+					</div>
+					<div class="R ">
+						<h1>{{item.title}}</h1>
+						<p class="avoidOverflow5">{{item.description}}</p>
+						<a class="moreBtn"  :href="'newsdetail.html?id='+item.id+'&type=case'">READ MORE ></a>
+					</div>
+				</div>
+			</div>
+			
 			
 			<div class="all-pages mgt30">
 				<span class="no-prev flexCenter" ><img data-type="back" @click="changePage" class="arrow" src="images/case-icon5.png"></span>
@@ -164,6 +215,33 @@
 		
 	</div>
 </body>
+
+<script type="text/javascript">
+	$(window).scroll(function(){
+		
+		if($('#news1').offset().top + $('#news1').height()*0.35 < ($(window).scrollTop() + $(window).height()) &&
+		$('#news1').offset().top + $('#news1').height()*0.35 > ($(window).scrollTop() + $(window).height())-50){
+			$('#news1 .LL').addClass('animated fadeInLeft');
+			$('#news1 .RR').addClass('animated fadeInRight');
+		}
+		if($('#news2').offset().top + $('#news2').height()*0.35 < ($(window).scrollTop() + $(window).height()) &&
+		$('#news2').offset().top + $('#news2').height()*0.35 > ($(window).scrollTop() + $(window).height())-50){
+			$('#news2 .LL').addClass('animated fadeInLeft');
+			$('#news2 .RR').addClass('animated fadeInRight');
+		}
+		if($('#news3').offset().top + $('#news3').height()*0.35 < ($(window).scrollTop() + $(window).height()) &&
+		$('#news3').offset().top + $('#news3').height()*0.35 > ($(window).scrollTop() + $(window).height())-50){
+			$('#news3 .LL').addClass('animated fadeInLeft');
+			$('#news3 .RR').addClass('animated fadeInRight');
+		}
+		// if($('#news4').offset().top + $('#news4').height()*0.35 < ($(window).scrollTop() + $(window).height()) &&
+		// $('#news4').offset().top + $('#news4').height()*0.35 > ($(window).scrollTop() + $(window).height())-50){
+		// 	$('#news4 .LL').addClass('animated fadeInLeft');
+		// 	$('#news4 .RR').addClass('animated fadeInRight');
+		// }
+	    
+	})
+</script>
 
 	
 	<script type="text/javascript">
@@ -184,7 +262,7 @@
 					paginate:{
 						count: 0,
 						currentPage: 1,
-						pagesize: 2,
+						pagesize: 4,
 						is_page: true,
 					},
 					isCollapse:false

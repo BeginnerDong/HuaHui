@@ -1,12 +1,12 @@
 <div id="banner_app">
 	<div class="swiperBox">
 		<div class="banner" v-for="(item,index) in bannerData" v-if="index==banner_index" >
-			<a :href="item.url"><img :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''" /></a>
+			<a :href="item.url"><img :src="item&&item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''" /></a>
 		</div>
 		
 		<!-- 导航点 -->
 		<div class="banBtnNav flexCenter">
-			<span v-for="(item,index) in bannerData" :class="index==banner_index?'active':''" :data-index="index" @click="toBannerOne"></span>
+			<span v-for="(item,index) in bannerData" :class="index==banner_index?'active':''" :data-index="index" @mouseenter="toBannerOne"></span>
 		</div>
 		
 	</div>
@@ -103,7 +103,7 @@
 			
 			toBannerOne:function(e){
 				const self = this;
-				console.log('e',e)
+				// console.log('e',e)
 				var index = parseInt(e.target.dataset.index);
 				self.banner_index = index;
 			},
@@ -112,7 +112,6 @@
 	    	changeBanner: function(type) {
 	    		var self = this;
 	    		if(type=='+'){
-	    			console.log(8852)
 	    			self.banner_index += 1;
 	    		}else if((type=='-')){
 	    			self.banner_index -= 1;
@@ -124,7 +123,7 @@
 	    		if(self.banner_index==self.bannerData.length){
 	    			self.banner_index = 0
 	    		};	
-	    		console.log('self.banner_index',self.banner_index);
+	    		// console.log('self.banner_index',self.banner_index);
 	    	},
 			// 
 			// intoPath:function(url,id){

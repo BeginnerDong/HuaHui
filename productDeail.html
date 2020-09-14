@@ -42,7 +42,7 @@
 		<div id="app">
 			<include src="header.html"></include>
 
-			<div class="product-head w1200 flexRowBetween borderB1">
+			<div class="product-head w1660 flexRowBetween borderB1">
 				<div class="ll flexCenter">
 					<div class="view">
 						<div class="swiper-container">
@@ -91,12 +91,11 @@
 
 				</div>
 			</div>
-			<div class="borderB1"></div>
 
-			<div class="w1100">
+			<div class="w1200">
 				<div class="orderNav flexCenter">
-					<span class="tt flexCenter" :class="navCurr==1?'on':''" @click="changeNavCurr('1')">参数规格</span>
-					<span class="tt flexCenter" :class="navCurr==2?'on':''" @click="changeNavCurr('2')" v-if="mainData.description!=''">视频</span>
+					<span class="tt flexCenter hand" :class="navCurr==1?'on':''" @click="changeNavCurr('1')">参数规格</span>
+					<span class="tt flexCenter hand" :class="navCurr==2?'on':''" @click="changeNavCurr('2')" v-if="mainData.description!=''">视频</span>
 				</div>
 				<div class="xqCont">
 					<div class="xqPic" v-show="navCurr==1">

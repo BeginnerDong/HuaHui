@@ -15,6 +15,7 @@
 		<link type="text/css" rel="stylesheet" href="css/public.css">
 		<link type="text/css" rel="stylesheet" href="css/index.css">
 		<link type="text/css" rel="stylesheet" href="css/orderNav.css">
+		<link type="text/css" rel="stylesheet" href="css/animate.css">
 	</head>
 	<style>
 		.fxBj{position: absolute;top:0;right: 0;bottom: 0;left: 0;background: rgba(0,0,0,0.3);}
@@ -35,7 +36,7 @@
 	<div id="app">
 		<include src="header.html"></include>
 		
-		<div class="w1200 pdb80">
+		<div class="w1660 pdb80">
 			<!-- <div class="orderNav flexCenter borderB1">
 				<span class="tt flexCenter" v-for="item in labelData" 
 				:class="currId==item.id?'on':''" @click="changeCurr(item.id)">
@@ -46,8 +47,34 @@
 			</div> -->
 		
 			<!-- 案例新闻 -->
+			
 			<div class="ind-dynamic pdt40">
-				<div v-for="(item,index) in mainData">
+				
+				<div class="news" v-for="(item,index) in mainData">
+					
+					<div class="newsItem flexRowBetween" v-if="index%2==0">
+						<div class="L animated fadeInLeft">
+							<img :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''" >
+						</div>
+						<div class="R animated fadeInRight">
+							<h1>{{item.title}}</h1>
+							<p class="avoidOverflow5">{{item.description}}</p>
+							<a class="moreBtn"  :href="'newsdetail.html?id='+item.id+'&type=case'">READ MORE ></a>
+						</div>
+					</div>
+					<div class="newsItem flexRowBetween" v-if="index%2!=0">
+						<div class="R">
+							<h1>{{item.title}}</h1>
+							<p class="avoidOverflow5">{{item.description}}</p>
+							<div class="moreBtn">READ MORE ></div>
+						</div>
+						<div class="L">
+							<img src="images/home-img03.png" >
+						</div>
+					</div>
+				</div>
+				
+				<!-- <div v-for="(item,index) in mainData">
 					<div class="item flexRowBetween" v-if="index%2==0">
 						<a class="flexRowBetween" :href="'newsdetail.html?id='+item.id">
 							<div class="texbox">
@@ -57,7 +84,7 @@
 							</div>
 							<div class="fixArrow"></div>
 							<div class="imgBox">
-								<!-- <img src="images/BigArrow-icon3.png" class="imgIcon"> -->
+								<img src="images/BigArrow-icon3.png" class="imgIcon">
 								<img :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''" >
 							</div>
 						</a>
@@ -75,7 +102,7 @@
 							<div class="fixArrow"></div>
 						</a>
 					</div>
-				</div>
+				</div> -->
 			</div>
 			
 			<div class="all-pages mgt30">

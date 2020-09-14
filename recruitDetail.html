@@ -23,13 +23,13 @@
 		<div class="f5bj jobName">
 			<div class="w1100 pdlr4 flexRowBetween">
 				<div class="JobTit">
-					<h1 class="name ftn fs20">{{mainData.title}}</h1>
+					<h1 class="name ftn">{{mainData.title}}</h1>
 					<p class="money">{{mainData.salary}}</p>
 					<p class="lable pdb10">{{mainData.region}} {{mainData.experience}} {{mainData.education}}</p>
 					<p>{{mainData.duration}}</p>
 				</div>
 				<div class="rr">
-					<button class="btn" type="button">投递简历</button>
+					<!-- <button class="btn" type="button">投递简历</button> -->
 				</div>
 			</div>
 		</div>
@@ -63,7 +63,7 @@
 					<p>{{mainData.address}}</p>
 				</div>
 				<div class="jobMap flexEnd">
-					<div class="map"><img :src="mainData.bannerImg&&mainData.bannerImg[0]?mainData.bannerImg[0].url:''" ></div>
+					<div class="map"><img :src="mainData.mainImg&&mainData.mainImg[0]?mainData.mainImg[0].url:''" ></div>
 				</div>
 				
 			</div>
@@ -117,8 +117,9 @@
 		});
 	</script>
 	<style type="text/css">
-		.jobName{padding: 50px 0;}
-		.jobName .money{margin: 30px 0 20px 0;color: #c11719;font-size: 20px;}
+		.jobName{padding: 50px 0;font-size: 18px;}
+		.jobName .name{font-size: 28px;}
+		.jobName .money{margin: 30px 0 20px 0;color: #c11719;font-size: 26px;}
 		.jobName .rr .btn{width: 120px;height: 44px;line-height: 44px;text-align: center;background: #C11719;color: #fff;border-radius: 5px;font-size: 15px;}
 		.T-title{position: relative;margin: 50px 0 30px 0;}
 		.T-title::after{content: '';width: 100%;height: 1px;background: #eee;position: absolute;top: 50%;left: 0;transform: translateY(-50%);}

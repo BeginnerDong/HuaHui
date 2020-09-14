@@ -18,18 +18,53 @@
 		<link type="text/css" rel="stylesheet" href="css/about.css">
 		<link type="text/css" rel="stylesheet" href="css/jobPin.css">
 		<link type="text/css" rel="stylesheet" href="css/swiper.min.css">
+		<link type="text/css" rel="stylesheet" href="css/animate.css">
 	</head>
 	<style>
 		.MedalPic{margin-bottom: 0;}
-		.MedalPic .TwoPic .box{height: 240px;}
 		.MedalPic .half{width: auto;}
 		.MedalPic .TwoPic .box:first-child{margin-bottom: 0;}
 		
+		.pdt70{padding-top: 70px;}
+		.mb70{margin-bottom: 70px;}
+		
+		.aboutBg{height: 650px;}
+		.aboutBg img{width: 100%;height: 650px;position: fixed;top: 0;margin-top: 123px;}
+		.bg-white{background-color: #fff;}
+		.z-10{z-index: 10;}
+		.p-r{position: relative;}
+		
+		.ArrowIcon span{border-radius: 50%;transition: all 0.5s;}
+		.ArrowIcon span:hover{background-color: #C11719;}
+		
+		
+		@media only screen and (max-width: 1200px){
+			.aboutBg{height: 600px;}
+			.aboutBg img{height: 600px;margin-top: 123px;}
+		}
 		@media only screen and (max-width: 1024px){
 			.MedalPic .TwoPic .box{height: 195px;}
 		}
+		@media only screen and (max-width: 1000px){
+			.aboutBg{height: 450px;}
+			.aboutBg img{height: 450px;margin-top: 123px;}
+		}
+		@media only screen and (max-width: 800px){
+			.mb70{margin-bottom: 40px;}
+			.pdt70{padding-top: 40px;}
+			.aboutBg{height: 350px;}
+			.aboutBg img{height: 350px;margin-top: 80px;}
+		}
 		@media only screen and (max-width: 768px){
 			.MedalPic .TwoPic .box{height: 145px;}
+		}
+		@media only screen and (max-width: 600px){
+			.aboutBg{height: 300px;}
+			.aboutBg img{height: 300px;}
+		}
+		@media only screen and (max-width: 500px){
+			.aboutBg{height: 230px;}
+			.aboutBg img{height: 230px;margin-top: 50px;}
 		}
 		@media only screen and (max-width: 420px){
 			.MedalPic .TwoPic .box{height: 78px;}
@@ -45,154 +80,173 @@
 	<div id="app">
 		<include src="header.html"></include>
 		
-		<div class="f5bj">
-			<div class="w1200 pdb80">
-				<div class="pubtit flexCenter">
-					<img class="icon" src="images/about-icon.png" >
-					<h1 class="title">公司简介</h1>
-				</div>
-				<div class="detailePag">
-					<div class="inforCont pdb80">
-						<div class="content ql-editor " style="clear: both;">
-							<p class="p1 " v-html="mainData.content"></p>
-						</div>
-					</div>
-				</div>
-				<div class="companyPic pr">
-					<div>
-						<!-- Swiper -->
-						<div class="swiper-container">
-						    <ul class="swiper-wrapper">
-								<li class="swiper-slide" v-for="item in mainData.mainImg"><img :src="item.url"></li>
-								<!-- <li class="swiper-slide"><img src="images/about-img.jpg"></li>
-								<li class="swiper-slide"><img src="images/about-img.jpg"></li>
-								<li class="swiper-slide"><img src="images/about-img.jpg"></li> -->
-						    </ul>
-							
-							<!--左右箭头 -->
-							<div class="ArrowIcon flexRowBetween">
-								<span class="swiper-button-prev"><img class="icon" src="images/about-icon6.png" ></span>
-								<span  class="swiper-button-next"><img class="icon" src="images/about-icon7.png" ></span>
+		<div class="aboutBg">
+			<img src="images/video.png" >
+		</div>
+		
+		<div class="bg-white p-r">
+			<div class="">
+				<div class="w1660 pdb80 pdt70 detailBox">
+					<!-- <div class="pubtit flexCenter">
+						<img class="icon" src="images/about-icon.png" >
+						<h1 class="title">公司简介</h1>
+					</div> -->
+					<div class="detailePag LL">
+						<div class="inforCont pdb20">
+							<div class="content ql-editor " style="clear: both;">
+								<p class="p1 " v-html="mainData.content"></p>
 							</div>
 						</div>
 					</div>
-				</div>
-			</div>
-		</div>
-		
-		<div class="w1200 pdb80">
-			<div class="pubtit flexCenter">
-				<img class="icon" src="images/about-icon1.png" >
-				<h1 class="title">公司获奖</h1>
-			</div>
-			<div class="MedalPic pr oh">
-				<!-- Swiper -->
-				<div class="swiper-container2">
-					<ul class="half TwoPic swiper-wrapper">
-						<li class="box swiper-slide" v-for="item in rewardData">
-							<img class="pic" :src="item.mainImg[0].url">
-							<p class="text center flexCenter">
-								<em>{{item.title}}</em>
-							</p>
-						</li>
-					</ul>
-					
-					<!--左右箭头 -->
-					<div class="ArrowIcon flexRowBetween">
-						<span class="btn swiper-button-prev"><img class="icon" src="images/about-icon6.png" ></span>
-						<span  class="btn swiper-button-next"><img class="icon" src="images/about-icon7.png" ></span>
-					</div>
-				</div>
-			</div>
-			<!-- <div class="MedalPic flexRowBetween">
-				<div class="half TwoPic">
-					<div class="box flexCenter" v-if="rewardData[0]">
-						<img class="pic" :src="rewardData&&rewardData[0]&&rewardData[0].mainImg&&rewardData[0].mainImg[0]?rewardData[0].mainImg[0].url:''" >
-						<p class="text center flexCenter">
-							<em>{{rewardData&&rewardData[0]?rewardData[0].title:''}}</em>
-						</p>
-					</div>
-					<div class="box flexCenter" v-if="rewardData[1]">
-						<img class="pic" :src="rewardData&&rewardData[1]&&rewardData[1].mainImg&&rewardData[1].mainImg[0]?rewardData[1].mainImg[0].url:''" >
-						<p class="text center flexCenter">
-							<em>{{rewardData&&rewardData[1]?rewardData[1].title:''}}</em>
-						</p>
-					</div>
-				</div>
-				<div class="half onePic" v-if="rewardData[2]">
-					<div class="box flexCenter">
-						<img class="pic" class="" :src="rewardData&&rewardData[2]&&rewardData[2].mainImg&&rewardData[2].mainImg[0]?rewardData[2].mainImg[0].url:''">
-						<p class="text center flexCenter">
-							<em>{{rewardData&&rewardData[2]?rewardData[2].title:''}}</em>
-						</p>
-					</div>
-				</div>
-			</div> -->
-		</div>
-		<div class="f5bj pdb80">
-			<div class="w1200">
-				<div class="pubtit flexRowBetween">
-					<div></div>
-					<div class="flexCenter">
-						<img class="icon" src="images/about-icon2.png" >
-						<h1 class="title">招聘信息</h1>
-					</div>
-					<div><a class="flexEnd more" href="recruit.html">更多<img class="arrowR" src="images/home-icon2.png" ></a></div>
-				</div>
-				<div class="jobPin w1200">
-					<ul class="flexRowBetween">
-						<li v-for="(item,index) in recruitData">
-							<a :href="'recruitDetail.html?id='+item.id">
-								<div class="infor">
-									<img class="icon" src="images/about-icon4.png" >
-									<h2 class="tit">{{item.title}}</h2>
-									<p>{{item.description}}</p>
+					<div class="companyPic pr RR">
+						<div>
+							<!-- Swiper -->
+							<div class="swiper-container">
+							    <ul class="swiper-wrapper">
+									<li class="swiper-slide" v-for="item in mainData.mainImg"><img :src="item.url"></li>
+							    </ul>
+								
+								<!--左右箭头 -->
+								<div class="ArrowIcon flexRowBetween">
+									<span class="swiper-button-prev"><img class="icon" src="images/about-icon6.png" ></span>
+									<span  class="swiper-button-next"><img class="icon" src="images/about-icon7.png" ></span>
 								</div>
-							</a>
-						</li>
-					</ul>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
-		</div>
-		
-		<div class="w1200 pdb80">
-			<div class="pubtit flexCenter">
-				<img class="icon" src="images/about-icon5.png" >
-				<h1 class="title">人才储备</h1>
-			</div>
-			<div class="jianliMsg boxShaow">
-				<div>
-					<ul>
-						<li>
-							<span class="ll">姓名</span>
-							<div class="rr">
-								<input type="text" name="" v-model="submitData.title" placeholder="请输入姓名" />
-							</div>
-						</li>
-						<li>
-							<span class="ll">电话</span>
-							<div class="rr">
-								<input type="text" name="" v-model="submitData.phone" placeholder="请输入联系电话" onkeyup="this.value=this.value.replace(/\D/g,'')" />
-							</div>
-						</li>
-						<li>
-							<span class="ll">自我评价</span>
-							<div class="rr">
-								<textarea style="padding: 0;" type="text" name="" v-model="submitData.description" placeholder="请写出自身亮点，让HR第一眼关注你"></textarea>
-				 			</div>
-						</li>
-						<li>
-							 <span class="ll">投递简历</span>
-							<div class="rr flex" style="flex-wrap: wrap;">
-								<input class="" type="file" @change="uploadFile" enctype="multipart/form-data">
-									<!-- <img src="images/about-icon8.jpg" > -->
-								</input>
-							</div>
-						</li>
-					</ul>
+			
+			<div class="w1660 pdb80">
+				<!-- <div class="pubtit flexCenter">
+					<img class="icon" src="images/about-icon1.png" >
+					<h1 class="title">公司获奖</h1>
+				</div> -->
+				<div class="allH1 mb70">
+					<h1><span>公司获奖</span> Awards</h1>
 				</div>
-				<div class="submitbtn pdt30">
-					<button class="btn" type="button" style="width: 50%;"  @click="!isSending?JustaddMessage():''">提交</button>
+				<div class="MedalPic pr oh">
+					<!-- Swiper -->
+					<div class="swiper-container2 LL">
+						<ul class="half TwoPic swiper-wrapper">
+							<li class="box swiper-slide" v-for="item in rewardData">
+								<img class="pic" :src="item.mainImg[0].url">
+								<p class="text center flexCenter">
+									<em>{{item.title}}</em>
+								</p>
+							</li>
+						</ul>
+						
+						<!--左右箭头 -->
+						<div class="ArrowIcon flexRowBetween">
+							<span class="btn swiper-button-prev"><img class="icon" src="images/about-icon6.png" ></span>
+							<span  class="btn swiper-button-next"><img class="icon" src="images/about-icon7.png" ></span>
+						</div>
+					</div>
+				</div>
+				<!-- <div class="MedalPic flexRowBetween">
+					<div class="half TwoPic">
+						<div class="box flexCenter" v-if="rewardData[0]">
+							<img class="pic" :src="rewardData&&rewardData[0]&&rewardData[0].mainImg&&rewardData[0].mainImg[0]?rewardData[0].mainImg[0].url:''" >
+							<p class="text center flexCenter">
+								<em>{{rewardData&&rewardData[0]?rewardData[0].title:''}}</em>
+							</p>
+						</div>
+						<div class="box flexCenter" v-if="rewardData[1]">
+							<img class="pic" :src="rewardData&&rewardData[1]&&rewardData[1].mainImg&&rewardData[1].mainImg[0]?rewardData[1].mainImg[0].url:''" >
+							<p class="text center flexCenter">
+								<em>{{rewardData&&rewardData[1]?rewardData[1].title:''}}</em>
+							</p>
+						</div>
+					</div>
+					<div class="half onePic" v-if="rewardData[2]">
+						<div class="box flexCenter">
+							<img class="pic" class="" :src="rewardData&&rewardData[2]&&rewardData[2].mainImg&&rewardData[2].mainImg[0]?rewardData[2].mainImg[0].url:''">
+							<p class="text center flexCenter">
+								<em>{{rewardData&&rewardData[2]?rewardData[2].title:''}}</em>
+							</p>
+						</div>
+					</div>
+				</div> -->
+			</div>
+			<div class="pdb80">
+				<div class="w1660">
+					<!-- <div class="pubtit flexRowBetween">
+						<div></div>
+						<div class="flexCenter">
+							<img class="icon" src="images/about-icon2.png" >
+							<h1 class="title">招聘信息</h1>
+						</div>
+						<div><a class="flexEnd more" href="recruit.html">更多<img class="arrowR" src="images/home-icon2.png" ></a></div>
+					</div> -->
+					<div class="allH1 mb70">
+						<h1><span>招聘信息</span> Recruit</h1>
+					</div>
+					<div class="jobPin w1660">
+						<ul class="flex LL">
+							<!-- <li v-for="(item,index) in recruitData">
+								<a :href="'recruitDetail.html?id='+item.id">
+									<div class="infor">
+										<img class="icon" src="images/about-icon4.png" >
+										<h2 class="tit">{{item.title}}</h2>
+										<p>{{item.description}}</p>
+									</div>
+								</a>
+							</li> -->
+							<li class="f5bj" v-for="(item,index) in recruitData" :key="index">
+								<div class="zp">
+									<img src="images/about-img.jpg" >
+									<div class="txt">
+										<div class="tit avoidOverflow4">{{item.title}}</div>
+										<div class="con">{{item.description}}</div>
+										<a :href="'recruitDetail.html?id='+item.id" class="more hand">了解更多 ></a>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			
+			<div class="w1660 pdb80 bto">
+				<!-- <div class="pubtit flexCenter">
+					<img class="icon" src="images/about-icon5.png" >
+					<h1 class="title">人才储备</h1>
+				</div> -->
+				<div class="jianliMsg boxShaow pdt20 LL">
+					<div>
+						<ul>
+							<li>
+								<span class="ll">姓名</span>
+								<div class="rr">
+									<input type="text" name="" v-model="submitData.title" placeholder="请输入姓名" />
+								</div>
+							</li>
+							<li>
+								<span class="ll">电话</span>
+								<div class="rr">
+									<input type="text" name="" v-model="submitData.phone" placeholder="请输入联系电话" onkeyup="this.value=this.value.replace(/\D/g,'')" />
+								</div>
+							</li>
+							<li>
+								<span class="ll">自我评价</span>
+								<div class="rr">
+									<textarea style="padding: 0;" type="text" name="" v-model="submitData.description" placeholder="请写出自身亮点，让HR第一眼关注你"></textarea>
+					 			</div>
+							</li>
+							<li>
+								 <span class="ll">投递简历</span>
+								<div class="rr flex" style="flex-wrap: wrap;">
+									<input class="" type="file" @change="uploadFile" enctype="multipart/form-data">
+										<!-- <img src="images/about-icon8.jpg" > -->
+									</input>
+								</div>
+							</li>
+						</ul>
+					</div>
+					<div class="submitbtn pdt40">
+						<button class="moreBtn" type="button"  @click="!isSending?JustaddMessage():''">提交</button>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -201,8 +255,35 @@
 		
 	</div>
 </body>
+<script type="text/javascript">
+		$(window).scroll(function(){
+			if($('.detailBox').offset().top*0.3 + $('.detailBox').height() < ($(window).scrollTop() + $(window).height()) ){
+				$('.detailBox .LL').addClass('animated fadeInLeft');
+				$('.detailBox .RR').addClass('animated fadeInRight');
+			}
+			
+			if($('.jobPin').offset().top + $('.jobPin').height()*0.35 < ($(window).scrollTop() + $(window).height()) &&
+			$('.jobPin').offset().top + $('.jobPin').height()*0.35 > ($(window).scrollTop() + $(window).height())-50){
+				// console.log('高度',$('.'+one).height()*0.35)
+				$('.jobPin .LL').addClass('animated fadeInUp');
+			}
+			
+			if($('.MedalPic').offset().top + $('.MedalPic').height()*0.35 < ($(window).scrollTop() + $(window).height()) &&
+			$('.MedalPic').offset().top + $('.MedalPic').height()*0.35 > ($(window).scrollTop() + $(window).height())-50){
+				// console.log('高度',$('.'+one).height()*0.35)
+				$('.MedalPic .LL').addClass('animated fadeInUp');
+			}
+			
+			if($('.bto').offset().top + $('.bto').height()*0.35 < ($(window).scrollTop() + $(window).height()) &&
+			$('.bto').offset().top + $('.bto').height()*0.35 > ($(window).scrollTop() + $(window).height())-50){
+				// console.log('高度',$('.'+one).height()*0.35)
+				$('.bto .LL').addClass('animated fadeInUp');
+			}
+			
+		})
+</script>
 	
-	<script type="text/javascript" src="js/swiper.min.js"></script>
+	<script src="js/swiper.min.js"></script>
 	<script type="text/javascript">
 		// import 'js/swiper.min.js';
 		var app = new Vue({

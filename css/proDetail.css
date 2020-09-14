@@ -1,15 +1,15 @@
 
-.xqCont{width: 900px;margin: 0 auto;}
+.xqCont{width: 100%;margin: 0 auto;}
 .xqPic img{width: 100%;height: auto;}
 .videoCont{width: 100%;box-sizing: border-box;}
 .videoCont .video{width: 100%;}
 .videoCont img{width: 100%;height: auto;display: block;}
 
 .product-head{padding: 50px 0 60px 0;align-items: flex-start;}
-.product-head .ll{width:45%;height: 450px; overflow: hidden;border: 1px solid #eee;box-sizing: border-box;}
+.product-head .ll{width:45%;height: 600px; overflow: hidden;border: 1px solid #eee;box-sizing: border-box;}
 .product-head .ll img{width: 80%;height: auto; max-height: 100%; display: block;}
-.product-head .rr{width:50%;height: 450px;position: relative;padding-bottom:100px;box-sizing: border-box;}
-.product-head .rr .title{padding-top: 10px;font-size: 20px;line-height: 30px;}
+.product-head .rr{width:50%;height: 600px;position: relative;padding-bottom:100px;box-sizing: border-box;}
+.product-head .rr .title{padding-top: 10px;font-size: 28px;line-height: 30px;}
 .product-head .rr .text2{font-size: 15px;line-height: 26px;padding-top:20px;}
 
 /* 轮播 */

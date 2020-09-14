@@ -17,6 +17,7 @@
 		<link type="text/css" rel="stylesheet" href="css/index.css">
 		<link type="text/css" rel="stylesheet" href="css/swiper.min.css">
 		<link type="text/css" rel="stylesheet" href="css/ind-brand.css">
+		<link type="text/css" rel="stylesheet" href="css/animate.css">
 	</head>
 
 <body>
@@ -24,9 +25,171 @@
 		<include src="header.html"></include>
 		<include src="banner.html"></include>
 		
+		<!-- 公司简介 -->
+		<div class="aboutUs">
+			<div class="allH1 aboutH1">
+				<h1><span>公司简介</span> About Us</h1>
+			</div>
+			<div class="w1660 flexRowBetween jj">
+				<div class="aboutR aboutR2 animated">
+					<video controls="controls" :src="productData&&productData.video&&productData.video[0]&&productData.video[0].url">
+						<source :src="productData&&productData.video&&productData.video[0]&&productData.video[0].url" type="video/mp4"></source>
+						当前浏览器不支持 video直接播放
+					</video>
+				</div>
+				<div class="aboutL animated">
+					<h1>公司简介 <span>About Us</span></h1>
+					<div class="con avoidOverflow6">
+						{{productData.description}}
+					</div>
+					<a class="moreBtn" href="aboutUs.html">READ MORE ></a>
+				</div>
+				<div class="aboutR aboutR1 animated">
+					<video controls="controls" :src="productData&&productData.video&&productData.video[0]&&productData.video[0].url">
+						<source :src="productData&&productData.video&&productData.video[0]&&productData.video[0].url" type="video/mp4"></source>
+						当前浏览器不支持 video直接播放
+					</video>
+				</div>
+			</div>
+		</div>
+		
+		<!-- 经典案例 -->
+		<div class="case">
+			<div class="allH1">
+				<h1><span>经典案例</span> Cases</h1>
+			</div>
+			
+			<div class="flex con con1">
+				<div class="item" v-for="(item,index) in artData" :key="index">
+					<img :src="item&&item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''" >
+					<div class="b-name avoidOverflow">{{item.title}}</div>
+					<div class="caseMask">
+						<div class="b-f">
+							<div class="b-fCon">
+								<h1 class="avoidOverflow">{{item.title}}</h1>
+								<p class="avoidOverflow3">{{item.description}}</p>
+								<a class="hand" :href="'newsdetail.html?id='+item.id">READ MORE ></a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="flex con con2">
+				<!-- Swiper -->
+				<div class="swiper-container">
+				    <ul class="swiper-wrapper">
+						<li class="swiper-slide item" v-for="(item,index) in artData" :key="index">
+							<!-- <img src="images/home-img02.png" > -->
+							<img :src="item&&item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''" >
+							<div class="b-name avoidOverflow">{{item.title}}</div>
+							<div class="caseMask">
+								<div class="b-f">
+									<div class="b-fCon">
+										<h1 class="avoidOverflow">{{item.title}}</h1>
+										<p class="avoidOverflow3">{{item.description}}</p>
+										<a class="hand" :href="'newsdetail.html?id='+item.id">READ MORE ></a>
+									</div>
+								</div>
+							</div>
+						</li>
+				    </ul>
+				</div>
+			</div>
+			
+		</div>
+		
+		<!-- 最新案例 -->
+		<div class="news w1660">
+			<div class="allH1">
+				<h1><span>最新案例</span> News</h1>
+			</div>
+			
+			
+				<div id='news1' class="newsItem flexRowBetween">
+					<div class="L LL">
+						<img :src="newsData&&newsData[0]&&newsData[0].mainImg&&newsData[0].mainImg[0]&&newsData[0].mainImg[0].url" >
+					</div>
+					<div class="R RR">
+						<h1 class="avoidOverflow">{{newsData&&newsData[0]&&newsData[0].title}}</h1>
+						<p class="avoidOverflow5">{{newsData&&newsData[0]&&newsData[0].description}}</p>
+						<a class="moreBtn" :href="'newsdetail.html?id='+newsData&&newsData[0]&&newsData[0].id">READ MORE ></a>
+					</div>
+				</div>
+				<div id='news2' class="newsItem flexRowBetween">
+					<div class="R LL">
+						<h1 class="avoidOverflow">{{newsData&&newsData[1]&&newsData[1].title}}</h1>
+						<p class="avoidOverflow5">{{newsData&&newsData[1]&&newsData[1].description}}</p>
+						<a class="moreBtn" :href="'newsdetail.html?id='+newsData&&newsData[1]&&newsData[1].id">READ MORE ></a>
+					</div>
+					<div class="L RR">
+						<img :src="newsData&&newsData[1]&&newsData[1].mainImg&&newsData[1].mainImg[0]?newsData&&newsData[1].mainImg[0].url:''" >
+					</div>
+				</div>
+				<div id='news3' class="newsItem flexRowBetween">
+					<div class="L LL">
+						<img :src="newsData&&newsData[2]&&newsData[2].mainImg&&newsData[2].mainImg[0]?newsData&&newsData[2].mainImg[0].url:''" >
+					</div>
+					<div class="R RR">
+						<h1 class="avoidOverflow">{{newsData&&newsData[2]&&newsData[2].title}}</h1>
+						<p class="avoidOverflow5">{{newsData&&newsData[2]&&newsData[2].description}}</p>
+						<a class="moreBtn" :href="'newsdetail.html?id='+newsData&&newsData[2]&&newsData[2].id">READ MORE ></a>
+					</div>
+				</div>
+			
+		</div>
+		
+		<!-- 合作品牌 -->
+		<div class="part3 flexRowBetween" id="part3">
+			<div class="L LL">
+				<h1>{{brandCon.title}}</h1>
+				<p class="avoidOverflow6">{{brandCon.description}}</p>
+				<a :href="'product.html?id='+brandCon.id+'&behavior='+brandCon.behavior">READ MORE ></a>
+			</div>
+			<div class="R R1 RR">
+				<div class="flex pdb40 flex-wrap hd">
+					<div class="IconBoxs" 
+					v-for="(item,index) in brandData" :key="index"
+					@mouseenter="enter(index)" @mouseleave="leave()">
+						<div class="IconBox" v-show="index<=5">
+							<!-- <img src="images/news-img3.jpg" class="bg"> -->
+							<img :src="item&&item.headImg&&item.headImg[0]?item.headImg[0].url:''" class="bg">
+							<div class="Icon flexCenter">
+								<!-- <img src="images/brand-img113.png"> -->
+								<img :src="item.mainImg&&item.mainImg[0]&&item.mainImg[0].url">
+							</div>
+						</div>
+						<img src="images/home-img06.png" class="mgl30 qtImg" v-if="index==1" >
+						<img src="images/home-img09.png" class="mgl30 qtImg" v-if="index==3" >
+						<div class="flexCenter mgl30 pr" v-if="index>5">
+							<!-- <img src="images/home-img012.png" class="qtImg"> -->
+							<img :src="brandData[index]&&brandData[index].headImg&&brandData[index].headImg[0]?brandData[index].headImg[0].url:''" class="qtImg">
+							<div class="Icon flexCenter font31 hand">更多 ></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="R R2 RR">
+				<!-- Swiper -->
+				<div class="swiper-container2">
+				    <ul class="swiper-wrapper">
+						<li class="swiper-slide item" v-for="(item,index) in brandData" :key="index">
+							<div class="IconBox">
+								<img :src="item&&item.headImg&&item.headImg[0]?item.headImg[0].url:''" class="bg">
+								<div class="Icon flexCenter">
+									<img :src="item.mainImg&&item.mainImg[0]&&item.mainImg[0].url">
+								</div>
+							</div>
+						</li>
+				    </ul>
+				</div>
+			</div>
+		</div>
+		
+		
 		<!-- 案例新闻 -->
-		<div class="pdb80 f5bj">
-			<div class="w1200">
+		<!-- <div class="pdb80 f5bj">
+			<div class="w1660">
 				<div class="pubtit flexRowBetween">
 					<div></div>
 					<div class="flexCenter">
@@ -71,9 +234,10 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> -->
 		
-		<div class="black-bj" style="opacity: 0.6;" v-show="is_show" @click="seltAnliNav"></div>
+		<!-- 品牌中心 -->
+		<!-- <div class="black-bj" style="opacity: 0.6;" v-show="is_show" @click="seltAnliNav"></div>
 		<div class="flexColumn anliSetNav" v-show="is_anliSetNav">
 			<a class="btn" href="newsCenter.html">公司动态</a>
 			<a class="btn" href="anliCenter.html">经典案例</a>
@@ -96,22 +260,52 @@
 							<img class="logo" :src="item.mainImg[0].url" >
 						</a>
 					</div>
-					<!-- <div class="child" @mouseenter="enter(index)" @mouseleave="leave()" >
-						<a  href="brand.html">
-							<div class="more">更 多</div>
-						</a>
-					</div> -->
 				</div>
 				<div class="right flexCenter"><img class="w" :src="brandData[index]&&brandData[index].headImg&&brandData[index].headImg[0]?brandData[index].headImg[0].url:''" ></div>
 			</div>
 			
-		</div>
+		</div> -->
 		
 		<include src="footer.html"></include>
 		
 	</div>
 </body>
-
+<script type="text/javascript">
+	$(window).scroll(function(){
+		if($('.jj').offset().top + $('.jj').height()*0.35 < ($(window).scrollTop() + $(window).height()) ){
+			$('.jj .aboutL').addClass('animated fadeInLeft');
+			$('.jj .aboutR').addClass('animated fadeInRight');
+		}
+		
+		if($('.case').offset().top + $('.case').height()*0.35 < ($(window).scrollTop() + $(window).height()) &&
+		$('.case').offset().top + $('.case').height()*0.35 > ($(window).scrollTop() + $(window).height())-50){
+			// console.log('高度',$('.'+one).height()*0.35)
+			$('.case .con').addClass('animated fadeInUp');
+		}
+		
+		if($('#news1').offset().top + $('#news1').height()*0.35 < ($(window).scrollTop() + $(window).height()) &&
+		$('#news1').offset().top + $('#news1').height()*0.35 > ($(window).scrollTop() + $(window).height())-50){
+			$('#news1 .LL').addClass('animated fadeInLeft');
+			$('#news1 .RR').addClass('animated fadeInRight');
+		}
+		if($('#news2').offset().top + $('#news2').height()*0.35 < ($(window).scrollTop() + $(window).height()) &&
+		$('#news2').offset().top + $('#news2').height()*0.35 > ($(window).scrollTop() + $(window).height())-50){
+			$('#news2 .LL').addClass('animated fadeInLeft');
+			$('#news2 .RR').addClass('animated fadeInRight');
+		}
+		if($('#news3').offset().top + $('#news3').height()*0.35 < ($(window).scrollTop() + $(window).height()) &&
+		$('#news3').offset().top + $('#news3').height()*0.35 > ($(window).scrollTop() + $(window).height())-50){
+			$('#news3 .LL').addClass('animated fadeInLeft');
+			$('#news3 .RR').addClass('animated fadeInRight');
+		}
+		
+		if($('#part3').offset().top + $('#part3').height()*0.35 < ($(window).scrollTop() + $(window).height()) &&
+		$('#part3').offset().top + $('#part3').height()*0.35 > ($(window).scrollTop() + $(window).height())-50){
+			$('#part3 .LL').addClass('animated fadeInLeft');
+			$('#part3 .RR').addClass('animated fadeInRight');
+		}
+	})
+</script>
 	
 	<script type="text/javascript">
 		var app = new Vue({
@@ -128,15 +322,24 @@
 					artData:[],
 					brandData:[],
 					brandIconData:7,
-					index:0
-					
+					index:0,
+					brandCon:{
+						title:'',
+						description:'',
+						id:'',
+						behavior:''
+					},
+					productData:{},
+					newsData:[]
 		        }
 		    },
 			
 			created:function () {
 			    var self = this;
+				self.getProductData();
 				self.getArtData();
-				self.getBrandData()
+				self.getNewsData();
+				self.getBrandData();
 			},
 			
 		    methods: {
@@ -147,11 +350,14 @@
 					if(self.index!=index){
 						self.index = index;
 					}
+					self.brandCon.title = self.brandData[index].title;
+					self.brandCon.description = self.brandData[index].description;
+					self.brandCon.id = self.brandData[index].id;
+					self.brandCon.behavior = self.brandData[index].behavior;
 				},
 				
 				leave(){
 					const self = this;
-					console.log(2323)
 					self.index = 0;
 				},
 				
@@ -159,6 +365,35 @@
 					const self = this;
 					self.is_show = !self.is_show;
 					self.is_anliSetNav = !self.is_anliSetNav
+				},
+				
+				getProductData() {
+					const self = this;
+					const postData = {};
+					postData.searchItem = {
+						thirdapp_id:2,
+						type:6
+					};
+					postData.getBefore = {
+						child:{
+							tableName:'Label',
+							middleKey:'menu_id',
+							key:'id',
+							searchItem:{
+								status:['in',[1]],
+								title:['in',['公司简介']]
+							},
+							condition:'in',
+						}
+					};
+					const callback = (res) => {
+						if (res.info.data.length > 0) {
+							self.productData = res.info.data[0]
+						} 
+						
+						console.log(self.productData,'公司简介')
+					};
+					window.base.articleGet(postData, callback);
 				},
 				
 				getArtData(){
@@ -177,9 +412,46 @@
 				    var callback = function(res){
 				        if(res.info.data.length>0&&res.info.data[0]){
 							self.artData.push.apply(self.artData,res.info.data)
+							
+							var swiper = new Swiper('.swiper-container', {
+							   // loop: true,
+							    initialSlide:0,
+							    slidesPerView: 1,
+							    spaceBetween : 20,
+								speed:1000,
+								
+								observer: true,//修改swiper自己或子元素时，自动初始化swiper
+								observeParents: true,//修改swiper的父元素时，自动初始化swiper
+							})
+							
+							
 				        };    
 				    };
 				    window.base.articleGet(postData, callback);
+				},
+				
+				getNewsData() {
+					const self = this;
+					const postData = {};
+					postData.paginate = {
+					    count: 0, 
+					    currentPage: 1, 
+					    pagesize:3, 
+					    is_page: true, 
+					};
+					postData.searchItem = {
+						thirdapp_id: 2
+					};
+					postData.order = {
+						listorder:'asc'
+					};
+					const callback = (res) => {
+						if (res.info.data.length > 0) {
+							self.newsData.push.apply(self.newsData,res.info.data);
+							
+						}
+					};
+					window.base.articleGet(postData, callback);
 				},
 				
 				getBrandData() {
@@ -201,21 +473,58 @@
 					const callback = (res) => {
 						if (res.info.data.length > 0) {
 							self.brandData.push.apply(self.brandData,res.info.data);
+							self.brandCon.title = self.brandData[0].title;
+							self.brandCon.description = self.brandData[0].description;
+							self.brandCon.id = self.brandData[0].id;
+							self.brandCon.behavior = self.brandData[0].behavior;
 						} 
+						
+						var mySwiper = new Swiper('.swiper-container2', {
+						    loop: true,
+						    initialSlide:0,
+						    // slidesPerView: 1,
+						    spaceBetween : 20,
+							speed:3000,
+							autoplay: {
+							    delay: 3000,
+							    stopOnLastSlide: true,
+							    disableOnInteraction: true,
+							},
+							
+							observer: true,//修改swiper自己或子元素时，自动初始化swiper
+							observeParents: true,//修改swiper的父元素时，自动初始化swiper
+							
+							on: {
+								slideChangeTransitionStart: function(){
+								    // alert(this.activeIndex);
+									console.log(this.activeIndex,'序号')
+									self.brandCon.title = self.brandData[this.activeIndex].title;
+									self.brandCon.description = self.brandData[this.activeIndex].description;
+									self.brandCon.id = self.brandData[this.activeIndex].id;
+									self.brandCon.behavior = self.brandData[this.activeIndex].behavior;
+								},
+								slideChange: function(){
+								    alert('改变了，activeIndex为'+this.activeIndex);
+								},
+							},
+						})
+						
+						
 					};
 					window.base.labelGet(postData, callback);
-				},
+				}
 				
 		    }
 		});
 	</script>
 	<style>
-		.anliSetNav{position: fixed;top: 50%;left: 50%;transform: translate(-50%,-50%);z-index: 41;}
+		/* .anliSetNav{position: fixed;top: 50%;left: 50%;transform: translate(-50%,-50%);z-index: 41;}
 		.anliSetNav .btn{width: 150px;line-height: 50px;text-align: center;border: 1px solid #fff;border-radius: 8px;color: #fff;margin: 15px auto;font-size: 18px;}
 		.anliSetNav .btn:hover{padding:5px 10px;font-size: 20px;}
 		.anliSet .btn{width: 150px;line-height: 50px;text-align: center;border: 1px solid ;border-radius: 8px;margin: 15px auto;font-size: 18px;}
-		.anliSet .btn:hover{font-size: 20px;}
+		.anliSet .btn:hover{font-size: 20px;} */
 		
+		.case .con{opacity: 0;}
 		
 		.ind-brandTwo{ align-items: flex-start;}
 		.ind-brandTwo .left{width: 45%;flex-wrap: wrap;}

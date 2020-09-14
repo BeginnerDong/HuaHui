@@ -20,8 +20,8 @@
 	<div id="app">
 		<include src="header.html"></include>
 		
-		<div class="w1200 pdb80">
-			<div class="jobPin">
+		<div class="pdb80">
+			<!-- <div class="jobPin">
 				<ul class="flexRowBetween">
 					<li v-for="(item,index) in mainData" :key="index">
 						<a :href="'recruitDetail.html?id='+item.id">
@@ -33,7 +33,23 @@
 						</a>
 					</li>
 				</ul>
+			</div> -->
+			
+			<div class="jobPin w1660">
+				<ul class="flex pdt50">
+					<li class="f5bj" v-for="(item,index) in mainData" :key="index">
+						<div class="zp">
+							<img src="images/about-img.jpg" >
+							<div class="txt">
+								<div class="tit avoidOverflow4">{{item.title}}</div>
+								<div class="con">{{item.description}}</div>
+								<a :href="'recruitDetail.html?id='+item.id" class="more hand">了解更多 ></a>
+							</div>
+						</div>
+					</li>
+				</ul>
 			</div>
+			
 			
 			<div class="all-pages">
 				<span class="no-prev flexCenter" data-type="back" @click="changePage"><img class="arrow" src="images/case-icon5.png"></span>
@@ -62,7 +78,7 @@
 					paginate:{
 						count: 0,
 						currentPage: 1,
-						pagesize: 9,
+						pagesize: 3,
 						is_page: true,
 					},
 					linkPage: [],
