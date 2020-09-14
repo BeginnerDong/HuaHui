@@ -165,23 +165,23 @@
 			
 			<div class="news w1660 news1" v-for="(item,index) in mainData">
 				
-				<div class="newsItem flexRowBetween" v-if="index%2==0" :id="index==0?'news1':'news3'">
-					<div class="L LL">
+				<div class="newsItem flexRowBetween" v-if="index%2==0" >
+					<div class="L ">
 						<img :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''" >
 					</div>
-					<div class="R RR">
+					<div class="R ">
 						<h1>{{item.title}}</h1>
 						<p class="avoidOverflow5">{{item.description}}</p>
 						<a class="moreBtn"  :href="'newsdetail.html?id='+item.id+'&type=case'">READ MORE ></a>
 					</div>
 				</div>
-				<div class="newsItem flexRowBetween" v-if="index%2!=0" :id="index==1?'news2':'news4'">
-					<div class="R LL">
+				<div class="newsItem flexRowBetween" v-if="index%2!=0" >
+					<div class="R ">
 						<h1>{{item.title}}</h1>
 						<p class="avoidOverflow5">{{item.description}}</p>
 						<div class="moreBtn">READ MORE ></div>
 					</div>
-					<div class="L RR">
+					<div class="L ">
 						<img src="images/home-img03.png" >
 					</div>
 				</div>
@@ -216,32 +216,7 @@
 	</div>
 </body>
 
-<script type="text/javascript">
-	$(window).scroll(function(){
-		
-		if($('#news1').offset().top + $('#news1').height()*0.35 < ($(window).scrollTop() + $(window).height()) &&
-		$('#news1').offset().top + $('#news1').height()*0.35 > ($(window).scrollTop() + $(window).height())-50){
-			$('#news1 .LL').addClass('animated fadeInLeft');
-			$('#news1 .RR').addClass('animated fadeInRight');
-		}
-		if($('#news2').offset().top + $('#news2').height()*0.35 < ($(window).scrollTop() + $(window).height()) &&
-		$('#news2').offset().top + $('#news2').height()*0.35 > ($(window).scrollTop() + $(window).height())-50){
-			$('#news2 .LL').addClass('animated fadeInLeft');
-			$('#news2 .RR').addClass('animated fadeInRight');
-		}
-		if($('#news3').offset().top + $('#news3').height()*0.35 < ($(window).scrollTop() + $(window).height()) &&
-		$('#news3').offset().top + $('#news3').height()*0.35 > ($(window).scrollTop() + $(window).height())-50){
-			$('#news3 .LL').addClass('animated fadeInLeft');
-			$('#news3 .RR').addClass('animated fadeInRight');
-		}
-		// if($('#news4').offset().top + $('#news4').height()*0.35 < ($(window).scrollTop() + $(window).height()) &&
-		// $('#news4').offset().top + $('#news4').height()*0.35 > ($(window).scrollTop() + $(window).height())-50){
-		// 	$('#news4 .LL').addClass('animated fadeInLeft');
-		// 	$('#news4 .RR').addClass('animated fadeInRight');
-		// }
-	    
-	})
-</script>
+
 
 	
 	<script type="text/javascript">
