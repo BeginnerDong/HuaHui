@@ -60,7 +60,7 @@
 			</div>
 			
 			<div class="flex con con1">
-				<div class="item" v-for="(item,index) in artData" :key="index">
+				<!-- <div class="item" v-for="(item,index) in artData" :key="index">
 					<img :src="item&&item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''" >
 					<div class="b-name avoidOverflow">{{item.title}}</div>
 					<div class="caseMask">
@@ -72,6 +72,30 @@
 							</div>
 						</div>
 					</div>
+				</div> -->
+				<!-- Swiper -->
+				<div class="swiper-container3">
+				    <ul class="swiper-wrapper flex con con1">
+						<li class="swiper-slide item" v-for="(item,index) in artData" :key="index">
+							<img :src="item&&item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''" >
+							<div class="b-name avoidOverflow">{{item.small_title}}</div>
+							<div class="caseMask">
+								<div class="b-f">
+									<div class="b-fCon">
+										<h1 class="avoidOverflow">{{item.title}}</h1>
+										<p class="avoidOverflow3">{{item.description}}</p>
+										<a class="hand" :href="'newsdetail.html?id='+item.id">READ MORE ></a>
+									</div>
+								</div>
+							</div>
+						</li>
+				    </ul>
+					
+					<!--左右箭头 -->
+					<div class="ArrowIcon flexRowBetween" v-show="artData.length>3">
+						<span class="swiper-button-prev"><img class="icon" src="images/about-icon6.png" ></span>
+						<span  class="swiper-button-next"><img class="icon" src="images/about-icon7.png" ></span>
+					</div>
 				</div>
 			</div>
 			
@@ -82,7 +106,7 @@
 						<li class="swiper-slide item" v-for="(item,index) in artData" :key="index">
 							<!-- <img src="images/home-img02.png" > -->
 							<img :src="item&&item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''" >
-							<div class="b-name avoidOverflow">{{item.title}}</div>
+							<div class="b-name avoidOverflow">{{item.small_title}}</div>
 							<div class="caseMask">
 								<div class="b-f">
 									<div class="b-fCon">
@@ -159,13 +183,19 @@
 								<img :src="item.mainImg&&item.mainImg[0]&&item.mainImg[0].url">
 							</div>
 						</div>
-						<img src="images/home-img06.png" class="mgl30 qtImg" v-if="index==1" >
-						<img src="images/home-img09.png" class="mgl30 qtImg" v-if="index==3" >
-						<div class="flexCenter mgl30 pr" v-if="index>5">
-							<!-- <img src="images/home-img012.png" class="qtImg"> -->
-							<img :src="brandData[index]&&brandData[index].headImg&&brandData[index].headImg[0]?brandData[index].headImg[0].url:''" class="qtImg">
+						<a href="brand.html" class="flexCenter mgl30 pr o-h" v-if="index==1" >
+							<img src="images/home-img06.png" class="mgl30 qtImg ">
+							<div class="Icon flexCenter mgl30"></div>
+						</a>
+						<a href="brand.html" class="flexCenter mgl30 pr o-h" v-if="index==3">
+							<img src="images/home-img09.png" class="mgl30 qtImg " >
+							<div class="Icon flexCenter mgl30"></div>
+						</a>
+						<!-- <img src="images/home-img012.png" class="mgl30 qtImg" v-if="index==5"> -->
+						<a class="flexCenter mgl30 pr o-h" v-if="index>5"  href="brand.html" style="color: #fff;">
+							<img src="images/home-img012.png" class="qtImg">
 							<div class="Icon flexCenter font31 hand">更多 ></div>
-						</div>
+						</a>
 					</div>
 				</div>
 			</div>
@@ -399,12 +429,12 @@
 				getArtData(){
 				    var self = this;
 				    var postData = {};
-					postData.paginate = {
-					    count: 0, 
-					    currentPage: 1, 
-					    pagesize:3, 
-					    is_page: true, 
-					};
+					// postData.paginate = {
+					//     count: 0, 
+					//     currentPage: 1, 
+					//     pagesize:3, 
+					//     is_page: true, 
+					// };
 				    postData.searchItem = {
 						thirdapp_id:2,
 						type:1
@@ -412,6 +442,19 @@
 				    var callback = function(res){
 				        if(res.info.data.length>0&&res.info.data[0]){
 							self.artData.push.apply(self.artData,res.info.data)
+							
+							var swiper = new Swiper('.swiper-container3', {
+							   // loop: true,
+							   initialSlide:0,
+							    slidesPerView: 3,
+							    spaceBetween : 0,
+								pagination: '.swiper-pagination',
+								nextButton: '.swiper-button-next',
+								prevButton: '.swiper-button-prev',
+								
+								observer: true,//修改swiper自己或子元素时，自动初始化swiper
+								observeParents: true,//修改swiper的父元素时，自动初始化swiper
+							})
 							
 							var swiper = new Swiper('.swiper-container', {
 							   // loop: true,
@@ -424,7 +467,9 @@
 								observeParents: true,//修改swiper的父元素时，自动初始化swiper
 							})
 							
-							
+							setTimeout(() => {
+								swiper.slideTo(0, 50, false);
+							}, 50);
 				        };    
 				    };
 				    window.base.articleGet(postData, callback);
@@ -523,6 +568,9 @@
 		.anliSetNav .btn:hover{padding:5px 10px;font-size: 20px;}
 		.anliSet .btn{width: 150px;line-height: 50px;text-align: center;border: 1px solid ;border-radius: 8px;margin: 15px auto;font-size: 18px;}
 		.anliSet .btn:hover{font-size: 20px;} */
+		
+		/* .swiper-button-next{right: 40px;}
+		.swiper-button-prev{left: 40px;} */
 		
 		.case .con{opacity: 0;}
 		

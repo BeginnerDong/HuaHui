@@ -14,13 +14,6 @@
 			
 		</div>
 		
-		<div class="ewmBox clearfix center flexRowBetween ewm2">
-			<div class="tt" v-for="(item,index) in pcData" :key="index">
-				<img :src="item.mainImg[0].url" class="img1">
-				<img :src="item.bannerImg[0].url" class="img2">
-			</div>
-		</div>
-		
 		<div class="Rcont flexRowBetween">
 			<div class="footNav">
 				<ul class="flexRowBetween">
@@ -63,8 +56,15 @@
 			</div> -->
 		</div>
 		
-		<div class="footerLogo">
+		<!-- <div class="footerLogo">
 			<img src="images/home-logo.png" >
+		</div> -->
+		
+		<div class="ewmBox clearfix center flexRowBetween ewm2">
+			<div class="tt" v-for="(item,index) in pcData" :key="index">
+				<img :src="item.mainImg[0].url" class="img1">
+				<img :src="item.bannerImg[0].url" class="img2">
+			</div>
 		</div>
 		
 

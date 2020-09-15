@@ -5,8 +5,14 @@
 		</div>
 		
 		<!-- 导航点 -->
-		<div class="banBtnNav flexCenter">
+		<!-- <div class="banBtnNav flexCenter">
 			<span v-for="(item,index) in bannerData" :class="index==banner_index?'active':''" :data-index="index" @mouseenter="toBannerOne"></span>
+		</div> -->
+		<div class="banBtnNav flexCenter">
+			<div style="padding: 0 10px;" v-for="(item,index) in bannerData" :data-index="index" @mouseenter="toBannerOne">
+				<img src="images/index1.png" v-if="index==banner_index">
+				<img src="images/index2.png" v-else>
+			</div>
 		</div>
 		
 	</div>
