@@ -52,7 +52,7 @@
 				
 				<div class="news" v-for="(item,index) in mainData">
 					
-					<div class="newsItem flexRowBetween" v-if="index%2==0">
+					<div class="newsItem flexRowBetween" v-show="index%2==0&&(index*500+headerHeight+150<offsetTopNow)">
 						<div class="L animated fadeInLeft">
 							<img :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''" >
 						</div>
@@ -62,13 +62,13 @@
 							<a class="moreBtn"  :href="'newsdetail.html?id='+item.id+'&type=case'">READ MORE ></a>
 						</div>
 					</div>
-					<div class="newsItem flexRowBetween" v-if="index%2!=0">
-						<div class="R">
+					<div class="newsItem flexRowBetween" v-show="index%2!=0&&(index*500+headerHeight+150<offsetTopNow)">
+						<div class="R animated fadeInLeft">
 							<h1>{{item.title}}</h1>
 							<p class="avoidOverflow5">{{item.description}}</p>
 							<div class="moreBtn">READ MORE ></div>
 						</div>
-						<div class="L">
+						<div class="L animated fadeInRight">
 							<img src="images/home-img03.png" >
 						</div>
 					</div>
@@ -139,17 +139,30 @@
 						pagesize: 4,
 						is_page: true,
 					},
+					cardHeight:500,
+					headerHeight:123,
+					offsetTopNow:0
 		        }
 		    },
 			
 			created () {
 			    const self = this;
+				self.handleScroll();
+				window.addEventListener('scroll', this.handleScroll);
 				self.getMainData();
 			},
 			
 		    methods: {
 				
-			
+				handleScroll: function(){
+					const self = this;
+					var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+					var winHeight = window.screen.height;
+					var extra = winHeight*0.3;
+					if((scrollTop + winHeight - extra)>self.offsetTopNow){
+						self.offsetTopNow = scrollTop + winHeight - extra;
+					};
+				},
 				
 				
 				

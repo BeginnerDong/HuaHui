@@ -12,10 +12,11 @@
 		<script type="text/javascript" src="js/jquery.min.js"></script>
 		<script type="text/javascript" src="js/base.js"></script>
 		<script type="text/javascript" src="js/include.js"></script>
-		<script type="text/javascript" src="js/swiper.min.js"></script>
+		<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">    
+		<script type="text/javascript" src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 		<link type="text/css" rel="stylesheet" href="css/public.css">
 		<link type="text/css" rel="stylesheet" href="css/index.css">
-		<link type="text/css" rel="stylesheet" href="css/swiper.min.css">
+		<!-- <link type="text/css" rel="stylesheet" href="css/swiper.min.css"> -->
 		<link type="text/css" rel="stylesheet" href="css/ind-brand.css">
 		<link type="text/css" rel="stylesheet" href="css/animate.css">
 	</head>
@@ -32,10 +33,11 @@
 			</div>
 			<div class="w1660 flexRowBetween jj">
 				<div class="aboutR aboutR2 animated">
-					<video controls="controls" :src="productData&&productData.video&&productData.video[0]&&productData.video[0].url">
+					<video id="videoPlay" preload="metadata" controls="controls" :src="productData&&productData.video&&productData.video[0]&&productData.video[0].url">
 						<source :src="productData&&productData.video&&productData.video[0]&&productData.video[0].url" type="video/mp4"></source>
 						当前浏览器不支持 video直接播放
 					</video>
+					<div @click="play()">点击播放</div>
 				</div>
 				<div class="aboutL animated">
 					<h1>公司简介 <span>About Us</span></h1>
@@ -45,7 +47,7 @@
 					<a class="moreBtn" href="aboutUs.html">READ MORE ></a>
 				</div>
 				<div class="aboutR aboutR1 animated">
-					<video controls="controls" :src="productData&&productData.video&&productData.video[0]&&productData.video[0].url">
+					<video preload="metadata" controls="controls" :src="productData&&productData.video&&productData.video[0]&&productData.video[0].url">
 						<source :src="productData&&productData.video&&productData.video[0]&&productData.video[0].url" type="video/mp4"></source>
 						当前浏览器不支持 video直接播放
 					</video>
@@ -101,7 +103,7 @@
 			
 			<div class="flex con con2">
 				<!-- Swiper -->
-				<div class="swiper-container">
+				<div class="swiper-container swiper1">
 				    <ul class="swiper-wrapper">
 						<li class="swiper-slide item" v-for="(item,index) in artData" :key="index">
 							<!-- <img src="images/home-img02.png" > -->
@@ -199,23 +201,24 @@
 					</div>
 				</div>
 			</div>
-			<div class="R R2 RR">
+			<div class="R R2 RR" >
 				<!-- Swiper -->
-				<div class="swiper-container2">
-				    <ul class="swiper-wrapper">
-						<li class="swiper-slide item" v-for="(item,index) in brandData" :key="index">
+				<div class="swiper-container  swiper2">
+				    <div class="swiper-wrapper">
+						<div class="swiper-slide item" v-for="(item,index) in brandData" :key="index">
+							
 							<div class="IconBox">
 								<img :src="item&&item.headImg&&item.headImg[0]?item.headImg[0].url:''" class="bg">
 								<div class="Icon flexCenter">
 									<img :src="item.mainImg&&item.mainImg[0]&&item.mainImg[0].url">
 								</div>
 							</div>
-						</li>
-				    </ul>
+						</div>
+				    </div>
 				</div>
 			</div>
 		</div>
-		
+	
 		
 		<!-- 案例新闻 -->
 		<!-- <div class="pdb80 f5bj">
@@ -335,6 +338,27 @@
 			$('#part3 .RR').addClass('animated fadeInRight');
 		}
 	})
+	
+	var mySwiper = new Swiper ('.swiper-container88', {
+	    /* direction: 'vertical', */ // 垂直切换选项
+	    loop: true, // 循环模式选项
+	    
+	    // 如果需要分页器
+	    pagination: {
+	      el: '.swiper-pagination',
+	    },
+	    
+	    // 如果需要前进后退按钮
+	    navigation: {
+	      nextEl: '.swiper-button-next',
+	      prevEl: '.swiper-button-prev',
+	    },
+	    
+	    // 如果需要滚动条
+	    scrollbar: {
+	      el: '.swiper-scrollbar',
+	    },
+	  })        
 </script>
 	
 	<script type="text/javascript">
@@ -373,7 +397,14 @@
 			},
 			
 		    methods: {
-				
+				play:function(){
+					var videoElement = document.getElementById("videoPlay");	
+					if(videoElement.paused){
+						videoElement.play();
+					}else{
+						videoElement.pause();
+					};
+				},
 				enter(index){
 					const self = this;
 					console.log(index)
@@ -443,7 +474,7 @@
 				        if(res.info.data.length>0&&res.info.data[0]){
 							self.artData.push.apply(self.artData,res.info.data)
 							
-							var swiper = new Swiper('.swiper-container3', {
+							var swiper3 = new Swiper('.swiper-container3', {
 							   // loop: true,
 							   initialSlide:0,
 							    slidesPerView: 3,
@@ -456,7 +487,7 @@
 								observeParents: true,//修改swiper的父元素时，自动初始化swiper
 							})
 							
-							var swiper = new Swiper('.swiper-container', {
+							var swiper = new Swiper('.swiper1', {
 							   // loop: true,
 							    initialSlide:0,
 							    slidesPerView: 1,
@@ -524,18 +555,18 @@
 							self.brandCon.behavior = self.brandData[0].behavior;
 						} 
 						
-						var mySwiper = new Swiper('.swiper-container2', {
+						var mySwiper = new Swiper('.swiper2', {
 						    loop: true,
-						    initialSlide:0,
+						    initialSlide:1,
 						    // slidesPerView: 1,
 						    spaceBetween : 20,
-							speed:3000,
+							speed:1000,
 							autoplay: {
 							    delay: 3000,
 							    stopOnLastSlide: true,
 							    disableOnInteraction: true,
 							},
-							
+							autoResize:true,
 							observer: true,//修改swiper自己或子元素时，自动初始化swiper
 							observeParents: true,//修改swiper的父元素时，自动初始化swiper
 							
@@ -549,7 +580,7 @@
 									self.brandCon.behavior = self.brandData[this.activeIndex].behavior;
 								},
 								slideChange: function(){
-								    alert('改变了，activeIndex为'+this.activeIndex);
+								    console.log('改变了，activeIndex为'+this.activeIndex);
 								},
 							},
 						})

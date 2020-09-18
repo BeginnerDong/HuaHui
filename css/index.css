@@ -34,7 +34,7 @@
 .case .item:hover .caseMask{opacity: 1;}
 .case .item:hover .b-name{opacity: 0;}
 /* .swiper-container3{width: 100%;} */
-.swiper-wrapper{overflow: hidden;}
+/* .swiper-wrapper{overflow: hidden;} */
 .swiper-container3 { width: 100%;position: relative;}
 .swiper-container3 ul{width: 100%;}
 
