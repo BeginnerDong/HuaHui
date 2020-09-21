@@ -233,9 +233,9 @@
 		
 		
 		<!-- 底部图 -->
-		<div class="footImg">
+	<!-- 	<div class="footImg">
 			<img src="images/home-img013.png" >
-		</div>
+		</div> -->
 	
 		
 		<!-- 案例新闻 -->
@@ -607,38 +607,43 @@
 					};
 					const callback = (res) => {
 						if (res.info.data.length > 0) {
-							self.brandData.push.apply(self.brandData,res.info.data);
+							var arr = [res.info.data[res.info.data.length-1]];
+							arr.push.apply(arr,res.info.data);
+							arr.push(res.info.data[0]);
+							self.brandData = arr;
+							console.log('self.brandData',self.brandData)
 							self.brandCon.title = self.brandData[0].title;
 							self.brandCon.description = self.brandData[0].description;
 							self.brandCon.id = self.brandData[0].id;
 							self.brandCon.behavior = self.brandData[0].behavior;
 						} 
-						setTimeout(function() {
+						//setTimeout(function() {
 							var mySwiper = new Swiper ('.swiper2', {
-							    loop: true, // 循环模式选项
-							    speed:2000,
+							    //loop: true, // 循环模式选项
+								//loopAdditionalSlides :0,
+								speed:3000,
 								freeMode:true,
 								autoplay: {
-								    delay:0
+								    delay:0,
 								},
 								observer: true,//修改swiper自己或子元素时，自动初始化swiper
 								observeParents: true,//修改swiper的父元素时，自动初始化swiper
-								
+								observeSlideChildren:true,
 								on: {
 									slideChangeTransitionStart: function(){
 									    // alert(this.activeIndex);
-										console.log(this.activeIndex,'序号')
-										self.brandCon.title = self.brandData[this.activeIndex].title;
-										self.brandCon.description = self.brandData[this.activeIndex].description;
-										self.brandCon.id = self.brandData[this.activeIndex].id;
-										self.brandCon.behavior = self.brandData[this.activeIndex].behavior;
+										console.log(this.activeIndex,'序号33333')
+										self.brandCon.title = self.brandData[this.activeIndex-1].title;
+										self.brandCon.description = self.brandData[this.activeIndex-1].description;
+										self.brandCon.id = self.brandData[this.activeIndex-1].id;
+										self.brandCon.behavior = self.brandData[this.activeIndex-1].behavior;
 									},
 									slideChange: function(){
 									    console.log('改变了，activeIndex为'+this.activeIndex);
 									},
 								},
 							})
-						}, 1000);
+						//}, 1000);
 						
 						
 					};
