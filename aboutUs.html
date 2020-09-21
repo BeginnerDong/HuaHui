@@ -65,12 +65,15 @@
 		@media only screen and (max-width: 500px){
 			.aboutBg{height: 230px;}
 			.aboutBg img{height: 230px;margin-top: 50px;}
+			
+			.swiper3{height: 250px;}
+			.MedalPic .TwoPic .box{height: 250px;width: 100%;}
 		}
 		@media only screen and (max-width: 420px){
-			.MedalPic .TwoPic .box{height: 78px;}
+			/* .MedalPic .TwoPic .box{height: 78px;} */
 		}
 		@media only screen and (max-width: 375px){
-			.MedalPic .TwoPic .box{height: 68px;}
+			/* .MedalPic .TwoPic .box{height: 68px;} */
 		}
 	</style>
 
@@ -84,24 +87,24 @@
 			<img src="images/video.png" >
 		</div>
 		
-		<div class="bg-white p-r">
+		<div class="bg-white p-r" >
 			<div class="">
-				<div class="w1660 pdb80 pdt70 detailBox">
+				<div class="w1660 pdb80 pdt70 detailBox height1">
 					<!-- <div class="pubtit flexCenter">
 						<img class="icon" src="images/about-icon.png" >
 						<h1 class="title">公司简介</h1>
 					</div> -->
-					<div class="detailePag LL">
+					<div class="detailePag animated fadeInLeft"  v-show="height1+headerHeight+(height1*0.3)<offsetTopNow">
 						<div class="inforCont pdb20">
 							<div class="content ql-editor " style="clear: both;">
 								<p class="p1 " v-html="mainData.content"></p>
 							</div>
 						</div>
 					</div>
-					<div class="companyPic pr RR">
+					<div class="companyPic pr animated fadeInRight"  v-show="height1+headerHeight+(height1*0.3)<offsetTopNow">
 						<div>
 							<!-- Swiper -->
-							<div class="swiper-container">
+							<div class="swiper-container swiper11">
 							    <ul class="swiper-wrapper">
 									<li class="swiper-slide" v-for="item in mainData.mainImg"><img :src="item.url"></li>
 							    </ul>
@@ -117,7 +120,7 @@
 				</div>
 			</div>
 			
-			<div class="w1660 pdb80">
+			<div class="w1660 pdb80 " >
 				<!-- <div class="pubtit flexCenter">
 					<img class="icon" src="images/about-icon1.png" >
 					<h1 class="title">公司获奖</h1>
@@ -125,9 +128,28 @@
 				<div class="allH1 mb70">
 					<h1><span>公司获奖</span> Awards</h1>
 				</div>
-				<div class="MedalPic pr oh">
+				<div class="MedalPic pr oh hj1">
 					<!-- Swiper -->
-					<div class="swiper-container2 LL">
+					<div class="swiper-container2 animated fadeInUp height2" v-show="height2+headerHeight+(height2*0.3)<offsetTopNow">
+						<ul class="half TwoPic swiper-wrapper">
+							<li class="box swiper-slide" v-for="item in rewardData">
+								<img class="pic" :src="item.mainImg[0].url">
+								<p class="text center flexCenter">
+									<em>{{item.title}}</em>
+								</p>
+							</li>
+						</ul>
+						
+						<!--左右箭头 -->
+						<div class="ArrowIcon flexRowBetween">
+							<span class="btn swiper-button-prev"><img class="icon" src="images/about-icon6.png" ></span>
+							<span  class="btn swiper-button-next"><img class="icon" src="images/about-icon7.png" ></span>
+						</div>
+					</div>
+				</div>
+				<div class="MedalPic pr oh hj2">
+					<!-- Swiper -->
+					<div class="swiper-container swiper3 animated fadeInUp height2" v-show="height2+headerHeight+(height2*0.3)<offsetTopNow">
 						<ul class="half TwoPic swiper-wrapper">
 							<li class="box swiper-slide" v-for="item in rewardData">
 								<img class="pic" :src="item.mainImg[0].url">
@@ -182,8 +204,8 @@
 					<div class="allH1 mb70">
 						<h1><span>招聘信息</span> Recruit</h1>
 					</div>
-					<div class="jobPin w1660">
-						<ul class="flex LL">
+					<div class="jobPin w1660 height3 animated fadeInUp" v-show="height3+headerHeight+(height3*0.3)<offsetTopNow">
+						<ul class="flex">
 							<!-- <li v-for="(item,index) in recruitData">
 								<a :href="'recruitDetail.html?id='+item.id">
 									<div class="infor">
@@ -213,7 +235,7 @@
 					<img class="icon" src="images/about-icon5.png" >
 					<h1 class="title">人才储备</h1>
 				</div> -->
-				<div class="jianliMsg boxShaow pdt20 LL">
+				<div class="jianliMsg boxShaow pdt20 animated fadeInUp height4" v-show="height4+headerHeight+(height4*0.3)<offsetTopNow">
 					<div>
 						<ul>
 							<li>
@@ -256,31 +278,7 @@
 	</div>
 </body>
 <script type="text/javascript">
-		$(window).scroll(function(){
-			if($('.detailBox').offset().top*0.3 + $('.detailBox').height() < ($(window).scrollTop() + $(window).height()) ){
-				$('.detailBox .LL').addClass('animated fadeInLeft');
-				$('.detailBox .RR').addClass('animated fadeInRight');
-			}
-			
-			if($('.jobPin').offset().top + $('.jobPin').height()*0.35 < ($(window).scrollTop() + $(window).height()) &&
-			$('.jobPin').offset().top + $('.jobPin').height()*0.35 > ($(window).scrollTop() + $(window).height())-50){
-				// console.log('高度',$('.'+one).height()*0.35)
-				$('.jobPin .LL').addClass('animated fadeInUp');
-			}
-			
-			if($('.MedalPic').offset().top + $('.MedalPic').height()*0.35 < ($(window).scrollTop() + $(window).height()) &&
-			$('.MedalPic').offset().top + $('.MedalPic').height()*0.35 > ($(window).scrollTop() + $(window).height())-50){
-				// console.log('高度',$('.'+one).height()*0.35)
-				$('.MedalPic .LL').addClass('animated fadeInUp');
-			}
-			
-			if($('.bto').offset().top + $('.bto').height()*0.35 < ($(window).scrollTop() + $(window).height()) &&
-			$('.bto').offset().top + $('.bto').height()*0.35 > ($(window).scrollTop() + $(window).height())-50){
-				// console.log('高度',$('.'+one).height()*0.35)
-				$('.bto .LL').addClass('animated fadeInUp');
-			}
-			
-		})
+		
 </script>
 	
 	<script src="js/swiper.min.js"></script>
@@ -305,7 +303,14 @@
 						type:1,
 						thirdapp_id:2
 					},
-					isSending:false
+					isSending:false,
+					
+					headerHeight:123,
+					offsetTopNow:0,
+					height1:650,
+					height2:0,
+					height3:0,
+					height4:0
 					
 		        }
 		    },
@@ -316,6 +321,14 @@
 				self.getRewardData();
 				self.getRecruitData()
 				
+				var winWidth = document.body.clientWidth;
+				self.test(winWidth);
+				window.onresize = function(){  
+					var winWidth = document.body.clientWidth;
+					self.test(winWidth)
+				};
+				self.handleScroll();
+				window.addEventListener('scroll', this.handleScroll);
 			},
 			
 			mounted(){
@@ -324,6 +337,41 @@
 			},
 			
 		    methods: {
+				
+				//元素到页面顶部高度
+				getHeight(){
+					const self = this;
+					// self.height1 = $(".height1").offset().top;
+					// self.height2 = $(".height2").offset().top;
+					// self.height3 = $(".height3").offset().top;
+					// self.height4 = $(".height4").offset().top;
+					self.height2 = $(".height1").height() + self.height1;
+					self.height3 = $(".height2").height() + self.height2 + 200;
+					self.height4 = $(".height3").height() + self.height3;
+					// console.log(self.height1,self.height2,self.height3,self.height4)
+				},
+				
+				test:function(width){
+					const self = this;
+					if(width<=800){
+						self.headerHeight = 80;
+					}else if(width<=500){
+						self.headerHeight = 50;
+						self.height1 = 200;
+					}
+					self.getHeight();
+					self.height3 = $(".height3").offset().top - $(".height3").height() ;
+				},
+				
+				handleScroll: function(){
+					const self = this;
+					var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+					var winHeight = window.screen.height;
+					var extra = winHeight*0.3;
+					if((scrollTop + winHeight - extra)>self.offsetTopNow){
+						self.offsetTopNow = scrollTop + winHeight - extra;
+					};
+				},
 				 
 				uploadFile(e){
 					var self = this;
@@ -368,9 +416,9 @@
 						if (res.info.data.length > 0) {
 							self.mainData = res.info.data[0]
 							
-								var swiper = new Swiper('.swiper-container', {
+								var swiper = new Swiper('.swiper11', {
 								   // loop: true,
-								    initialSlide:1,
+								    initialSlide:0,
 								    slidesPerView: 2,
 								    spaceBetween : 20,
 									
@@ -381,18 +429,42 @@
 									observer: true,//修改swiper自己或子元素时，自动初始化swiper
 									observeParents: true,//修改swiper的父元素时，自动初始化swiper
 								})
-								var swiper = new Swiper('.swiper-container2', {
-								   // loop: true,
-								    initialSlide:1,
-								    slidesPerView: 3,
-								    spaceBetween : 10,
-									pagination: '.swiper-pagination',
-									nextButton: '.swiper-button-next',
-									prevButton: '.swiper-button-prev',
-									
-									observer: true,//修改swiper自己或子元素时，自动初始化swiper
-									observeParents: true,//修改swiper的父元素时，自动初始化swiper
-								})
+								setTimeout(function(){
+									var swiper = new Swiper('.swiper-container2', {
+									   // loop: true,
+									    initialSlide:0,
+									    slidesPerView: 3,
+									    spaceBetween : 10,
+										speed:5000,
+										autoplay: {
+											delay: 3000
+										},
+										pagination: '.swiper-pagination',
+										nextButton: '.swiper-button-next',
+										prevButton: '.swiper-button-prev',
+										
+										observer: true,//修改swiper自己或子元素时，自动初始化swiper
+										observeParents: true,//修改swiper的父元素时，自动初始化swiper
+									})
+								},1000);
+								setTimeout(function(){
+									var mySwiper = new Swiper('.swiper3', {
+									    //loop: true,
+									    initialSlide:0,
+									    slidesPerView: 1,
+									    spaceBetween : 10,
+										speed:3000,
+										autoplay: {
+											delay: 1000
+										},
+										pagination: '.swiper-pagination',
+										nextButton: '.swiper-button-next',
+										prevButton: '.swiper-button-prev',
+										
+										observer: true,//修改swiper自己或子元素时，自动初始化swiper
+										observeParents: true,//修改swiper的父元素时，自动初始化swiper
+									})
+								},1000)
 							
 								setTimeout(() => {
 									swiper.slideTo(0, 50, false);

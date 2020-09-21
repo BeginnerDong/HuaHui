@@ -25,7 +25,12 @@
 .MedalPic .half .box .text em{position: absolute;bottom: 10px;left: 0;right: 0;display: block;width: 100%;padding:20px;box-sizing: border-box;}
 .MedalPic .onePic .box .logo{height: 300px;}
 
+.hj2{display: none;}
 
+.detailBox{min-height: 800px;}
+.hj1{min-height: 320px;}
+.jobPin{min-height: 640px;}
+.bto{min-height: 500px;}
 
 /* 人才储备 */
 .jianliMsg{width: 1200px;padding: 0 4%;margin: 0 auto;box-sizing: border-box; padding-bottom: 40px; border-radius: 15px;}
@@ -38,6 +43,10 @@
 
 @media only screen and (max-width: 1700px){
 	.swiper-container{height: 400px;}
+	.detailBox{min-height: 700px;}
+	.hj1{min-height: 280px;}
+	.jobPin{min-height: 440px;}
+	.bto{min-height: 450px;}
 }
 
 @media only screen and (max-width: 1050px){
@@ -50,7 +59,7 @@
 }
 
 @media only screen and (max-width: 780px){
-	.swiper-container{height: 240px;}
+	.swiper-container{height: 150px;}
 }
 @media only screen and (max-width: 500px){
 	.MedalPic .TwoPic .box:first-child{margin-bottom: 12px;}
@@ -64,6 +73,9 @@
 	.jianliMsg li .ll{width: 25%; font-size: 13px;}
 	.jianliMsg li .rr{width: 75%;}
 	.jianliMsg .submitbtn .btn{width: 86%!important;}
+	
+	.hj1{display: none;}
+	.hj2{display: block;}
 	
 }
 @media only screen and (max-width: 414px){

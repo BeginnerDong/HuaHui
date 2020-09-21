@@ -75,6 +75,8 @@
 }
 
 @media only screen and (max-width: 500px){
+	.zhHead{height: 50px!important;}
+	
 	.ind-brand{padding-top: 15px;}
 	.ind-brand .TwoPic .box{height: 147px;}
 	.ind-brand .TwoPic .box .logo{width: 80px;height: 80px;}
@@ -84,7 +86,7 @@
 	.ind-brand .half .box .text em{bottom: 10px;line-height: 20px;}
 	
 	.navMask .b-w h1{padding-bottom: 15px;font-size: 18px;}
-	.navMask .b-w p{margin: 10px 0;font-size: 12px;}
+	.navMask .b-w p{margin: 10px 0;font-size: 12px;-webkit-line-clamp: 3;}
 }
 
 

@@ -8,18 +8,22 @@
 
 /* 公司简介 */
 .aboutUs{padding: 190px 0 120px;}
-.aboutUs .aboutL{width: 38%;opacity: 0;}
-.aboutUs .aboutR{width: 55%;overflow: hidden;opacity: 0;}
-.aboutL h1{font-size: 60px;line-height: 1;padding-bottom: 60px;transition: all 0.5s;letter-spacing: 10px;}
-.aboutL h1:hover{color: #C11719;}
+.aboutUs .aboutL{width: 38%;}
+.aboutUs .aboutR{width: 55%;overflow: hidden;position: relative;}
+.aboutL h1{font-size: 60px;line-height: 1;padding-bottom: 60px;transition: all 0.5s;letter-spacing: 10px;cursor: pointer;}
+.aboutL h1:hover{color: #5c5c5c;}
 .aboutL h1 span{font-size: 46px;color: #BABABA;padding-left: 0;letter-spacing: 0;}
 .aboutL .con{line-height: 2.5;font-size: 14px;margin-bottom: 68px;}
 .aboutR video{width: 100%;height: auto;float: right;}
+.poster{position: absolute;top: 0;left: 0;bottom: 0;right: 0;}
+.posterImg{width: 100%;height: 100%;}
+.play{width: 100rpx;height: 100rpx;position: absolute;top: 0;left: 0;bottom: 0;right: 0;margin: auto;cursor: pointer;}
+.jj{min-height: 520px;}
 
 /* 经典案例 */
 .case .allH1{margin: 60px auto 100px;}
-/* .case .con1{display: none;} */
-.case .con2{display: none;}
+.case{min-height: 900px;}
+.case .con2{display: none;min-height: 520px;}
 
 .case .con .item{position: relative;width: 33.33%;transition: all 0.8s;}
 .case .con .item img{width: 100%;height: auto;}
@@ -42,7 +46,7 @@
 .news{margin: 0 auto;}
 .news .allH1{margin-top: 130px;}
 .newsItem{padding: 100px 0;border-bottom: 1px solid #e1e1e1;height: 500px;}
-.newsItem .LL,.newsItem .RR{opacity: 0;}
+/* .newsItem .LL,.newsItem .RR{} */
 .newsItem .L{width: 48%;}
 .newsItem .L img{width: 100%;height: 100%;}
 .newsItem .R{width: 48%;}
@@ -54,7 +58,7 @@
 .part3{background-color: #000000;padding: 120px 0;color: #fff;padding-left: 6%;}
 .part3 .L{width: 60%;}
 .part3 .L h1{font-size: 50px;line-height: 1;padding-bottom: 60px;}
-.part3 .L p{font-size: 22px;margin-bottom: 40px;line-height: 2;}
+.part3 .L p{font-size: 22px;margin-bottom: 40px;line-height: 2;min-height: 264px;}
 .part3 .L a{font-size: 18px;cursor: pointer;color: #fff;}
 .part3 .R .IconBox{margin-left: 30px;width: 380px;height: 240px;border-radius: 20px;overflow: hidden;position: relative;}
 .part3 .R .IconBox .bg{width: 100%;height: 100%;}
@@ -86,6 +90,10 @@
 .fixArrow{position: absolute;top: -2px;left: 49.9%;z-index: 2;width: 10%;height: 103%;background: url(../images/BigArrow-icon1.png) 0 0/100% 100%;}
 .ind-dynamic>div:nth-of-type(2n) .fixArrow{right: 49.9%;left: auto;background-image: url(../images/BigArrow-icon2.png);}
 
+
+/* 底部图 */
+.footImg img{margin: 4% auto;width: 60%;}
+
 /* .ind-dynamic .item:last-child{margin-bottom: 0;} */
 /* .ind-dynamic .item .imgBox::before{content: '';    position: absolute;
     top: 0;
@@ -106,6 +114,8 @@
 .aboutH1{display: none;}
 .aboutR2{display: none;}
 
+.part3{min-height: 800px;}
+
 /*以下自适应样式*/
 .flex-wrap{flex-wrap: wrap;}
 @media only screen and (max-width: 1800px){
@@ -117,6 +127,10 @@
 	.aboutL h1 span{font-size: 30px;}
 	.aboutL h1{font-size: 50px;}
 	.aboutL .con{ -webkit-line-clamp:5;}
+	
+	.aboutUs{padding: 100px 0;}
+	.jj{min-height: 520px;}
+	.case .con1{min-height: 620px;}
 	
 	.newsItem{height: 400px;padding:50px;}
 	.newsItem .R h1{font-size: 26px;margin-bottom: 50px;}
@@ -228,6 +242,11 @@
 
 @media only screen and (max-width: 500px){
 	
+	.jj{min-height: 420px;}
+	.case{min-height: 500px;}
+	.part3{min-height: 500px;}
+	.footImg img{width: 80%;}
+	
 	.seeMoreBtn{width: 100px;line-height: 36px;height: 36px;font-size: 12px;margin-top: 35px;}
 	.seeMoreBtn .arrow{width: 10px;height: 10px;}
 	
@@ -249,13 +268,16 @@
 	.caseMask .b-f{font-size: 14px;}
 	
 	.news .allH1{margin: 30px auto;}
+	.newsItem{min-height: 430px;}
 	.newsItem .L{padding-bottom: 20px;}
 	.newsItem .R h1{font-size: 22px;padding-bottom: 20px;}
 	.newsItem .R p{font-size: 14px;padding-top: 20px;margin-bottom: 20px;min-height: 80px;}
 	.newsItem .R .moreBtn{margin-bottom: 30px;}
 	
 	.part3 .L h1{font-size: 30px;padding: 50px 0 30px;}
-	.part3 .L p, .part3 .L div{font-size: 14px;}
+	.part3 .L p, .part3 .L div{font-size: 14px;min-height: 170px;}
+	.part3 .R .IconBox{width: 280px;height: 170px;}
 	
+	.play{width: 60px;height:60px;}
 }
 

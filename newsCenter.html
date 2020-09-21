@@ -25,6 +25,12 @@
 		.ind-dynamic>div:nth-of-type(2n) .fixArrow{background-image: url(images/BigArrow-icon4.png);}
 		
 		.ind-dynamic .item .imgBox .imgIcon{height: 100%;width: 100px;position: absolute;margin: 0;}
+		.newM{display: none;}
+		
+		@media only screen and (max-width: 800px){
+			.newM{display: block;}
+			.newPC{display: none;}
+		}
 		
 		@media only screen and (max-width: 500px){
 			.ind-dynamic {padding-top: 20px;}
@@ -50,9 +56,9 @@
 			
 			<div class="ind-dynamic pdt40">
 				
-				<div class="news" v-for="(item,index) in mainData">
+				<div class="news newPC" v-for="(item,index) in mainData">
 					
-					<div class="newsItem flexRowBetween" v-show="index%2==0&&(index*500+headerHeight+150<offsetTopNow)">
+					<div class="newsItem flexRowBetween" v-show="index%2==0&&(index*cardHeight+headerHeight+(cardHeight*0.3)<offsetTopNow)">
 						<div class="L animated fadeInLeft">
 							<img :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''" >
 						</div>
@@ -62,7 +68,7 @@
 							<a class="moreBtn"  :href="'newsdetail.html?id='+item.id+'&type=case'">READ MORE ></a>
 						</div>
 					</div>
-					<div class="newsItem flexRowBetween" v-show="index%2!=0&&(index*500+headerHeight+150<offsetTopNow)">
+					<div class="newsItem flexRowBetween" v-show="index%2!=0&&(index*cardHeight+headerHeight+(cardHeight*0.3)<offsetTopNow)">
 						<div class="R animated fadeInLeft">
 							<h1>{{item.title}}</h1>
 							<p class="avoidOverflow5">{{item.description}}</p>
@@ -70,6 +76,20 @@
 						</div>
 						<div class="L animated fadeInRight">
 							<img src="images/home-img03.png" >
+						</div>
+					</div>
+				</div>
+				
+				<div class="news newM" v-for="(item,index) in mainData">
+					
+					<div class="newsItem flexRowBetween" v-show="(index*cardHeight+headerHeight+(cardHeight*0.3)<offsetTopNow)">
+						<div class="L animated fadeInLeft">
+							<img :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''" >
+						</div>
+						<div class="R animated fadeInRight">
+							<h1>{{item.title}}</h1>
+							<p class="avoidOverflow5">{{item.description}}</p>
+							<a class="moreBtn"  :href="'newsdetail.html?id='+item.id+'&type=case'">READ MORE ></a>
 						</div>
 					</div>
 				</div>
@@ -147,12 +167,28 @@
 			
 			created () {
 			    const self = this;
+				var winWidth = document.body.clientWidth;
+				self.test(winWidth);
+				window.onresize = function(){  
+					var winWidth = document.body.clientWidth;
+					self.test(winWidth)
+				};
 				self.handleScroll();
 				window.addEventListener('scroll', this.handleScroll);
 				self.getMainData();
 			},
 			
 		    methods: {
+				
+				test:function(width){
+					const self = this;
+					if(width<=800){
+						self.headerHeight = 80;
+					}else if(width<=500){
+						self.headerHeight = 50;
+						self.cardHeight = 400;
+					}
+				},
 				
 				handleScroll: function(){
 					const self = this;

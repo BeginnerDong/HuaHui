@@ -54,16 +54,16 @@
 				<img class="w" :src="item.bannerImg[0].url" >
 			</div> -->
 			<div class="brandNavPic"
-			 v-for="(item,index) in mainData" :key="index">
-				<img class="w" :src="mainData[index]&&mainData[index].headImg&&mainData[index].headImg[0]?mainData[index].headImg[0].url:''" >
-				<div class="navMask flexCenter">
-					<div class="b-w flexCenter">
-						<div class="b-wCon">
-							<h1 class="avoidOverflow">{{item.title}}</h1>
-							<p class="avoidOverflow3">{{item.description}}</p>
+			 v-for="(item,index) in mainData" :key="index" @click="goDetail(item,index)">
+					<img class="w" :src="mainData[index]&&mainData[index].headImg&&mainData[index].headImg[0]?mainData[index].headImg[0].url:''" >
+					<div class="navMask flexCenter">
+						<div class="b-w flexCenter">
+							<div class="b-wCon">
+								<h1 class="avoidOverflow">{{item.title}}</h1>
+								<p class="avoidOverflow3">{{item.description}}</p>
+							</div>
 						</div>
 					</div>
-				</div>
 			</div>
 		</div>
 		
@@ -140,7 +140,9 @@
 						pagesize:6,
 						is_page: true,
 					},
-					bannerTimer:null
+					bannerTimer:null,
+					go:-1,
+					href:''
 		        }
 		    },
 			
@@ -150,6 +152,14 @@
 			},
 			
 		    methods: {
+				
+				goDetail(item,index){
+					const self = this;
+					if(index == self.go){
+						window.location.href = 'product.html?id='+item.id+'&behavior='+item.behavior;
+					}
+					self.go = index;
+				},
 				
 				autoBanner(){
 					const self = this;

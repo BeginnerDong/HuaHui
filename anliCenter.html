@@ -165,7 +165,7 @@
 			
 			<div class="news w1660 news1" v-for="(item,index) in mainData">
 				
-				<div class="newsItem flexRowBetween" v-if="index%2==0&&(index*cardHeight+headerHeight+150<offsetTopNow)" >
+				<div class="newsItem flexRowBetween" v-if="index%2==0&&(index*cardHeight+headerHeight+(cardHeight*0.3)<offsetTopNow)" >
 					<div class="L animated fadeInLeft">
 						<img :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''" >
 					</div>
@@ -175,7 +175,7 @@
 						<a class="moreBtn"  :href="'newsdetail.html?id='+item.id+'&type=case'">READ MORE ></a>
 					</div>
 				</div>
-				<div class="newsItem flexRowBetween" v-if="index%2!=0&&(index*cardHeight+headerHeight+150<offsetTopNow)" >
+				<div class="newsItem flexRowBetween" v-if="index%2!=0&&(index*cardHeight+headerHeight+(cardHeight*0.3)<offsetTopNow)" >
 					<div class="R animated fadeInLeft">
 						<h1>{{item.title}}</h1>
 						<p class="avoidOverflow5">{{item.description}}</p>
@@ -249,9 +249,9 @@
 			
 			created () {
 			    const self = this;
+				
 				var winWidth = document.body.clientWidth;
 				self.test(winWidth);
-				console.log('winWidth','winWidth')
 				window.onresize = function(){  
 					var winWidth = document.body.clientWidth;
 					self.test(winWidth)
@@ -259,6 +259,7 @@
 				};
 				self.handleScroll();
 				window.addEventListener('scroll', this.handleScroll);
+				
 				self.getLabelData();
 			},
 			
@@ -270,8 +271,11 @@
 				
 				test:function(width){
 					const self = this;
-					if(width<1600){
-						self.headerHeight = 123;
+					if(width<=800){
+						self.headerHeight = 80;
+						self.cardHeight = 650;
+					}else if(width<=500){
+						self.headerHeight = 50;
 					}
 				},
 				

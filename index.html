@@ -37,31 +37,39 @@
 						<source :src="productData&&productData.video&&productData.video[0]&&productData.video[0].url" type="video/mp4"></source>
 						当前浏览器不支持 video直接播放
 					</video>
-					<div @click="play()">点击播放</div>
+					<div class="poster" v-show="poster_show" @click="playM()">
+						<img :src="productData&&productData.mainImg&&productData.mainImg[0]&&productData.mainImg[0].url" class="posterImg" >
+						<img src="./images/download-icon9.png" class="play" >
+					</div>
+					<!-- <div @click="play()">点击播放</div> -->
 				</div>
-				<div class="aboutL animated">
+				<div class="aboutL animated fadeInLeft" v-show="aboutHeight+headerHeight+(aboutHeight*0.3)<offsetTopNow">
 					<h1>公司简介 <span>About Us</span></h1>
 					<div class="con avoidOverflow6">
 						{{productData.description}}
 					</div>
 					<a class="moreBtn" href="aboutUs.html">READ MORE ></a>
 				</div>
-				<div class="aboutR aboutR1 animated">
-					<video preload="metadata" controls="controls" :src="productData&&productData.video&&productData.video[0]&&productData.video[0].url">
+				<div class="aboutR aboutR1 animated fadeInRight" v-show="aboutHeight+headerHeight+(aboutHeight*0.3)<offsetTopNow">
+					<video id="pcVideoPlay" preload="metadata" controls="controls" :src="productData&&productData.video&&productData.video[0]&&productData.video[0].url">
 						<source :src="productData&&productData.video&&productData.video[0]&&productData.video[0].url" type="video/mp4"></source>
 						当前浏览器不支持 video直接播放
 					</video>
+					<div class="poster" v-show="poster_show" @click="play()">
+						<img :src="productData&&productData.mainImg&&productData.mainImg[0]&&productData.mainImg[0].url" class="posterImg" >
+						<img src="./images/download-icon9.png" class="play" >
+					</div>
 				</div>
 			</div>
 		</div>
 		
 		<!-- 经典案例 -->
-		<div class="case">
+		<div class="case" id="case">
 			<div class="allH1">
 				<h1><span>经典案例</span> Cases</h1>
 			</div>
 			
-			<div class="flex con con1">
+			<div class="flex con con1 animated fadeInUp" v-show="caseHeight+headerHeight+(caseHeight*0.3)<offsetTopNow">
 				<!-- <div class="item" v-for="(item,index) in artData" :key="index">
 					<img :src="item&&item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''" >
 					<div class="b-name avoidOverflow">{{item.title}}</div>
@@ -76,29 +84,33 @@
 					</div>
 				</div> -->
 				<!-- Swiper -->
-				<div class="swiper-container3">
-				    <ul class="swiper-wrapper flex con con1">
-						<li class="swiper-slide item" v-for="(item,index) in artData" :key="index">
-							<img :src="item&&item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''" >
-							<div class="b-name avoidOverflow">{{item.small_title}}</div>
-							<div class="caseMask">
-								<div class="b-f">
-									<div class="b-fCon">
-										<h1 class="avoidOverflow">{{item.title}}</h1>
-										<p class="avoidOverflow3">{{item.description}}</p>
-										<a class="hand" :href="'newsdetail.html?id='+item.id">READ MORE ></a>
+				<div style="width: 100%;overflow: hidden;">
+					<!-- Swiper -->
+					<div class="swiper-container swiper11">
+					    <ul class="swiper-wrapper flex">
+							<li class="swiper-slide item" v-for="(item,index) in artData" :key="index">
+								<img :src="item&&item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''" >
+								<div class="b-name avoidOverflow">{{item.small_title}}</div>
+								<div class="caseMask">
+									<div class="b-f">
+										<div class="b-fCon">
+											<h1 class="avoidOverflow">{{item.title}}</h1>
+											<p class="avoidOverflow3">{{item.description}}</p>
+											<a class="hand" :href="'newsdetail.html?id='+item.id">READ MORE ></a>
+										</div>
 									</div>
 								</div>
-							</div>
-						</li>
-				    </ul>
-					
-					<!--左右箭头 -->
-					<div class="ArrowIcon flexRowBetween" v-show="artData.length>3">
-						<span class="swiper-button-prev"><img class="icon" src="images/about-icon6.png" ></span>
-						<span  class="swiper-button-next"><img class="icon" src="images/about-icon7.png" ></span>
+							</li>
+					    </ul>
+						
+						<!--左右箭头 -->
+						<div class="ArrowIcon flexRowBetween" v-show="artData.length>3">
+							<span class="swiper-prev"><img class="icon" src="images/about-icon6.png" ></span>
+							<span  class="swiper-next"><img class="icon" src="images/about-icon7.png" ></span>
+						</div>
 					</div>
 				</div>
+				
 			</div>
 			
 			<div class="flex con con2">
@@ -132,31 +144,31 @@
 			</div>
 			
 			
-				<div id='news1' class="newsItem flexRowBetween">
-					<div class="L LL">
+				<div id='news1' class="newsItem flexRowBetween" >
+					<div class="L animated fadeInLeft" v-show="newsHeight1+headerHeight+(newsHeight1*0.3)<offsetTopNow">
 						<img :src="newsData&&newsData[0]&&newsData[0].mainImg&&newsData[0].mainImg[0]&&newsData[0].mainImg[0].url" >
 					</div>
-					<div class="R RR">
+					<div class="R animated fadeInRight" v-show="newsHeight1+headerHeight+(newsHeight1*0.3)<offsetTopNow">
 						<h1 class="avoidOverflow">{{newsData&&newsData[0]&&newsData[0].title}}</h1>
 						<p class="avoidOverflow5">{{newsData&&newsData[0]&&newsData[0].description}}</p>
 						<a class="moreBtn" :href="'newsdetail.html?id='+newsData&&newsData[0]&&newsData[0].id">READ MORE ></a>
 					</div>
 				</div>
 				<div id='news2' class="newsItem flexRowBetween">
-					<div class="R LL">
+					<div class="R animated fadeInLeft" v-show="newsHeight2+headerHeight+(newsHeight2*0.3)<offsetTopNow">
 						<h1 class="avoidOverflow">{{newsData&&newsData[1]&&newsData[1].title}}</h1>
 						<p class="avoidOverflow5">{{newsData&&newsData[1]&&newsData[1].description}}</p>
 						<a class="moreBtn" :href="'newsdetail.html?id='+newsData&&newsData[1]&&newsData[1].id">READ MORE ></a>
 					</div>
-					<div class="L RR">
+					<div class="L animated fadeInRight" v-show="newsHeight2+headerHeight+(newsHeight2*0.3)<offsetTopNow">
 						<img :src="newsData&&newsData[1]&&newsData[1].mainImg&&newsData[1].mainImg[0]?newsData&&newsData[1].mainImg[0].url:''" >
 					</div>
 				</div>
 				<div id='news3' class="newsItem flexRowBetween">
-					<div class="L LL">
+					<div class="L animated fadeInLeft" v-show="newsHeight3+headerHeight+(newsHeight3*0.3)<offsetTopNow">
 						<img :src="newsData&&newsData[2]&&newsData[2].mainImg&&newsData[2].mainImg[0]?newsData&&newsData[2].mainImg[0].url:''" >
 					</div>
-					<div class="R RR">
+					<div class="R animated fadeInRight" v-show="newsHeight3+headerHeight+(newsHeight3*0.3)<offsetTopNow">
 						<h1 class="avoidOverflow">{{newsData&&newsData[2]&&newsData[2].title}}</h1>
 						<p class="avoidOverflow5">{{newsData&&newsData[2]&&newsData[2].description}}</p>
 						<a class="moreBtn" :href="'newsdetail.html?id='+newsData&&newsData[2]&&newsData[2].id">READ MORE ></a>
@@ -167,12 +179,12 @@
 		
 		<!-- 合作品牌 -->
 		<div class="part3 flexRowBetween" id="part3">
-			<div class="L LL">
+			<div class="L animated fadeInLeft" v-show="partHeight+headerHeight+(partHeight*0.3)<offsetTopNow">
 				<h1>{{brandCon.title}}</h1>
 				<p class="avoidOverflow6">{{brandCon.description}}</p>
 				<a :href="'product.html?id='+brandCon.id+'&behavior='+brandCon.behavior">READ MORE ></a>
 			</div>
-			<div class="R R1 RR">
+			<div class="R R1 animated fadeInRight" v-show="partHeight+headerHeight+(partHeight*0.3)<offsetTopNow">
 				<div class="flex pdb40 flex-wrap hd">
 					<div class="IconBoxs" 
 					v-for="(item,index) in brandData" :key="index"
@@ -201,11 +213,11 @@
 					</div>
 				</div>
 			</div>
-			<div class="R R2 RR" >
+			<div class="R R2 RR animated fadeInRight" v-show="partHeight+headerHeight+(partHeight*0.3)<offsetTopNow">
 				<!-- Swiper -->
-				<div class="swiper-container  swiper2">
-				    <div class="swiper-wrapper">
-						<div class="swiper-slide item" v-for="(item,index) in brandData" :key="index">
+				<div class="swiper-container  swiper2" >
+				    <div class="swiper-wrapper" id="swiper2">
+						<div class="swiper-slide item" v-if="brandData.length" v-for="(item,index) in brandData" :key="index">
 							
 							<div class="IconBox">
 								<img :src="item&&item.headImg&&item.headImg[0]?item.headImg[0].url:''" class="bg">
@@ -217,6 +229,12 @@
 				    </div>
 				</div>
 			</div>
+		</div>
+		
+		
+		<!-- 底部图 -->
+		<div class="footImg">
+			<img src="images/home-img013.png" >
 		</div>
 	
 		
@@ -304,40 +322,6 @@
 	</div>
 </body>
 <script type="text/javascript">
-	$(window).scroll(function(){
-		if($('.jj').offset().top + $('.jj').height()*0.35 < ($(window).scrollTop() + $(window).height()) ){
-			$('.jj .aboutL').addClass('animated fadeInLeft');
-			$('.jj .aboutR').addClass('animated fadeInRight');
-		}
-		
-		if($('.case').offset().top + $('.case').height()*0.35 < ($(window).scrollTop() + $(window).height()) &&
-		$('.case').offset().top + $('.case').height()*0.35 > ($(window).scrollTop() + $(window).height())-50){
-			// console.log('高度',$('.'+one).height()*0.35)
-			$('.case .con').addClass('animated fadeInUp');
-		}
-		
-		if($('#news1').offset().top + $('#news1').height()*0.35 < ($(window).scrollTop() + $(window).height()) &&
-		$('#news1').offset().top + $('#news1').height()*0.35 > ($(window).scrollTop() + $(window).height())-50){
-			$('#news1 .LL').addClass('animated fadeInLeft');
-			$('#news1 .RR').addClass('animated fadeInRight');
-		}
-		if($('#news2').offset().top + $('#news2').height()*0.35 < ($(window).scrollTop() + $(window).height()) &&
-		$('#news2').offset().top + $('#news2').height()*0.35 > ($(window).scrollTop() + $(window).height())-50){
-			$('#news2 .LL').addClass('animated fadeInLeft');
-			$('#news2 .RR').addClass('animated fadeInRight');
-		}
-		if($('#news3').offset().top + $('#news3').height()*0.35 < ($(window).scrollTop() + $(window).height()) &&
-		$('#news3').offset().top + $('#news3').height()*0.35 > ($(window).scrollTop() + $(window).height())-50){
-			$('#news3 .LL').addClass('animated fadeInLeft');
-			$('#news3 .RR').addClass('animated fadeInRight');
-		}
-		
-		if($('#part3').offset().top + $('#part3').height()*0.35 < ($(window).scrollTop() + $(window).height()) &&
-		$('#part3').offset().top + $('#part3').height()*0.35 > ($(window).scrollTop() + $(window).height())-50){
-			$('#part3 .LL').addClass('animated fadeInLeft');
-			$('#part3 .RR').addClass('animated fadeInRight');
-		}
-	})
 	
 	var mySwiper = new Swiper ('.swiper-container88', {
 	    /* direction: 'vertical', */ // 垂直切换选项
@@ -384,7 +368,18 @@
 						behavior:''
 					},
 					productData:{},
-					newsData:[]
+					newsData:[],
+					poster_show:true,
+					headerHeight:123,
+					offsetTopNow:0,
+					
+					bannerHeight:300,
+					aboutHeight:530,
+					caseHeight:842,
+					newsHeight1:0,
+					newsHeight2:0,
+					newsHeight3:0,
+					partHeight:0
 		        }
 		    },
 			
@@ -394,15 +389,76 @@
 				self.getArtData();
 				self.getNewsData();
 				self.getBrandData();
+				
+				var winWidth = document.body.clientWidth;
+				self.test(winWidth);
+				window.onresize = function(){  
+					var winWidth = document.body.clientWidth;
+					self.test(winWidth)
+				};
+				self.handleScroll();
+				window.addEventListener('scroll', this.handleScroll);
 			},
 			
 		    methods: {
+				
+				//元素到页面顶部高度
+				getHeight(){
+					const self = this;
+					self.caseHeight = $("#case").height() + self.aboutHeight + self.bannerHeight;
+					self.newsHeight1 = $("#news1").height() + self.caseHeight;
+					self.newsHeight2 = $("#news2").height() + self.newsHeight1;
+					self.newsHeight3 = $("#news3").height() + self.newsHeight2;
+					self.partHeight = $(".part3").height() + self.newsHeight3;
+				},
+				
+				test:function(width){
+					const self = this;
+					if(width<=800){
+						self.headerHeight = 80;
+					}else if(width<=500){
+						self.headerHeight = 50;
+						self.bannerHeight = 0;
+						self.aboutHeight = 0;
+					}
+					self.getHeight();
+					if(width<=500){
+						self.newsHeight1 = 0;
+						self.newsHeight3 = 0;
+						self.partHeight = 0;
+					}
+				},
+				
+				handleScroll: function(){
+					const self = this;
+					var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+					var winHeight = window.screen.height;
+					var extra = winHeight*0.3;
+					if((scrollTop + winHeight - extra)>self.offsetTopNow){
+						self.offsetTopNow = scrollTop + winHeight - extra;
+					};
+				},
+				
 				play:function(){
+					const self = this;
+					var videoElement = document.getElementById("pcVideoPlay");	
+					if(videoElement.paused){
+						videoElement.play();
+						self.poster_show = false;
+					}else{
+						videoElement.pause();
+						self.poster_show = true;
+					};
+				},
+				playM:function(){
+					const self = this;
 					var videoElement = document.getElementById("videoPlay");	
 					if(videoElement.paused){
 						videoElement.play();
+						self.poster_show = false;
 					}else{
 						videoElement.pause();
+						self.poster_show = true;
 					};
 				},
 				enter(index){
@@ -474,15 +530,18 @@
 				        if(res.info.data.length>0&&res.info.data[0]){
 							self.artData.push.apply(self.artData,res.info.data)
 							
-							var swiper3 = new Swiper('.swiper-container3', {
+							var swiper3 = new Swiper('.swiper11', {
 							   // loop: true,
 							   initialSlide:0,
 							    slidesPerView: 3,
 							    spaceBetween : 0,
-								pagination: '.swiper-pagination',
-								nextButton: '.swiper-button-next',
-								prevButton: '.swiper-button-prev',
-								
+								//pagination: '.swiper-pagination',
+								/* nextButton: '.swiper-next',
+								prevButton: '.swiper-prev', */
+								navigation: {
+								  nextEl: '.swiper-next',
+								  prevEl: '.swiper-prev',
+								},
 								observer: true,//修改swiper自己或子元素时，自动初始化swiper
 								observeParents: true,//修改swiper的父元素时，自动初始化swiper
 							})
@@ -554,36 +613,32 @@
 							self.brandCon.id = self.brandData[0].id;
 							self.brandCon.behavior = self.brandData[0].behavior;
 						} 
-						
-						var mySwiper = new Swiper('.swiper2', {
-						    loop: true,
-						    initialSlide:1,
-						    // slidesPerView: 1,
-						    spaceBetween : 20,
-							speed:1000,
-							autoplay: {
-							    delay: 3000,
-							    stopOnLastSlide: true,
-							    disableOnInteraction: true,
-							},
-							autoResize:true,
-							observer: true,//修改swiper自己或子元素时，自动初始化swiper
-							observeParents: true,//修改swiper的父元素时，自动初始化swiper
-							
-							on: {
-								slideChangeTransitionStart: function(){
-								    // alert(this.activeIndex);
-									console.log(this.activeIndex,'序号')
-									self.brandCon.title = self.brandData[this.activeIndex].title;
-									self.brandCon.description = self.brandData[this.activeIndex].description;
-									self.brandCon.id = self.brandData[this.activeIndex].id;
-									self.brandCon.behavior = self.brandData[this.activeIndex].behavior;
+						setTimeout(function() {
+							var mySwiper = new Swiper ('.swiper2', {
+							    loop: true, // 循环模式选项
+							    speed:2000,
+								freeMode:true,
+								autoplay: {
+								    delay:0
 								},
-								slideChange: function(){
-								    console.log('改变了，activeIndex为'+this.activeIndex);
+								observer: true,//修改swiper自己或子元素时，自动初始化swiper
+								observeParents: true,//修改swiper的父元素时，自动初始化swiper
+								
+								on: {
+									slideChangeTransitionStart: function(){
+									    // alert(this.activeIndex);
+										console.log(this.activeIndex,'序号')
+										self.brandCon.title = self.brandData[this.activeIndex].title;
+										self.brandCon.description = self.brandData[this.activeIndex].description;
+										self.brandCon.id = self.brandData[this.activeIndex].id;
+										self.brandCon.behavior = self.brandData[this.activeIndex].behavior;
+									},
+									slideChange: function(){
+									    console.log('改变了，activeIndex为'+this.activeIndex);
+									},
 								},
-							},
-						})
+							})
+						}, 1000);
 						
 						
 					};
@@ -603,7 +658,16 @@
 		/* .swiper-button-next{right: 40px;}
 		.swiper-button-prev{left: 40px;} */
 		
-		.case .con{opacity: 0;}
+		/* .case .con{opacity: 0;} */
+		#swiper2 {
+		    -webkit-transition-timing-function: linear!important; /*之前是ease-out*/
+		    -moz-transition-timing-function: linear!important;
+		    -ms-transition-timing-function: linear!important;
+		    -o-transition-timing-function: linear!important;
+		    transition-timing-function: linear!important;
+		    margin: 0 auto;
+		}
+		/* #swiper2 .item{width: 280px!important;} */
 		
 		.ind-brandTwo{ align-items: flex-start;}
 		.ind-brandTwo .left{width: 45%;flex-wrap: wrap;}

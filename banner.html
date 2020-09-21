@@ -9,7 +9,7 @@
 			<span v-for="(item,index) in bannerData" :class="index==banner_index?'active':''" :data-index="index" @mouseenter="toBannerOne"></span>
 		</div> -->
 		<div class="banBtnNav flexCenter">
-			<div style="padding: 0 10px;" v-for="(item,index) in bannerData" :data-index="index" @mouseenter="toBannerOne">
+			<div v-for="(item,index) in bannerData" :data-index="index" @mouseenter="toBannerOne">
 				<img src="images/index1.png" v-if="index==banner_index">
 				<img src="images/index2.png" v-else>
 			</div>
@@ -157,7 +157,7 @@
 .banBtnNav{ width: 100%; text-align: center; position: absolute; bottom:4%; left: 0;z-index: 9;}
 .banBtnNav span{ margin: 0 5px; /* background:#fff; */ width: 10px; height: 10px;box-shadow: 0 0 3px rgba(0,0,0,0.1);border-radius: 10px;border: 1px solid #a5a5a5;}
 .banBtnNav span.active{ background: #a5a5a5;}
-
+.banBtnNav div{padding: 0 10px;}
 /* banner 各种屏幕自适应 */
 
 @media only screen and (max-width: 1920px){
@@ -177,6 +177,8 @@
 }
 @media only screen and (max-width: 500px){
 	.swiperBox{ height:206px;}
+	.banBtnNav img{width: 12px;}
+	.banBtnNav div{padding: 0 5px;}
 }
 @media only screen and (max-width: 414px){.swiperBox{height: 186px;}}
 @media only screen and (max-width: 375px){.swiperBox{height: 166px;}}
