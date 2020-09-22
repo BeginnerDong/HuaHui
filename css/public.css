@@ -285,7 +285,7 @@ textarea{width: 100%;padding: 10px; box-sizing: border-box;font-size: 14px;color
 	.allH1{width: 96%;}
 	.allH1 h1{font-size: 26px;}
 	.allH1 h1 span{font-size: 40px;}
-	.moreBtn{width: 170px;line-height: 60px;height: 60px;}
+	/* .moreBtn{width: 170px;line-height: 60px;height: 60px;} */
 }
 
 @media screen and ( max-width: 500px){

@@ -188,8 +188,8 @@
 				<div class="flex pdb40 flex-wrap hd">
 					<div class="IconBoxs" 
 					v-for="(item,index) in brandData" :key="index"
-					@mouseenter="enter(index)" @mouseleave="leave()">
-						<div class="IconBox" v-show="index<=5">
+					@mouseenter="enter(index)" @mouseleave="leave()" v-show="index<=6">
+						<div class="IconBox" v-show="index<=6 && index!=0">
 							<!-- <img src="images/news-img3.jpg" class="bg"> -->
 							<img :src="item&&item.headImg&&item.headImg[0]?item.headImg[0].url:''" class="bg">
 							<div class="Icon flexCenter">
@@ -197,16 +197,16 @@
 								<img :src="item.mainImg&&item.mainImg[0]&&item.mainImg[0].url">
 							</div>
 						</div>
-						<a href="brand.html" class="flexCenter mgl30 pr o-h" v-if="index==1" >
+						<a href="brand.html" class="flexCenter mgl30 pr o-h" v-if="index==2" >
 							<img src="images/home-img06.png" class="mgl30 qtImg ">
 							<div class="Icon flexCenter mgl30"></div>
 						</a>
-						<a href="brand.html" class="flexCenter mgl30 pr o-h" v-if="index==3">
+						<a href="brand.html" class="flexCenter mgl30 pr o-h" v-if="index==4">
 							<img src="images/home-img09.png" class="mgl30 qtImg " >
 							<div class="Icon flexCenter mgl30"></div>
 						</a>
 						<!-- <img src="images/home-img012.png" class="mgl30 qtImg" v-if="index==5"> -->
-						<a class="flexCenter mgl30 pr o-h" v-if="index>5"  href="brand.html" style="color: #fff;">
+						<a class="flexCenter mgl30 pr o-h" v-show="index==6"  href="brand.html" style="color: #fff;">
 							<img src="images/home-img012.png" class="qtImg">
 							<div class="Icon flexCenter font31 hand">更多 ></div>
 						</a>
@@ -673,6 +673,8 @@
 		    margin: 0 auto;
 		}
 		/* #swiper2 .item{width: 280px!important;} */
+		.swiper-prev,.swiper-next{cursor: pointer;border-radius: 50%;transition: all 0.5s;}
+		.swiper-prev:hover,.swiper-next:hover{background-color: #222;}
 		
 		.ind-brandTwo{ align-items: flex-start;}
 		.ind-brandTwo .left{width: 45%;flex-wrap: wrap;}

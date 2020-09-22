@@ -204,8 +204,8 @@
 					<div class="allH1 mb70">
 						<h1><span>招聘信息</span> Recruit</h1>
 					</div>
-					<div class="jobPin w1660 height3 animated fadeInUp" v-show="height3+headerHeight+(height3*0.3)<offsetTopNow">
-						<ul class="flex">
+					<div class="jobPin w1660 height3">
+						<ul class="flex animated fadeInUp" v-show="height3+headerHeight+(height3*0.3)<offsetTopNow">
 							<!-- <li v-for="(item,index) in recruitData">
 								<a :href="'recruitDetail.html?id='+item.id">
 									<div class="infor">
@@ -307,7 +307,8 @@
 					
 					headerHeight:123,
 					offsetTopNow:0,
-					height1:650,
+					bannerHeight:650,
+					height1:0,
 					height2:0,
 					height3:0,
 					height4:0
@@ -345,8 +346,9 @@
 					// self.height2 = $(".height2").offset().top;
 					// self.height3 = $(".height3").offset().top;
 					// self.height4 = $(".height4").offset().top;
+					self.height1 = self.bannerHeight;
 					self.height2 = $(".height1").height() + self.height1;
-					self.height3 = $(".height2").height() + self.height2 + 200;
+					self.height3 = $(".height2").height() + self.height2;
 					self.height4 = $(".height3").height() + self.height3;
 					// console.log(self.height1,self.height2,self.height3,self.height4)
 				},
@@ -360,7 +362,12 @@
 						self.height1 = 200;
 					}
 					self.getHeight();
-					self.height3 = $(".height3").offset().top - $(".height3").height() ;
+					if(width<=500){
+						self.height1 = 0;
+						self.height2 = 0;
+						self.height3 = 0;
+						self.height4 = 0;
+					}
 				},
 				
 				handleScroll: function(){

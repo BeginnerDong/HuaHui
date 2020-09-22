@@ -58,6 +58,10 @@
 			.videoBox li{width: 48%;}
 			
 			.orderNav{padding: 10px 0;}
+			.orderNav .tt{margin: 0 1%;}
+			.downLoad{letter-spacing: 0;}
+			/* .leftNav span{padding: 0;display: flex;align-items: center;justify-content: center;} */
+			.leftNav span{overflow:hidden;text-overflow:ellipsis; white-space:nowrap;}
 		}
 	</style>
 
@@ -103,8 +107,7 @@
 			<div class="downLoad flexRowBetween pdt50" style="align-items: flex-start;">
 				<div class="leftNav color6">
 					<span :class="navCurrId==item.id?'on':''" 
-					@click="changeNavCurr(index)" v-for="(item,index) in leftNavData" :key="index">
-					{{item.title}}</span>
+					@click="changeNavCurr(index)" v-for="(item,index) in leftNavData" :key="index">{{item.title}}</span>
 				</div>
 				<div class="R-Cont">
 					
@@ -251,6 +254,7 @@
 				
 				changeBrand(brandCurr){
 					const self = this;
+					
 					if(brandCurr!=self.brandCurr){
 						self.brandCurr = brandCurr;
 						self.mainData = [];
@@ -262,6 +266,8 @@
 	
 							self.getMainData()
 						}
+					}else{
+						console.log(232)
 					}
 				},
 				
