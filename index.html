@@ -146,7 +146,7 @@
 			
 				<div id='news1' class="newsItem flexRowBetween" >
 					<div class="L animated fadeInLeft" v-show="newsHeight1+headerHeight+(newsHeight1*0.3)<offsetTopNow">
-						<img :src="newsData&&newsData[0]&&newsData[0].mainImg&&newsData[0].mainImg[0]&&newsData[0].mainImg[0].url" >
+						<img :src="newsData&&newsData[0]&&newsData[0].bannerImg&&newsData[0].bannerImg[0]&&newsData[0].bannerImg[0].url" >
 					</div>
 					<div class="R animated fadeInRight" v-show="newsHeight1+headerHeight+(newsHeight1*0.3)<offsetTopNow">
 						<h1 class="avoidOverflow">{{newsData&&newsData[0]&&newsData[0].title}}</h1>
@@ -161,12 +161,12 @@
 						<a class="moreBtn" :href="'newsdetail.html?id='+newsData&&newsData[1]&&newsData[1].id">READ MORE ></a>
 					</div>
 					<div class="L animated fadeInRight" v-show="newsHeight2+headerHeight+(newsHeight2*0.3)<offsetTopNow">
-						<img :src="newsData&&newsData[1]&&newsData[1].mainImg&&newsData[1].mainImg[0]?newsData&&newsData[1].mainImg[0].url:''" >
+						<img :src="newsData&&newsData[1]&&newsData[1].bannerImg&&newsData[1].bannerImg[0]?newsData&&newsData[1].bannerImg[0].url:''" >
 					</div>
 				</div>
 				<div id='news3' class="newsItem flexRowBetween">
 					<div class="L animated fadeInLeft" v-show="newsHeight3+headerHeight+(newsHeight3*0.3)<offsetTopNow">
-						<img :src="newsData&&newsData[2]&&newsData[2].mainImg&&newsData[2].mainImg[0]?newsData&&newsData[2].mainImg[0].url:''" >
+						<img :src="newsData&&newsData[2]&&newsData[2].bannerImg&&newsData[2].bannerImg[0]?newsData&&newsData[2].bannerImg[0].url:''" >
 					</div>
 					<div class="R animated fadeInRight" v-show="newsHeight3+headerHeight+(newsHeight3*0.3)<offsetTopNow">
 						<h1 class="avoidOverflow">{{newsData&&newsData[2]&&newsData[2].title}}</h1>

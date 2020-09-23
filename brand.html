@@ -188,8 +188,10 @@
 					
 					for(var i=0; i<self.mainData.length; i++){
 						if(i == self.index){
+							$('.brandNavPic1').eq(i).css({backgroundSize:'100% 100%'});
 							$('.brandNavPic1 .navMask').eq(i).css({opacity:'1'});
 						}else{
+							$('.brandNavPic1').eq(i).css({backgroundSize:'auto 100%'});
 							$('.brandNavPic1 .navMask').eq(i).css({opacity:'0'});
 						}
 					}
@@ -202,8 +204,10 @@
 						clearInterval(self.bannerTimer);
 						for(var i=0; i<self.mainData.length; i++){
 							if(i == index){
+								$('.brandNavPic1').eq(i).css({backgroundSize:'100% 100%'});
 								$('.brandNavPic1 .navMask').eq(i).css({opacity:'1'});
 							}else{
+								$('.brandNavPic1').eq(i).css({backgroundSize:'auto 100%'});
 								$('.brandNavPic1 .navMask').eq(i).css({opacity:'0'});
 							}
 						}

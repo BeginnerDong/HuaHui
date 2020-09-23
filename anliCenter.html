@@ -169,7 +169,7 @@
 				
 				<div class="newsItem flexRowBetween" v-if="index%2==0&&(index*cardHeight+headerHeight+(cardHeight*0.3)<offsetTopNow)" >
 					<div class="L animated fadeInLeft">
-						<img :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''" >
+						<img :src="item.bannerImg&&item.bannerImg[0]?item.bannerImg[0].url:''" >
 					</div>
 					<div class="R animated fadeInRight">
 						<h1>{{item.title}}</h1>
@@ -195,7 +195,7 @@
 				
 				<div class="newsItem flexRowBetween" >
 					<div class="L ">
-						<img :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''" >
+						<img :src="item.bannerImg&&item.bannerImg[0]?item.bannerImg[0].url:''" >
 					</div>
 					<div class="R ">
 						<h1>{{item.title}}</h1>
