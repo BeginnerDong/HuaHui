@@ -179,6 +179,7 @@
 @media only screen and (max-width: 1100px){
 	.part3 .R .IconBox{width: 220px;height: 120px;}
 	.qtImg{height: 120px;}
+	.part3 .R .Icon img{width: 60px;}
 }
 
 @media only screen and (max-width: 980px){
@@ -287,6 +288,7 @@
 	.part3 .L h1{font-size: 30px;padding: 50px 0 30px;}
 	.part3 .L p, .part3 .L div{font-size: 14px;min-height: 170px;}
 	.part3 .R .IconBox{width: 280px;height: 170px;}
+	.part3 .R .Icon img{width: 80px;}
 	
 	.play{width: 60px;height:60px;}
 }
