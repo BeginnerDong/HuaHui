@@ -60,7 +60,7 @@
 					
 					<div class="newsItem flexRowBetween" v-show="index%2==0&&(index*cardHeight+headerHeight+(cardHeight*0.3)<offsetTopNow)">
 						<div class="L animated fadeInLeft">
-							<img :src="item.bannerImg&&item.bannerImg[0]?item.bannerImg[0].url:''" >
+							<img :src="item.bannerImg&&item.bannerImg[0]?item.bannerImg[0].url:''" class="Limg">
 						</div>
 						<div class="R animated fadeInRight">
 							<h1>{{item.title}}</h1>
@@ -75,7 +75,7 @@
 							<div class="moreBtn">READ MORE ></div>
 						</div>
 						<div class="L animated fadeInRight">
-							<img src="images/home-img03.png" >
+							<img :src="item.bannerImg&&item.bannerImg[0]?item.bannerImg[0].url:''" class="Limg">
 						</div>
 					</div>
 				</div>
@@ -84,7 +84,7 @@
 					
 					<div class="newsItem flexRowBetween" v-show="(index*cardHeight+headerHeight+(cardHeight*0.3)<offsetTopNow)">
 						<div class="L animated fadeInLeft">
-							<img :src="item.bannerImg&&item.bannerImg[0]?item.bannerImg[0].url:''" >
+							<img :src="item.bannerImg&&item.bannerImg[0]?item.bannerImg[0].url:''" class="Limg">
 						</div>
 						<div class="R animated fadeInRight">
 							<h1>{{item.title}}</h1>

@@ -13,7 +13,7 @@
 			
 			<div style="height: 100%;">
 				<div class="Rseach">
-					<input type="text" name="" id="" value="" placeholder="请输入你要搜索的内容" />
+					<input type="text" v-on:keydown.enter="goSearch" v-model="title" placeholder="请输入你要搜索的内容" />
 					<a href="seach.html"><img class="icon" src="images/home-icon0.png" ></a>
 				</div>
 				<div class="orderNavTwo pc flexRowBetween fs16" >
@@ -21,7 +21,7 @@
 					<div class="tt" :class="currentUrl=='/aboutUs.html'?'on':''"><a href="aboutUs.html">关于华汇</a></div>
 					<div class="tt pr" :class="currentUrl=='/anliCenter.html'||(menu_id!=5&&menu_id!=0)?'on':''">
 						<a href="anliCenter.html">经典案例</a>
-						<div class="Asamll">
+						<div class="Asamll alAsamll">
 							<div class="Achild" v-for="(item,index) in labelData" :key="item.id">
 								<div class="Aname">
 									<a class="link" :href="'anliCenter.html?menu_id='+item.id">{{item.title}}</a>
@@ -31,19 +31,21 @@
 					</div>
 					<div class="tt pr"  :class="currentUrl=='/brand.html'?'on':''">
 						<a href="brand.html">品牌中心</a>
-						<div class="Asamll">
-							<div class="Achild" v-for="(item,index) in brandData" :key="item.id">
-								<div class="Aname">
-									<a class="link" :href="'product.html?id='+item.id+'&behavior='+item.behavior">{{item.title}}
-										<em class="pdl5" v-if="item.child&&item.child.length>0">&gt;</em>
-									</a>
-								</div>
-								<div class="Bsamll">
-									<a v-for="(c_item,c_index) in item.child" :href="'product.html?id='+item.id+'&childId='+c_item.id+'&behavior='+item.behavior" :key="c_item.id" class="Bchild" 
-									>{{c_item.title}}</a>
+						<!-- <div class="ppA"> -->
+							<div class="Asamll ppAsamll">
+								<div class="Achild" v-for="(item,index) in brandData" :key="item.id">
+									<div class="Aname">
+										<a class="link" :href="'product.html?id='+item.id+'&behavior='+item.behavior">{{item.title}}
+											<em class="pdl5" v-if="item.child&&item.child.length>0">&gt;</em>
+										</a>
+									</div>
+									<div class="Bsamll">
+										<a v-for="(c_item,c_index) in item.child" :href="'product.html?id='+item.id+'&childId='+c_item.id+'&behavior='+item.behavior" :key="c_item.id" class="Bchild" 
+										>{{c_item.title}}</a>
+									</div>
 								</div>
 							</div>
-						</div>
+						<!-- </div> -->
 					</div>
 					<div class="tt" :class="currentUrl=='/newsCenter.html'||menu_id==5?'on':''"><a href="newsCenter.html">公司动态</a></div>
 					<div class="tt" :class="currentUrl=='/loadCenter.html'?'on':''"><a href="loadCenter.html">下载中心</a></div>
@@ -164,6 +166,7 @@
 				menu_id:0,
 				show1:true,
 				show2:true,
+				title:''
 	        }
 	    },
 	    created:function () {
@@ -209,6 +212,11 @@
 			self.bannerTimer = null;
 		},
 	    methods: {
+			
+			goSearch() {
+				const self = this;
+				window.location.href = 'seach.html?title='+self.title
+			},
 			
 			showOff(type){
 				const self = this;
@@ -322,21 +330,28 @@
 
 <style>
 /* 二级导航 */
-.Asamll{width: 150px;position: absolute;left: 50%;top:100%;transform: translateX(-50%);background:#fff;color: #222;text-align: left; display: none;box-shadow: 0px 0px 5px rgba(0,0,0,0.15);}
+.Asamll{width: 230px;position: absolute;left: 0;top:0;/* transform: translateX(-50%); */background:#fff;color: #222;text-align: left; /* display: none; */box-shadow: 0px 0px 5px rgba(0,0,0,0.15);/* height: 0; */transition: all 0.3s;letter-spacing: 1px;opacity: 0;overflow: hidden;}
+/* .ppAsamll{top: 10px;left: 10px;}
+.ppA{width: 230px;position: absolute;overflow: hidden;height: 0;left: -10px;top: 84%;} */
 /* .AnliLabel{left: 45.4%;} */
-.Asamll .Achild{line-height: 50px;height: 50px;position: absolute;width: 100%;position: relative;font-size: 14px;box-sizing: border-box;border-bottom: 1px solid #e1e1e1;}
+.Asamll .Achild{line-height: 45px;height: 0px;position: absolute;width: 100%;position: relative;font-size: 14px;box-sizing: border-box;border-bottom: 1px solid #e1e1e1;opacity: 0;z-index: 5;}
 .Aname{padding: 0 15px;box-sizing: border-box;}
 .Aname>.link{ color: #222;width: 100%; display: block;}
 .Asamll .Achild:hover,.Bsamll .Bchild:hover{background: #F5F5F5;}
 /* .Asamll .Achild .Aname:hover .link{color: #fff;} */
 .Asamll .Achild .Aname em{font-size: 13px;}
 
-.Bsamll{position: absolute;left: 100%;top: 0;width: 150px;background: #fff;display:none;box-shadow: 0px 0px 5px rgba(0,0,0,0.15);}
+.Bsamll{position: absolute;left: 100%;top: -100%;width: 230px;background: #fff;/* display:none; */box-shadow: 0px 0px 5px rgba(0,0,0,0.15);transition: all 0.3s;opacity: 0;}
 .Bsamll .Bchild{display: block;font-size: 14px;padding: 0 15px;box-sizing: border-box;color: #222;border-bottom: 1px solid #e1e1e1;}
 .Bsamll .Bchild:last-child{border-bottom: 0;}
 
-.orderNavTwo .tt:hover .Asamll{display: block;}
-.Asamll .Achild:hover .Bsamll{display: block;}
+/* .orderNavTwo .tt:hover .alAsamll{height: 270px;}
+.orderNavTwo .tt:hover .ppAsamll{height: 315px;} */
+/* .orderNavTwo .ppA:hover .Asamll{overflow: initial;} */
+.orderNavTwo .tt:hover .Asamll{top: 100%;opacity: 1;overflow: initial;}
+.orderNavTwo .tt:hover .ppA{height: 450px;width: 480px;}
+.orderNavTwo .tt:hover .Achild{opacity: 1;height: 45px;}
+.Asamll .Achild:hover .Bsamll{/* display: block; */opacity: 1;top: 0;}
 
 .black-bj2{z-index: 10;/* display: none; */}
 
@@ -349,17 +364,17 @@
 .T-Logo a{width: 100%;height: 100%; display: block;}
 .T-Logo img{width: auto;height: 100%; display: block;}
 
-.orderNavTwo{height: 50%;}
+.orderNavTwo{height: 50%;z-index: 10;}
 .orderNavTwo .w1200{align-items: flex-start;}
 .orderNavTwo .tt{ text-align: center; box-sizing: border-box;padding-left: 20px;height: 100%;}
 .orderNavTwo .tt>a{display: flex;height: 100%;padding: 0 10px;color: #222;align-items: center;}
 .orderNavTwo .tt.on>a{ color: #c11719; }
 .orderNavTwo .tt>a:hover{color: #c11719;}
 
-.Rseach{display: flex;justify-content: flex-end;align-items: center;height: 50%;width: 100%;padding: 20px 0 0;box-sizing: border-box;width: auto;}
-.Rseach input{width: 0;height: 30px;border: 1px solid #e1e1e1;display: block;border-radius: 15px;transition: all 1s;opacity: 0;}
+.Rseach{display: flex;justify-content: flex-end;align-items: center;height: 50%;width: 100%;padding: 35px 0 0;box-sizing: border-box;width: auto;}
+.Rseach input{width: 0;height: 30px;border: 1px solid #e1e1e1;display: block;border-radius: 15px;transition: all 1s;opacity: 0;cursor: text;}
 .Rseach .icon{width: 23px;height:21px;display: block;margin: 0 20px;}
-.Rseach:hover input{width: 300px;padding: 0 20px;opacity: 1;}
+.Rseach:hover input{width: 200px;padding: 0 20px;opacity: 1;}
 
 .mobile-Btn{width: 50px;height: 80px;display: none;align-items: center;}
 .mobile-Btn img{height: 40px;}

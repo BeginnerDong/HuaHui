@@ -89,7 +89,7 @@
 					<div class="swiper-container swiper11">
 					    <ul class="swiper-wrapper flex">
 							<li class="swiper-slide item" v-for="(item,index) in artData" :key="index">
-								<img :src="item&&item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''" >
+								<img :src="item&&item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''" class="caseImg">
 								<div class="b-name avoidOverflow">{{item.small_title}}</div>
 								<div class="caseMask">
 									<div class="b-f">
@@ -146,7 +146,7 @@
 			
 				<div id='news1' class="newsItem flexRowBetween" >
 					<div class="L animated fadeInLeft" v-show="newsHeight1+headerHeight+(newsHeight1*0.3)<offsetTopNow">
-						<img :src="newsData&&newsData[0]&&newsData[0].bannerImg&&newsData[0].bannerImg[0]&&newsData[0].bannerImg[0].url" >
+						<img :src="newsData&&newsData[0]&&newsData[0].bannerImg&&newsData[0].bannerImg[0]&&newsData[0].bannerImg[0].url" class="Limg">
 					</div>
 					<div class="R animated fadeInRight" v-show="newsHeight1+headerHeight+(newsHeight1*0.3)<offsetTopNow">
 						<h1 class="avoidOverflow">{{newsData&&newsData[0]&&newsData[0].title}}</h1>
@@ -161,12 +161,12 @@
 						<a class="moreBtn" :href="'newsdetail.html?id='+newsData&&newsData[1]&&newsData[1].id">READ MORE ></a>
 					</div>
 					<div class="L animated fadeInRight" v-show="newsHeight2+headerHeight+(newsHeight2*0.3)<offsetTopNow">
-						<img :src="newsData&&newsData[1]&&newsData[1].bannerImg&&newsData[1].bannerImg[0]?newsData&&newsData[1].bannerImg[0].url:''" >
+						<img :src="newsData&&newsData[1]&&newsData[1].bannerImg&&newsData[1].bannerImg[0]?newsData&&newsData[1].bannerImg[0].url:''" class="Limg">
 					</div>
 				</div>
 				<div id='news3' class="newsItem flexRowBetween">
 					<div class="L animated fadeInLeft" v-show="newsHeight3+headerHeight+(newsHeight3*0.3)<offsetTopNow">
-						<img :src="newsData&&newsData[2]&&newsData[2].bannerImg&&newsData[2].bannerImg[0]?newsData&&newsData[2].bannerImg[0].url:''" >
+						<img :src="newsData&&newsData[2]&&newsData[2].bannerImg&&newsData[2].bannerImg[0]?newsData&&newsData[2].bannerImg[0].url:''" class="Limg">
 					</div>
 					<div class="R animated fadeInRight" v-show="newsHeight3+headerHeight+(newsHeight3*0.3)<offsetTopNow">
 						<h1 class="avoidOverflow">{{newsData&&newsData[2]&&newsData[2].title}}</h1>
@@ -189,24 +189,25 @@
 					<div class="IconBoxs" 
 					v-for="(item,index) in brandData" :key="index"
 					@mouseenter="enter(index)" @mouseleave="leave()" v-show="index<=6">
-						<div class="IconBox" v-show="index<=6 && index!=0">
+						<a  :href="'product.html?id='+brandCon.id+'&behavior='+brandCon.behavior"
+						class="IconBox" v-show="index<=6 && index!=0">
 							<!-- <img src="images/news-img3.jpg" class="bg"> -->
 							<img :src="item&&item.headImg&&item.headImg[0]?item.headImg[0].url:''" class="bg">
 							<div class="Icon flexCenter">
 								<!-- <img src="images/brand-img113.png"> -->
 								<img :src="item.mainImg&&item.mainImg[0]&&item.mainImg[0].url">
 							</div>
-						</div>
-						<a href="brand.html" class="flexCenter mgl30 pr o-h" v-if="index==2" >
+						</a>
+						<a href="brand.html" class="flexCenter mgl30 pr o-h qtImg" v-if="index==2" >
 							<img src="images/home-img06.png" class="mgl30 qtImg ">
 							<div class="Icon flexCenter mgl30"></div>
 						</a>
-						<a href="brand.html" class="flexCenter mgl30 pr o-h" v-if="index==4">
+						<a href="brand.html" class="flexCenter mgl30 pr o-h qtImg" v-if="index==4">
 							<img src="images/home-img09.png" class="mgl30 qtImg " >
 							<div class="Icon flexCenter mgl30"></div>
 						</a>
 						<!-- <img src="images/home-img012.png" class="mgl30 qtImg" v-if="index==5"> -->
-						<a class="flexCenter mgl30 pr o-h" v-show="index==6"  href="brand.html" style="color: #fff;">
+						<a class="flexCenter mgl30 pr o-h qtImg" v-show="index==6"  href="brand.html" style="color: #fff;">
 							<img src="images/home-img012.png" class="qtImg">
 							<div class="Icon flexCenter font31 hand">更多 ></div>
 						</a>
@@ -233,9 +234,9 @@
 		
 		
 		<!-- 底部图 -->
-	<!-- 	<div class="footImg">
-			<img src="images/home-img013.png" >
-		</div> -->
+		<div class="footImg animated fadeInUp"  v-show="footHeight+headerHeight+(footHeight*0.3)<offsetTopNow">
+			<img :src="footData&&footData.mainImg&&footData.mainImg[0]&&footData.mainImg[0].url" >
+		</div>
 	
 		
 		<!-- 案例新闻 -->
@@ -367,6 +368,7 @@
 						id:'',
 						behavior:''
 					},
+					footData:{},
 					productData:{},
 					newsData:[],
 					poster_show:true,
@@ -379,7 +381,8 @@
 					newsHeight1:0,
 					newsHeight2:0,
 					newsHeight3:0,
-					partHeight:0
+					partHeight:0.,
+					footHeight:0
 		        }
 		    },
 			
@@ -389,6 +392,7 @@
 				self.getArtData();
 				self.getNewsData();
 				self.getBrandData();
+				self.getFootData();
 				
 				var winWidth = document.body.clientWidth;
 				self.test(winWidth);
@@ -410,6 +414,7 @@
 					self.newsHeight2 = $("#news2").height() + self.newsHeight1;
 					self.newsHeight3 = $("#news3").height() + self.newsHeight2;
 					self.partHeight = $(".part3").height() + self.newsHeight3;
+					self.footHeight = $(".footImg").height() + self.partHeight;
 				},
 				
 				test:function(width){
@@ -420,13 +425,12 @@
 						self.headerHeight = 50;
 						self.bannerHeight = 0;
 						self.aboutHeight = 0;
-					}
-					self.getHeight();
-					if(width<=500){
 						self.newsHeight1 = 0;
 						self.newsHeight3 = 0;
 						self.partHeight = 0;
+						self.footHeight = 0;
 					}
+					self.getHeight();
 				},
 				
 				handleScroll: function(){
@@ -513,15 +517,31 @@
 					window.base.articleGet(postData, callback);
 				},
 				
+				
+				// 底部图
+				getFootData() {
+					const self = this;
+					const postData = {};
+					postData.searchItem = {
+						title: '首页底部图'
+					};
+					const callback = (res) => {
+						if (res.info.data.length > 0) {
+							self.footData = res.info.data[0];
+						};	
+					};
+					window.base.labelGet(postData, callback);
+				},
+				
 				getArtData(){
 				    var self = this;
 				    var postData = {};
-					// postData.paginate = {
-					//     count: 0, 
-					//     currentPage: 1, 
-					//     pagesize:3, 
-					//     is_page: true, 
-					// };
+					postData.paginate = {
+					    count: 0, 
+					    currentPage: 1, 
+					    pagesize:6, 
+					    is_page: true, 
+					};
 				    postData.searchItem = {
 						thirdapp_id:2,
 						type:1
@@ -530,21 +550,22 @@
 				        if(res.info.data.length>0&&res.info.data[0]){
 							self.artData.push.apply(self.artData,res.info.data)
 							
-							var swiper3 = new Swiper('.swiper11', {
-							   // loop: true,
-							   initialSlide:0,
-							    slidesPerView: 3,
-							    spaceBetween : 0,
-								//pagination: '.swiper-pagination',
-								/* nextButton: '.swiper-next',
-								prevButton: '.swiper-prev', */
-								navigation: {
-								  nextEl: '.swiper-next',
-								  prevEl: '.swiper-prev',
-								},
-								observer: true,//修改swiper自己或子元素时，自动初始化swiper
-								observeParents: true,//修改swiper的父元素时，自动初始化swiper
-							})
+							setTimeout(function(){
+								var swiper3 = new Swiper('.swiper11', {
+									loop: true,
+									initialSlide:0,
+								    slidesPerView: 3,
+								    spaceBetween : 0,
+									speed:1500,
+									autoplay:true,
+									navigation: {
+									  nextEl: '.swiper-next',
+									  prevEl: '.swiper-prev',
+									},
+									observer: true,//修改swiper自己或子元素时，自动初始化swiper
+									observeParents: true,//修改swiper的父元素时，自动初始化swiper
+								})
+							},1000)
 							
 							var swiper = new Swiper('.swiper1', {
 							   // loop: true,
