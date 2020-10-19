@@ -151,14 +151,14 @@
 					<div class="R animated fadeInRight" v-show="newsHeight1+headerHeight+(newsHeight1*0.3)<offsetTopNow">
 						<h1 class="avoidOverflow">{{newsData&&newsData[0]&&newsData[0].title}}</h1>
 						<p class="avoidOverflow5">{{newsData&&newsData[0]&&newsData[0].description}}</p>
-						<a class="moreBtn" :href="'newsdetail.html?id='+newsData&&newsData[0]&&newsData[0].id">READ MORE ></a>
+						<a class="moreBtn" :href="newsData&&newsData[0]&&newsData[0].id?'newsdetail.html?id='+newsData[0].id:'newsdetail.html'">READ MORE ></a>
 					</div>
 				</div>
 				<div id='news2' class="newsItem flexRowBetween">
 					<div class="R animated fadeInLeft" v-show="newsHeight2+headerHeight+(newsHeight2*0.3)<offsetTopNow">
 						<h1 class="avoidOverflow">{{newsData&&newsData[1]&&newsData[1].title}}</h1>
 						<p class="avoidOverflow5">{{newsData&&newsData[1]&&newsData[1].description}}</p>
-						<a class="moreBtn" :href="'newsdetail.html?id='+newsData&&newsData[1]&&newsData[1].id">READ MORE ></a>
+						<a class="moreBtn" :href="newsData&&newsData[1]&&newsData[1].id?'newsdetail.html?id='+newsData[1].id:'newsdetail.html'">READ MORE ></a>
 					</div>
 					<div class="L animated fadeInRight" v-show="newsHeight2+headerHeight+(newsHeight2*0.3)<offsetTopNow">
 						<img :src="newsData&&newsData[1]&&newsData[1].bannerImg&&newsData[1].bannerImg[0]?newsData&&newsData[1].bannerImg[0].url:''" class="Limg">
@@ -171,7 +171,7 @@
 					<div class="R animated fadeInRight" v-show="newsHeight3+headerHeight+(newsHeight3*0.3)<offsetTopNow">
 						<h1 class="avoidOverflow">{{newsData&&newsData[2]&&newsData[2].title}}</h1>
 						<p class="avoidOverflow5">{{newsData&&newsData[2]&&newsData[2].description}}</p>
-						<a class="moreBtn" :href="'newsdetail.html?id='+newsData&&newsData[2]&&newsData[2].id">READ MORE ></a>
+						<a class="moreBtn" :href="newsData&&newsData[2]&&newsData[2].id?'newsdetail.html?id='+newsData[2].id:'newsdetail.html'">READ MORE ></a>
 					</div>
 				</div>
 			
@@ -234,7 +234,7 @@
 		
 		
 		<!-- 底部图 -->
-		<div class="footImg animated fadeInUp"  v-show="footHeight+headerHeight+(footHeight*0.3)<offsetTopNow">
+		<div class="footImg animated fadeInUp"  v-if="footHeight+headerHeight+(footHeight*0.3)<offsetTopNow">
 			<img :src="footData&&footData.mainImg&&footData.mainImg[0]&&footData.mainImg[0].url" >
 		</div>
 	
@@ -414,7 +414,7 @@
 					self.newsHeight2 = $("#news2").height() + self.newsHeight1;
 					self.newsHeight3 = $("#news3").height() + self.newsHeight2;
 					self.partHeight = $(".part3").height() + self.newsHeight3;
-					self.footHeight = $(".footImg").height() + self.partHeight;
+					self.footHeight = $(".footImg").height() + self.partHeight + 500;
 				},
 				
 				test:function(width){
