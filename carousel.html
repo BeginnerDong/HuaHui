@@ -153,13 +153,9 @@
 				if(self.nowCents==self.cents){
 					self.nowCents = 0;
 				};
-				console.log('self.nowIndex',self.nowIndex)
-				console.log('self.toIndex',self.toIndex)
-				console.log('self.mainData.length',self.mainData.length)
 				self.pause = false;
 				var nowLeftOffset = -self.widthStandard*self.nowIndex;
 				var targetLeft = -self.widthStandard*self.toIndex;
-				console.log('targetLeft',targetLeft)
 				var oneCentLeft = parseFloat(((targetLeft-nowLeftOffset)/self.cents).toFixed(2));
 				var go = function (){
 					if(self.pause){
@@ -208,14 +204,9 @@
 				if(self.clock){
 					return;
 				};
-				/* if (self.nowIndex == (self.mainData.length-1)) {
-					self.toIndex = 0;
-				    self.animate();
-				}
-				else { */
-					self.toIndex = self.nowIndex +1;
-				    self.animate();
-				//}
+				self.toIndex = self.nowIndex +1;
+				self.animate();
+				
 			},
 			prev:function(){
 				const self = this;
@@ -223,13 +214,8 @@
 				if(self.clock){
 					return;
 				};
-				if (self.nowIndex == 0) {
-					self.toIndex = self.mainData.length-1;
-				    self.animate();
-				}else {
-					self.toIndex = self.nowIndex - 1;
-				    self.animate();
-				};
+				self.toIndex = self.nowIndex - 1;
+				self.animate();
 			},
 			
 			
@@ -253,7 +239,7 @@
 						self.title = self.mainData[0].title;
 						self.content = self.mainData[0].description;
 						// console.log('宽度',self.totalWidth)
-						 console.log('self.mainData',self.mainData)
+						 //console.log('self.mainData',self.mainData)
 						// console.log('self.bannerData',self.bannerData)
 			        };    
 					setTimeout(function(){
