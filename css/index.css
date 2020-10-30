@@ -65,7 +65,7 @@
 .part3 .L a{font-size: 18px;cursor: pointer;color: #fff;}
 .part3 .R .IconBox{margin-left: 30px;width: 380px;height: 240px;border-radius: 20px;overflow: hidden;position: relative;}
 .part3 .R .IconBox .bg{width: 100%;height: 100%;}
-.part3 .R .Icon{width: 100%;height: 100%;background-color: rgba(0,0,0,0.5);position: absolute;top: 0;left: 0;transition: all 0.5s;border-top-left-radius: 20px;border-bottom-left-radius: 20px;}
+.part3 .R .Icon{width: 100%;height: 100%;background-color: rgba(0,0,0,0.5);position: absolute;top: 0;left: 0;border-top-left-radius: 20px;border-bottom-left-radius: 20px;}
 .part3 .R .Icon:hover{background-color: rgba(255,255,255,0.3);}
 /* .qtImg1{transition: all 0.5s;}
 .part3 .qtImg1:hover{background-color: rgba(255,255,255,0.3);} */

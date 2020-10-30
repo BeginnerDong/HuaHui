@@ -6,7 +6,7 @@
 	</div>
 	
 	<div class="swiperBox" @touchmove="test"  @mouseover="stop()" @mouseleave="conti()">
-		<div id="list" :style="'left:'+ leftOffset + 'px;width:'+totalWidth+'px'">
+		<div id="list" :style="'left:'+ (originOffset+leftOffset) + 'px;width:'+totalWidth+'px'">
 			<div :style="'width:'+widthStandard+'px'" v-for="(item,index) in mainData" :key="index">
 				<img :src="item&&item.headImg&&item.headImg[0]&&item.headImg[0].url"/>
 				<div class="Icon flexCenter">
@@ -69,26 +69,27 @@
 				cents:200,
 				perTime:1500,//轮播速度
 				nowCents:0,
-				nowIndex:0,
+				nowIndex:2,
 				toIndex:0,
 				gapLenth:0,
 				isAutoPlay:true,//是否自动轮播
 				autoPlayInterval:1000,//自动轮播间隔,
 				timeOutEvent:'',
 				title:'',
-				content:''
+				content:'',
+				originOffset:50,
+				offSetStandard:0
 				
 	        }
 	    },
 	    created:function () {
 	        var self = this;
 			self.widthStandard = document.body.clientWidth*0.7;
+			self.leftOffset = -self.widthStandard*self.nowIndex;
 			// console.log('屏幕',self.widthStandard)
 			self.totalWidth = self.widthStandard*self.mainData.length;
 	        var currentUrl = window.base.GetUrlRelativePath();
-			setTimeout(function(){
-				self.next();
-			},self.autoPlayInterval)
+			
 			var reg = /\/([^\/]+)\.html/i;
 			if(reg.exec(currentUrl)&&reg.exec(currentUrl)[0]){
 				self.currentUrl = reg.exec(currentUrl)[0];
@@ -152,10 +153,13 @@
 				if(self.nowCents==self.cents){
 					self.nowCents = 0;
 				};
-				
+				console.log('self.nowIndex',self.nowIndex)
+				console.log('self.toIndex',self.toIndex)
+				console.log('self.mainData.length',self.mainData.length)
 				self.pause = false;
 				var nowLeftOffset = -self.widthStandard*self.nowIndex;
 				var targetLeft = -self.widthStandard*self.toIndex;
+				console.log('targetLeft',targetLeft)
 				var oneCentLeft = parseFloat(((targetLeft-nowLeftOffset)/self.cents).toFixed(2));
 				var go = function (){
 					if(self.pause){
@@ -167,17 +171,19 @@
 						// console.log('self.perTime/self.cents',self.perTime/self.cents)
 						setTimeout(go, self.perTime/self.cents);
 					}else{
-						if(self.toIndex==0){
-							self.leftOffset = -self.widthStandard*(self.mainData.length-1);
-							self.nowIndex = self.mainData.length-1;
-						}else if(self.toIndex==(self.mainData.length-1)){
-							self.leftOffset = 0;
-							self.nowIndex = 0;
+						if(self.toIndex==1){
+							self.leftOffset = -self.widthStandard*(self.mainData.length-2);
+							self.nowIndex = self.mainData.length-3;
+						}else if(self.toIndex==(self.mainData.length-2)){
+							self.nowIndex = 2;
+							self.leftOffset = -self.widthStandard*self.nowIndex;
 							// self.leftOffset = -self.widthStandard*1;
 							// self.nowIndex = 1;
 						}else{
 							self.nowIndex = self.toIndex;
 						};
+						
+						
 						self.clock = false;
 						self.title = self.mainData[self.nowIndex].title;
 						self.content = self.mainData[self.nowIndex].description;
@@ -202,14 +208,14 @@
 				if(self.clock){
 					return;
 				};
-				if (self.nowIndex == (self.mainData.length-1)) {
+				/* if (self.nowIndex == (self.mainData.length-1)) {
 					self.toIndex = 0;
 				    self.animate();
 				}
-				else {
+				else { */
 					self.toIndex = self.nowIndex +1;
 				    self.animate();
-				}
+				//}
 			},
 			prev:function(){
 				const self = this;
@@ -239,18 +245,20 @@
 				};
 			    var callback = function(res){
 			        if(res.info.data.length>0&&res.info.data[0]){
-						self.mainData =res.info.data;
+						self.mainData = window.base.cloneForm(res.info.data);
+						self.mainData.unshift(res.info.data[res.info.data.length-2],res.info.data[res.info.data.length-1]);
+						self.mainData.push(res.info.data[0]);
+						self.mainData.push(res.info.data[1]);
 						self.totalWidth = self.widthStandard*self.mainData.length;
 						self.title = self.mainData[0].title;
 						self.content = self.mainData[0].description;
 						// console.log('宽度',self.totalWidth)
-						// console.log('self.mainData',self.mainData)
+						 console.log('self.mainData',self.mainData)
 						// console.log('self.bannerData',self.bannerData)
 			        };    
-					self.bannerTimer = setInterval(function(){
-						
-						self.changeBanner('+');
-					},5000)
+					setTimeout(function(){
+						self.next();
+					},self.autoPlayInterval)
 			    };
 			    window.base.labelGet(postData, callback);
 			},
