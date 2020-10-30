@@ -39,7 +39,7 @@
 			:style="{backgroundImage:'url('+ item.bannerImg[0].url +')'}">
 				<!-- <img class="w" :src="mainData[index]&&mainData[index].headImg&&mainData[index].headImg[0]?mainData[index].headImg[0].url:''" > -->
 				<a :href="'product.html?id='+item.id+'&behavior='+item.behavior">
-					<div class="navMask flexCenter">
+					<div class="navMask flexCenter" :class="'mask'+index">
 						<div class="b-w flexCenter">
 							<div class="b-wCon">
 								<h1 class="avoidOverflow">{{item.title}}</h1>
@@ -55,18 +55,14 @@
 			<!-- <div class="brandNavPic" v-for="(item,i) in mainData" :key="i" @mouseenter="active(i)" @mouseleave="noActive(i)">
 				<img class="w" :src="item.bannerImg[0].url" >
 			</div> -->
-			<div class="brandNavPic"
-			 v-for="(item,index) in mainData" :key="index" @click="goDetail(item,index)">
+			<a class="brandNavPic" 
+			 v-for="(item,index) in mainData" :key="index" @click="goDetail(item,index)"
+			:href="'product.html?id='+item.id+'&behavior='+item.behavior">
 					<img class="w" :src="mainData[index]&&mainData[index].headImg&&mainData[index].headImg[0]?mainData[index].headImg[0].url:''" >
-					<div class="navMask flexCenter">
-						<div class="b-w flexCenter">
-							<div class="b-wCon">
-								<h1 class="avoidOverflow">{{item.title}}</h1>
-								<p class="avoidOverflow3">{{item.description}}</p>
-							</div>
-						</div>
+					<div class="titM">
+						<h1 class="avoidOverflow">{{item.title}}</h1>
 					</div>
-			</div>
+			</a>
 		</div>
 		
 		

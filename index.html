@@ -24,7 +24,8 @@
 <body>
 	<div id="app">
 		<include src="header.html"></include>
-		<include src="carousel.html"></include>
+		<include src="banner.html"></include>
+		<!-- <include src="carousel.html"></include> -->
 		
 		<!-- 公司简介 -->
 		<div class="aboutUs">
@@ -33,7 +34,7 @@
 			</div>
 			<div class="w1660 flexRowBetween jj">
 				<div class="aboutR aboutR2 animated">
-					<video id="videoPlay" preload="metadata" controls="controls" :src="productData&&productData.video&&productData.video[0]&&productData.video[0].url">
+					<video id="videoPlay" preload="metadata" controls="controls" :src="productData&&productData.video&&productData.video[0]&&productData.video[0].url" x5-video-player-type="h5">
 						<source :src="productData&&productData.video&&productData.video[0]&&productData.video[0].url" type="video/mp4"></source>
 						当前浏览器不支持 video直接播放
 					</video>
@@ -86,7 +87,7 @@
 				<!-- Swiper -->
 				<div style="width: 100%;overflow: hidden;">
 					<!-- Swiper -->
-					<div class="swiper-container swiper11">
+					<div class="swiper-container swiper11" @mouseenter="stopPlay" @mouseleave="autoPlay">
 					    <ul class="swiper-wrapper flex">
 							<li class="swiper-slide item" v-for="(item,index) in artData" :key="index">
 								<img :src="item&&item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''" class="caseImg">
@@ -132,7 +133,13 @@
 							</div>
 						</li>
 				    </ul>
+					<div class="swiper-pagination"></div>
 				</div>
+				
+				<div class="pointBox">
+					<div class="point on" v-for="(item,index) in artData" :key="index"></div>
+				</div>
+				
 			</div>
 			
 		</div>
@@ -188,8 +195,8 @@
 				<div class="flex pdb40 flex-wrap hd">
 					<div class="IconBoxs" 
 					v-for="(item,index) in brandData" :key="index"
-					@mouseenter="enter(index)" @mouseleave="leave()" v-show="index<=6">
-						<a  :href="'product.html?id='+brandCon.id+'&behavior='+brandCon.behavior"
+					 v-show="index<=6">
+						<a @mouseenter="enter(index)" @mouseleave="leave()" :href="'product.html?id='+brandCon.id+'&behavior='+brandCon.behavior"
 						class="IconBox" v-show="index<=6 && index!=0">
 							<!-- <img src="images/news-img3.jpg" class="bg"> -->
 							<img :src="item&&item.headImg&&item.headImg[0]?item.headImg[0].url:''" class="bg">
@@ -198,24 +205,24 @@
 								<img :src="item.mainImg&&item.mainImg[0]&&item.mainImg[0].url">
 							</div>
 						</a>
-						<a href="brand.html" class="flexCenter mgl30 pr o-h qtImg" v-if="index==2" >
+						<a href="brand.html" class="flexCenter mgl30 pr o-h qtImg" v-if="index==2" @mouseenter="enter(7)" @mouseleave="leave()" >
 							<img src="images/home-img06.png" class="mgl30 qtImg ">
 							<div class="Icon flexCenter mgl30"></div>
 						</a>
-						<a href="brand.html" class="flexCenter mgl30 pr o-h qtImg" v-if="index==4">
+						<a href="brand.html" class="flexCenter mgl30 pr o-h qtImg" v-if="index==4" @mouseenter="enter(7)" @mouseleave="leave()">
 							<img src="images/home-img09.png" class="mgl30 qtImg " >
 							<div class="Icon flexCenter mgl30"></div>
 						</a>
-						<!-- <img src="images/home-img012.png" class="mgl30 qtImg" v-if="index==5"> -->
-						<a class="flexCenter mgl30 pr o-h qtImg" v-show="index==6"  href="brand.html" style="color: #fff;">
+						<a class="flexCenter mgl30 pr o-h qtImg" v-show="index==6"  href="brand.html" style="color: #fff;" @mouseenter="enter(7)" @mouseleave="leave()">
 							<img src="images/home-img012.png" class="qtImg">
 							<div class="Icon flexCenter font31 hand">更多 ></div>
 						</a>
 					</div>
 				</div>
 			</div>
-			<div class="R R2 RR animated fadeInRight" v-show="partHeight+headerHeight+(partHeight*0.3)<offsetTopNow">
-				<!-- Swiper -->
+			
+			<include src="carousel.html"></include>
+			<!-- <div class="R R2 RR animated fadeInRight" v-show="partHeight+headerHeight+(partHeight*0.3)<offsetTopNow">
 				<div class="swiper-container  swiper2" >
 				    <div class="swiper-wrapper" id="swiper2">
 						<div class="swiper-slide item" v-if="brandData.length" v-for="(item,index) in brandData" :key="index">
@@ -229,8 +236,9 @@
 						</div>
 				    </div>
 				</div>
-			</div>
+			</div> -->
 		</div>
+		
 		
 		
 		<!-- 底部图 -->
@@ -381,8 +389,10 @@
 					newsHeight1:0,
 					newsHeight2:0,
 					newsHeight3:0,
-					partHeight:0.,
-					footHeight:0
+					partHeight:0,
+					footHeight:0,
+					
+					swiper3:null
 		        }
 		    },
 			
@@ -415,22 +425,28 @@
 					self.newsHeight3 = $("#news3").height() + self.newsHeight2;
 					self.partHeight = $(".part3").height() + self.newsHeight3;
 					self.footHeight = $(".footImg").height() + self.partHeight + 500;
+					// console.log(self.caseHeight,self.newsHeight1,self.newsHeight2)
 				},
 				
 				test:function(width){
 					const self = this;
-					if(width<=800){
-						self.headerHeight = 80;
-					}else if(width<=500){
+					console.log(width)
+					if(width<=500){
 						self.headerHeight = 50;
 						self.bannerHeight = 0;
 						self.aboutHeight = 0;
 						self.newsHeight1 = 0;
-						self.newsHeight3 = 0;
+						self.newsHeight2 = 0;
 						self.partHeight = 0;
 						self.footHeight = 0;
+						// console.log(self.newsHeight2,self.partHeight,width)
+					}else if(width<=800){
+						self.headerHeight = 80;
+						self.getHeight();
+					} else{
+						self.getHeight();
 					}
-					self.getHeight();
+					// console.log(self.newsHeight2,self.partHeight,width)
 				},
 				
 				handleScroll: function(){
@@ -441,6 +457,7 @@
 					if((scrollTop + winHeight - extra)>self.offsetTopNow){
 						self.offsetTopNow = scrollTop + winHeight - extra;
 					};
+					// console.log(winHeight,extra,self.offsetTopNow,scrollTop)
 				},
 				
 				play:function(){
@@ -475,6 +492,7 @@
 					self.brandCon.description = self.brandData[index].description;
 					self.brandCon.id = self.brandData[index].id;
 					self.brandCon.behavior = self.brandData[index].behavior;
+					console.log(self.index)
 				},
 				
 				leave(){
@@ -533,6 +551,18 @@
 					window.base.labelGet(postData, callback);
 				},
 				
+				autoPlay(){
+					const self = this;
+					self.swiper3.autoplay.start();
+					console.log(start)
+				},
+				
+				stopPlay(){
+					const self = this;
+					self.swiper3.autoplay.stop();
+					console.log(stop)
+				},
+				
 				getArtData(){
 				    var self = this;
 				    var postData = {};
@@ -551,13 +581,15 @@
 							self.artData.push.apply(self.artData,res.info.data)
 							
 							setTimeout(function(){
-								var swiper3 = new Swiper('.swiper11', {
+								self.swiper3 = new Swiper('.swiper11', {
 									loop: true,
 									initialSlide:0,
 								    slidesPerView: 3,
 								    spaceBetween : 0,
 									speed:1500,
-									autoplay:true,
+									autoplay:{
+										delay: 5000,
+									},
 									navigation: {
 									  nextEl: '.swiper-next',
 									  prevEl: '.swiper-prev',
@@ -568,11 +600,14 @@
 							},1000)
 							
 							var swiper = new Swiper('.swiper1', {
-							   // loop: true,
+							    //loop: true,
 							    initialSlide:0,
 							    slidesPerView: 1,
 							    spaceBetween : 20,
 								speed:1000,
+								pagination: {
+								    el: '.swiper-pagination',
+								},
 								
 								observer: true,//修改swiper自己或子元素时，自动初始化swiper
 								observeParents: true,//修改swiper的父元素时，自动初始化swiper
@@ -653,14 +688,14 @@
 								on: {
 									slideChangeTransitionStart: function(){
 									    // alert(this.activeIndex);
-										console.log(this.activeIndex,'序号33333')
+										// console.log(this.activeIndex,'序号33333')
 										self.brandCon.title = self.brandData[this.activeIndex-1].title;
 										self.brandCon.description = self.brandData[this.activeIndex-1].description;
 										self.brandCon.id = self.brandData[this.activeIndex-1].id;
 										self.brandCon.behavior = self.brandData[this.activeIndex-1].behavior;
 									},
 									slideChange: function(){
-									    console.log('改变了，activeIndex为'+this.activeIndex);
+									    // console.log('改变了，activeIndex为'+this.activeIndex);
 									},
 								},
 							})

@@ -20,15 +20,27 @@ textarea{width: 100%;padding: 10px; box-sizing: border-box;font-size: 14px;color
 .hand{cursor: pointer;}
 
 
+::selection
+{
+background-color: #383838;
+color:#fff;
+}
+::-moz-selection
+{
+background-color: #383838;
+color:#fff;
+}
+
+
 /* 新增 */
 .w1660{width: 1660px;margin: 0 auto;}
-.moreBtn{width: 140px;line-height: 45px;color: #fff;font-size: 14px;text-align: center;background-color: #383838;cursor: pointer;transition: all 0.5s;box-shadow: 0 3px 6px 2px #bebebe;display: block;letter-spacing: 2px;border-radius: 5px;}
+.moreBtn{width: 140px;line-height: 45px;color: #fff;font-size: 14px;text-align: center;background-color: #383838;cursor: pointer;transition: all 0.5s;box-shadow: 0 3px 6px 2px #bebebe;display: block;letter-spacing: 1px;border-radius: 3px;}
 .moreBtn:hover{background-color: #5c5c5c;}
 
 .allH1{padding: 20px 0;border-bottom: 2px solid #BABABA;position: relative;width: 1660px;margin: 0 auto;}
 .allH1::before{content: '';width: 100px;height: 6px;background-color: #BABABA;position: absolute;right: 0;bottom: -6px;}
 .allH1 h1{font-size: 30px;line-height: 1;color: #BABABA;}
-.allH1 h1 span{font-size: 36px;padding-right: 0;color: #333;transition: all 0.5s;letter-spacing: 10px;cursor: pointer;}
+.allH1 h1 span{font-size: 36px;padding-right: 0;color: #333;transition: all 0.5s;letter-spacing: 10px;}
 /* .allH1 h1 span:hover{color: #5c5c5c;} */
 
 /* .LL,.RR{opacity: 0;} */
@@ -299,7 +311,7 @@ textarea{width: 100%;padding: 10px; box-sizing: border-box;font-size: 14px;color
 	
 	.allH1{padding: 10px 0;}
 	.allH1 h1{font-size: 18px;}
-	.allH1 h1 span{font-size: 24px;padding-right: 10px;letter-spacing: 3px;}
+	.allH1 h1 span{font-size: 30px;padding-right: 10px;letter-spacing: 3px;}
 	.allH1::before{width: 50px;height: 4px;bottom: -4px;}
 	.moreBtn{width: 120px;line-height: 40px;height: 40px;font-size: 14px;}
 }

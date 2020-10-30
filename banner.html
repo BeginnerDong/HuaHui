@@ -1,6 +1,11 @@
-<div id="banner_app">
+<div id="banner_appone">
 	<div class="swiperBox">
-		<div class="banner animated fadeIn" v-for="(item,index) in bannerData" v-if="index==banner_index" >
+		<div class="banner animated fadeIn" 
+		v-for="(item,index) in bannerData" 
+		v-if="index==banner_index" 
+		v-swipeleft="{fn:vuetouch,name:'左滑'}"
+		v-swiperight="{fn:vuetouch,name:'右滑'}"
+		@touchmove.prevent>
 			<a :href="item.url"><img :src="item&&item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''" /></a>
 		</div>
 		
@@ -16,14 +21,22 @@
 		</div>
 		
 	</div>
+	<!-- <div style="width: 100%;height: 200px;background-color: plum;"
+	v-tap="vuetouch"
+	v-longtap="{fn:vuetouch,name:'长按'}"
+	v-swipeleft="{fn:vuetouch,name:'左滑'}"
+	v-swiperight="{fn:vuetouch,name:'右滑'}"
+	v-swipeup="{fn:vuetouch,name:'上滑'}"
+	v-swipedown="{fn:vuetouch,name:'下滑'}">{{name}}</div> -->
 </div>
 
-
+<script src="js/touch.js"></script>
 <script type="text/javascript">
 	var banner_app = new Vue({
-	    el: '#banner_app',
+	    el: '#banner_appone',
 	    data:function(){
 	        return {
+				name:'开始',
 	        	banner_index:0,
 	        	is_toggle:false,
 				shownav:true,
@@ -75,6 +88,25 @@
 			self.bannerTimer = null;
 		},
 	    methods: {
+			
+			vuetouch:function(s,e){
+				const self = this;
+				// console.log(s)
+				// console.log(e)
+				if(s.name == '左滑'){
+					self.banner_index++;
+				}else{
+					self.banner_index--;
+				}
+				
+				if(self.banner_index<0){
+					self.banner_index = self.bannerData.length-1
+				};
+				if(self.banner_index==self.bannerData.length){
+					self.banner_index = 0
+				};
+			},
+
 			
 			getMainData: function(id){
 			    var self = this;
@@ -145,16 +177,16 @@
 <style>
 	
 /*网站banner*/
-.swiperBox{  position: relative; width: 100%; height:800px; overflow: hidden;}
-.swiperBox .banner{ width: 100%; height: 100%;/* opacity: 0; */}
-.swiperBox .banner a{width: 100%;height: 100%;}
-.swiperBox .banner img{width:auto; height: 100%; display: block;position: relative;left: 50%;transform: translateX(-50%);}
+#banner_appone .swiperBox{  position: relative; width: 100%; height:800px; overflow: hidden;}
+#banner_appone .swiperBox .banner{ width: 100%; height: 100%;/* opacity: 0; */}
+#banner_appone .swiperBox .banner a{width: 100%;height: 100%;}
+#banner_appone .swiperBox .banner img{width:auto; height: 100%; display: block;position: relative;left: 50%;transform: translateX(-50%);}
 
 .show{opacity: 1;}
 
-.swiperBox .arrowIon{position: absolute;top:45%;z-index:50;cursor: pointer; padding: 20px 15px; background: rgba(0,0,0,0.3); border-radius: 4px;}
-.swiperBox .arrowIon.prev{right:30px;}
-.swiperBox .arrowIon.next{left:30px;}
+#banner_appone .swiperBox .arrowIon{position: absolute;top:45%;z-index:50;cursor: pointer; padding: 20px 15px; background: rgba(0,0,0,0.3); border-radius: 4px;}
+#banner_appone .swiperBox .arrowIon.prev{right:30px;}
+#banner_appone .swiperBox .arrowIon.next{left:30px;}
 
 .banBtnNav{ width: 100%; text-align: center; position: absolute; bottom:4%; left: 0;z-index: 9;}
 .banBtnNav span{ margin: 0 5px; /* background:#fff; */ width: 10px; height: 10px;box-shadow: 0 0 3px rgba(0,0,0,0.1);border-radius: 10px;border: 1px solid #a5a5a5;}
@@ -163,27 +195,27 @@
 /* banner 各种屏幕自适应 */
 
 @media only screen and (max-width: 1920px){
-	.swiperBox .banner img{width:100%;}
-	.swiperBox{height: 800px;}
+	#banner_appone .swiperBox .banner img{width:100%;}
+	#banner_appone .swiperBox{height: 800px;}
 }
-@media only screen and (max-width: 1600px){.swiperBox{height: 667px;}}
-@media only screen and (max-width: 1440px){.swiperBox{height: 600px;}}
-@media only screen and (max-width: 1366px){.swiperBox{height: 570px;}}
-@media only screen and (max-width: 1280px){.swiperBox{height: 533px;}}
-@media only screen and (max-width: 1100px){.swiperBox{height: 400px;}}
-@media only screen and (max-width: 1024px){.swiperBox{height: 427px;}}
+@media only screen and (max-width: 1600px){#banner_appone .swiperBox{height: 667px;}}
+@media only screen and (max-width: 1440px){#banner_appone .swiperBox{height: 600px;}}
+@media only screen and (max-width: 1366px){#banner_appone .swiperBox{height: 570px;}}
+@media only screen and (max-width: 1280px){#banner_appone .swiperBox{height: 533px;}}
+@media only screen and (max-width: 1100px){#banner_appone .swiperBox{height: 400px;}}
+@media only screen and (max-width: 1024px){#banner_appone .swiperBox{height: 427px;}}
 
 /* 平板 */
 @media only screen and (max-width: 800px){
-	.swiperBox{height:320px;}
+	#banner_appone .swiperBox{height:320px;}
 }
 @media only screen and (max-width: 500px){
-	.swiperBox{ height:206px;}
+	#banner_appone .swiperBox{ height:206px;}
 	.banBtnNav img{width: 12px;}
 	.banBtnNav div{padding: 0 5px;}
 }
-@media only screen and (max-width: 414px){.swiperBox{height: 186px;}}
-@media only screen and (max-width: 375px){.swiperBox{height: 166px;}}
-@media only screen and (max-width: 320px){.swiperBox{height: 146px;}}
+@media only screen and (max-width: 414px){#banner_appone .swiperBox{height: 186px;}}
+@media only screen and (max-width: 375px){#banner_appone .swiperBox{height: 166px;}}
+@media only screen and (max-width: 320px){#banner_appone .swiperBox{height: 146px;}}
 
 </style>

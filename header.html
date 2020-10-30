@@ -11,7 +11,11 @@
 			
 			<div class="T-Logo"><a href="index.html"><img src="images/home-img1.png" ></a></div>
 			
-			<div style="height: 100%;">
+			<div class="searchM">
+				<a href="seach.html"><img class="icon" style="height: 22px;" src="images/icon-02.png" ></a>
+			</div>
+			
+			<div style="height: 100%;" class="searchPC">
 				<div class="Rseach">
 					<input type="text" v-on:keydown.enter="goSearch" v-model="title" placeholder="请输入你要搜索的内容" />
 					<a href="seach.html"><img class="icon" src="images/home-icon0.png" ></a>
@@ -39,9 +43,11 @@
 											<em class="pdl5" v-if="item.child&&item.child.length>0">&gt;</em>
 										</a>
 									</div>
-									<div class="Bsamll">
-										<a v-for="(c_item,c_index) in item.child" :href="'product.html?id='+item.id+'&childId='+c_item.id+'&behavior='+item.behavior" :key="c_item.id" class="Bchild" 
-										>{{c_item.title}}</a>
+									<div class="bBox">
+										<div class="Bsamll">
+											<a v-for="(c_item,c_index) in item.child" :href="'product.html?id='+item.id+'&childId='+c_item.id+'&behavior='+item.behavior" :key="c_item.id" class="Bchild" 
+											>{{c_item.title}}</a>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -56,7 +62,7 @@
 		</div>
 	
 		<!-- 移动端显示导航 -->
-		<div class="mNav" v-show="is_showNav">
+		<div class="mNav animated fadeInLeft" v-show="is_showNav">
 			<img class="close" src="images/icon-09.png" @click="shownav" >
 			<a href="seach.html" class="Mseach">
 				<img src="images/input.png" class="input">
@@ -330,28 +336,31 @@
 
 <style>
 /* 二级导航 */
-.Asamll{width: 230px;position: absolute;left: 0;top:0;/* transform: translateX(-50%); */background:#fff;color: #222;text-align: left; /* display: none; */box-shadow: 0px 0px 5px rgba(0,0,0,0.15);/* height: 0; */transition: all 0.3s;letter-spacing: 1px;opacity: 0;overflow: hidden;}
-/* .ppAsamll{top: 10px;left: 10px;}
-.ppA{width: 230px;position: absolute;overflow: hidden;height: 0;left: -10px;top: 84%;} */
+.Asamll{width: 230px;position: absolute;left: 0;/* top:0; *//* transform: translateX(-50%); */background:#fff;color: rgba(34,34,34,0);text-align: left; /* display: none; */box-shadow: 0px 0px 15px rgba(0,0,0,0.1);height: 0;transition: all 0.2s;letter-spacing: 1px;opacity: 0;/* overflow: hidden; */}
+/* .ppAsamll{top: 10px;left: 10px;} */
+.ppA{width: 230px;position: absolute;overflow: hidden;height: 0;left: -10px;}
 /* .AnliLabel{left: 45.4%;} */
-.Asamll .Achild{line-height: 45px;height: 0px;position: absolute;width: 100%;position: relative;font-size: 14px;box-sizing: border-box;border-bottom: 1px solid #e1e1e1;opacity: 0;z-index: 5;}
+.Asamll .Achild{line-height: 45px;height: 0px;position: absolute;width: 100%;position: relative;font-size: 14px;box-sizing: border-box;border-bottom: 1px solid #f5f5f5;opacity: 0;z-index: 5;}
 .Aname{padding: 0 15px;box-sizing: border-box;}
 .Aname>.link{ color: #222;width: 100%; display: block;}
 .Asamll .Achild:hover,.Bsamll .Bchild:hover{background: #F5F5F5;}
 /* .Asamll .Achild .Aname:hover .link{color: #fff;} */
 .Asamll .Achild .Aname em{font-size: 13px;}
 
-.Bsamll{position: absolute;left: 100%;top: -100%;width: 230px;background: #fff;/* display:none; */box-shadow: 0px 0px 5px rgba(0,0,0,0.15);transition: all 0.3s;opacity: 0;}
-.Bsamll .Bchild{display: block;font-size: 14px;padding: 0 15px;box-sizing: border-box;color: #222;border-bottom: 1px solid #e1e1e1;}
+.Bsamll{/* position: absolute;left: 100%;top: -100%; */width: 230px;background: #fff;/* display:none; */box-shadow: 0px 0px 5px rgba(0,0,0,0.15);transition: all 0.15s;/* opacity: 0; */}
+.Bsamll .Bchild{display: block;font-size: 14px;padding: 0 15px;box-sizing: border-box;color: #222;border-bottom: 1px solid #f5f5f5;}
 .Bsamll .Bchild:last-child{border-bottom: 0;}
 
-/* .orderNavTwo .tt:hover .alAsamll{height: 270px;}
-.orderNavTwo .tt:hover .ppAsamll{height: 315px;} */
-/* .orderNavTwo .ppA:hover .Asamll{overflow: initial;} */
-.orderNavTwo .tt:hover .Asamll{top: 100%;opacity: 1;overflow: initial;}
-.orderNavTwo .tt:hover .ppA{height: 450px;width: 480px;}
+.bBox{height: 0;overflow: hidden;position: absolute;left: 225px;transition: all 0.3s;top: -10px;width: 240px;}
+
+.orderNavTwo .tt:hover .alAsamll{height: 270px;opacity: 1;color: rgba(34,34,34,1);}
+.orderNavTwo .tt:hover .ppAsamll{height: 315px;opacity: 1;color: rgba(34,34,34,1);}
+.orderNavTwo .ppA:hover{overflow: initial;}
+/* .orderNavTwo .tt:hover .Asamll{top: 100%;opacity: 1;overflow: initial;} */
+/* .orderNavTwo .tt:hover .ppA{height: 450px;width: 480px;} */
 .orderNavTwo .tt:hover .Achild{opacity: 1;height: 45px;}
-.Asamll .Achild:hover .Bsamll{/* display: block; */opacity: 1;top: 0;}
+/* .Asamll .Achild:hover .Bsamll{opacity: 1;top: 0;} */
+.Asamll .Achild:hover .bBox{height: 325px;padding-top: 10px;padding-left: 5px;}
 
 .black-bj2{z-index: 10;/* display: none; */}
 
@@ -366,8 +375,9 @@
 
 .orderNavTwo{height: 50%;z-index: 10;}
 .orderNavTwo .w1200{align-items: flex-start;}
-.orderNavTwo .tt{ text-align: center; box-sizing: border-box;padding-left: 20px;height: 100%;}
-.orderNavTwo .tt>a{display: flex;height: 100%;padding: 0 10px;color: #222;align-items: center;}
+.orderNavTwo .tt{ text-align: center; box-sizing: border-box;margin-right: 40px;height: 100%;}
+.orderNavTwo .tt:nth-child(7){margin-right: 0;}
+.orderNavTwo .tt>a{display: flex;height: 100%;padding: 0 0;color: #222;align-items: center;}
 .orderNavTwo .tt.on>a{ color: #c11719; }
 .orderNavTwo .tt>a:hover{color: #c11719;}
 
@@ -376,13 +386,15 @@
 .Rseach .icon{width: 23px;height:21px;display: block;margin: 0 20px;}
 .Rseach:hover input{width: 200px;padding: 0 20px;opacity: 1;}
 
+.searchM{display: none;}
+
 .mobile-Btn{width: 50px;height: 80px;display: none;align-items: center;}
 .mobile-Btn img{height: 40px;}
 .mobile-Btn em{width: 100%;height: 1px;background: #999;margin: 3px 0;}
 
 .headH{height: 60px;width: 100%;}
 
-.mNav{width: 100%;background-color: #fff;position: fixed;top: 0;left: 0;right: 0;bottom: 0;overflow-y: auto;}
+.mNav{width: 100%;background-color: #fff;position: fixed;top: 0;left: 0;right: 0;bottom: 0;overflow-y: auto;z-index: 100000;}
 .mNav .close{margin: 30px;position: absolute;top: 0;left: 0;}
 .Mseach{margin: 115px 75px 80px;position: relative;display: block;/* background-image: url(images/input.png); */}
 .Mseach input{width: 100%;height: 60px;border-radius: 30px;font-size: 26px;text-indent: 30px;position: relative;background: none!important;}
@@ -393,27 +405,32 @@
 .orderNavTwo.mobile{background-color: #f5f5f5; display: none;width: 100%;box-sizing: border-box;font-size: 26px;height: auto;}
 .orderNavTwo.mobile .tt{border-bottom: 1px solid #E1E1E1;margin: 0 30px;line-height: 100px;min-height: 100px;position: relative;padding-left: 0;}
 .orderNavTwo.mobile .tt>a{line-height: 100px;}
-.orderNavTwo .off,.orderNavTwo .onn{width: 18px;position: absolute;right: 0;top: 30px;padding: 20px;}
+.orderNavTwo .off,.orderNavTwo .onn{width: 15px;position: absolute;right: 0;top: 30px;padding: 24px;}
 .orderNavTwo .off{top:20px;}
 .orderNavTwo.mobile .Asamll{box-shadow: none;background-color: #f5f5f5;position: relative;width: 100%;}
 .orderNavTwo.mobile .Asamll .Achild{line-height: 80px;font-size: 22px;height: 80px;border-bottom: none;}
 
 #head_app{position: sticky;z-index: 100000;}
 
+.orderNavTwo.mobile .Asamll{height: 0;display: none;opacity: 1;}
+.orderNavTwo.mobile .Asamll .Bsamll{display: none;}
+.orderNavTwo .off img{width: 12px;height: 12px;}
+.orderNavTwo .onn img{width: 12px;height: 2px;}
 
 /*以下自适应样式*/
+@media screen and ( max-width: 1300px){
+	.fsbanner .item{height: auto;}
+}
+
 
 @media screen and ( max-width: 1000px){
 	.orderNavTwo .tt>a{padding: 0 5px;}
 	
-	.orderNavTwo.pc{display: none;}
-	.orderNavTwo.mobile{display: block;}
-	
-	.orderNavTwo .tt:hover .Asamll{display: none;}
-	.Asamll .Achild:hover .Bsamll{display: none;}
+	.orderNavTwo .tt{margin-right: 10px;}
 }
 
 @media screen and ( max-width: 800px){
+	.zhHead{height: 80px;}
 	.head{display: flex;align-items: center;justify-content: space-between;}
 	.head .logoCont{padding: 10px 2%;}
 	.T-Logo{height: 47px;margin: 0;}
@@ -422,6 +439,17 @@
 	.head .cont{height: 80px;align-items: center;}
 	.headH{height: 50px;}
 	.Rseach{margin-left: 30px; padding: 40px 0 0;}
+	
+	
+	.orderNavTwo.pc{display: none;}
+	.orderNavTwo.mobile{display: block;}
+	
+	.searchPC{display: none;}
+	.searchM{display: block;}
+	.searchM a{display: block;padding: 10px 0 11px 10px;height: 100%;}
+	
+	.orderNavTwo .tt:hover .Asamll{display: none;}
+	.Asamll .Achild:hover .Bsamll{display: none;}
 	
 	/* 二级导航 */
 	/* .Asamll{display: block; width: 100%;left: auto;transform:initial;right: 100%;top: 0;position: initial;}
@@ -435,23 +463,25 @@
 }
 
 @media screen and ( max-width: 500px){
-	.head .cont{justify-content: space-between;height: 50px;}
+	.head .cont{justify-content: space-between;height: 70px;}
 	.zhHead{height: 50px;}
 	.T-Logo{height: 37px;}
 	.mobile-Btn{height: 50px;width: 30px;}
 	.mobile-Btn img{height: 25px;}
 	.Rseach{margin: 0;padding: 25px 0 0;}
 	
+	.head .cont{padding: 0 4%;}
+	
 	.mNav .close{margin: 20px;width: 20px;}
-	.Mseach{margin: 60px 5% 40px;}
-	.Mseach input{height: 40px;font-size: 20px;text-indent: 20px;}
+	.Mseach{margin: 80px 5% 40px;}
+	.Mseach input{height: 35px;font-size: 16px;text-indent: 20px;}
 	.Mseach img{width: 20px;}
 	
 	.orderNavTwo.mobile{font-size: 20px;}
 	.orderNavTwo.mobile .tt{margin: 0 15px;min-height: 60px;}
-	.orderNavTwo.mobile .tt>a{line-height: 60px;}
+	.orderNavTwo.mobile .tt>a{line-height: 60px;font-size: 16px;}
 	.orderNavTwo.mobile .Asamll{padding-bottom: 10px;}
-	.orderNavTwo.mobile .Asamll .Achild{font-size: 16px;line-height: 40px;height: 40px;}
+	.orderNavTwo.mobile .Asamll .Achild{font-size: 14px;line-height: 40px;height: 40px;}
 	.orderNavTwo .off{top: 0;}
 	.orderNavTwo .onn{top: 10px;}
 }

@@ -4,7 +4,7 @@
 .cailiaoList li{padding-bottom: 40px;}
 .cailiaoList li:last-child{padding-bottom: 0;}
 .cailiaoList li .ll{width: 80%;font-size: 15px;padding-left: 20px;box-sizing: border-box;background: url(../images/download-icon8.png) no-repeat 0 5px/10px 10px;overflow:hidden;text-overflow:ellipsis; white-space:nowrap;}
-.cailiaoList li .rr{width: 20%;color: #666;}
+.cailiaoList li .rr{/* width: 20%; */color: #666;}
 .cailiaoList li .rr .icon{width: 18px;height: 21px;margin-right: 8px;}
 
 /* 高清图 */

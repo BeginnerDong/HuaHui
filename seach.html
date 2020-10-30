@@ -99,7 +99,9 @@
 					
 					<!-- <img class="icon" src="images/home-icon.png" > -->
 				</div>
-				<div class="R"></div>
+				<div class="R">
+					<a href="index.html">Cancel</a>
+				</div>
 				
 			</div>
 		</div>
@@ -124,7 +126,7 @@
 			<div class="ind-dynamic" v-if="curr==1">
 				
 				<div v-for="(item,index) in mainData">
-					<div class="item flexRowBetween" style="margin-bottom: 60px;" v-if="index%2==0">
+					<!-- <div class="item flexRowBetween" style="margin-bottom: 60px;" v-if="index%2==0">
 						<a class="flexRowBetween" :href="'newsdetail.html?id='+item.id">
 							<div class="texbox">
 								<div class="tit avoidOverflow">{{item.title}}</div>
@@ -149,8 +151,33 @@
 							</div>
 							<div class="fixArrow"></div>
 						</a>
+					</div> -->
+					
+					
+					<div id='news1' class="newsItem flexRowBetween" >
+						<div class="L animated fadeInLeft" >
+							<img :src="item.bannerImg&&item.bannerImg[0]?item.bannerImg[0].url:''" class="Limg">
+						</div>
+						<div class="R animated fadeInRight" >
+							<h1 class="avoidOverflow">{{item.title}}</h1>
+							<p class="avoidOverflow5">{{item.description}}</p>
+							<a class="moreBtn" :href="'newsdetail.html?id='+item.id">Read More></a>
+						</div>
 					</div>
+					<div id='news2' class="newsItem flexRowBetween">
+						<div class="R animated fadeInLeft">
+							<h1 class="avoidOverflow">{{item.title}}</h1>
+							<p class="avoidOverflow5">{{item.description}}</p>
+							<a class="moreBtn" :href="'newsdetail.html?id='+item.id">Read More></a>
+						</div>
+						<div class="L animated fadeInRight">
+							<img :src="item.bannerImg&&item.bannerImg[0]?item.bannerImg[0].url:''" class="Limg">
+						</div>
+					</div>
+					
+					
 				</div>
+				
 			</div>
 			
 			
@@ -297,7 +324,7 @@
 					self.searchItem.type = self.curr
 					self.goSearch()
 				}
-				
+				self.submit()
 			},
 			
 		    methods: {
@@ -418,6 +445,7 @@
 	.head{position: fixed;top: 0;left: 0;right: 0;z-index: 20;box-shadow: 0 1px 4px rgba(100, 100, 100, 0.1);width: 100%;box-sizing: border-box;background-color: #fff;}
 	
 	.head .cont{height: 60px;justify-content: center;}
+	.head .R{padding: 30px;cursor: pointer;}
 	
 	.T-Logo{width:auto; height:42px; display: block;}
 	.T-Logo a{width: 100%;height: 100%; display: block;}
@@ -454,9 +482,10 @@
 		.head .cont{height: 50px;}
 		.headH{height: 50px;}
 		
-		.seachInput{width: 60%;}
+		.seachInput{width: 95%;}
 		.Rseach{margin-left: 30px;}
-		.head .cont .R{display: none;}
+		.head .cont {padding: 0 4%;}
+		.head .cont .R{padding: 0 0 0 20px;font-size: 16px;}
 	}
 	
 	@media screen and ( max-width: 375px){

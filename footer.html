@@ -1,9 +1,12 @@
 <div class="footer" id="footer_app">
 	<div class="cont w1200 flexRowBetween">
 		<div class="ewm1">
-			<div v-for="(item,index) in mData" :key="index">
+			<div v-for="(item,index) in mData" :key="index" v-show="index<=1">
 				<img :src="item&&item.mainImg&&item.mainImg[0]&&item.mainImg[0]&&item.mainImg[0].url" class="img1" @click="showEwm(item&&item.bannerImg&&item.bannerImg[0]&&item.bannerImg[0]&&item.bannerImg[0].url)">
 			</div>
+			<a href="https://weibo.com/u/7310396002?is_all=1">
+				<img src="images/icon-05.png" class="img1" >
+			</a>
 			
 				<div class="ewmShow" @click="showEwm(0)" >
 					<img :src="ewmUrl" class="">
@@ -201,7 +204,7 @@
 		color: #fff;
 		padding: 60px 0 0;
 		position: relative;
-		z-index: 100000;
+		z-index: 10000;
 	}
 
 	.footer .cont {
@@ -291,7 +294,7 @@
 	.footer .liCon{display: flex;flex-wrap: wrap;width: 100%;}
 	.footer .liCon p{width: 50%;}
 	
-	.footer .copy{padding: 20px 0;font-size: 12px;color: #777;border-top: 1px solid #777;text-align: center;margin-top: 130px;}
+	.footer .copy{padding: 20px 0;font-size: 12px;color: #777;border-top: 1px solid #777;text-align: center;margin-top: 130px;letter-spacing: 1px;line-height: 1.8;}
 
 
 	@media only screen and (max-width: 1280px) {

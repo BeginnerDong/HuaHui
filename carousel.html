@@ -1,13 +1,19 @@
 <div id="banner_app">
-	<div class="swiperBox"  @mouseover="stop()" @mouseleave="conti()">
+	<div class="listCon">
+		<h1>{{title}}</h1>
+		<p class="avoidOverflow6">{{content}}</p>
+		<a :href="'product.html'">READ MORE ></a>
+	</div>
+	
+	<div class="swiperBox" @touchmove="test"  @mouseover="stop()" @mouseleave="conti()">
 		<div id="list" :style="'left:'+ leftOffset + 'px;width:'+totalWidth+'px'">
-		    <img :style="'width:'+widthStandard+'px'" src="images/5.jpg" alt="1"/>
-		    <img :style="'width:'+widthStandard+'px'" src="images/1.jpg" alt="1"/>
-		    <img :style="'width:'+widthStandard+'px'" src="images/2.jpg" alt="2"/>
-		    <img :style="'width:'+widthStandard+'px'" src="images/3.jpg" alt="3"/>
-		    <img :style="'width:'+widthStandard+'px'" src="images/4.jpg" alt="4"/>
-		    <img :style="'width:'+widthStandard+'px'" src="images/5.jpg" alt="5"/>
-		    <img :style="'width:'+widthStandard+'px'" src="images/1.jpg" alt="5"/>
+			<div :style="'width:'+widthStandard+'px'" v-for="(item,index) in mainData" :key="index">
+				<img :src="item&&item.headImg&&item.headImg[0]&&item.headImg[0].url"/>
+				<div class="Icon flexCenter">
+					<img :src="item.mainImg&&item.mainImg[0]&&item.mainImg[0].url" class="logoImg">
+				</div>
+			</div>
+		    <!-- <img :src="item.url" :alt="index" v-for="(item,index) in mainData" :key="index"  :style="'width:'+widthStandard+'px'"/> -->
 		</div>
 		
 		<!-- 导航点 -->
@@ -23,8 +29,9 @@
 		
 	</div>
 	
-	<div @click="next()">next</div>
-	<div @click="prev()">prev</div>
+	<!-- 左右按钮 -->
+	<!-- <div @click="next()">next</div>
+	<div @click="prev()">prev</div> -->
 	
 </div>
 
@@ -38,15 +45,16 @@
 	        	is_toggle:false,
 				shownav:true,
 				is_show:false,
-				mainData:[
-					{url:'images/5.jpg'},
-					{url:'images/1.jpg'},
-					{url:'images/2.jpg'},
-					{url:'images/3.jpg'},
-					{url:'images/4.jpg'},
-					{url:'images/5.jpg'},
-					{url:'images/1.jpg'},
-				],
+				// mainData:[
+				// 	{url:'images/5.jpg'},
+				// 	{url:'images/1.jpg'},
+				// 	{url:'images/2.jpg'},
+				// 	{url:'images/3.jpg'},
+				// 	{url:'images/4.jpg'},
+				// 	{url:'images/5.jpg'},
+				// 	{url:'images/1.jpg'},
+				// ],
+				mainData:[],
 				searchItem:{
 					thirdapp_id:window.base.thirdapp_id,
 					title:'首页轮播图'
@@ -58,21 +66,24 @@
 				leftOffset:0,
 				totalWidth:0,
 				clock:false,
-				cents:10,
-				perTime:500,
+				cents:200,
+				perTime:1500,//轮播速度
 				nowCents:0,
 				nowIndex:0,
 				toIndex:0,
 				gapLenth:0,
 				isAutoPlay:true,//是否自动轮播
-				autoPlayInterval:2000,//自动轮播间隔,
-				timeOutEvent:''
+				autoPlayInterval:1000,//自动轮播间隔,
+				timeOutEvent:'',
+				title:'',
+				content:''
 				
 	        }
 	    },
 	    created:function () {
 	        var self = this;
-			self.widthStandard = window.screen.width;
+			self.widthStandard = document.body.clientWidth*0.7;
+			// console.log('屏幕',self.widthStandard)
 			self.totalWidth = self.widthStandard*self.mainData.length;
 	        var currentUrl = window.base.GetUrlRelativePath();
 			setTimeout(function(){
@@ -111,6 +122,9 @@
 		},
 	    methods: {
 			
+			test(e){
+				console.log(e)
+			},
 			
 			stop(){
 				const self = this;
@@ -150,20 +164,24 @@
 					self.nowCents++;
 					self.leftOffset = parseFloat((self.leftOffset + oneCentLeft).toFixed(2));
 					if(self.nowCents<self.cents){
-						console.log('self.perTime/self.cents',self.perTime/self.cents)
+						// console.log('self.perTime/self.cents',self.perTime/self.cents)
 						setTimeout(go, self.perTime/self.cents);
 					}else{
 						if(self.toIndex==0){
-							self.leftOffset = -self.widthStandard*(self.mainData.length-2);
-							self.nowIndex = self.mainData.length-2;
+							self.leftOffset = -self.widthStandard*(self.mainData.length-1);
+							self.nowIndex = self.mainData.length-1;
 						}else if(self.toIndex==(self.mainData.length-1)){
-							self.leftOffset = -self.widthStandard*1;
-							self.nowIndex = 1;
+							self.leftOffset = 0;
+							self.nowIndex = 0;
+							// self.leftOffset = -self.widthStandard*1;
+							// self.nowIndex = 1;
 						}else{
 							self.nowIndex = self.toIndex;
 						};
 						self.clock = false;
-						console.log('self.autoPlayInterval',self.autoPlayInterval)
+						self.title = self.mainData[self.nowIndex].title;
+						self.content = self.mainData[self.nowIndex].description;
+						// console.log('self.autoPlayInterval',self.autoPlayInterval)
 						if(self.isAutoPlay){
 							if(self.timeOutEvent){
 								clearTimeout(self.timeOutEvent);
@@ -208,28 +226,26 @@
 				};
 			},
 			
+			
 			getMainData: function(id){
 			    var self = this;
 			    var postData = {};
-			    postData.searchItem = window.base.cloneForm(self.searchItem);
-				postData.getAfter = {
-					child:{
-						tableName:'Label',
-						middleKey:'id',
-						key:'parentid',
-						searchItem:{
-							status:1
-						},
-						condition:'=',
-						order:{
-							listorder:'desc'
-						}
-					}
+				postData.searchItem = {
+					parentid:0,
+					type:5
+				};
+				postData.order = {
+					listorder:'asc'
 				};
 			    var callback = function(res){
 			        if(res.info.data.length>0&&res.info.data[0]){
-						self.bannerData =res.info.data[0].child;
-						console.log('self.bannerData',self.bannerData)
+						self.mainData =res.info.data;
+						self.totalWidth = self.widthStandard*self.mainData.length;
+						self.title = self.mainData[0].title;
+						self.content = self.mainData[0].description;
+						// console.log('宽度',self.totalWidth)
+						// console.log('self.mainData',self.mainData)
+						// console.log('self.bannerData',self.bannerData)
 			        };    
 					self.bannerTimer = setInterval(function(){
 						
@@ -256,11 +272,13 @@
 	    		};
 	    		
 	    		if(self.banner_index<0){
-	    			self.banner_index = self.bannerData.length-1
+	    			self.banner_index = self.mainData.length-1
 	    		};
-	    		if(self.banner_index==self.bannerData.length){
+	    		if(self.banner_index==self.mainData.length){
 	    			self.banner_index = 0
 	    		};	
+				// self.title = self.mainData[self.banner_index].title;
+				// self.content = self.mainData[self.banner_index].description;
 	    		// console.log('self.banner_index',self.banner_index);
 	    	},
 			// 
@@ -277,12 +295,17 @@
 <style>
 	
 /*网站banner*/
+#banner_app{display: none;}
+
 .swiperBox{  position: relative; width: 100%; height:800px; overflow: hidden;}
 .swiperBox .banner{ width: 100%; height: 100%;/* opacity: 0; */}
 .swiperBox .banner a{width: 100%;height: 100%;}
 .swiperBox .banner img{width:auto; height: 100%; display: block;position: relative;left: 50%;transform: translateX(-50%);}
-#list { height: 400px; position: absolute; z-index: 1;}
-#list img { float: left;}
+#list { height: 170px; position: absolute; z-index: 1;margin-top: 50px;}
+#list div{float: left;height: 100%;display: flex;align-items: center;justify-content: center;position: relative;}
+#list img { /* float: left;height: 100%; */width: 280px;height: 100%;border-radius: 20px;margin-top: 20px;}
+#list .Icon{width: 100%;height: 100%;border-radius: 0;background-color: rgba(0,0,0,0.3);position: absolute;}
+#list .logoImg{width: 80px;height: 80px;border-radius: 0;}
 .show{opacity: 1;}
 
 .swiperBox .arrowIon{position: absolute;top:45%;z-index:50;cursor: pointer; padding: 20px 15px; background: rgba(0,0,0,0.3); border-radius: 4px;}
@@ -293,30 +316,35 @@
 .banBtnNav span{ margin: 0 5px; /* background:#fff; */ width: 10px; height: 10px;box-shadow: 0 0 3px rgba(0,0,0,0.1);border-radius: 10px;border: 1px solid #a5a5a5;}
 .banBtnNav span.active{ background: #a5a5a5;}
 .banBtnNav div{padding: 0 10px;}
+
+.listCon h1{font-size: 30px;padding: 50px 0 30px;}
+.listCon p, .listCon div{font-size: 14px;min-height: 170px;}
+.listCon a{color: #fff;margin-top: 20px;}
 /* banner 各种屏幕自适应 */
 
 @media only screen and (max-width: 1920px){
 	.swiperBox .banner img{width:100%;}
-	.swiperBox{height: 800px;}
+	/* .swiperBox{height: 800px;} */
 }
-@media only screen and (max-width: 1600px){.swiperBox{height: 667px;}}
+/* @media only screen and (max-width: 1600px){.swiperBox{height: 667px;}}
 @media only screen and (max-width: 1440px){.swiperBox{height: 600px;}}
 @media only screen and (max-width: 1366px){.swiperBox{height: 570px;}}
 @media only screen and (max-width: 1280px){.swiperBox{height: 533px;}}
 @media only screen and (max-width: 1100px){.swiperBox{height: 400px;}}
-@media only screen and (max-width: 1024px){.swiperBox{height: 427px;}}
+@media only screen and (max-width: 1024px){.swiperBox{height: 427px;}} */
 
 /* 平板 */
 @media only screen and (max-width: 800px){
-	.swiperBox{height:320px;}
+	#banner_app{display: block;height: 100%;}
+	/* .swiperBox{height:320px;} */
 }
 @media only screen and (max-width: 500px){
-	.swiperBox{ height:206px;}
+	/* .swiperBox{ height:206px;} */
 	.banBtnNav img{width: 12px;}
 	.banBtnNav div{padding: 0 5px;}
 }
-@media only screen and (max-width: 414px){.swiperBox{height: 186px;}}
+/* @media only screen and (max-width: 414px){.swiperBox{height: 186px;}}
 @media only screen and (max-width: 375px){.swiperBox{height: 166px;}}
-@media only screen and (max-width: 320px){.swiperBox{height: 146px;}}
+@media only screen and (max-width: 320px){.swiperBox{height: 146px;}} */
 
 </style>
