@@ -63,16 +63,20 @@
 							<img :src="item.bannerImg&&item.bannerImg[0]?item.bannerImg[0].url:''" class="Limg">
 						</div>
 						<div class="R animated fadeInRight">
-							<h1>{{item.title}}</h1>
+							<a :href="'newsdetail.html?id='+item.id+'&type=case'">
+								<h1>{{item.title}}</h1>
+							</a>
 							<p class="avoidOverflow5">{{item.description}}</p>
 							<a class="moreBtn"  :href="'newsdetail.html?id='+item.id+'&type=case'">READ MORE ></a>
 						</div>
 					</div>
 					<div class="newsItem flexRowBetween" v-show="index%2!=0&&(index*cardHeight+headerHeight+(cardHeight*0.3)<offsetTopNow)">
 						<div class="R animated fadeInLeft">
-							<h1>{{item.title}}</h1>
+							<a :href="'newsdetail.html?id='+item.id+'&type=case'">
+								<h1>{{item.title}}</h1>
+							</a>
 							<p class="avoidOverflow5">{{item.description}}</p>
-							<div class="moreBtn">READ MORE ></div>
+							<a class="moreBtn"  :href="'newsdetail.html?id='+item.id+'&type=case'">READ MORE ></a>
 						</div>
 						<div class="L animated fadeInRight">
 							<img :src="item.bannerImg&&item.bannerImg[0]?item.bannerImg[0].url:''" class="Limg">
@@ -87,7 +91,9 @@
 							<img :src="item.bannerImg&&item.bannerImg[0]?item.bannerImg[0].url:''" class="Limg">
 						</div>
 						<div class="R animated fadeInRight">
-							<h1>{{item.title}}</h1>
+							<a :href="'newsdetail.html?id='+item.id+'&type=case'">
+								<h1>{{item.title}}</h1>
+							</a>
 							<p class="avoidOverflow5">{{item.description}}</p>
 							<a class="moreBtn"  :href="'newsdetail.html?id='+item.id+'&type=case'">READ MORE ></a>
 						</div>

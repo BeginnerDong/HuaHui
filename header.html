@@ -91,7 +91,7 @@
 						<img src="images/icon-07.png" >
 					</div>
 					
-					<div class="Asamll AnliLabel">
+					<div class="Asamll AnliLabel" v-show="!show1">
 						<div class="Achild" v-for="(item,index) in labelData" :key="item.id">
 							<div class="Aname">
 								<a class="link" :href="'anliCenter.html?menu_id='+item.id">{{item.title}}</a>
@@ -107,7 +107,7 @@
 					<div class="onn" v-show="!show2" @click="showOff('two')">
 						<img src="images/icon-07.png" >
 					</div>
-					<div class="Asamll centerLabel">
+					<div class="Asamll centerLabel" v-show="!show2">
 						<div class="Achild" v-for="(item,index) in brandData" :key="item.id">
 							<div class="Aname">
 								<a class="link" :href="'product.html?id='+item.id+'&behavior='+item.behavior">{{item.title}}
@@ -179,6 +179,7 @@
 			var self = this;
 			self.getBrandData();
 			self.getLabelData();
+			self.is_showNav = false;
 			// if(window.screen.width<1000){
 			// 	// self.is_showNav = true;
 			// 	// self.is_show = false
@@ -228,31 +229,31 @@
 				const self = this;
 				if(type=='one'){
 					self.show1 = !self.show1;
-					if(self.show1){
-						$('.AnliLabel').css({
-							height:'0',
-							display:'none'
-						});
-					}else{
-						$('.AnliLabel').css({
-							height:'auto',
-							display:'block'
-						});
-					}
+					// if(self.show1){
+					// 	$('.AnliLabel').css({
+					// 		height:'0',
+					// 		display:'none'
+					// 	});
+					// }else{
+					// 	$('.AnliLabel').css({
+					// 		height:'auto',
+					// 		display:'block'
+					// 	});
+					// }
 				}
 				if(type=='two'){
 					self.show2 = !self.show2;
-					if(self.show2){
-						$('.centerLabel').css({
-							height:'0',
-							display:'none'
-						});
-					}else{
-						$('.centerLabel').css({
-							height:'auto',
-							display:'block'
-						});
-					}
+					// if(self.show2){
+					// 	$('.centerLabel').css({
+					// 		height:'0',
+					// 		display:'none'
+					// 	});
+					// }else{
+					// 	$('.centerLabel').css({
+					// 		height:'auto',
+					// 		display:'block'
+					// 	});
+					// }
 				}
 			},
 				
@@ -267,6 +268,12 @@
 				// }
 				self.is_showNav = !self.is_showNav;
 				self.is_show = !self.is_show;
+				if(self.is_showNav){
+					window.base.bus.$emit('to_index',true);
+				}
+				if(!self.is_showNav){
+					window.base.bus.$emit('to_index',false);
+				}
 			},
 			
 			getBrandData() {
@@ -341,11 +348,12 @@
 .ppA{width: 230px;position: absolute;overflow: hidden;height: 0;left: -10px;}
 /* .AnliLabel{left: 45.4%;} */
 .Asamll .Achild{line-height: 45px;height: 0px;position: absolute;width: 100%;position: relative;font-size: 14px;box-sizing: border-box;border-bottom: 1px solid #f5f5f5;opacity: 0;z-index: 5;}
-.Aname{padding: 0 15px;box-sizing: border-box;}
-.Aname>.link{ color: #222;width: 100%; display: block;}
+.Aname{padding: 0 15px;box-sizing: border-box;height: 0;}
+.Aname>.link{ color: #222;width: 100%; display: block;height: 0;}
 .Asamll .Achild:hover,.Bsamll .Bchild:hover{background: #F5F5F5;}
 /* .Asamll .Achild .Aname:hover .link{color: #fff;} */
 .Asamll .Achild .Aname em{font-size: 13px;}
+.head:hover{overflow: initial;}
 
 .Bsamll{/* position: absolute;left: 100%;top: -100%; */width: 230px;background: #fff;/* display:none; */box-shadow: 0px 0px 5px rgba(0,0,0,0.15);transition: all 0.15s;/* opacity: 0; */}
 .Bsamll .Bchild{display: block;font-size: 14px;padding: 0 15px;box-sizing: border-box;color: #222;border-bottom: 1px solid #f5f5f5;}
@@ -355,16 +363,18 @@
 
 .orderNavTwo .tt:hover .alAsamll{height: 270px;opacity: 1;color: rgba(34,34,34,1);}
 .orderNavTwo .tt:hover .ppAsamll{height: 315px;opacity: 1;color: rgba(34,34,34,1);}
+/* .orderNavTwo .tt:hover .Aname{} */
 .orderNavTwo .ppA:hover{overflow: initial;}
 /* .orderNavTwo .tt:hover .Asamll{top: 100%;opacity: 1;overflow: initial;} */
 /* .orderNavTwo .tt:hover .ppA{height: 450px;width: 480px;} */
 .orderNavTwo .tt:hover .Achild{opacity: 1;height: 45px;}
+.orderNavTwo .tt:hover .Aname{height: 45px;}
 /* .Asamll .Achild:hover .Bsamll{opacity: 1;top: 0;} */
 .Asamll .Achild:hover .bBox{height: 325px;padding-top: 10px;padding-left: 5px;}
 
 .black-bj2{z-index: 10;/* display: none; */}
 
-.head{box-shadow: 0 1px 4px rgba(100, 100, 100, 0.1);width: 100%;box-sizing: border-box;background: #fff;font-size: 16px;position: fixed;top: 0;}
+.head{box-shadow: 0 1px 4px rgba(100, 100, 100, 0.1);width: 100%;box-sizing: border-box;background: #fff;font-size: 16px;position: fixed;top: 0;overflow: hidden;}
 
 .head .cont{height: 123px;margin: 0 auto;}
 .zhHead{height: 123px;}
@@ -387,6 +397,7 @@
 .Rseach:hover input{width: 200px;padding: 0 20px;opacity: 1;}
 
 .searchM{display: none;}
+.searchPC{display: flex;align-items: flex-end;flex-direction: column;}
 
 .mobile-Btn{width: 50px;height: 80px;display: none;align-items: center;}
 .mobile-Btn img{height: 40px;}
@@ -448,8 +459,10 @@
 	.searchM{display: block;}
 	.searchM a{display: block;padding: 10px 0 11px 10px;height: 100%;}
 	
-	.orderNavTwo .tt:hover .Asamll{display: none;}
-	.Asamll .Achild:hover .Bsamll{display: none;}
+	.orderNavTwo.mobile .Asamll{display: block;height: auto;opacity: 1;}
+	.orderNavTwo.mobile .Asamll .Achild{opacity: 1;}
+	/* .orderNavTwo .tt:hover .Asamll{display: block;height: auto;} */
+	/* .Asamll .Achild:hover .Bsamll{display: none;} */
 	
 	/* 二级导航 */
 	/* .Asamll{display: block; width: 100%;left: auto;transform:initial;right: 100%;top: 0;position: initial;}

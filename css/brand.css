@@ -105,12 +105,13 @@
 		.ind-brand .TwoPic .box{height: 451px;}
 		.ind-brand .TwoPic .box .logo{width: 260px;height: 260px;}
 		
-		#head_app{margin-top: -20px;height: 70px;}
+		/* #head_app{margin-top: -20px;height: 123px;} */
 		
 		
 		@media only screen and (max-width: 1600px){
 			.ind-brand .TwoPic .box{height: 376px;}
 			.ind-brand .TwoPic .box .logo{width: 180px;height: 180px;}
+			.brandNav{height: 500px;}
 		}
 		@media only screen and (max-width: 1440px){
 			.ind-brand .TwoPic .box{height: 338px;}
@@ -123,18 +124,34 @@
 		@media only screen and (max-width: 1280px){
 			.ind-brand .TwoPic .box{height: 301px;}
 			.ind-brand .TwoPic .box .logo{width: 130px;height: 130px;}
+			.brandNav{height: 400px;}
 		}
 		@media only screen and (max-width: 1024px){
 			.ind-brand .TwoPic .box{height: 241px;}
 			.ind-brand .TwoPic .box .logo{width: 110px;height: 110px;}
+			.itemBox img{width: 50px;}
+			.brandNav{height: 350px;}
+		}
+		@media only screen and (max-width: 900px){
+			.brandNav{height: 300px;}
+		}
+		@media only screen and (max-width: 800px){
+			.brandNavM .titM{position: absolute;left: 0;top: 0;padding: 25px;}
+			.brandNavM .titM img{width: auto;height: 30px;}
+			.brandNavM .titM3 img{width: auto;height: 33px;}
+			.brandNavM .titM4 img{width: auto;height: 33px;}
+			.brandNavM .titM5 img{width: auto;height: 40px;}
 		}
 		@media only screen and (max-width: 768px){
 			.ind-brand .TwoPic .box{height: 180px;}
 			.ind-brand .TwoPic .box .logo{width: 80px;height: 80px;}
 			.titM{position: absolute;top: 0;left: 0;color: #fff;padding: 15px;}
 			.titM h1{font-weight: normal;}
+			
 		}
 		@media only screen and (max-width: 500px){
+			#head_app{margin-top: -20px;height: 70px;}
+			
 			.ind-brand .half{width: 49%;}
 			.ind-brand .half:nth-of-type(3n){margin-right: 2%;}
 			.ind-brand .half:nth-of-type(2n){margin-right: 0!important;}
@@ -144,6 +161,11 @@
 			
 			.brandNavM .brandNavPic{height: 220px;}
 			.brandNavM .brandNavPic img{height: 100%;width: 100%;}
+			.brandNavM .titM img{width: auto;height: 20px;}
+			.brandNavM .titM3 img{width: auto;height: 23px;}
+			.brandNavM .titM4 img{width: auto;height: 23px;}
+			.brandNavM .titM5 img{width: auto;height: 30px;}
+			/* .brandNavM .titM img{width: 120px;height: auto;} */
 		}
 		@media only screen and (max-width: 375px){
 			.ind-brand .TwoPic .box{height: 135px;}

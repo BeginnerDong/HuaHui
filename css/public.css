@@ -276,7 +276,7 @@ color:#fff;
 	.allH1{width: 1150px;}
 	.allH1 h1{font-size: 30px;}
 	.allH1 h1 span{font-size: 50px;}
-	.moreBtn{width: 130px;height: 45px;font-size: 16px;line-height: 45px;}
+	.moreBtn{width: 130px;height: 45px;line-height: 45px;}
 }
 
 @media screen and ( max-width: 1220px){
@@ -290,7 +290,7 @@ color:#fff;
 
 @media screen and ( max-width: 1000px){
 	.pdb80{padding-bottom: 35px!important;}
-	.pdt40{padding-top: 100px;}
+	.pdt40{padding-top: 50px;}
 	.pubtit{padding: 40px 0 30px 0;}
 	.pubtit .title{font-size: 20px;}
 	.pubtit .text{padding-top: 5px;}
@@ -307,11 +307,12 @@ color:#fff;
 	.pubtit .more{font-size: 12px;}
 	.pubtit .icon {width: 25px;height: 25px;margin-right: 10px;}
 	
+	.all-pages{padding-top: 0;}
 	.all-pages a, .all-pages span{padding: 0 5px;line-height: 28px;height: 28px;}
 	
 	.allH1{padding: 10px 0;}
-	.allH1 h1{font-size: 18px;}
-	.allH1 h1 span{font-size: 30px;padding-right: 10px;letter-spacing: 3px;}
+	.allH1 h1{font-size: 16px;}
+	.allH1 h1 span{font-size: 24px;padding-right: 10px;letter-spacing: 3px;}
 	.allH1::before{width: 50px;height: 4px;bottom: -4px;}
 	.moreBtn{width: 120px;line-height: 40px;height: 40px;font-size: 14px;}
 }

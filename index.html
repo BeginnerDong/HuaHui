@@ -30,11 +30,11 @@
 		<!-- 公司简介 -->
 		<div class="aboutUs">
 			<div class="allH1 aboutH1">
-				<h1><span>公司简介</span> About Us</h1>
+				<h1><span>公司简介</span>About Us</h1>
 			</div>
 			<div class="w1660 flexRowBetween jj">
-				<div class="aboutR aboutR2 animated">
-					<video id="videoPlay" preload="metadata" controls="controls" :src="productData&&productData.video&&productData.video[0]&&productData.video[0].url" x5-video-player-type="h5">
+				<div class="aboutR aboutR2 animated" :style="video_show?'margin-left:-2000px':'margin-left:0'">
+					<video id="videoPlay" preload="metadata" controls="controls" :src="productData&&productData.video&&productData.video[0]&&productData.video[0].url"  x5-video-player-type="h5-page" >
 						<source :src="productData&&productData.video&&productData.video[0]&&productData.video[0].url" type="video/mp4"></source>
 						当前浏览器不支持 video直接播放
 					</video>
@@ -52,7 +52,7 @@
 					<a class="moreBtn" href="aboutUs.html">READ MORE ></a>
 				</div>
 				<div class="aboutR aboutR1 animated fadeInRight" v-show="aboutHeight+headerHeight+(aboutHeight*0.3)<offsetTopNow">
-					<video id="pcVideoPlay" preload="metadata" controls="controls" :src="productData&&productData.video&&productData.video[0]&&productData.video[0].url">
+					<video id="pcVideoPlay" preload="metadata" controls="controls" :src="productData&&productData.video&&productData.video[0]&&productData.video[0].url" x5-video-player-type="h5-page">
 						<source :src="productData&&productData.video&&productData.video[0]&&productData.video[0].url" type="video/mp4"></source>
 						当前浏览器不支持 video直接播放
 					</video>
@@ -156,14 +156,18 @@
 						<img :src="newsData&&newsData[0]&&newsData[0].bannerImg&&newsData[0].bannerImg[0]&&newsData[0].bannerImg[0].url" class="Limg">
 					</div>
 					<div class="R animated fadeInRight" v-show="newsHeight1+headerHeight+(newsHeight1*0.3)<offsetTopNow">
-						<h1 class="avoidOverflow">{{newsData&&newsData[0]&&newsData[0].title}}</h1>
+						<a :href="newsData&&newsData[0]&&newsData[0].id?'newsdetail.html?id='+newsData[0].id:'newsdetail.html'">
+							<h1 class="avoidOverflow">{{newsData&&newsData[0]&&newsData[0].title}}</h1>
+						</a>
 						<p class="avoidOverflow5">{{newsData&&newsData[0]&&newsData[0].description}}</p>
 						<a class="moreBtn" :href="newsData&&newsData[0]&&newsData[0].id?'newsdetail.html?id='+newsData[0].id:'newsdetail.html'">READ MORE ></a>
 					</div>
 				</div>
 				<div id='news2' class="newsItem flexRowBetween">
 					<div class="R animated fadeInLeft" v-show="newsHeight2+headerHeight+(newsHeight2*0.3)<offsetTopNow">
-						<h1 class="avoidOverflow">{{newsData&&newsData[1]&&newsData[1].title}}</h1>
+						<a :href="newsData&&newsData[1]&&newsData[1].id?'newsdetail.html?id='+newsData[1].id:'newsdetail.html'">
+							<h1 class="avoidOverflow">{{newsData&&newsData[1]&&newsData[1].title}}</h1>
+						</a>
 						<p class="avoidOverflow5">{{newsData&&newsData[1]&&newsData[1].description}}</p>
 						<a class="moreBtn" :href="newsData&&newsData[1]&&newsData[1].id?'newsdetail.html?id='+newsData[1].id:'newsdetail.html'">READ MORE ></a>
 					</div>
@@ -176,7 +180,9 @@
 						<img :src="newsData&&newsData[2]&&newsData[2].bannerImg&&newsData[2].bannerImg[0]?newsData&&newsData[2].bannerImg[0].url:''" class="Limg">
 					</div>
 					<div class="R animated fadeInRight" v-show="newsHeight3+headerHeight+(newsHeight3*0.3)<offsetTopNow">
-						<h1 class="avoidOverflow">{{newsData&&newsData[2]&&newsData[2].title}}</h1>
+						<a :href="newsData&&newsData[2]&&newsData[2].id?'newsdetail.html?id='+newsData[2].id:'newsdetail.html'">
+							<h1 class="avoidOverflow">{{newsData&&newsData[2]&&newsData[2].title}}</h1>
+						</a>
 						<p class="avoidOverflow5">{{newsData&&newsData[2]&&newsData[2].description}}</p>
 						<a class="moreBtn" :href="newsData&&newsData[2]&&newsData[2].id?'newsdetail.html?id='+newsData[2].id:'newsdetail.html'">READ MORE ></a>
 					</div>
@@ -186,17 +192,20 @@
 		
 		<!-- 合作品牌 -->
 		<div class="part3 flexRowBetween" id="part3">
-			<div class="L animated fadeInLeft" v-show="partHeight+headerHeight+(partHeight*0.3)<offsetTopNow">
-				<h1>{{brandCon.title}}</h1>
-				<p class="avoidOverflow6">{{brandCon.description}}</p>
-				<a :href="'product.html?id='+brandCon.id+'&behavior='+brandCon.behavior">READ MORE ></a>
+			<div class="L animated fadeInLeft p-r" v-show="partHeight+headerHeight+(partHeight*0.3)<offsetTopNow">
+				<div class="animated fadeIn" style="float: left;" 
+				v-for="(item,index) in brandData" :key="index" v-show="brandIndex==index">
+					<h1>{{item.title}}</h1>
+					<p class="avoidOverflow6">{{item.description}}</p>
+					<a :href="'product.html?id='+item.id+'&behavior='+item.behavior">READ MORE ></a>
+				</div>
 			</div>
 			<div class="R R1 animated fadeInRight" v-show="partHeight+headerHeight+(partHeight*0.3)<offsetTopNow">
 				<div class="flex pdb40 flex-wrap hd">
 					<div class="IconBoxs" 
 					v-for="(item,index) in brandData" :key="index"
 					 v-show="index<=6">
-						<a @mouseenter="enter(index)" @mouseleave="leave()" :href="'product.html?id='+brandCon.id+'&behavior='+brandCon.behavior"
+						<a @mouseenter="enter(index)" :href="'product.html?id='+brandCon.id+'&behavior='+brandCon.behavior"
 						class="IconBox" v-show="index<=6 && index!=0">
 							<!-- <img src="images/news-img3.jpg" class="bg"> -->
 							<img :src="item&&item.headImg&&item.headImg[0]?item.headImg[0].url:''" class="bg">
@@ -242,7 +251,7 @@
 		
 		
 		<!-- 底部图 -->
-		<div class="footImg animated fadeInUp"  v-if="footHeight+headerHeight+(footHeight*0.3)<offsetTopNow">
+		<div class="footImg animated animated-1.5 fadeInUpBig"  v-if="footHeight+headerHeight+(footHeight*0.3)<offsetTopNow">
 			<img :src="footData&&footData.mainImg&&footData.mainImg[0]&&footData.mainImg[0].url" >
 		</div>
 	
@@ -351,7 +360,7 @@
 	    scrollbar: {
 	      el: '.swiper-scrollbar',
 	    },
-	  })        
+	})
 </script>
 	
 	<script type="text/javascript">
@@ -376,6 +385,7 @@
 						id:'',
 						behavior:''
 					},
+					brandIndex:1,
 					footData:{},
 					productData:{},
 					newsData:[],
@@ -392,7 +402,8 @@
 					partHeight:0,
 					footHeight:0,
 					
-					swiper3:null
+					swiper3:null,
+					video_show:false
 		        }
 		    },
 			
@@ -412,8 +423,19 @@
 				};
 				self.handleScroll();
 				window.addEventListener('scroll', this.handleScroll);
+				
+				window.base.bus.$on('to_index',(res)=>{
+					console.log(res)
+					var videoElement = document.getElementById("videoPlay");
+					videoElement.pause();
+					self.poster_show = res;
+					self.video_show = res;
+				})
 			},
-			
+			mounted(){
+				const self = this;
+				
+			},
 		    methods: {
 				
 				//元素到页面顶部高度
@@ -425,7 +447,7 @@
 					self.newsHeight3 = $("#news3").height() + self.newsHeight2;
 					self.partHeight = $(".part3").height() + self.newsHeight3;
 					self.footHeight = $(".footImg").height() + self.partHeight + 500;
-					// console.log(self.caseHeight,self.newsHeight1,self.newsHeight2)
+					console.log(self.footHeight,$(".footImg").height(),self.partHeight)
 				},
 				
 				test:function(width){
@@ -487,17 +509,19 @@
 					console.log(index)
 					if(self.index!=index){
 						self.index = index;
+						self.brandIndex = index;
 					}
-					self.brandCon.title = self.brandData[index].title;
-					self.brandCon.description = self.brandData[index].description;
-					self.brandCon.id = self.brandData[index].id;
-					self.brandCon.behavior = self.brandData[index].behavior;
+					// self.brandCon.title = self.brandData[index].title;
+					// self.brandCon.description = self.brandData[index].description;
+					// self.brandCon.id = self.brandData[index].id;
+					// self.brandCon.behavior = self.brandData[index].behavior;
 					console.log(self.index)
 				},
 				
 				leave(){
 					const self = this;
 					self.index = 0;
+					self.brandIndex = 0;
 				},
 				
 				seltAnliNav(){
@@ -599,18 +623,24 @@
 								})
 							},1000)
 							
-							var swiper = new Swiper('.swiper1', {
-							    //loop: true,
-							    initialSlide:0,
-							    slidesPerView: 1,
-							    spaceBetween : 20,
-								speed:1000,
-								pagination: {
-								    el: '.swiper-pagination',
-								},
-								
-								observer: true,//修改swiper自己或子元素时，自动初始化swiper
-								observeParents: true,//修改swiper的父元素时，自动初始化swiper
+							setTimeout(function(){
+								var swiper = new Swiper('.swiper1', {
+								    loop: true,
+								    initialSlide:0,
+								    slidesPerView: 1,
+								    spaceBetween : 20,
+									speed:1000,
+									autoplay:{
+										disableOnInteraction: false,
+										delay: 5000,
+									},
+									pagination: {
+									    el: '.swiper-pagination',
+									},
+									
+									observer: true,//修改swiper自己或子元素时，自动初始化swiper
+									observeParents: true,//修改swiper的父元素时，自动初始化swiper
+								})
 							})
 							
 							setTimeout(() => {

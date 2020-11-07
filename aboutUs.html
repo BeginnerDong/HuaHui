@@ -68,6 +68,9 @@
 			
 			.swiper3{height: 250px;}
 			.MedalPic .TwoPic .box{height: 250px;width: 100%;}
+			
+			/* #app{width: 100%;overflow-y: auto;} */
+			body{overflow: hidden;overflow-y: auto;}
 		}
 		@media only screen and (max-width: 420px){
 			/* .MedalPic .TwoPic .box{height: 78px;} */
@@ -97,7 +100,8 @@
 					<div class="detailePag animated fadeInLeft"  v-show="height1+headerHeight+(height1*0.3)<offsetTopNow">
 						<div class="inforCont pdb20">
 							<div class="content ql-editor " style="clear: both;">
-								<p class="p1 " v-html="mainData.content"></p>
+								<p class="p1 " v-html="mainData.content"></p> 
+								<!-- @touchmove.prevent -->
 							</div>
 						</div>
 					</div>
@@ -128,9 +132,11 @@
 				<div class="allH1 mb70">
 					<h1><span>公司获奖</span> Awards</h1>
 				</div>
-				<div class="MedalPic pr oh hj1">
+				<div class="MedalPic pr oh hj1 animated fadeInUp height2" v-show="height2+headerHeight+(height2*0.3)<offsetTopNow">
+					
+					<!-- <include src="bannerTwo.html"></include> -->
 					<!-- Swiper -->
-					<div class="swiper-container2 animated fadeInUp height2" v-show="height2+headerHeight+(height2*0.3)<offsetTopNow">
+					<div class="swiper-container2">
 						<ul class="half TwoPic swiper-wrapper">
 							<li class="box swiper-slide" v-for="item in rewardData">
 								<img class="pic" :src="item.mainImg[0].url">
@@ -140,16 +146,20 @@
 							</li>
 						</ul>
 						
-						<!--左右箭头 -->
-						<div class="ArrowIcon flexRowBetween">
+						<!-- <div class="ArrowIcon flexRowBetween">
 							<span class="btn swiper-button-prev"><img class="icon" src="images/about-icon6.png" ></span>
 							<span  class="btn swiper-button-next"><img class="icon" src="images/about-icon7.png" ></span>
+						</div> -->
+						<div class="ArrowIcon flexRowBetween">
+							<span class="btn btnL swiper-button-prev"><img class="icon" src="images/about-icon6.png" ></span>
+							<span  class="btn btnR swiper-button-next"><img class="icon" src="images/about-icon7.png" ></span>
 						</div>
 					</div>
 				</div>
-				<div class="MedalPic pr oh hj2">
+				<div class="MedalPic pr oh hj2 animated fadeInUp height2" v-show="height2+headerHeight+(height2*0.3)<offsetTopNow">
+					<!-- <include src="bannerTwo.html"></include> -->
 					<!-- Swiper -->
-					<div class="swiper-container swiper3 animated fadeInUp height2" v-show="height2+headerHeight+(height2*0.3)<offsetTopNow">
+					<div class="swiper-container swiper3">
 						<ul class="half TwoPic swiper-wrapper">
 							<li class="box swiper-slide" v-for="item in rewardData">
 								<img class="pic" :src="item.mainImg[0].url">
@@ -159,7 +169,6 @@
 							</li>
 						</ul>
 						
-						<!--左右箭头 -->
 						<div class="ArrowIcon flexRowBetween">
 							<span class="btn swiper-button-prev"><img class="icon" src="images/about-icon6.png" ></span>
 							<span  class="btn swiper-button-next"><img class="icon" src="images/about-icon7.png" ></span>
@@ -219,8 +228,8 @@
 								<div class="zp">
 									<img src="images/about-img.jpg" >
 									<div class="txt">
-										<div class="tit avoidOverflow4">{{item.title}}</div>
-										<div class="con">{{item.description}}</div>
+										<div class="tit avoidOverflow">{{item.title}}</div>
+										<div class="con avoidOverflow3">{{item.description}}</div>
 										<a :href="'recruitDetail.html?id='+item.id" class="more hand">了解更多 ></a>
 									</div>
 								</div>
@@ -423,29 +432,13 @@
 						if (res.info.data.length > 0) {
 							self.mainData = res.info.data[0]
 							
-								var swiper = new Swiper('.swiper11', {
-								   // loop: true,
-								    initialSlide:0,
-								    slidesPerView: 2,
-								    spaceBetween : 20,
-									
-									pagination: '.swiper-pagination',
-									nextButton: '.swiper-button-next',
-									prevButton: '.swiper-button-prev',
-									
-									observer: true,//修改swiper自己或子元素时，自动初始化swiper
-									observeParents: true,//修改swiper的父元素时，自动初始化swiper
-								})
 								setTimeout(function(){
-									var swiper = new Swiper('.swiper-container2', {
-									   // loop: true,
+									var swiper = new Swiper('.swiper11', {
+									    loop: true,
 									    initialSlide:0,
-									    slidesPerView: 3,
-									    spaceBetween : 10,
-										speed:5000,
-										autoplay: {
-											delay: 3000
-										},
+									    slidesPerView: 2,
+									    spaceBetween : 20,
+										
 										pagination: '.swiper-pagination',
 										nextButton: '.swiper-button-next',
 										prevButton: '.swiper-button-prev',
@@ -453,16 +446,36 @@
 										observer: true,//修改swiper自己或子元素时，自动初始化swiper
 										observeParents: true,//修改swiper的父元素时，自动初始化swiper
 									})
+								},1000)
+								setTimeout(function(){
+									var swiper = new Swiper('.swiper-container2', {
+									    loop: true,
+									    initialSlide:0,
+									    slidesPerView: 3,
+									    spaceBetween : 10,
+										speed:3000,
+										autoplay:{
+											disableOnInteraction: false,
+											delay: 3000,
+										},
+										nextButton: '.btnR',
+										prevButton: '.btnL',
+										
+										observer: true,//修改swiper自己或子元素时，自动初始化swiper
+										observeParents: true,//修改swiper的父元素时，自动初始化swiper
+									})
 								},1000);
 								setTimeout(function(){
 									var mySwiper = new Swiper('.swiper3', {
-									    //loop: true,
+									    loop: true,
 									    initialSlide:0,
 									    slidesPerView: 1,
 									    spaceBetween : 10,
 										speed:3000,
+										autoplay: true,
 										autoplay: {
-											delay: 1000
+											delay: 1000,
+											disableOnInteraction: false
 										},
 										pagination: '.swiper-pagination',
 										nextButton: '.swiper-button-next',

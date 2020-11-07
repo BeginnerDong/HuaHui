@@ -48,6 +48,7 @@
 		@media only screen and (max-width: 800px){
 			.news2{display: block;}
 			.news1{display: none;}
+			.pdt40{padding-top: 100px;}
 		}
 		@media only screen and (max-width: 768px){
 			.ind-dynamic{margin-top: 90px;}
@@ -172,14 +173,18 @@
 						<img :src="item.bannerImg&&item.bannerImg[0]?item.bannerImg[0].url:''"  class="Limg">
 					</div>
 					<div class="R animated fadeInRight">
-						<h1>{{item.title}}</h1>
+						<a :href="'newsdetail.html?id='+item.id+'&type=case'">
+							<h1>{{item.title}}</h1>
+						</a>
 						<p class="avoidOverflow5">{{item.description}}</p>
 						<a class="moreBtn"  :href="'newsdetail.html?id='+item.id+'&type=case'">READ MORE ></a>
 					</div>
 				</div>
 				<div class="newsItem flexRowBetween" v-if="index%2!=0&&(index*cardHeight+headerHeight+(cardHeight*0.3)<offsetTopNow)" >
 					<div class="R animated fadeInLeft">
-						<h1>{{item.title}}</h1>
+						<a :href="'newsdetail.html?id='+item.id+'&type=case'">
+							<h1>{{item.title}}</h1>
+						</a>
 						<p class="avoidOverflow5">{{item.description}}</p>
 						<a class="moreBtn" :href="'newsdetail.html?id='+item.id+'&type=case'">READ MORE ></a>
 					</div>
@@ -198,7 +203,9 @@
 						<img :src="item.bannerImg&&item.bannerImg[0]?item.bannerImg[0].url:''" class="Limg">
 					</div>
 					<div class="R ">
-						<h1>{{item.title}}</h1>
+						<a :href="'newsdetail.html?id='+item.id+'&type=case'">
+							<h1>{{item.title}}</h1>
+						</a>
 						<p class="avoidOverflow5">{{item.description}}</p>
 						<a class="moreBtn"  :href="'newsdetail.html?id='+item.id+'&type=case'">READ MORE ></a>
 					</div>

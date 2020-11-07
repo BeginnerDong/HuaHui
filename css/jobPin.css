@@ -31,6 +31,7 @@
 	.jobPin .txt .more{font-size: 20px;}
 	.jianliMsg{width: 900px;}
 	.MedalPic .TwoPic .box{height: 280px;}
+	
 }
 
 @media only screen and (max-width: 1000px){
@@ -38,8 +39,10 @@
 	.jobPin .txt{padding: 20px;}
 	.zp img{height: 180px;}
 	.jobPin .txt .tit{padding-bottom: 20px;}
-	.jobPin .txt .con{height: 100px;}
+	.jobPin .txt .con{height: 80px;overflow: hidden;margin-bottom: 30px;}
 	.jobPin .txt .more{font-size: 18px;}
+	
+	.jianliMsg{width: 700px;}
 }
 
 @media only screen and (max-width: 800px){

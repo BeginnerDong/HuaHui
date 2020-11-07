@@ -59,8 +59,9 @@
 			 v-for="(item,index) in mainData" :key="index" @click="goDetail(item,index)"
 			:href="'product.html?id='+item.id+'&behavior='+item.behavior">
 					<img class="w" :src="mainData[index]&&mainData[index].headImg&&mainData[index].headImg[0]?mainData[index].headImg[0].url:''" >
-					<div class="titM">
-						<h1 class="avoidOverflow">{{item.title}}</h1>
+					<div class="titM" :class="'titM'+index">
+						<img :src="item&&item.phoneImg&&item.phoneImg[0]&&item.phoneImg[0].url" >
+						<!-- <h1 class="avoidOverflow">{{item.title}}</h1> -->
 					</div>
 			</a>
 		</div>
