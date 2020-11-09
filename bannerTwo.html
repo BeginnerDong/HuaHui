@@ -1,8 +1,8 @@
-<div id="banner_app">
+<div id="banner_app"  >
 	
-	<div class="swiperBox" @touchmove="test"  @mouseover="stop()" @mouseleave="conti()">
-		<div id="list" :style="'left:'+ leftOffset + 'px;width:'+totalWidth+'px'">
-			<div class="box" :style="'width:'+widthStandard+'px'" v-for="(item,index) in mainData" :key="index">
+	<div class="swiperBox" @touchmove="test" >
+		<div id="list" :style="'left:'+ leftOffset + 'px;width:'+totalWidth+'px'" @mouseenter.stop="stop()" @mouseleave.stop="conti()" >
+			<div class="box" :style="'width:'+widthStandard+'px'" v-for="(item,index) in mainData" :key="index" >
 				<div class="boxItem">
 					<img  class="pic":src="item&&item.mainImg&&item.mainImg[0]&&item.mainImg[0].url"/>
 					<p class="text center flexCenter">
@@ -82,7 +82,10 @@
 				timeOutEvent:'',
 				originOffset:0,
 				offSetStandard:0,
-				id:0
+				id:0,
+				extraNum:2,
+				startCriticalIndex:0,//左滑触发移位的index
+				endCriticalIndex:2,//向右滑发生亿为的index的递减量相当于总体的index-这个值
 				
 	        }
 	    },
@@ -91,10 +94,10 @@
 			if(document.body.clientWidth>=1660){
 				self.widthStandard = 1660/3;
 			}else{
-				self.widthStandard = document.body.clientWidth*0.3;
-			}
+				self.widthStandard = document.body.clientWidth*0.333;
+			};
+			console.log('self.widthStandard',self.widthStandard)
 			
-			self.leftOffset = -self.widthStandard*self.nowIndex;
 			// console.log('屏幕',self.widthStandard)
 			self.totalWidth = self.widthStandard*self.mainData.length;
 	        var currentUrl = window.base.GetUrlRelativePath();
@@ -162,18 +165,24 @@
 			
 			stop(){
 				const self = this;
-				console.log('stop')
-				self.clock = true;
-				self.pause = true;
-				self.isAutoPlay = false;
+				console.log('stopbefore',self.clock);
+				if(self.isAutoPlay){
+					console.log('stop');
+					self.clock = true;
+					self.pause = true;
+				};
 			},
 			
 			conti(){
 				const self = this;
-				self.pause = false;
-				self.clock = false;
-				self.isAutoPlay = true;
-				self.animate()
+				console.log('contibefore',self.clock);
+				if(self.clock&&self.isAutoPlay){
+					console.log('conti');
+					self.pause = false;
+					self.clock = false;
+					self.animate()
+				};
+				
 			},
 			
 			animate: function () {
@@ -183,41 +192,48 @@
 				}else{
 					self.clock = true;
 				};
-				if(self.nowCents==self.cents){
+	
+				
+				if(self.nowCents>=self.cents){
 					self.nowCents = 0;
 				};
-				self.pause = false;
+				//self.pause = false;
 				var nowLeftOffset = -self.widthStandard*self.nowIndex;
 				var targetLeft = -self.widthStandard*self.toIndex;
 				var oneCentLeft = parseFloat(((targetLeft-nowLeftOffset)/self.cents).toFixed(2));
 				var go = function (){
+					
 					if(self.pause){
 						return;
 					};
 					self.nowCents++;
 					self.leftOffset = parseFloat((self.leftOffset + oneCentLeft).toFixed(2));
-					if(self.nowCents<self.cents){
-						// console.log('self.perTime/self.cents',self.perTime/self.cents)
+					
+					if(self.nowCents<self.cents&&oneCentLeft!=0){
 						setTimeout(go, self.perTime/self.cents);
 					}else{
-						if(self.toIndex==1){
-							self.leftOffset = -self.widthStandard*(self.mainData.length-2);
-							self.nowIndex = self.mainData.length-3;
-						}else if(self.toIndex==(self.mainData.length-2)){
-							self.nowIndex = 2;
-							self.leftOffset = -self.widthStandard*self.nowIndex;
-							// self.leftOffset = -self.widthStandard*1;
-							// self.nowIndex = 1;
-						}else{
-							self.nowIndex = self.toIndex;
+						
+						if(self.toIndex!=self.nowIndex){
+							console.log('self.toIndex',self.toIndex)
+							if(self.toIndex==self.startCriticalIndex){
+								self.nowIndex = self.toIndex+ self.mainData.length-2*self.extraNum;
+								self.leftOffset = -self.widthStandard*self.nowIndex;
+							}else if(self.toIndex==(self.mainData.length-self.endCriticalIndex-1)){
+								self.nowIndex = self.toIndex - self.mainData.length + 2*self.extraNum;
+								self.leftOffset = -self.widthStandard*self.nowIndex;
+							}else{
+								self.nowIndex = self.toIndex;
+							};
+							
+							
+							
+							self.title = self.mainData[self.nowIndex].title;
+							self.content = self.mainData[self.nowIndex].description;
+							self.behavior = self.mainData[self.nowIndex].behavior;
+							self.id = self.mainData[self.nowIndex].id;
 						};
-						
-						
 						self.clock = false;
-						self.title = self.mainData[self.nowIndex].title;
-						self.content = self.mainData[self.nowIndex].description;
-						self.behavior = self.mainData[self.nowIndex].behavior;
-						self.id = self.mainData[self.nowIndex].id;
+						self.clickClock = false;
 						// console.log('self.autoPlayInterval',self.autoPlayInterval)
 						if(self.isAutoPlay){
 							if(self.timeOutEvent){
@@ -228,6 +244,7 @@
 							},self.autoPlayInterval);
 						};
 						return;
+						
 					};
 				};
 			    go();
@@ -235,21 +252,33 @@
 			
 			next:function(){
 				const self = this;
-				console.log('next',self.clock)
-				if(self.clock){
+				
+				if(self.clock&&self.pause){
 					return;
 				};
+				if(self.clickClock){
+					return;
+				}else{
+					self.clickClock = true;
+				};
 				self.toIndex = self.nowIndex +1;
+				console.log('self.toIndexnext',self.toIndex)
 				self.animate();
 				
 			},
 			prev:function(){
 				const self = this;
 				console.log('prev')
-				if(self.clock){
+				if(self.clock&&self.pause){
 					return;
 				};
+				if(self.clickClock){
+					return;
+				}else{
+					self.clickClock = true;
+				};
 				self.toIndex = self.nowIndex - 1;
+				console.log('self.toIndexself.toIndex',self.toIndex)
 				self.animate();
 			},
 			
@@ -278,21 +307,35 @@
 				};
 			    var callback = function(res){
 			        if(res.info.data.length>0&&res.info.data[0]){
-						self.mainData = window.base.cloneForm(res.info.data);
-						self.mainData.unshift(res.info.data[res.info.data.length-2],res.info.data[res.info.data.length-1]);
-						self.mainData.push(res.info.data[0]);
-						self.mainData.push(res.info.data[1]);
-						self.totalWidth = self.widthStandard*self.mainData.length;
-						self.id = self.mainData[0].id;
+						self.initialMainData(res.info.data);
 						// console.log('宽度',self.totalWidth)
 						 //console.log('self.mainData',self.mainData)
 						// console.log('self.bannerData',self.bannerData)
-			        };    
-					setTimeout(function(){
-						self.next();
-					},self.autoPlayInterval)
+			        };  
 			    };
 			    window.base.articleGet(postData, callback);
+			},
+			
+			
+			initialMainData(data){
+				const self = this;
+				self.mainData = window.base.cloneForm(data);
+				for(var i=0;i<self.extraNum;i++){
+					self.mainData.unshift(data[data.length-1-i]);
+					self.mainData.push(data[i]);
+				};
+				self.totalWidth = self.widthStandard*self.mainData.length;
+				self.nowIndex = self.extraNum;
+				self.leftOffset = -self.widthStandard*self.nowIndex;
+				self.id = self.mainData[0].id;
+				console.log('self.mainData',self.mainData);
+				console.log('self.leftOffset',self.leftOffset);
+				if(self.isAutoPlay){
+					setTimeout(function(){
+						console.log('next')
+						self.next();
+					},self.autoPlayInterval)
+				};
 			},
 			
 			toBannerOne:function(e){
@@ -333,16 +376,18 @@
 </script>
 
 <style>
-	
+	/* 几个错误，首先是宽度设置不对外层宽度设置不得当。
+	其次是不要给轮播盒子添加任何的padding或者border因此改变期宽度
+	最后是注意按钮的悬浮不要面积太大*/
 /*网站banner*/
-#banner_app{position: relative;width: 1660px;height: 800px;overflow: hidden;}
+#banner_app{position: relative;width: 100%;height: 300px;overflow: hidden;}
 
 .swiperBox{  position: relative; width: 100%; height:100%; overflow: hidden;}
 /* .swiperBox .banner{ width: 100%; height: 100%;opacity: 0;}
 .swiperBox .banner a{width: 100%;height: 100%;}
 .swiperBox .banner img{width:auto; height: 100%; display: block;position: relative;left: 50%;transform: translateX(-50%);} */
 #list { height: 340px; position: absolute; z-index: 1;overflow: hidden;}
-#list .box{height: 100%;float: left;position: relative;padding: 0 5px;}
+#list .box{height: 100%;float: left;position: relative;}
 #list .boxItem{position: relative;height: 100%;}
 #list .pic{width: 100%;height: 100%;}
 #list .text{position: absolute;top: 0;left: 0;right: 0;bottom: 0;background-image: linear-gradient(to bottom,rgba(0,0,0,0) 30%,rgba(0,0,0,0.7));}
