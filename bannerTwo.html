@@ -29,14 +29,14 @@
 	</div>
 	
 	<!-- 左右按钮 -->
-	<div class="btnBox">
+	<!-- <div class="btnBox"> -->
 		<div @click="prev()" class="prev">
 			<img class="icon" src="images/about-icon6.png" >
 		</div>
 		<div @click="next()" class="next">
 			<img class="icon" src="images/about-icon7.png" >
 		</div>
-	</div>
+	<!-- </div> -->
 	
 </div>
 
@@ -72,13 +72,13 @@
 				totalWidth:0,
 				clock:false,
 				cents:200,
-				perTime:500,//轮播速度
+				perTime:1000,//轮播速度
 				nowCents:0,
 				nowIndex:0,
 				toIndex:0,
 				gapLenth:0,
 				isAutoPlay:true,//是否自动轮播
-				autoPlayInterval:1000,//自动轮播间隔,
+				autoPlayInterval:5000,//自动轮播间隔,
 				timeOutEvent:'',
 				originOffset:0,
 				offSetStandard:0,
@@ -91,10 +91,17 @@
 	    },
 	    created:function () {
 	        var self = this;
-			if(document.body.clientWidth>=1660){
+			screenWidth = document.body.clientWidth;
+			if(screenWidth>=1660){
 				self.widthStandard = 1660/3;
+			}else if(screenWidth>=800&&screenWidth<1660){
+				self.widthStandard = (screenWidth-screenWidth*0.04)/3;
+			}else if(screenWidth>500 && screenWidth<800){
+				self.widthStandard = (screenWidth-screenWidth*0.04)/2;
+				self.extraNum = 1;
+				self.endCriticalIndex = 1;
 			}else{
-				self.widthStandard = document.body.clientWidth*0.333;
+				self.widthStandard = screenWidth-screenWidth*0.04;
 			};
 			console.log('self.widthStandard',self.widthStandard)
 			
@@ -134,13 +141,15 @@
 			    screenWidth = document.body.clientWidth;
 				if(screenWidth>=1660){
 					self.widthStandard = 1660/3;
-				}else if(screenWidth>=800 && screenWidth<1660){
-					self.widthStandard = screenWidth/3;
+				}else if(screenWidth>=800&&screenWidth<1660){
+					self.widthStandard = (screenWidth-screenWidth*0.4)/3;
 				}else if(screenWidth>=500 && screenWidth<800){
-					self.widthStandard = screenWidth/2;
+					self.widthStandard = (screenWidth-screenWidth*0.4)/2;
+					self.extraNum = 1;
+					self.endCriticalIndex = 1;
 				}else{
-					self.widthStandard = screenWidth;
-				}
+					self.widthStandard = screenWidth-screenWidth*0.4;
+				};
 				// console.log(screenWidth,screenHeight)
 			};
 		},
@@ -380,24 +389,24 @@
 	其次是不要给轮播盒子添加任何的padding或者border因此改变期宽度
 	最后是注意按钮的悬浮不要面积太大*/
 /*网站banner*/
-#banner_app{position: relative;width: 100%;height: 300px;overflow: hidden;}
+#banner_app{position: relative;width: 100%;height: 340px;overflow: hidden;}
 
 .swiperBox{  position: relative; width: 100%; height:100%; overflow: hidden;}
 /* .swiperBox .banner{ width: 100%; height: 100%;opacity: 0;}
 .swiperBox .banner a{width: 100%;height: 100%;}
 .swiperBox .banner img{width:auto; height: 100%; display: block;position: relative;left: 50%;transform: translateX(-50%);} */
-#list { height: 340px; position: absolute; z-index: 1;overflow: hidden;}
+#list { height: 100%; position: absolute; z-index: 1;overflow: hidden;}
 #list .box{height: 100%;float: left;position: relative;}
-#list .boxItem{position: relative;height: 100%;}
+#list .boxItem{position: relative;height: 100%;padding: 0 5px;}
 #list .pic{width: 100%;height: 100%;}
-#list .text{position: absolute;top: 0;left: 0;right: 0;bottom: 0;background-image: linear-gradient(to bottom,rgba(0,0,0,0) 30%,rgba(0,0,0,0.7));}
+#list .text{position: absolute;top: 0;left: 5px;right: 5px;bottom: 0;background-image: linear-gradient(to bottom,rgba(0,0,0,0) 30%,rgba(0,0,0,0.7));}
 #list .text em{position: absolute;bottom: 0;text-align: center;color: #fff;padding: 20px;}
 
-#banner_app .btnBox{position: absolute;top:35%;z-index:50;cursor: pointer; padding: 20px 15px;  border-radius: 4px;left: 0;right: 0;}
-#banner_app .btnBox .prev{right:30px;float: left;transition: all 0.3s;border-radius: 50%;}
-#banner_app .btnBox .next{left:30px;float: right;transition: all 0.3s;border-radius: 50%;}
-#banner_app .btnBox img{width: 40px;}
-#banner_app .btnBox .prev:hover,#banner_app .btnBox .next:hover{background-color: rgba(56,56,56,0.5);}
+#banner_app .prev,#banner_app .next{position: absolute;top:45%;z-index:50;cursor: pointer; border-radius: 4px;}
+#banner_app .prev{left:30px;transition: all 0.3s;border-radius: 50%;}
+#banner_app .next{right:30px;transition: all 0.3s;border-radius: 50%;}
+#banner_app img{width: 40px;}
+#banner_app .prev:hover,#banner_app .next:hover{background-color: rgba(56,56,56,0.5);}
 
 .banBtnNav{ width: 100%; text-align: center; position: absolute; bottom:4%; left: 0;z-index: 9;}
 .banBtnNav span{ margin: 0 5px; /* background:#fff; */ width: 10px; height: 10px;box-shadow: 0 0 3px rgba(0,0,0,0.1);border-radius: 10px;border: 1px solid #a5a5a5;}
@@ -413,25 +422,30 @@
 	.swiperBox .banner img{width:100%;}
 	/* .swiperBox{height: 800px;} */
 }
-/* @media only screen and (max-width: 1600px){.swiperBox{height: 667px;}}
-@media only screen and (max-width: 1440px){.swiperBox{height: 600px;}}
-@media only screen and (max-width: 1366px){.swiperBox{height: 570px;}}
-@media only screen and (max-width: 1280px){.swiperBox{height: 533px;}}
-@media only screen and (max-width: 1100px){.swiperBox{height: 400px;}}
-@media only screen and (max-width: 1024px){.swiperBox{height: 427px;}} */
+@media only screen and (max-width: 1600px){#banner_app{height: 320px;}}
+@media only screen and (max-width: 1440px){#banner_app{height: 300px;}}
+@media only screen and (max-width: 1366px){#banner_app{height: 290px;}}
+@media only screen and (max-width: 1280px){#banner_app{height: 280px;}}
+@media only screen and (max-width: 1100px){#banner_app{height: 275px;}}
+@media only screen and (max-width: 1024px){#banner_app{height: 270px;}}
 
 /* 平板 */
 @media only screen and (max-width: 800px){
 	#banner_app{display: block;height: 100%;}
-	.swiperBox{height:320px;}
+	#banner_app{height:320px;}
 }
 @media only screen and (max-width: 500px){
-	/* .swiperBox{ height:206px;} */
+	#banner_app{ height:250px;}
 	.banBtnNav img{width: 12px;}
 	.banBtnNav div{padding: 0 5px;}
+	
+	#banner_app .prev,#banner_app .next{top: 40%;}
+	#banner_app img{width: 30px;}
+	#banner_app .prev{left:20px;}
+	#banner_app .next{right:20px;}
 }
-/* @media only screen and (max-width: 414px){.swiperBox{height: 186px;}}
-@media only screen and (max-width: 375px){.swiperBox{height: 166px;}}
-@media only screen and (max-width: 320px){.swiperBox{height: 146px;}} */
+/* @media only screen and (max-width: 414px){#banner_app{height: 186px;}}
+@media only screen and (max-width: 375px){#banner_app{height: 166px;}}
+@media only screen and (max-width: 320px){#banner_app{height: 146px;}} */
 
 </style>

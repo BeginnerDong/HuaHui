@@ -28,8 +28,8 @@
 		.pdt70{padding-top: 70px;}
 		.mb70{margin-bottom: 70px;}
 		
-		.aboutBg{height: 650px;}
-		.aboutBg img{width: 100%;height: 650px;position: fixed;top: 0;margin-top: 123px;}
+		.aboutBg{height: 800px;}
+		.aboutBg img{width: 100%;height: 800px;position: fixed;top: 0;margin-top: 123px;}
 		.bg-white{background-color: #fff;}
 		.z-10{z-index: 10;}
 		.p-r{position: relative;}
@@ -37,13 +37,18 @@
 		.ArrowIcon span{border-radius: 50%;transition: all 0.5s;}
 		.ArrowIcon span:hover{background-color: #383838;}
 		
+		.null{height: 300px;}
+		
 		
 		@media only screen and (max-width: 1200px){
 			.aboutBg{height: 600px;}
 			.aboutBg img{height: 600px;margin-top: 123px;}
+			
+			.null{height: 250px;}
 		}
 		@media only screen and (max-width: 1024px){
 			.MedalPic .TwoPic .box{height: 195px;}
+			.null{height: 180px;}
 		}
 		@media only screen and (max-width: 1000px){
 			.aboutBg{height: 450px;}
@@ -54,6 +59,7 @@
 			.pdt70{padding-top: 40px;}
 			.aboutBg{height: 350px;}
 			.aboutBg img{height: 350px;margin-top: 80px;}
+			.null{height: 120px;}
 		}
 		@media only screen and (max-width: 768px){
 			.MedalPic .TwoPic .box{height: 145px;}
@@ -69,8 +75,8 @@
 			.swiper3{height: 250px;}
 			.MedalPic .TwoPic .box{height: 250px;width: 100%;}
 			
-			/* #app{width: 100%;overflow-y: auto;} */
-			body{overflow: hidden;overflow-y: auto;}
+			
+			.null{height: 80px;}
 		}
 		@media only screen and (max-width: 420px){
 			/* .MedalPic .TwoPic .box{height: 78px;} */
@@ -90,8 +96,8 @@
 			<img src="images/video.png" >
 		</div>
 		
-		<div class="bg-white p-r" >
-			<div class="">
+		<div class="p-r" style="overflow: hidden;" >
+			<div class="bg-white">
 				<div class="w1660 pdb80 pdt70 detailBox height1">
 					<!-- <div class="pubtit flexCenter">
 						<img class="icon" src="images/about-icon.png" >
@@ -124,162 +130,164 @@
 				</div>
 			</div>
 			
-			<div class="w1660 pdb80 " >
-				<!-- <div class="pubtit flexCenter">
-					<img class="icon" src="images/about-icon1.png" >
-					<h1 class="title">公司获奖</h1>
-				</div> -->
-				<div class="allH1 mb70">
-					<h1><span>公司获奖</span> Awards</h1>
-				</div>
-				<div class="MedalPic pr oh hj1 animated fadeInUp height2" v-show="height2+headerHeight+(height2*0.3)<offsetTopNow">
-					
-					<!-- <include src="bannerTwo.html"></include> -->
-					<!-- Swiper -->
-					<div class="swiper-container2">
-						<ul class="half TwoPic swiper-wrapper">
-							<li class="box swiper-slide" v-for="item in rewardData">
-								<img class="pic" :src="item.mainImg[0].url">
-								<p class="text center flexCenter">
-									<em>{{item.title}}</em>
-								</p>
-							</li>
-						</ul>
-						
-						<!-- <div class="ArrowIcon flexRowBetween">
-							<span class="btn swiper-button-prev"><img class="icon" src="images/about-icon6.png" ></span>
-							<span  class="btn swiper-button-next"><img class="icon" src="images/about-icon7.png" ></span>
-						</div> -->
-						<div class="ArrowIcon flexRowBetween">
-							<span class="btn btnL swiper-button-prev"><img class="icon" src="images/about-icon6.png" ></span>
-							<span  class="btn btnR swiper-button-next"><img class="icon" src="images/about-icon7.png" ></span>
-						</div>
-					</div>
-				</div>
-				<div class="MedalPic pr oh hj2 animated fadeInUp height2" v-show="height2+headerHeight+(height2*0.3)<offsetTopNow">
-					<!-- <include src="bannerTwo.html"></include> -->
-					<!-- Swiper -->
-					<div class="swiper-container swiper3">
-						<ul class="half TwoPic swiper-wrapper">
-							<li class="box swiper-slide" v-for="item in rewardData">
-								<img class="pic" :src="item.mainImg[0].url">
-								<p class="text center flexCenter">
-									<em>{{item.title}}</em>
-								</p>
-							</li>
-						</ul>
-						
-						<div class="ArrowIcon flexRowBetween">
-							<span class="btn swiper-button-prev"><img class="icon" src="images/about-icon6.png" ></span>
-							<span  class="btn swiper-button-next"><img class="icon" src="images/about-icon7.png" ></span>
-						</div>
-					</div>
-				</div>
-				<!-- <div class="MedalPic flexRowBetween">
-					<div class="half TwoPic">
-						<div class="box flexCenter" v-if="rewardData[0]">
-							<img class="pic" :src="rewardData&&rewardData[0]&&rewardData[0].mainImg&&rewardData[0].mainImg[0]?rewardData[0].mainImg[0].url:''" >
-							<p class="text center flexCenter">
-								<em>{{rewardData&&rewardData[0]?rewardData[0].title:''}}</em>
-							</p>
-						</div>
-						<div class="box flexCenter" v-if="rewardData[1]">
-							<img class="pic" :src="rewardData&&rewardData[1]&&rewardData[1].mainImg&&rewardData[1].mainImg[0]?rewardData[1].mainImg[0].url:''" >
-							<p class="text center flexCenter">
-								<em>{{rewardData&&rewardData[1]?rewardData[1].title:''}}</em>
-							</p>
-						</div>
-					</div>
-					<div class="half onePic" v-if="rewardData[2]">
-						<div class="box flexCenter">
-							<img class="pic" class="" :src="rewardData&&rewardData[2]&&rewardData[2].mainImg&&rewardData[2].mainImg[0]?rewardData[2].mainImg[0].url:''">
-							<p class="text center flexCenter">
-								<em>{{rewardData&&rewardData[2]?rewardData[2].title:''}}</em>
-							</p>
-						</div>
-					</div>
-				</div> -->
-			</div>
-			<div class="pdb80">
-				<div class="w1660">
-					<!-- <div class="pubtit flexRowBetween">
-						<div></div>
-						<div class="flexCenter">
-							<img class="icon" src="images/about-icon2.png" >
-							<h1 class="title">招聘信息</h1>
-						</div>
-						<div><a class="flexEnd more" href="recruit.html">更多<img class="arrowR" src="images/home-icon2.png" ></a></div>
+			<div class="null"></div>
+			
+			<div class="bg-white pdt70">
+				<div class="w1660 pdb80" >
+					<!-- <div class="pubtit flexCenter">
+						<img class="icon" src="images/about-icon1.png" >
+						<h1 class="title">公司获奖</h1>
 					</div> -->
 					<div class="allH1 mb70">
-						<h1><span>招聘信息</span> Recruit</h1>
+						<h1><span>公司获奖</span> Awards</h1>
 					</div>
-					<div class="jobPin w1660 height3">
-						<ul class="flex animated fadeInUp" v-show="height3+headerHeight+(height3*0.3)<offsetTopNow">
-							<!-- <li v-for="(item,index) in recruitData">
-								<a :href="'recruitDetail.html?id='+item.id">
-									<div class="infor">
-										<img class="icon" src="images/about-icon4.png" >
-										<h2 class="tit">{{item.title}}</h2>
-										<p>{{item.description}}</p>
+					<div class="MedalPic pr oh hj1 animated fadeInUp height2" v-show="height2+headerHeight+(height2*0.3)<offsetTopNow">
+						
+						<include src="bannerTwo.html"></include>
+						<!-- Swiper -->
+						<!-- <div class="swiper-container2">
+							<ul class="half TwoPic swiper-wrapper">
+								<li class="box swiper-slide" v-for="item in rewardData">
+									<img class="pic" :src="item.mainImg[0].url">
+									<p class="text center flexCenter">
+										<em>{{item.title}}</em>
+									</p>
+								</li>
+							</ul>
+							
+							<div class="ArrowIcon flexRowBetween">
+								<span class="btn btnL swiper-button-prev"><img class="icon" src="images/about-icon6.png" ></span>
+								<span  class="btn btnR swiper-button-next"><img class="icon" src="images/about-icon7.png" ></span>
+							</div>
+						</div> -->
+					</div>
+					<div class="MedalPic pr oh hj2 animated fadeInUp height2" v-show="height2+headerHeight+(height2*0.3)<offsetTopNow">
+						<include src="bannerTwo.html"></include>
+						<!-- Swiper -->
+						<!-- <div class="swiper-container swiper3">
+							<ul class="half TwoPic swiper-wrapper">
+								<li class="box swiper-slide" v-for="item in rewardData">
+									<img class="pic" :src="item.mainImg[0].url">
+									<p class="text center flexCenter">
+										<em>{{item.title}}</em>
+									</p>
+								</li>
+							</ul>
+							
+							<div class="ArrowIcon flexRowBetween">
+								<span class="btn swiper-button-prev"><img class="icon" src="images/about-icon6.png" ></span>
+								<span  class="btn swiper-button-next"><img class="icon" src="images/about-icon7.png" ></span>
+							</div>
+						</div> -->
+					</div>
+					<!-- <div class="MedalPic flexRowBetween">
+						<div class="half TwoPic">
+							<div class="box flexCenter" v-if="rewardData[0]">
+								<img class="pic" :src="rewardData&&rewardData[0]&&rewardData[0].mainImg&&rewardData[0].mainImg[0]?rewardData[0].mainImg[0].url:''" >
+								<p class="text center flexCenter">
+									<em>{{rewardData&&rewardData[0]?rewardData[0].title:''}}</em>
+								</p>
+							</div>
+							<div class="box flexCenter" v-if="rewardData[1]">
+								<img class="pic" :src="rewardData&&rewardData[1]&&rewardData[1].mainImg&&rewardData[1].mainImg[0]?rewardData[1].mainImg[0].url:''" >
+								<p class="text center flexCenter">
+									<em>{{rewardData&&rewardData[1]?rewardData[1].title:''}}</em>
+								</p>
+							</div>
+						</div>
+						<div class="half onePic" v-if="rewardData[2]">
+							<div class="box flexCenter">
+								<img class="pic" class="" :src="rewardData&&rewardData[2]&&rewardData[2].mainImg&&rewardData[2].mainImg[0]?rewardData[2].mainImg[0].url:''">
+								<p class="text center flexCenter">
+									<em>{{rewardData&&rewardData[2]?rewardData[2].title:''}}</em>
+								</p>
+							</div>
+						</div>
+					</div> -->
+				</div>
+				<div class="pdb80">
+					<div class="w1660">
+						<!-- <div class="pubtit flexRowBetween">
+							<div></div>
+							<div class="flexCenter">
+								<img class="icon" src="images/about-icon2.png" >
+								<h1 class="title">招聘信息</h1>
+							</div>
+							<div><a class="flexEnd more" href="recruit.html">更多<img class="arrowR" src="images/home-icon2.png" ></a></div>
+						</div> -->
+						<div class="allH1 mb70">
+							<h1><span>招聘信息</span> Recruit</h1>
+						</div>
+						<div class="jobPin w1660 height3">
+							<ul class="flex animated fadeInUp" v-show="height3+headerHeight+(height3*0.3)<offsetTopNow">
+								<!-- <li v-for="(item,index) in recruitData">
+									<a :href="'recruitDetail.html?id='+item.id">
+										<div class="infor">
+											<img class="icon" src="images/about-icon4.png" >
+											<h2 class="tit">{{item.title}}</h2>
+											<p>{{item.description}}</p>
+										</div>
+									</a>
+								</li> -->
+								<li class="f5bj" v-for="(item,index) in recruitData" :key="index">
+									<div class="zp">
+										<img src="images/about-img.jpg" >
+										<div class="txt">
+											<div class="tit avoidOverflow">{{item.title}}</div>
+											<div class="con avoidOverflow3">{{item.description}}</div>
+											<a :href="'recruitDetail.html?id='+item.id" class="more hand">了解更多 ></a>
+										</div>
 									</div>
-								</a>
-							</li> -->
-							<li class="f5bj" v-for="(item,index) in recruitData" :key="index">
-								<div class="zp">
-									<img src="images/about-img.jpg" >
-									<div class="txt">
-										<div class="tit avoidOverflow">{{item.title}}</div>
-										<div class="con avoidOverflow3">{{item.description}}</div>
-										<a :href="'recruitDetail.html?id='+item.id" class="more hand">了解更多 ></a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				
+				<div class="w1660 pdb80 bto">
+					<!-- <div class="pubtit flexCenter">
+						<img class="icon" src="images/about-icon5.png" >
+						<h1 class="title">人才储备</h1>
+					</div> -->
+					<div class="jianliMsg boxShaow pdt20 animated fadeInUp height4" v-show="height4+headerHeight+(height4*0.3)<offsetTopNow">
+						<div>
+							<ul>
+								<li>
+									<span class="ll">姓名</span>
+									<div class="rr">
+										<input type="text" name="" v-model="submitData.title" placeholder="请输入姓名" />
 									</div>
-								</div>
-							</li>
-						</ul>
+								</li>
+								<li>
+									<span class="ll">电话</span>
+									<div class="rr">
+										<input type="text" name="" v-model="submitData.phone" placeholder="请输入联系电话" onkeyup="this.value=this.value.replace(/\D/g,'')" />
+									</div>
+								</li>
+								<li>
+									<span class="ll">自我评价</span>
+									<div class="rr">
+										<textarea style="padding: 0;" type="text" name="" v-model="submitData.description" placeholder="请写出自身亮点，让HR第一眼关注你"></textarea>
+						 			</div>
+								</li>
+								<li>
+									 <span class="ll">投递简历</span>
+									<div class="rr flex" style="flex-wrap: wrap;">
+										<input class="" type="file" @change="uploadFile" enctype="multipart/form-data">
+											<!-- <img src="images/about-icon8.jpg" > -->
+										</input>
+									</div>
+								</li>
+							</ul>
+						</div>
+						<div class="submitbtn pdt40">
+							<button class="moreBtn" type="button"  @click="!isSending?JustaddMessage():''">提交</button>
+						</div>
 					</div>
 				</div>
 			</div>
 			
-			<div class="w1660 pdb80 bto">
-				<!-- <div class="pubtit flexCenter">
-					<img class="icon" src="images/about-icon5.png" >
-					<h1 class="title">人才储备</h1>
-				</div> -->
-				<div class="jianliMsg boxShaow pdt20 animated fadeInUp height4" v-show="height4+headerHeight+(height4*0.3)<offsetTopNow">
-					<div>
-						<ul>
-							<li>
-								<span class="ll">姓名</span>
-								<div class="rr">
-									<input type="text" name="" v-model="submitData.title" placeholder="请输入姓名" />
-								</div>
-							</li>
-							<li>
-								<span class="ll">电话</span>
-								<div class="rr">
-									<input type="text" name="" v-model="submitData.phone" placeholder="请输入联系电话" onkeyup="this.value=this.value.replace(/\D/g,'')" />
-								</div>
-							</li>
-							<li>
-								<span class="ll">自我评价</span>
-								<div class="rr">
-									<textarea style="padding: 0;" type="text" name="" v-model="submitData.description" placeholder="请写出自身亮点，让HR第一眼关注你"></textarea>
-					 			</div>
-							</li>
-							<li>
-								 <span class="ll">投递简历</span>
-								<div class="rr flex" style="flex-wrap: wrap;">
-									<input class="" type="file" @change="uploadFile" enctype="multipart/form-data">
-										<!-- <img src="images/about-icon8.jpg" > -->
-									</input>
-								</div>
-							</li>
-						</ul>
-					</div>
-					<div class="submitbtn pdt40">
-						<button class="moreBtn" type="button"  @click="!isSending?JustaddMessage():''">提交</button>
-					</div>
-				</div>
-			</div>
+			
 		</div>
 		
 		<include src="footer.html"></include>
@@ -366,16 +374,19 @@
 					const self = this;
 					if(width<=800){
 						self.headerHeight = 80;
+						self.getHeight();
 					}else if(width<=500){
 						self.headerHeight = 50;
 						self.height1 = 200;
+						self.getHeight();
 					}
-					self.getHeight();
+					
 					if(width<=500){
 						self.height1 = 0;
 						self.height2 = 0;
 						self.height3 = 0;
 						self.height4 = 0;
+						// self.getHeight();
 					}
 				},
 				
