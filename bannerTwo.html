@@ -186,7 +186,7 @@
 				const self = this;
 				console.log('contibefore',self.clock);
 				if(self.clock&&self.isAutoPlay){
-					console.log('conti');
+					console.log('continowIndex',self.nowIndex);
 					self.pause = false;
 					self.clock = false;
 					self.animate()
@@ -206,6 +206,7 @@
 				if(self.nowCents>=self.cents){
 					self.nowCents = 0;
 				};
+				console.log('self.toIndex',self.toIndex)
 				//self.pause = false;
 				var nowLeftOffset = -self.widthStandard*self.nowIndex;
 				var targetLeft = -self.widthStandard*self.toIndex;
@@ -223,12 +224,14 @@
 					}else{
 						
 						if(self.toIndex!=self.nowIndex){
-							console.log('self.toIndex',self.toIndex)
+							
 							if(self.toIndex==self.startCriticalIndex){
 								self.nowIndex = self.toIndex+ self.mainData.length-2*self.extraNum;
+								self.toIndex = self.nowIndex;
 								self.leftOffset = -self.widthStandard*self.nowIndex;
 							}else if(self.toIndex==(self.mainData.length-self.endCriticalIndex-1)){
 								self.nowIndex = self.toIndex - self.mainData.length + 2*self.extraNum;
+								self.toIndex = self.nowIndex;
 								self.leftOffset = -self.widthStandard*self.nowIndex;
 							}else{
 								self.nowIndex = self.toIndex;
@@ -335,6 +338,7 @@
 				};
 				self.totalWidth = self.widthStandard*self.mainData.length;
 				self.nowIndex = self.extraNum;
+				self.toIndex = self.extraNum;
 				self.leftOffset = -self.widthStandard*self.nowIndex;
 				self.id = self.mainData[0].id;
 				console.log('self.mainData',self.mainData);
