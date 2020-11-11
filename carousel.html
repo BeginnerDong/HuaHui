@@ -7,7 +7,11 @@
 	
 	<div class="swiperBox" @touchmove="test"  @mouseover="stop()" @mouseleave="conti()">
 		<div id="list" :style="'left:'+ (originOffset+leftOffset) + 'px;width:'+totalWidth+'px'">
-			<div :style="'width:'+widthStandard+'px'" v-for="(item,index) in mainData" :key="index">
+			<div :style="'width:'+widthStandard+'px'" 
+			v-for="(item,index) in mainData" :key="index"
+			v-swipeleft="{fn:vuetouch,name:'左滑'}"
+			v-swiperight="{fn:vuetouch,name:'右滑'}"
+			@touchmove.prevent>
 				<img :src="item&&item.headImg&&item.headImg[0]&&item.headImg[0].url"/>
 				<div class="Icon flexCenter">
 					<img :src="item.mainImg&&item.mainImg[0]&&item.mainImg[0].url" class="logoImg">
@@ -35,7 +39,7 @@
 	
 </div>
 
-
+<script src="js/touch.js"></script>
 <script type="text/javascript">
 	var banner_app = new Vue({
 	    el: '#banner_app',
@@ -127,6 +131,24 @@
 			
 			test(e){
 				console.log(e)
+			},
+			
+			vuetouch:function(s,e){
+				const self = this;
+				// console.log(s)
+				// console.log(e)
+				if(s.name == '左滑'){
+					self.next();
+				}else{
+					self.prev();
+				}
+				
+				// if(self.banner_index<0){
+				// 	self.banner_index = self.bannerData.length-1
+				// };
+				// if(self.banner_index==self.bannerData.length){
+				// 	self.banner_index = 0
+				// };
 			},
 			
 			stop(){
@@ -318,7 +340,7 @@
 .banBtnNav div{padding: 0 10px;}
 
 .listCon h1{font-size: 30px;padding: 50px 0 30px;}
-.listCon p, .listCon div{font-size: 14px;min-height: 115px;margin-bottom: 55px;}
+.listCon p, .listCon div{font-size: 14px;height: 114px;margin-bottom: 55px;overflow: hidden;}
 .listCon a{color: #fff;margin-top: 20px;}
 /* banner 各种屏幕自适应 */
 

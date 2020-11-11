@@ -38,7 +38,7 @@
 	.FixOrderNav span.tt{margin: 0;font-size: 13px;line-height: 50px}
 	.FixOrderNav .tt .icon{width: 18px;height: 18px;margin-right: 6px;}
 	
-	.orderNavTop{width: 80%;left: 10%;top: 50px;display: flex;flex-wrap: wrap;}
+	.orderNavTop{width: 80%;left: 10%;top: 50px;display: flex;flex-wrap: wrap;justify-content: center;}
 	/* .orderNavTop .tt{width: 33.3%;height: 40px;} */
 	/* .ind-dynamic{padding-top: 0;} */
 }

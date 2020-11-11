@@ -84,6 +84,7 @@
 			.ind-dynamic>div:nth-of-type(2n) .fixArrow{right: 42%;}
 			
 			.orderNavTop{top: 70px;justify-content: center;}
+			.anliBox{min-height: 500px!important;}
 		}
 		@media only screen and (max-width: 320px){
 			.orderNavTop{width: 100%;left: 0;}
@@ -96,7 +97,7 @@
 	<div id="app">
 		<include src="header.html"></include>
 		
-		<div class="pdb80 pdt40">
+		<div class="pdb80 pdt40 anliBox">
 			<!-- <div class="orderNav flexCenter borderB1" id="orderNav" v-show="!isCollapse">
 				<span class="tt flexCenter" v-for="item in labelData"
 				:class="currId==item.id?'on':''" @click="changeCurr(item.id)">
@@ -213,7 +214,7 @@
 			</div>
 			
 			
-			<div class="all-pages mgt30">
+			<div class="all-pages mgt30" v-if="mainData.length>0">
 				<span class="no-prev flexCenter" ><img data-type="back" @click="changePage" class="arrow" src="images/case-icon5.png"></span>
 				<span v-for="item in pageArray" :class="item == paginate.currentPage?'on':''" @click="linkTo(item)">{{item}}</span>
 				<span class="next flexCenter" ><img class="arrow" data-type="next" @click="changePage" src="images/case-icon4.png"></span>
