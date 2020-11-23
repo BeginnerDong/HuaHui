@@ -165,6 +165,8 @@
 	.newsItem .L img{max-height: 350px;}
 	
 	.footImg{height: 420px;padding-top: 10%;}
+	
+	.newsItem .R p{margin-bottom: 30px;-webkit-line-clamp:3;min-height: 120px;}
 }
 
 @media only screen and (max-width: 1325px){
@@ -269,6 +271,8 @@
 	.part3 .R .Icon img{width: 80px;}
 	
 	.part3 .L{display: none;}
+	
+	.newsItem .R p{margin-bottom: 30px;-webkit-line-clamp:4;min-height: 150px;}
 }
 
 @media only screen and (max-width: 700px){

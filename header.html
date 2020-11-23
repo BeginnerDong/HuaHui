@@ -1,6 +1,6 @@
 <div id="head_app">
 
-	<div class="zhHead"></div>
+	<!-- <div class="zhHead"></div> -->
 	
 	<div class="head">
 		
@@ -72,18 +72,19 @@
 			
 			<div class="orderNavTwo mobile flexRowBetween fs16">
 				<div class="tt" :class="currentUrl=='/index.html'?'on':''">
-					<a href="index.html">首页</a>
+					<a @click="go(1)">首页</a>
 					<div class="off">
 						<img src="images/icon-08.png">
 					</div>
 				</div>
-				<div class="tt" :class="currentUrl=='/aboutUs.html'?'on':''"><a href="aboutUs.html">关于华汇</a>
+				<div class="tt" :class="currentUrl=='/aboutUs.html'?'on':''"><a  @click="go(2)">关于华汇</a>
 					<div class="off">
 						<img src="images/icon-08.png">
 					</div>
 				</div>
-				<div class="tt" :class="currentUrl=='/anliCenter.html'||(menu_id!=5&&menu_id!=0)?'on':''">
-					<a href="anliCenter.html">经典案例</a>
+				<div class="tt" 
+				:class="currentUrl=='/anliCenter.html'||(menu_id!=5&&menu_id!=0)?'on':''">
+					<a  @click="go(3)">经典案例</a>
 					<div class="off" v-show="show1" @click="showOff('one')">
 						<img src="images/icon-08.png">
 					</div>
@@ -94,13 +95,13 @@
 					<div class="Asamll AnliLabel" v-show="!show1">
 						<div class="Achild" v-for="(item,index) in labelData" :key="item.id">
 							<div class="Aname">
-								<a class="link" :href="'anliCenter.html?menu_id='+item.id">{{item.title}}</a>
+								<a class="link" @click="go(3,item)">{{item.title}}</a>
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="tt pr"  :class="currentUrl=='/brand.html'?'on':''">
-					<a href="brand.html">品牌中心</a>
+					<a @click="go(4)">品牌中心</a>
 					<div class="off" v-show="show2" @click="showOff('two')">
 						<img src="images/icon-08.png">
 					</div>
@@ -110,7 +111,7 @@
 					<div class="Asamll centerLabel" v-show="!show2">
 						<div class="Achild" v-for="(item,index) in brandData" :key="item.id">
 							<div class="Aname">
-								<a class="link" :href="'product.html?id='+item.id+'&behavior='+item.behavior">{{item.title}}
+								<a class="link"  @click="go(4,item)">{{item.title}}
 									<!-- <em class="pdl5" v-if="item.child&&item.child.length>0">&gt;</em> -->
 								</a>
 							</div>
@@ -121,24 +122,28 @@
 								<img src="images/icon-07.png" >
 							</div> -->
 							<div class="Bsamll">
-								<a v-for="(c_item,c_index) in item.child" :href="'product.html?id='+item.id+'&childId='+c_item.id+'&behavior='+item.behavior" :key="c_item.id" class="Bchild" 
-								>{{c_item.title}}</a>
+								<a
+								v-for="(c_item,c_index) in item.child" :key="c_item.id" class="Bchild" 
+								  @click="go(4,item,c_item)" >{{c_item.title}}</a>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="tt" :class="currentUrl=='/newsCenter.html'?'on':''||menu_id==5"><a href="newsCenter.html">公司动态</a>
+				<div class="tt"
+				:class="currentUrl=='/newsCenter.html'?'on':''||menu_id==5"><a @click="go(5)">公司动态</a>
 					<div class="off">
 						<img src="images/icon-08.png">
 					</div>
 				</div>
 				
-				<div class="tt" :class="currentUrl=='/loadCenter.html'?'on':''"><a href="loadCenter.html">下载中心</a>
+				<div class="tt" 
+				:class="currentUrl=='/loadCenter.html'?'on':''"><a @click="go(6)">下载中心</a>
 					<div class="off">
 						<img src="images/icon-08.png">
 					</div>
 				</div>
-				<div class="tt" :class="currentUrl=='/contactUs.html'?'on':''"><a href="contactUs.html">联系我们</a>
+				<div class="tt" 
+				:class="currentUrl=='/contactUs.html'?'on':''"><a @click="go(7)">联系我们</a>
 					<div class="off">
 						<img src="images/icon-08.png">
 					</div>
@@ -212,13 +217,55 @@
 			},3000) */
 	    },
 		
-		
 		destroyed() {
 			const self = this;
 			clearInterval(this.timer);        
 			self.bannerTimer = null;
 		},
 	    methods: {
+			
+			go(type,item,c_item){
+				const self = this;
+				self.is_showNav = false;
+				console.log(self.is_showNav,type);
+				setTimeout(function(){
+					switch(type){
+						case 1:
+							window.location.href = 'index.html';
+							break;
+						case 2:
+							window.location.href = 'aboutUs.html';
+							break;
+						case 3:
+							if(item){
+								window.location.href = 'anliCenter.html?menu_id='+item.id;
+							}else{
+								window.location.href = 'anliCenter.html';
+							}
+							break;
+						case 4:
+							if(c_item){
+								window.location.href = 'product.html?id='+item.id+'&childId='+c_item.id+'&behavior='+item.behavior;
+							}else if(item){
+								window.location.href = 'product.html?id='+item.id+'&behavior='+item.behavior;
+							}else{
+								window.location.href = 'brand.html';
+							}
+							break;
+						case 5:
+							window.location.href = 'newsCenter.html';
+							break;
+						case 6:
+							window.location.href = 'loadCenter.html';
+							break;
+						case 7:
+							window.location.href = 'contactUs.html';
+							break;
+						default:
+							break;
+					}
+				},300)
+			},
 			
 			goSearch() {
 				const self = this;
@@ -374,8 +421,8 @@
 
 .black-bj2{z-index: 10;/* display: none; */}
 
-#head_app{position: sticky;z-index: 10000;top: 0;left: 0;right: 0;}
-.head{box-shadow: 0 1px 4px rgba(100, 100, 100, 0.1);width: 100%;box-sizing: border-box;background: #fff;font-size: 16px;position: fixed;top: 0;overflow: hidden;}
+#head_app{position: fixed;z-index: 10000;top: 0;left: 0;right: 0;}
+.head{box-shadow: 0 1px 4px rgba(100, 100, 100, 0.1);width: 100%;box-sizing: border-box;background: #fff;font-size: 16px;position: absolute;top: 0;overflow: hidden;}
 
 .head .cont{height: 123px;margin: 0 auto;background-color: #fff;}
 .zhHead{height: 123px;}
@@ -406,7 +453,7 @@
 
 .headH{height: 60px;width: 100%;}
 
-.mNav{width: 100%;background-color: #fff;position: fixed;top: 0;left: 0;right: 0;bottom: 0;overflow-y: auto;z-index: 100000;}
+.mNav{width: 100%;background-color: #fff;position: fixed;top: 0;left: 0;right: 0;bottom: 0;overflow-y: auto;z-index: 10000;}
 .mNav .close{margin: 30px;position: absolute;top: 0;left: 0;}
 .Mseach{margin: 115px 75px 80px;position: relative;display: block;/* background-image: url(images/input.png); */}
 .Mseach input{width: 100%;height: 60px;border-radius: 30px;font-size: 26px;text-indent: 30px;position: relative;background: none!important;}

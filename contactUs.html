@@ -20,7 +20,7 @@
 	</head>
 	<style>
 		/* banner */
-		/* .fsbanner{min-height: 670px;} */
+		.fsbanner{min-height: 580px;}
 		.mb70{margin-bottom: 70px;}
 		
 		.fsbanner .item{float: left; overflow: hidden;position: relative;transition: all 0.5s;height: 528px;border-top: 26px solid #fff;border-bottom: 26px solid #fff;}
@@ -36,12 +36,14 @@
 		.fsbanner .item.on .name{font-size: 50px;}
 		
 		@media only screen and (max-width: 1440px){
+			.fsbanner{min-height: 400px;}
 			.fsbanner .item{height: 400px!important;}
 			.fsbanner .name {font-size: 38px;}
 			.fsbanner .item.on .name{font-size:45px;letter-spacing: 25px;}
 			.fsbanner .item.on .pic{transform: scale(1.35);}
 		}
 		@media only screen and (max-width:1280px){
+			.fsbanner{min-height: 350px;}
 			.fsbanner .item{height: 350px!important;}
 			.fsbanner .name {font-size: 34px;}
 			.fsbanner .item.on .name{font-size: 40px;}
@@ -63,8 +65,8 @@
 		
 		@media only screen and (max-width:500px){
 			#head_app{height: 70px;}
-			/* .fsbanner{height: 200px;} */
-			.fsbanner .item{height: 200px!important;width: 100%!important;}
+			.fsbanner{min-height: 200px;}
+			.fsbanner .item{height: 200px!important;width: 100%!important;border-top: none;border-bottom: none;}
 			.fsbanner .item.on {padding: 0 10px;}
 			.fsbanner .name {font-size: 18px; letter-spacing: 0;    -webkit-writing-mode: initial; writing-mode: initial;line-height: 30px;display: flex;align-items: center;}
 			.fsbanner .item .pic{width: 100%; height: 100%;right: 0;}
@@ -76,6 +78,8 @@
 
 <body>
 	<div id="app">
+		<div class="headTop"></div>
+		
 		<include src="header.html"></include>
 		
 		<div class="fsbanner white oh flexRowBetween">
@@ -108,7 +112,7 @@
 				
 				<div class="companyMsg clearfix">
 					<div class="item clearfix whiteBj flexRowBetween">
-						<div class="pic LL"><img :src="mainData[index]&&mainData[index].bannerImg&&mainData[index].bannerImg[0]?mainData[index].bannerImg[0].url:'images/contact-usl-img8.jpg'" ></div>
+						<div class="pic LL"><img :src="mainData[index]&&mainData[index].bannerImg&&mainData[index].bannerImg[0]?mainData[index].bannerImg[0].url:''" ></div>
 						<div class="infor RR">
 							<p class="compay">{{mainData[index]?mainData[index].title:''}}</p>
 							<p class="adrs">{{mainData[index]?mainData[index].address:''}}</p>

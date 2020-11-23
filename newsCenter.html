@@ -26,6 +26,7 @@
 		
 		.ind-dynamic .item .imgBox .imgIcon{height: 100%;width: 100px;position: absolute;margin: 0;}
 		.newM{display: none;}
+		.newBox{min-height: 800px;}
 		
 		@media only screen and (max-width: 800px){
 			.newM{display: block;}
@@ -36,15 +37,19 @@
 			.ind-dynamic {padding-top: 20px;}
 			
 			.orderNavTop{justify-content: center;}
+			
+			.newBox{min-height: 900px;}
 		}
 		
 	</style>
 
 <body>
 	<div id="app">
+		<div class="headTop"></div>
+		
 		<include src="header.html"></include>
 		
-		<div class="w1660 pdb80">
+		<div class="w1660 pdb80 newBox">
 			<!-- <div class="orderNav flexCenter borderB1">
 				<span class="tt flexCenter" v-for="item in labelData" 
 				:class="currId==item.id?'on':''" @click="changeCurr(item.id)">
@@ -133,7 +138,7 @@
 				</div> -->
 			</div>
 			
-			<div class="all-pages mgt30">
+			<div class="all-pages mgt30" v-show="(2*cardHeight+headerHeight+(cardHeight*0.3)<offsetTopNow)">
 				<span class="no-prev flexCenter" data-type="back" @click="changePage"><img class="arrow" src="images/case-icon5.png"></span>
 				<span v-for="item in pageArray" :class="item == paginate.currentPage?'on':''" @click="linkTo(item)">{{item}}</span>
 				<span class="next flexCenter" data-type="next" @click="changePage"><img class="arrow" src="images/case-icon4.png"></span>
@@ -190,7 +195,9 @@
 				
 				test:function(width){
 					const self = this;
-					if(width<=800){
+					if(width>800 && width<=1100){
+						self.cardHeight = 388;
+					}else if(width<=800 && width>500){
 						self.headerHeight = 80;
 					}else if(width<=500){
 						self.headerHeight = 50;

@@ -43,6 +43,14 @@ color:#fff;
 .allH1 h1 span{font-size: 36px;padding-right: 0;color: #333;transition: all 0.5s;letter-spacing: 10px;}
 /* .allH1 h1 span:hover{color: #5c5c5c;} */
 
+.headTop{height: 123px;}
+@media only screen and (max-width: 800px){
+	.headTop{height: 80px;}
+}
+@media only screen and (max-width: 500px){
+	.headTop{height: 70px;}
+}
+
 /* .LL,.RR{opacity: 0;} */
 /* 新增 */
 

@@ -4,7 +4,7 @@
 .orderNav .tt .icon{width: 24px;height: 24px;margin-right: 10px;}
 .orderNav .tt.on{ color: #222; font-weight: bold;}
 
-.FixOrderNav{padding: 0!important;left: 0;top:15%;position: fixed;width: 120px;background-color: #fff;border-radius: 3px;box-shadow: 2px 0 5px rgba(0,0,0,0.2);padding: 0 10px; z-index: 10001;}
+.FixOrderNav{padding: 0!important;left: 0;top:15%;position: fixed;width: 120px;background-color: #fff;border-radius: 3px;box-shadow: 2px 0 5px rgba(0,0,0,0.2);padding: 0 10px; z-index: 9999;}
 .FixOrderNav .tt{width: 100%;line-height: 60px;border-bottom: 1px solid #eee;margin: 0;cursor: pointer;}
 .FixOrderNav .tt:last-child{border-bottom: 0;}
 .FixOrderNav .tt:hover{background-color: #fafafa;}

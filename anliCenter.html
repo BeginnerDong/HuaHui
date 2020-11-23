@@ -33,13 +33,15 @@
 		
 		.news2{display: none;}
 		
+		.anliBox{min-height: 800px;}
+		
 		@media only screen and (max-width: 1024px){
 			.ind-dynamic{margin-top: 70px;}
 			.ind-dynamic .item{margin-bottom: 60px;}
 			.ind-dynamic .item .imgBox{height: 252px;}
 		}
 		@media only screen and (max-width: 1000px){
-			.orderNavTop{top: 80px;}
+			.orderNavTop{top: 123px;}
 		}
 		@media only screen and (max-width: 980px){
 			.orderNavTop{width: 100%;left: 0;display: flex;flex-wrap: wrap;}
@@ -49,6 +51,8 @@
 			.news2{display: block;}
 			.news1{display: none;}
 			.pdt40{padding-top: 100px;}
+			
+			.orderNavTop{top: 80px;}
 		}
 		@media only screen and (max-width: 768px){
 			.ind-dynamic{margin-top: 90px;}
@@ -84,7 +88,7 @@
 			.ind-dynamic>div:nth-of-type(2n) .fixArrow{right: 42%;}
 			
 			.orderNavTop{top: 70px;justify-content: center;}
-			.anliBox{min-height: 500px!important;}
+			.anliBox{min-height: 900px!important;}
 		}
 		@media only screen and (max-width: 320px){
 			.orderNavTop{width: 100%;left: 0;}
@@ -95,6 +99,8 @@
 
 <body>
 	<div id="app">
+		<div class="headTop"></div>
+		
 		<include src="header.html"></include>
 		
 		<div class="pdb80 pdt40 anliBox">
@@ -184,7 +190,7 @@
 				<div class="newsItem flexRowBetween" v-if="index%2!=0&&(index*cardHeight+headerHeight+(cardHeight*0.3)<offsetTopNow)" >
 					<div class="R animated fadeInLeft">
 						<a :href="'newsdetail.html?id='+item.id+'&type=case'">
-							<h1>{{item.title}}</h1>
+							<h1 class="avoidOverflow">{{item.title}}</h1>
 						</a>
 						<p class="avoidOverflow5">{{item.description}}</p>
 						<a class="moreBtn" :href="'newsdetail.html?id='+item.id+'&type=case'">READ MORE ></a>
@@ -383,6 +389,7 @@
 					console.log(item);
 					self.linkPage = item;
 					window.base.linkTo(self);
+					window.scrollTo(0,0);
 					console.log(self.pageArray)
 				},
 				
@@ -391,6 +398,7 @@
 					var dataSet = window.base.getDataSet(e);
 					console.log('232')
 					window.base.changePage(dataSet, self);
+					window.scrollTo(0,0);
 				},
 				
 		    }

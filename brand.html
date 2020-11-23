@@ -12,7 +12,7 @@
 		<script type="text/javascript" src="js/jquery.min.js"></script>
 		<script type="text/javascript" src="js/base.js"></script>
 		<script type="text/javascript" src="js/include.js"></script>
-		<script type="text/javascript" src="js/swiper.min.js"></script>\
+		<script type="text/javascript" src="js/swiper.min.js"></script>
 		<link type="text/css" rel="stylesheet" href="css/public.css">
 		<link type="text/css" rel="stylesheet" href="css/swiper.min.css">
 		<link type="text/css" rel="stylesheet" href="css/brand.css">
@@ -20,6 +20,8 @@
 	</head>
 <body>
 	<div id="app">
+		<div class="headTop"></div>
+		
 		<include src="header.html"></include>
 		<!-- <include src="banner.html"></include> -->
 		
@@ -112,7 +114,7 @@
 				<span class="next flexCenter" data-type="next" @click="changePage"><img class="arrow" src="images/case-icon4.png"></span>
 			</div>
 		</div> -->
-		
+		<div class="brandNull"></div>
 		<include src="footer.html"></include>
 		
 	</div>
@@ -164,7 +166,7 @@
 					const self = this;
 					self.bannerTimer = setInterval(function(){
 						self.changeBanner('+');
-					},3000)
+					},5000)
 				},
 				
 				//自动轮播

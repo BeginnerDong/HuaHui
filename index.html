@@ -23,6 +23,8 @@
 
 <body>
 	<div id="app">
+		<div class="headTop"></div>
+		
 		<include src="header.html"></include>
 		<include src="banner.html"></include>
 		<!-- <include src="carousel.html"></include> -->
@@ -403,7 +405,8 @@
 					footHeight:0,
 					
 					swiper3:null,
-					video_show:false
+					video_show:false,
+					head_show:false
 		        }
 		    },
 			
@@ -425,16 +428,29 @@
 				window.addEventListener('scroll', this.handleScroll);
 				
 				window.base.bus.$on('to_index',(res)=>{
-					console.log(res)
 					var videoElement = document.getElementById("videoPlay");
 					videoElement.pause();
 					self.poster_show = res;
 					self.video_show = res;
+					self.head_show = res;
+					console.log('head_show',res)
 				})
 			},
 			mounted(){
 				const self = this;
-				
+				$(window).scroll( function() {
+				    var docHeight = $(document).height(); // 获取整个页面的高度(不只是窗口,还包括为显示的页面)
+				    var winHeight = $(window).height(); // 获取当前窗体的高度(显示的高度)
+				    var winScrollHeight = $(window).scrollTop(); // 获取滚动条滚动的距离(移动距离)
+				    // console.log('滚动距离',winScrollHeight)
+					if(self.head_show){
+						self.video_show = true;
+					}else if(winScrollHeight>=250 && winScrollHeight<=600){
+						self.video_show = true;
+					}else{
+						self.video_show = false;
+					}
+				});
 			},
 		    methods: {
 				

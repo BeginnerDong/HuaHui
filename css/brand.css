@@ -6,7 +6,7 @@
 .itemBox .on:before{content: '';width: 40px;height:4px;background: #383838;position: absolute;left: 50%;transform: translateX(-50%);bottom: -20px;}
 
 .brandNav{height: 650px;}
-.brandNav .brandNavPic{height: 100%;width: 16.66%;position: relative;overflow: hidden;transition: all 0.5s;background-repeat: no-repeat;background-position: center center;background-size: auto 100%;}
+.brandNav .brandNavPic{height: 100%;width: 16.66%;position: relative;overflow: hidden;transition: all 0.8s;background-repeat: no-repeat;background-position: center center;background-size: auto 100%;}
 .brandNav .brandNavPic img{height: 100%;width: auto;position: absolute;top: 0;left: -500px;}
 .navMask{background-color: rgba(0,0,0,0.5);position: absolute;left: 0;top: 0;right: 0;bottom: 0;opacity: 0;}
 .b-w{width: 80%;height: 80%;border: 2px solid #fff;}
@@ -21,6 +21,8 @@
 .brandNav .brandNavPic1 .mask0{opacity: 1;}
 .brandNav .brandNavPic1:nth-child(1){width: 65%;}
 .brandNav .brandNavPic1:nth-child(1) .navMask{opacity: 1;}
+
+.brandNull{height: 200px;}
 /* 二期 */
 
 
@@ -44,6 +46,7 @@
 @media only screen and (max-width: 1440px){
 	.ind-brand .TwoPic .box{height: 513px;}
 	.ind-brand .TwoPic .box .logo{width: 250px;height: 250px;}
+	.brandNull{height: 170px;}
 }
 @media only screen and (max-width: 1366px){
 	.ind-brand .TwoPic .box{height:485px;}
@@ -56,6 +59,7 @@
 @media only screen and (max-width: 1024px){
 	.ind-brand .TwoPic .box{height:365px;}
 	.ind-brand .TwoPic .box .logo{width: 170px;height: 170px;}
+	.brandNull{height: 140px;}
 }
 
 @media only screen and (max-width: 1000px){
@@ -92,6 +96,8 @@
 	
 	.navMask .b-w h1{padding-bottom: 15px;font-size: 18px;}
 	.navMask .b-w p{margin: 10px 0;font-size: 12px;-webkit-line-clamp: 3;}
+	
+	.brandNull{height: 80px;}
 }
 
 
@@ -150,7 +156,7 @@
 			
 		}
 		@media only screen and (max-width: 500px){
-			#head_app{margin-top: -20px;height: 70px;}
+			/* #head_app{margin-top: -20px;height: 70px;} */
 			
 			.ind-brand .half{width: 49%;}
 			.ind-brand .half:nth-of-type(3n){margin-right: 2%;}
