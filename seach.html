@@ -257,9 +257,9 @@
 			
 			
 			<!-- 招聘 -->
-			<div class="jobPin" v-if="curr==6">
-				<ul class="flexRowBetween">
-					<li v-for="(item,index) in mainData" :key="index">
+			<div class="searchJobPin" v-if="curr==6">
+				<ul class="flex">
+					<!-- <li v-for="(item,index) in mainData" :key="index">
 						<a :href="'recruitDetail.html?id='+item.id">
 							<div class="infor">
 								<img class="icon" src="images/about-icon4.png" >
@@ -267,6 +267,16 @@
 								<p>{{item.description}}</p>
 							</div>
 						</a>
+					</li> -->
+					<li class="f5bj searchZp" v-for="(item,index) in mainData" :key="index">
+						<div class="flex ZP">
+							<img src="images/about-img.jpg" >
+							<div class="txt flex-1">
+								<div class="tit avoidOverflow">{{item.title}}</div>
+								<div class="con avoidOverflow3">{{item.description}}</div>
+								<a :href="'recruitDetail.html?id='+item.id" class="more hand">了解更多 ></a>
+							</div>
+						</div>
 					</li>
 				</ul>
 			</div>

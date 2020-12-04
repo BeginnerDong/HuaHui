@@ -26,7 +26,11 @@
 		
 		.ind-dynamic .item .imgBox .imgIcon{height: 100%;width: 100px;position: absolute;margin: 0;}
 		.newM{display: none;}
-		.newBox{min-height: 800px;}
+		.newBox{min-height: 800px;position: relative;}
+		
+		@media only screen and (max-width: 1000px){
+			.newBox{padding-bottom: 80px!important;}
+		}
 		
 		@media only screen and (max-width: 800px){
 			.newM{display: block;}
@@ -71,7 +75,7 @@
 						</div>
 						<div class="R animated fadeInRight">
 							<a :href="'newsdetail.html?id='+item.id+'&type=case'">
-								<h1>{{item.title}}</h1>
+								<h1 class="avoidOverflow">{{item.title}}</h1>
 							</a>
 							<p class="avoidOverflow5">{{item.description}}</p>
 							<a class="moreBtn"  :href="'newsdetail.html?id='+item.id+'&type=case'">READ MORE ></a>
@@ -80,7 +84,7 @@
 					<div class="newsItem flexRowBetween" v-show="index%2!=0&&(index*cardHeight+headerHeight+(cardHeight*0.3)<offsetTopNow)">
 						<div class="R animated fadeInLeft">
 							<a :href="'newsdetail.html?id='+item.id+'&type=case'">
-								<h1>{{item.title}}</h1>
+								<h1 class="avoidOverflow">{{item.title}}</h1>
 							</a>
 							<p class="avoidOverflow5">{{item.description}}</p>
 							<a class="moreBtn"  :href="'newsdetail.html?id='+item.id+'&type=case'">READ MORE ></a>
@@ -138,14 +142,22 @@
 				</div> -->
 			</div>
 			
-			<div class="all-pages mgt30" v-show="(2*cardHeight+headerHeight+(cardHeight*0.3)<offsetTopNow)">
+			<div class="all-pages mgt30 pageP" v-show="mainData.length>0&&((mainData.length-1)*cardHeight+headerHeight+(cardHeight*0.3)<offsetTopNow)">
+				<span class="no-prev flexCenter" data-type="back" @click="changePage"><img class="arrow" src="images/case-icon5.png"></span>
+				<span v-for="item in pageArray" :class="item == paginate.currentPage?'on':''" @click="linkTo(item)">{{item}}</span>
+				<span class="next flexCenter" data-type="next" @click="changePage"><img class="arrow" src="images/case-icon4.png"></span>
+			</div>
+			
+			<div class="all-pages mgt30 pageM" >
 				<span class="no-prev flexCenter" data-type="back" @click="changePage"><img class="arrow" src="images/case-icon5.png"></span>
 				<span v-for="item in pageArray" :class="item == paginate.currentPage?'on':''" @click="linkTo(item)">{{item}}</span>
 				<span class="next flexCenter" data-type="next" @click="changePage"><img class="arrow" src="images/case-icon4.png"></span>
 			</div>
 		</div>
 		
-		<include src="footer.html"></include>
+		<div :class="mainData.length<2?'fff':''">
+			<include src="footer.html"></include>
+		</div>
 		
 	</div>
 </body>
@@ -195,14 +207,18 @@
 				
 				test:function(width){
 					const self = this;
-					if(width>800 && width<=1100){
-						self.cardHeight = 388;
+					if(width>1100 && width<=1700){
+						self.cardHeight = 500;
+					}else if(width>900 && width<=1100){
+						self.cardHeight = 360;
 					}else if(width<=800 && width>500){
 						self.headerHeight = 80;
+						self.cardHeight = 360;
 					}else if(width<=500){
 						self.headerHeight = 50;
 						self.cardHeight = 400;
 					}
+					console.log('self.cardHeight',self.cardHeight,width)
 				},
 				
 				handleScroll: function(){

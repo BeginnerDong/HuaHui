@@ -463,6 +463,9 @@
 					self.newsHeight3 = $("#news3").height() + self.newsHeight2;
 					self.partHeight = $(".part3").height() + self.newsHeight3;
 					self.footHeight = $(".footImg").height() + self.partHeight + 500;
+					if($(".footImg").height()==null){
+						self.footHeight = self.partHeight + 50;
+					}
 					console.log(self.footHeight,$(".footImg").height(),self.partHeight)
 				},
 				
@@ -616,6 +619,9 @@
 						thirdapp_id:2,
 						type:1
 					};
+					postData.order = {
+						listorder:'desc'
+					}
 				    var callback = function(res){
 				        if(res.info.data.length>0&&res.info.data[0]){
 							self.artData.push.apply(self.artData,res.info.data)
