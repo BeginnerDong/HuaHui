@@ -99,7 +99,7 @@
 										<div class="b-fCon">
 											<h1 class="avoidOverflow">{{item.title}}</h1>
 											<p class="avoidOverflow3">{{item.description}}</p>
-											<a class="hand" :href="'newsdetail.html?id='+item.id">READ MORE ></a>
+											<a class="hand" :href="'anliCenter.html?menu_id='+labelData[index].id">READ MORE ></a>
 										</div>
 									</div>
 								</div>
@@ -129,7 +129,7 @@
 									<div class="b-fCon">
 										<h1 class="avoidOverflow">{{item.title}}</h1>
 										<p class="avoidOverflow3">{{item.description}}</p>
-										<a class="hand" :href="'newsdetail.html?id='+item.id">READ MORE ></a>
+										<a class="hand" :href="'anliCenter.html?menu_id='+labelData[index].id">READ MORE ></a>
 									</div>
 								</div>
 							</div>
@@ -406,7 +406,9 @@
 					
 					swiper3:null,
 					video_show:false,
-					head_show:false
+					head_show:false,
+					
+					labelData:[]
 		        }
 		    },
 			
@@ -417,6 +419,7 @@
 				self.getNewsData();
 				self.getBrandData();
 				self.getFootData();
+				self.getLabelData();
 				
 				var winWidth = document.body.clientWidth;
 				self.test(winWidth);
@@ -686,7 +689,7 @@
 						thirdapp_id: 2
 					};
 					postData.order = {
-						listorder:'asc'
+						listorder:'desc'
 					};
 					const callback = (res) => {
 						if (res.info.data.length > 0) {
@@ -754,6 +757,34 @@
 						//}, 1000);
 						
 						
+					};
+					window.base.labelGet(postData, callback);
+				},
+				
+				getLabelData() {
+					const self = this;
+					const postData = {};
+					postData.searchItem = {
+						thirdapp_id: 2
+					};
+					postData.getBefore = {
+						caseData: {
+							tableName: 'Label',
+							searchItem: {
+								title: ['in', ['案例中心']],
+							},
+							middleKey: 'parentid',
+							key: 'id',
+							condition: 'in',
+						},
+					};
+					postData.order = {
+						listorder:'asc'
+					};
+					const callback = (res) => {
+						if (res.info.data.length > 0) {
+							self.labelData.push.apply(self.labelData,res.info.data);
+						}
 					};
 					window.base.labelGet(postData, callback);
 				}
