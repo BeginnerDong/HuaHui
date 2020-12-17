@@ -141,6 +141,10 @@
 					self.next();
 				}else{
 					self.prev();
+					if(self.toIndex==1){
+						self.nowIndex = 7;
+						self.toIndex = 8;
+					}
 				}
 				
 				// if(self.banner_index<0){
@@ -226,13 +230,13 @@
 			
 			next:function(){
 				const self = this;
-				console.log('next',self.clock)
+				// console.log('next',self.clock)
 				if(self.clock){
 					return;
 				};
 				self.toIndex = self.nowIndex +1;
 				self.animate();
-				
+				console.log('next',self.nowIndex,self.toIndex,)
 			},
 			prev:function(){
 				const self = this;
@@ -242,6 +246,9 @@
 				};
 				self.toIndex = self.nowIndex - 1;
 				self.animate();
+				console.log('self.mainData',self.mainData.length)
+				console.log('self.nowIndex',self.nowIndex,)
+				console.log('self.toIndex',self.toIndex,)
 			},
 			
 			

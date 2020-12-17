@@ -322,8 +322,10 @@
 				changeCurr(id){
 					const self = this;
 					self.currId = id;
+					self.paginate.currentPage = 1;
 					self.mainData = [];
 					self.getMainData()
+					window.location.href = '#app'
 				},
 				
 				getLabelData() {

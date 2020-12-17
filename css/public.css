@@ -329,5 +329,7 @@ color:#fff;
 	
 	.pageP{display: none!important;}
 	.pageM{display: block;}
+	
+	.all-pages span:hover{color: #666;}
 }
 
