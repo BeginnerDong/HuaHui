@@ -253,8 +253,10 @@
 		
 		
 		<!-- 底部图 -->
-		<div class="footImg animated animated-1.5 fadeInUpBig"  v-if="footHeight+headerHeight+(footHeight*0.3)<offsetTopNow">
-			<img :src="footData&&footData.mainImg&&footData.mainImg[0]&&footData.mainImg[0].url" >
+		<div class="footImg animated animated-1.5 fadeInUpBig" >
+			<img :src="footData&&footData.mainImg&&footData.mainImg[0]&&footData.mainImg[0].url"  
+			class="animateds fadeInUpBig"
+			v-if="footHeight+headerHeight+(footHeight*0.3)<offsetTopNow">
 		</div>
 	
 		
