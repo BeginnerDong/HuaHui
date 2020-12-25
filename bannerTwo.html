@@ -86,23 +86,13 @@
 				extraNum:2,
 				startCriticalIndex:0,//左滑触发移位的index
 				endCriticalIndex:2,//向右滑发生亿为的index的递减量相当于总体的index-这个值
-				
+				screenWidth:0
 	        }
 	    },
 	    created:function () {
 	        var self = this;
-			screenWidth = document.body.clientWidth;
-			if(screenWidth>=1660){
-				self.widthStandard = 1660/3;
-			}else if(screenWidth>=800&&screenWidth<1660){
-				self.widthStandard = (screenWidth-screenWidth*0.04)/3;
-			}else if(screenWidth>500 && screenWidth<800){
-				self.widthStandard = (screenWidth-screenWidth*0.04)/2;
-				self.extraNum = 1;
-				self.endCriticalIndex = 1;
-			}else{
-				self.widthStandard = screenWidth-screenWidth*0.04;
-			};
+			self.screenWidth = document.body.clientWidth;
+			self.changeWidth();
 			console.log('self.widthStandard',self.widthStandard)
 			
 			// console.log('屏幕',self.widthStandard)
@@ -136,21 +126,12 @@
 		
 		mounted() {
 			const self = this;
-			var screenWidth = document.body.clientWidth;
 			window.onresize = () => {
-			    screenWidth = document.body.clientWidth;
-				if(screenWidth>=1660){
-					self.widthStandard = 1660/3;
-				}else if(screenWidth>=800&&screenWidth<1660){
-					self.widthStandard = (screenWidth-screenWidth*0.4)/3;
-				}else if(screenWidth>=500 && screenWidth<800){
-					self.widthStandard = (screenWidth-screenWidth*0.4)/2;
-					self.extraNum = 1;
-					self.endCriticalIndex = 1;
-				}else{
-					self.widthStandard = screenWidth-screenWidth*0.4;
-				};
-				// console.log(screenWidth,screenHeight)
+				if(self.screenWidth != document.body.clientWidth){
+					self.screenWidth = document.body.clientWidth;
+					self.changeWidth();
+				}
+				console.log(self.screenWidth)
 			};
 		},
 		
@@ -167,6 +148,24 @@
 			self.bannerTimer = null;
 		},
 	    methods: {
+			
+			changeWidth(){
+				const self = this;
+				self.leftOffset = 0;
+				if(self.screenWidth>=1660){
+					self.widthStandard = 1660/3;
+				}else if(self.screenWidth>=1220&&self.screenWidth<1660){
+					self.widthStandard = 1200/3;
+				}else if(self.screenWidth>=800 && self.screenWidth<1220){
+					self.widthStandard = (self.screenWidth-self.screenWidth*0.02)/3;
+				}else if(self.screenWidth>500 && self.screenWidth<800){
+					self.widthStandard = (self.screenWidth-self.screenWidth*0.02)/2;
+					self.extraNum = 1;
+					self.endCriticalIndex = 1;
+				}else{
+					self.widthStandard = self.screenWidth-self.screenWidth*0.04;
+				};
+			},
 			
 			test(e){
 				console.log(e)
@@ -431,15 +430,18 @@
 @media only screen and (max-width: 1366px){#banner_app{height: 290px;}}
 @media only screen and (max-width: 1280px){#banner_app{height: 280px;}}
 @media only screen and (max-width: 1100px){#banner_app{height: 275px;}}
-@media only screen and (max-width: 1024px){#banner_app{height: 270px;}}
+@media only screen and (max-width: 1024px){#banner_app{height: 230px;}}
 
 /* 平板 */
 @media only screen and (max-width: 800px){
 	#banner_app{display: block;height: 100%;}
-	#banner_app{height:320px;}
+	#banner_app{height:280px;}
+}
+@media only screen and (max-width: 800px){
+	#banner_app{height:230px;}
 }
 @media only screen and (max-width: 500px){
-	#banner_app{ height:250px;}
+	#banner_app{ height:280px;}
 	.banBtnNav img{width: 12px;}
 	.banBtnNav div{padding: 0 5px;}
 	
@@ -448,8 +450,8 @@
 	#banner_app .prev{left:20px;}
 	#banner_app .next{right:20px;}
 }
-/* @media only screen and (max-width: 414px){#banner_app{height: 186px;}}
-@media only screen and (max-width: 375px){#banner_app{height: 166px;}}
-@media only screen and (max-width: 320px){#banner_app{height: 146px;}} */
+@media only screen and (max-width: 414px){#banner_app{height: 230px;}}
+/* @media only screen and (max-width: 375px){#banner_app{height: 166px;}} */
+/* @media only screen and (max-width: 320px){#banner_app{height: 146px;}} */
 
 </style>

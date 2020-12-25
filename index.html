@@ -255,7 +255,7 @@
 		<!-- 底部图 -->
 		<div class="footImg animated animated-1.5 fadeInUpBig" >
 			<img :src="footData&&footData.mainImg&&footData.mainImg[0]&&footData.mainImg[0].url"  
-			class="animateds fadeInUpBig"
+			class="animateds fadeInUp"
 			v-if="footHeight+headerHeight+(footHeight*0.3)<offsetTopNow">
 		</div>
 	
@@ -424,11 +424,12 @@
 				self.getLabelData();
 				
 				var winWidth = document.body.clientWidth;
+				if(winWidth<1600){
+					self.bannerHeight = 200;
+					self.aboutHeight = 400;
+					console.log('小于1600',self.bannerHeight,self.aboutHeight)
+				}
 				self.test(winWidth);
-				window.onresize = function(){  
-					var winWidth = document.body.clientWidth;
-					self.test(winWidth)
-				};
 				self.handleScroll();
 				window.addEventListener('scroll', this.handleScroll);
 				
@@ -443,6 +444,20 @@
 			},
 			mounted(){
 				const self = this;
+				var winWidth = document.body.clientWidth;
+				window.onresize = function(){  
+					if(winWidth != document.body.clientWidth){
+						var width = document.body.clientWidth;
+						if(width<1600){
+							self.bannerHeight = 0;
+							self.aboutHeight = 200;
+							console.log('小于1600',self.bannerHeight,self.aboutHeight)
+						}
+						self.getHeight();
+						self.test(width);
+					}
+					
+				};
 				$(window).scroll( function() {
 				    var docHeight = $(document).height(); // 获取整个页面的高度(不只是窗口,还包括为显示的页面)
 				    var winHeight = $(window).height(); // 获取当前窗体的高度(显示的高度)
