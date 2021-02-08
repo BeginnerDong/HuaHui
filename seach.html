@@ -156,7 +156,7 @@
 					</div> -->
 					
 					
-					<div id='news1' class="newsItem flexRowBetween" >
+					<div id='news1' class="newsItem flexRowBetween" v-if="index%2==0">
 						<div class="L animated fadeInLeft" >
 							<img :src="item.bannerImg&&item.bannerImg[0]?item.bannerImg[0].url:''" class="Limg">
 						</div>
@@ -166,7 +166,7 @@
 							<a class="moreBtn" :href="'newsdetail.html?id='+item.id">Read More></a>
 						</div>
 					</div>
-					<div id='news2' class="newsItem flexRowBetween">
+					<div id='news2' class="newsItem flexRowBetween" v-else>
 						<div class="R animated fadeInLeft">
 							<h1 class="avoidOverflow">{{item.title}}</h1>
 							<p class="avoidOverflow5">{{item.description}}</p>
@@ -270,7 +270,7 @@
 					</li> -->
 					<li class="f5bj searchZp" v-for="(item,index) in mainData" :key="index">
 						<div class="flex ZP">
-							<img src="images/about-img.jpg" >
+							<img :src="item&&item.bannerImg&&item.bannerImg[0]&&item.bannerImg[0].url" >
 							<div class="txt flex-1">
 								<div class="tit avoidOverflow">{{item.title}}</div>
 								<div class="con avoidOverflow3">{{item.description}}</div>
@@ -370,7 +370,7 @@
 						self.getBefore = {}
 					};
 					self.mainData = [];
-					self.getMainData()
+					self.getMainData(true)
 					
 				},
 				
@@ -409,15 +409,23 @@
 				
 				changeCurr(curr){
 					const self = this;
+					//self.mainData = [];
+					if(!self.canClick){
+						return
+					};
+					self.canClick  = false;
 					if(curr!=self.curr){
 						self.curr = curr;
 						self.submit()
 					}
 				},
 				
-				getMainData(){
+				getMainData(isNew){
 				    var self = this;
 				    var postData = {};
+					if(isNew){
+						self.mainData = [];
+					}
 				    postData.searchItem = window.base.cloneForm(self.searchItem);
 					if(JSON.stringify(self.getBefore)!="{}"){
 						postData.getBefore = window.base.cloneForm(self.getBefore)
@@ -427,9 +435,10 @@
 					};
 				    var callback = function(res){
 				        if(res.info.data.length>0&&res.info.data[0]){
-							self.mainData.push.apply(self.mainData,res.info.data)
+							self.mainData = res.info.data
 				        };    
 						self.canSearch = true;
+						self.canClick = true;
 				    };
 				    window.base.articleGet(postData, callback);
 				},
@@ -474,6 +483,10 @@
 	.fixArrow{position: absolute;top: -4px;left: 49.9%;z-index: 2;width: 10%;height: 103%;background: url(images/BigArrow-icon3.png) 0 0/100% 100%;}
 	.ind-dynamic>div:nth-of-type(2n) .fixArrow{left: auto;right: 49.9%;background-image: url(images/BigArrow-icon4.png);}
 	
+	.ZP{height: 160px;}
+	.ZP img{height: 100%;}
+	.ZP .flex-1{flex: 1;}
+	
 	
 	.headH{height: 60px;width: 100%;}
 	/*以下自适应样式*/
@@ -499,10 +512,16 @@
 		.head .cont {padding: 0 4%;}
 		.head .cont .R{padding: 0 0 0 20px;font-size: 16px;letter-spacing: 0;}
 		.head .cont .R a{color: #383838;}
+		
+		.ZP{height: 140px;}
 	}
 	
-	@media screen and ( max-width: 375px){
+	@media screen and ( max-width: 414px){
 		.fixArrow{width: 13%;}
+		
+		.ZP,.searchZp, .searchZp img{min-height: 110px!important;height: 110px;}
+		.ZP img{height: 100%;min-height: initial;}
+		.ZP .txt .con{-webkit-line-clamp:2;}
 	}
 	</style>
 </html>

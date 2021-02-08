@@ -15,7 +15,7 @@
 		<link type="text/css" rel="stylesheet" href="css/public.css">
 	</head>
 	<style>
-		.lease{min-height: 500px;overflow: hidden;padding: 50px 0;position: relative;}
+		.lease{min-height: 500px;overflow: hidden;padding: 50px 0 100px;position: relative;}
 		.lease .allH1{margin-bottom: 50px;}
 		.lease .item{width: 50%;box-sizing: border-box;padding: 15px;overflow: hidden;float: left;}
 		.lease .itemBox{width: 100%;margin: auto;box-shadow: 0 0 5px 5px rgba(0,0,0,0.05);overflow: hidden;padding: 20px 60px;border-radius: 10px;display: flex;align-items: center;height: 160px;position: relative;transition: all 0.5s;box-sizing: border-box;}
@@ -78,9 +78,9 @@
 					</div> -->
 					<div class="itemCon">
 						<div><span>名称：</span><p>{{item.title}}</p></div>
-						<div><span>地址：</span><p>{{item.address}}</p></div>
+						<div><span>英文：</span><p>{{item.address}}</p></div>
 						<div><span>电话：</span><p>{{item.phone}}</p></div>
-						<div><span>官网：</span><p><a :href="item.description" target="_blank">{{item.description}}</a></p></div>
+						<div><span>邮箱：</span><p><a :href="item.description" target="_blank">{{item.description}}</a></p></div>
 					</div>
 					<div class="itemMask"></div>
 				</div>

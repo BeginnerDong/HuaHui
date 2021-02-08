@@ -24,11 +24,11 @@
 					<div class="tt" :class="currentUrl=='/index.html'?'on':''"><a href="index.html">首页</a></div>
 					<div class="tt" :class="currentUrl=='/aboutUs.html'?'on':''"><a href="aboutUs.html">关于华汇</a></div>
 					<div class="tt pr" :class="currentUrl=='/anliCenter.html'||(menu_id!=5&&menu_id!=0)?'on':''">
-						<a href="anliCenter.html">经典案例</a>
+						<a href="anliCenter.html" @click="goCase(1)">经典案例</a>
 						<div class="Asamll alAsamll">
 							<div class="Achild" v-for="(item,index) in labelData" :key="item.id">
 								<div class="Aname">
-									<a class="link" :href="'anliCenter.html?menu_id='+item.id">{{item.title}}</a>
+									<a class="link" @click="goCase(2,item)">{{item.title}}</a>
 								</div>
 							</div>
 						</div>
@@ -39,13 +39,13 @@
 							<div class="Asamll ppAsamll">
 								<div class="Achild" v-for="(item,index) in brandData" :key="item.id">
 									<div class="Aname">
-										<a class="link" :href="'product.html?id='+item.id+'&behavior='+item.behavior">{{item.title}}
+										<a class="link" @click="goProduct(item)">{{item.title}}
 											<em class="pdl5" v-if="item.child&&item.child.length>0">&gt;</em>
 										</a>
 									</div>
 									<div class="bBox">
 										<div class="Bsamll">
-											<a v-for="(c_item,c_index) in item.child" :href="'product.html?id='+item.id+'&childId='+c_item.id+'&behavior='+item.behavior" :key="c_item.id" class="Bchild" 
+											<a v-for="(c_item,c_index) in item.child" @click="goDetail(item,c_item)" :key="c_item.id" class="Bchild" 
 											>{{c_item.title}}</a>
 										</div>
 									</div>
@@ -224,6 +224,28 @@
 		},
 	    methods: {
 			
+			goCase(type,item){
+				const self = this;
+				sessionStorage.setItem('page',1);
+				if(type==1){
+					window.location.href = 'anliCenter.html';
+				}else{
+					window.location.href = 'anliCenter.html?menu_id='+item.id;
+				}
+			},
+			
+			goProduct(item){
+				const self = this;
+				sessionStorage.removeItem('currId');
+				window.location.href = 'product.html?id='+item.id+'&currId=-1'+'&behavior='+item.behavior;
+			},
+			
+			goDetail(item,c_item){
+				const self = this;
+				sessionStorage.removeItem('currId');
+				window.location.href = 'product.html?id='+item.id+'&childId='+c_item.id+'&behavior='+item.behavior;
+			},
+			
 			go(type,item,c_item){
 				const self = this;
 				self.is_showNav = false;
@@ -244,6 +266,7 @@
 							}
 							break;
 						case 4:
+							sessionStorage.removeItem('currId');
 							if(c_item){
 								window.location.href = 'product.html?id='+item.id+'&childId='+c_item.id+'&behavior='+item.behavior;
 							}else if(item){
@@ -417,7 +440,7 @@
 .orderNavTwo .tt:hover .Achild{opacity: 1;height: 45px;}
 .orderNavTwo .tt:hover .Aname{height: 45px;}
 /* .Asamll .Achild:hover .Bsamll{opacity: 1;top: 0;} */
-.Asamll .Achild:hover .bBox{height: 325px;padding-top: 10px;padding-left: 5px;}
+.Asamll .Achild:hover .bBox{height: 400px;padding-top: 10px;padding-left: 5px;}
 
 .black-bj2{z-index: 10;/* display: none; */}
 

@@ -577,7 +577,8 @@
 						return
 					};
 					const pass = window.base.checkComplete(self.submitData);
-					if (pass) {	
+					console.log('submitData',self.submitData);
+					if (!pass.description || !pass.title || !pass.phone ||!pass.mainImg.length==0) {	
 						const postData = {};
 						postData.data = window.base.cloneForm(self.submitData)
 						const callback = (res) => {
@@ -589,7 +590,8 @@
 									phone:'',
 									description:'',
 									mainImg:[],
-									type:1
+									type:1,
+									relation_user:'0'
 								}
 							}	
 						};

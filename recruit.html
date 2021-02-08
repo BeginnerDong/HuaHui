@@ -37,11 +37,11 @@
 				</ul>
 			</div> -->
 			
-			<div class="jobPin w1660">
+			<div class="jobPin w1660" style="margin-bottom: 50px;">
 				<ul class="flex pdt50">
 					<li class="f5bj" v-for="(item,index) in mainData" :key="index">
 						<div class="zp">
-							<img src="images/about-img.jpg" >
+							<img :src="item&&item.bannerImg&&item.bannerImg[0]&&item.bannerImg[0].url" >
 							<div class="txt">
 								<div class="tit avoidOverflow4">{{item.title}}</div>
 								<div class="con">{{item.description}}</div>

@@ -183,20 +183,20 @@
 						<img :src="item.bannerImg&&item.bannerImg[0]?item.bannerImg[0].url:''"  class="Limg">
 					</div>
 					<div class="R animated fadeInRight">
-						<a :href="'newsdetail.html?id='+item.id+'&type=case'">
+						<a @click="goDetail(item)">
 							<h1 class="avoidOverflow">{{item.title}}</h1>
 						</a>
 						<p class="avoidOverflow5">{{item.description}}</p>
-						<a class="moreBtn"  :href="'newsdetail.html?id='+item.id+'&type=case'">READ MORE ></a>
+						<a class="moreBtn"  @click="goDetail(item)">READ MORE ></a>
 					</div>
 				</div>
 				<div class="newsItem flexRowBetween" v-if="index%2!=0&&(index*cardHeight+headerHeight+(cardHeight*0.3)<offsetTopNow)" >
 					<div class="R animated fadeInLeft">
-						<a :href="'newsdetail.html?id='+item.id+'&type=case'">
+						<a @click="goDetail(item)">
 							<h1 class="avoidOverflow">{{item.title}}</h1>
 						</a>
 						<p class="avoidOverflow5">{{item.description}}</p>
-						<a class="moreBtn" :href="'newsdetail.html?id='+item.id+'&type=case'">READ MORE ></a>
+						<a class="moreBtn" @click="goDetail(item)">READ MORE ></a>
 					</div>
 					<div class="L animated fadeInRight">
 						<img :src="item.bannerImg&&item.bannerImg[0]?item.bannerImg[0].url:''"  class="Limg">
@@ -213,11 +213,11 @@
 						<img :src="item.bannerImg&&item.bannerImg[0]?item.bannerImg[0].url:''" class="Limg">
 					</div>
 					<div class="R ">
-						<a :href="'newsdetail.html?id='+item.id+'&type=case'">
+						<a @click="goDetail(item)">
 							<h1>{{item.title}}</h1>
 						</a>
 						<p class="avoidOverflow5">{{item.description}}</p>
-						<a class="moreBtn"  :href="'newsdetail.html?id='+item.id+'&type=case'">READ MORE ></a>
+						<a class="moreBtn"  @click="goDetail(item)">READ MORE ></a>
 					</div>
 				</div>
 			</div>
@@ -278,6 +278,10 @@
 			created () {
 			    const self = this;
 				
+				if(sessionStorage.getItem('page')){
+					self.paginate.currentPage = parseInt(sessionStorage.getItem('page'));
+				}
+				
 				var winWidth = document.body.clientWidth;
 				self.test(winWidth);
 				window.onresize = function(){  
@@ -296,6 +300,12 @@
 			},
 			
 		    methods: {
+				
+				goDetail(item){
+					const self = this;
+					sessionStorage.setItem('page',self.paginate.currentPage);
+					window.location.href = 'newsdetail.html?id='+item.id+'&type=case';
+				},
 				
 				test:function(width){
 					const self = this;
@@ -323,6 +333,7 @@
 					const self = this;
 					self.currId = id;
 					self.paginate.currentPage = 1;
+					sessionStorage.setItem('page',1);
 					self.mainData = [];
 					self.getMainData()
 					window.location.href = '#app'

@@ -33,7 +33,7 @@
             var mac = /<script type="text\/javascript">([\s\S]*?)<\/script>/g;
             var r = "";
             while(r = mac.exec(content)) {
-                console.log('r',r)
+                // console.log('r',r)
                 if(window.execScript){
                     window.execScript(r[1]);
                 }else if(window.eval){
@@ -116,7 +116,7 @@
 
                 //拿到路径
                 var src = this.getAttribute("src");
-                console.log('includeTals',includeTals)
+                // console.log('includeTals',includeTals)
                 //拿到文件内容
                 var content = $this.getFileContent($this.getRequestUrl(filePath, src));
                 

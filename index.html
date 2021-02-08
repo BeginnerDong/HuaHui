@@ -5,9 +5,10 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 		<meta name="renderer" content="webkit">
-		<meta name="description" content="">
+		<meta name="description" content="顾问有限公司创建于1997年,是一家专业从事音频产品代理、设计、销售、工程、培训及维保的集团化公司,是业界众多高端音频产品大中华区唯一总代理商。 华汇...">
 		<meta name="keywords" content="">
-		<title>首页</title>
+		<title>广州华汇音响顾问有限公司</title>
+		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 		<script type="text/javascript" src="./js/vue.js"></script>
 		<script type="text/javascript" src="js/jquery.min.js"></script>
 		<script type="text/javascript" src="js/base.js"></script>
@@ -207,7 +208,7 @@
 					<div class="IconBoxs" 
 					v-for="(item,index) in brandData" :key="index"
 					 v-show="index<=6">
-						<a @mouseenter="enter(index)" :href="'product.html?id='+brandCon.id+'&behavior='+brandCon.behavior"
+						<a @mouseenter="enter(index)" :href="'product.html?id='+item.id+'&behavior='+item.behavior"
 						class="IconBox" v-show="index<=6 && index!=0">
 							<!-- <img src="images/news-img3.jpg" class="bg"> -->
 							<img :src="item&&item.headImg&&item.headImg[0]?item.headImg[0].url:''" class="bg">
@@ -216,15 +217,15 @@
 								<img :src="item.mainImg&&item.mainImg[0]&&item.mainImg[0].url">
 							</div>
 						</a>
-						<a href="brand.html" class="flexCenter mgl30 pr o-h qtImg" v-if="index==2" @mouseenter="enter(7)" @mouseleave="leave()" >
+						<a href="product.html?id=96&behavior=2" class="flexCenter mgl30 pr o-h qtImg" v-if="index==2" @mouseenter="enter(7)" @mouseleave="leave()" >
 							<img src="images/home-img06.png" class="mgl30 qtImg ">
 							<div class="Icon flexCenter mgl30"></div>
 						</a>
-						<a href="brand.html" class="flexCenter mgl30 pr o-h qtImg" v-if="index==4" @mouseenter="enter(7)" @mouseleave="leave()">
+						<a href="product.html?id=96&behavior=2" class="flexCenter mgl30 pr o-h qtImg" v-if="index==4" @mouseenter="enter(7)" @mouseleave="leave()">
 							<img src="images/home-img09.png" class="mgl30 qtImg " >
 							<div class="Icon flexCenter mgl30"></div>
 						</a>
-						<a class="flexCenter mgl30 pr o-h qtImg" v-show="index==6"  href="brand.html" style="color: #fff;" @mouseenter="enter(7)" @mouseleave="leave()">
+						<a class="flexCenter mgl30 pr o-h qtImg" v-show="index==6"  href="product.html?id=96&behavior=2" style="color: #fff;" @mouseenter="enter(7)" @mouseleave="leave()">
 							<img src="images/home-img012.png" class="qtImg">
 							<div class="Icon flexCenter font31 hand">更多 ></div>
 						</a>
@@ -343,29 +344,40 @@
 		
 	</div>
 </body>
-<script type="text/javascript">
 	
-	var mySwiper = new Swiper ('.swiper-container88', {
-	    /* direction: 'vertical', */ // 垂直切换选项
-	    loop: true, // 循环模式选项
-	    
-	    // 如果需要分页器
-	    pagination: {
-	      el: '.swiper-pagination',
-	    },
-	    
-	    // 如果需要前进后退按钮
-	    navigation: {
-	      nextEl: '.swiper-button-next',
-	      prevEl: '.swiper-button-prev',
-	    },
-	    
-	    // 如果需要滚动条
-	    scrollbar: {
-	      el: '.swiper-scrollbar',
-	    },
-	})
-</script>
+	<script type="text/javascript">
+		
+		var mySwiper = new Swiper ('.swiper-container88', {
+			/* direction: 'vertical', */ // 垂直切换选项
+			loop: true, // 循环模式选项
+			
+			// 如果需要分页器
+			pagination: {
+			  el: '.swiper-pagination',
+			},
+			
+			// 如果需要前进后退按钮
+			navigation: {
+			  nextEl: '.swiper-button-next',
+			  prevEl: '.swiper-button-prev',
+			},
+			
+			// 如果需要滚动条
+			scrollbar: {
+			  el: '.swiper-scrollbar',
+			},
+		})
+		
+	</script>
+
+	<script>
+		(function(){
+		var bp = document.createElement('script');
+		bp.src = '//push.zhanzhang.baidu.com/push.js';
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(bp, s);
+		})();
+	</script>
 	
 	<script type="text/javascript">
 		var app = new Vue({

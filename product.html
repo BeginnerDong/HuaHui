@@ -22,6 +22,8 @@
 		
 		.productList{min-height: 400px;}
 		
+		.tt{cursor: pointer;}
+		
 		
 		
 		@media only screen and (max-width: 500px){
@@ -38,7 +40,7 @@
 		
 		<div class="w1100">
 			<div class="orderNav flexCenter borderB1">
-				<span class="tt flexCenter" :class="currId==-1?'on':''"
+				<span class="tt flexCenter" style="cursor: pointer;" :class="currId==-1?'on':''"
 				@click="changeCurr(-1,0)">全部</span>
 				<span class="tt flexCenter" :class="currId==item.id?'on':''" 
 				@click="changeCurr(item.id,item.behavior)" v-for="(item,index) in labelData" :key="index">{{item.title}}</span>
@@ -49,7 +51,7 @@
 			<div class="productList center">
 				<ul class="flex" :class="behavior==1?'Two':''">
 					<li v-for="(item,index) in mainData" :key="index">
-						<a class="flexColumn" :href="'productDeail.html?id='+item.id">
+						<a class="flexColumn" :href="'productDeail.html?id='+item.id+'&currId='+currId">
 							<h1 class="tit">{{item.title}}</h1>
 							<div class="pic">
 								<img :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''">
@@ -97,17 +99,37 @@
 						pagesize: 6,
 						is_page: true,
 					},
+					idArray:[]
 		        }
 		    },
 			
 			created () {
 			    const self = this;
-				console.log('222',window.base.GetRequest().childId)
+				
+				
 				self.behavior = window.base.GetRequest().behavior;
-				if(window.base.GetRequest().childId){
-					self.changeCurr(window.base.GetRequest().childId,window.base.GetRequest().behavior)
+				// self.currId = window.base.GetRequest().childId;
+				if(sessionStorage.getItem('currId')){
+					self.currId = parseInt(sessionStorage.getItem('currId'));
+				}else{
+					if(window.base.GetRequest().currId){
+						self.currId = window.base.GetRequest().currId;
+						sessionStorage.setItem('currId',window.base.GetRequest().currId);
+					}else{
+						self.currId = window.base.GetRequest().childId;
+						sessionStorage.removeItem('currId');
+					}
 				}
-				self.getLabelData();
+				
+				console.log('currId',self.currId)
+				
+				
+				if(self.currId==-1){
+					self.getLabelData();
+				}else{
+					self.changeCurr(self.currId,window.base.GetRequest().behavior)
+					self.getLabelData();
+				}
 			},
 			
 		    methods: {
@@ -116,6 +138,11 @@
 					const self = this;
 					
 					self.currId = id;
+					// if(id==-1){
+					// 	sessionStorage.removeItem('currId');
+					// }else{
+						sessionStorage['currId'] = self.currId;
+					// }
 					
 					self.mainData = [];
 					self.paginate = {
@@ -144,6 +171,8 @@
 							for (var i = 0; i < self.labelData.length; i++) {
 								self.idArray.push(self.labelData[i].id)
 							};
+							
+							console.log('window.base.GetRequest().childId',window.base.GetRequest().childId,window.base.GetRequest().id)
 							if(!window.base.GetRequest().childId){
 								self.getMainData()
 							}
@@ -171,6 +200,7 @@
 					}else{
 						postData.searchItem.menu_id = ['in',self.idArray]
 					};
+					console.log('searchItem',self.searchItem);
 					postData.order = {
 						listorder:'asc'
 					};
