@@ -8,7 +8,7 @@
 		<meta name="description" content="">
 		<meta name="keywords" content="">
 		<title>职位详情</title>
-		<script type="text/javascript" src="./js/vue.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
 		<script type="text/javascript" src="js/jquery.min.js"></script>
 		<script type="text/javascript" src="js/base.js"></script>
 		<script type="text/javascript" src="js/include.js"></script>
@@ -17,7 +17,7 @@
 	</head>
 
 <body>
-	<div id="app">
+	<div id="app" :style="language=='_e'?'letter-spacing:1px!important':''">
 		<div class="headTop"></div>
 		
 		<include src="header.html"></include>
@@ -25,10 +25,10 @@
 		<div class="f5bj jobName">
 			<div class="w1100 pdlr4 flexRowBetween">
 				<div class="JobTit">
-					<h1 class="name ftn">{{mainData.title}}</h1>
-					<p class="money">{{mainData.salary}}</p>
-					<p class="lable pdb10">{{mainData.region}} {{mainData.experience}} {{mainData.education}}</p>
-					<p>{{mainData.duration}}</p>
+					<h1 class="name ftn">{{mainData['title'+language]}}</h1>
+					<p class="money">{{mainData['salary'+language]}}</p>
+					<p class="lable pdb10">{{mainData['region'+language]}} {{mainData['experience'+language]}} {{mainData['education'+language]}}</p>
+					<p>{{mainData['duration'+language]}}</p>
 				</div>
 				<div class="rr">
 					<!-- <button class="btn" type="button">投递简历</button> -->
@@ -40,32 +40,32 @@
 				
 				<!-- 职位亮点 -->
 				<div class="T-title flex">
-					<span>职位亮点</span>
+					<span>{{language=='_e'?'Position Highlights':(language=='_f'?'職位亮點':'职位亮点')}}</span>
 				</div>
 				<div class="jobLable flex">
-					<span v-for="item in mainData.keywords">{{item}}</span>
+					<span v-for="item in mainData['keywords'+language]">{{item}}</span>
 				</div>
 				
 				<!-- 工作内容 -->
 				<div class="T-title flex">
-					<span>工作内容</span>
+					<span>{{language=='_e'?'Job Content':(language=='_f'?'工作内容':'工作内容')}}</span>
 				</div>
 				<div class="xqInfor color6">
 					<div class="content ql-editor " style="clear: both;">
-						<p class="p1 " v-html="mainData.content"></p>
+						<p class="p1 " v-html="mainData['content'+language]"></p>
 					</div>
 				</div>
 				
 				<!-- 工作地点 -->
 				<div class="T-title flex">
-					<span>工作地点</span>
+					<span>{{language=='_e'?'Place Of Work':(language=='_f'?'工作地點':'工作地点')}}</span>
 				</div>
 				<div class="flex jobAddrs pdb40">
 					<img class="icon" src="images/recruitment-icon.jpg" >
-					<p>{{mainData.address}}</p>
+					<p>{{mainData['address'+language]}}</p>
 				</div>
 				<div class="jobMap flexEnd">
-					<div class="map"><img :src="mainData.mainImg&&mainData.mainImg[0]?mainData.mainImg[0].url:''" ></div>
+					<div class="map"><img :src="mainData['mainImg'+language]&&mainData['mainImg'+language][0]?mainData['mainImg'+language][0].url:''" ></div>
 				</div>
 				
 			</div>
@@ -87,17 +87,35 @@
 					is_show:false,
 					wx_show:2,
 					mainData: {},
-					labelData: []
+					labelData: [],
+					
+					language:''
 		        }
 		    },
 			
 			created () {
 			    const self = this;
 				self.getMainData();
+				
+				self.initLanguage();
+				window.base.bus.$on('changelanguage',function(res){
+					self.language = res;
+					self.initLanguage()
+				});
 			},
 			
 			
 		    methods: {
+				
+				initLanguage(){
+					const self = this;
+					var lang = localStorage.getItem('language');
+					if(lang){
+						self.language = lang;
+					}else{
+						self.language = '';
+					}
+				},
 				
 				getMainData() {
 					const self = this;

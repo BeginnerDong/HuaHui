@@ -2,12 +2,14 @@
 	<div class="swiperBox">
 		<div class="banner animated" 
 		v-for="(item,index) in bannerData" 
-		:class="index==banner_index?'show':'hide'"
-		v-swipeleft="{fn:vuetouch,name:'左滑'}"
-		v-swiperight="{fn:vuetouch,name:'右滑'}"
-		@touchmove.prevent>
+		:class="index==banner_index?'show':'hide'">
 			<a :href="item.url"><img :src="item&&item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''" /></a>
 		</div>
+		
+		
+		<!-- v-swipeleft="{fn:vuetouch,name:'左滑'}"
+		v-swiperight="{fn:vuetouch,name:'右滑'}"
+		@touchmove.prevent -->
 		
 		<!-- 导航点 -->
 		<!-- <div class="banBtnNav flexCenter">

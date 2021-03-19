@@ -8,7 +8,7 @@
 		<meta name="description" content="">
 		<meta name="keywords" content="">
 		<title>搜索</title>
-		<script type="text/javascript" src="./js/vue.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
 		<script type="text/javascript" src="js/jquery.min.js"></script>
 		<script type="text/javascript" src="js/base.js"></script>
 		<script type="text/javascript" src="js/include.js"></script>
@@ -85,7 +85,7 @@
 	</style>
 
 <body>
-	<div id="app">
+	<div id="app" :style="language=='_e'?'letter-spacing:1px!important':''">
 		
 		<div class="head">
 			<div class="cont flexRowBetween w1200">
@@ -111,13 +111,13 @@
 		
 		<div class="f5bj">
 			<div class="orderNav flexCenter borderB1">
-				<span class="tt" :class="curr==1?'on':''" @click="changeCurr('1')">文章</span>
-				<span class="tt" :class="curr==2?'on':''" @click="changeCurr('2')">资料</span>
-				<span class="tt" :class="curr==3?'on':''" @click="changeCurr('3')">图片</span>
-				<span class="tt" :class="curr==4?'on':''" @click="changeCurr('4')">视频</span>
-				<span class="tt" :class="curr==7?'on':''" @click="changeCurr('7')">软件</span>
-				<span class="tt" :class="curr==5?'on':''" @click="changeCurr('5')">产品</span>
-				<span class="tt" :class="curr==6?'on':''" @click="changeCurr('6')">招聘</span>
+				<span class="tt" :class="curr==1?'on':''" @click="changeCurr('1')">{{language=='_e'?'Article':(language=='_f'?'文章':'文章')}}</span>
+				<span class="tt" :class="curr==2?'on':''" @click="changeCurr('2')">{{language=='_e'?'Data':(language=='_f'?'資料':'资料')}}</span>
+				<span class="tt" :class="curr==3?'on':''" @click="changeCurr('3')">{{language=='_e'?'Image':(language=='_f'?'圖片':'图片')}}</span>
+				<span class="tt" :class="curr==4?'on':''" @click="changeCurr('4')">{{language=='_e'?'Video':(language=='_f'?'視頻':'视频')}}</span>
+				<span class="tt" :class="curr==7?'on':''" @click="changeCurr('7')">{{language=='_e'?'Software':(language=='_f'?'軟件':'软件')}}</span>
+				<span class="tt" :class="curr==5?'on':''" @click="changeCurr('5')">{{language=='_e'?'Product':(language=='_f'?'產品':'产品')}}</span>
+				<span class="tt" :class="curr==6?'on':''" @click="changeCurr('6')">{{language=='_e'?'Recruit':(language=='_f'?'招聘':'招聘')}}</span>
 				<!-- <span class="tt" :class="curr==7?'on':''" @click="changeCurr('7')">品牌</span> -->
 			</div>
 		</div>
@@ -158,22 +158,22 @@
 					
 					<div id='news1' class="newsItem flexRowBetween" v-if="index%2==0">
 						<div class="L animated fadeInLeft" >
-							<img :src="item.bannerImg&&item.bannerImg[0]?item.bannerImg[0].url:''" class="Limg">
+							<img :src="item['bannerImg'+language]&&item['bannerImg'+language][0]?item['bannerImg'+language][0].url:''" class="Limg">
 						</div>
 						<div class="R animated fadeInRight" >
-							<h1 class="avoidOverflow">{{item.title}}</h1>
-							<p class="avoidOverflow5">{{item.description}}</p>
+							<h1 class="avoidOverflow">{{item['title'+language]}}</h1>
+							<p class="avoidOverflow5">{{item['description'+language]}}</p>
 							<a class="moreBtn" :href="'newsdetail.html?id='+item.id">Read More></a>
 						</div>
 					</div>
 					<div id='news2' class="newsItem flexRowBetween" v-else>
 						<div class="R animated fadeInLeft">
-							<h1 class="avoidOverflow">{{item.title}}</h1>
-							<p class="avoidOverflow5">{{item.description}}</p>
+							<h1 class="avoidOverflow">{{item['title'+language]}}</h1>
+							<p class="avoidOverflow5">{{item['description'+language]}}</p>
 							<a class="moreBtn" :href="'newsdetail.html?id='+item.id">Read More></a>
 						</div>
 						<div class="L animated fadeInRight">
-							<img :src="item.bannerImg&&item.bannerImg[0]?item.bannerImg[0].url:''" class="Limg">
+							<img :src="item['bannerImg'+language]&&item['bannerImg'+language][0]?item['bannerImg'+language][0].url:''" class="Limg">
 						</div>
 					</div>
 					
@@ -187,7 +187,7 @@
 			<div class="HDPicBox" v-if="curr==3">
 				<ul class="flex">
 					<li v-for="(item,index) in mainData" :key="index">
-						<img class="pic" :src="item.bannerImg&&item.bannerImg[0]?item.bannerImg[0].url:''">
+						<img class="pic" :src="item['bannerImg'+language]&&item['bannerImg'+language][0]?item['bannerImg'+language][0].url:''">
 						<a download class="download" :href="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''">
 							<img class="icon" src="images/download-icon7.png" >
 						</a>
@@ -200,10 +200,10 @@
 				<ul class="flex">
 					
 					<li v-for="(item,index) in mainData" :key="index">
-						<img class="pic" :src="item.video&&item.video[0]?item.video[0].url:''">
-						<!-- <iframe class="video" :src="item.description" frameborder="0" allowfullscreen="true" width="380" height="247"></iframe> -->
+						<img class="pic" :src="item['videl'+language]&&item['videl'+language][0]?item['videl'+language][0].url:''">
+						<!-- <iframe class="video" :src="item['description'+language]" frameborder="0" allowfullscreen="true" width="380" height="247"></iframe> -->
 					<!-- 	<img class="video" src="images/download-img4.png" > -->
-						<a class="download" :href="item.description">
+						<a class="download" :href="item['description'+language]">
 							<img class="icon" src="images/download-icon7.1.png" >
 						</a>
 					</li>
@@ -213,10 +213,10 @@
 			<div class="cailiaoList" v-if="curr==2||curr==7">
 				<ul>
 					<li class="flexRowBetween" v-for="(item,index) in mainData" :key="index">
-						<p class="ll">{{item.title}}</p>
+						<p class="ll">{{item['title'+language]}}</p>
 						<a class="rr flexEnd" download :href="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''">
 							<img class="icon" src="images/download-icon7.png" >
-							<em>下载</em>
+							<em>{{language=='_e'?'Download':(language=='_f'?'下載':'下载')}}</em>
 						</a>
 					</li>
 				</ul>
@@ -230,7 +230,7 @@
 							<div class="box flexCenter">
 								<img class="logo" :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''" >
 								<p class="text center flexCenter"><em>
-								{{item.description}}
+								{{item['description'+language]}}
 								</em></p>
 							</div>
 						</a>
@@ -244,7 +244,7 @@
 					<li class="row" v-for="(item,index) in mainData" :key="index">
 						<div class="infor">
 							<a :href="'productDeail.html?id='+item.id">
-								<h1 class="tit">{{item.title}}</h1>
+								<h1 class="tit">{{item['title'+language]}}</h1>
 								<div class="pic flexCenter">
 									<img :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''">
 								</div>
@@ -263,8 +263,8 @@
 						<a :href="'recruitDetail.html?id='+item.id">
 							<div class="infor">
 								<img class="icon" src="images/about-icon4.png" >
-								<h2 class="tit">{{item.title}}</h2>
-								<p>{{item.description}}</p>
+								<h2 class="tit">{{item['title'+language]}}</h2>
+								<p>{{item['description'+language]}}</p>
 							</div>
 						</a>
 					</li> -->
@@ -272,9 +272,9 @@
 						<div class="flex ZP">
 							<img :src="item&&item.bannerImg&&item.bannerImg[0]&&item.bannerImg[0].url" >
 							<div class="txt flex-1">
-								<div class="tit avoidOverflow">{{item.title}}</div>
-								<div class="con avoidOverflow3">{{item.description}}</div>
-								<a :href="'recruitDetail.html?id='+item.id" class="more hand">了解更多 ></a>
+								<div class="tit avoidOverflow">{{item['title'+language]}}</div>
+								<div class="con avoidOverflow3">{{item['description'+language]}}</div>
+								<a :href="'recruitDetail.html?id='+item.id" class="more hand">{{language=='_e'?'Learn More':(language=='_f'?'瞭解更多':'了解更多')}} ></a>
 							</div>
 						</div>
 					</li>
@@ -320,7 +320,9 @@
 						type:5,
 						parentid:0
 					},
-					canSearch:true
+					canSearch:true,
+					
+					language:''
 		        }
 		    },
 			
@@ -336,11 +338,26 @@
 					self.searchItem.type = self.curr
 					self.goSearch()
 				}
-				self.submit()
+				self.submit();
+				
+				self.initLanguage();
+				window.base.bus.$on('changelanguage',function(res){
+					self.language = res;
+					self.initLanguage()
+				});
 			},
 			
 		    methods: {
 				
+				initLanguage(){
+					const self = this;
+					var lang = localStorage.getItem('language');
+					if(lang){
+						self.language = lang;
+					}else{
+						self.language = '';
+					}
+				},
 				
 				submit(){
 					const self  = this;

@@ -42,7 +42,7 @@
 .upImg img{width: 100%;height: 100%; display: block}
 
 @media only screen and (max-width: 1700px){
-	.swiper-container{height: 400px;}
+	.swiper-container{height: 360px;}
 	.detailBox{min-height: 700px;}
 	.hj1{min-height: 280px;}
 	.jobPin{min-height: 440px;}
@@ -50,7 +50,7 @@
 }
 
 @media only screen and (max-width: 1050px){
-	.swiper-container{height: 320px;}
+	.swiper-container{height: 290px;}
 }
 @media only screen and (max-width: 1000px){
 	.inforCont{padding-bottom: 15px!important;}

@@ -8,7 +8,7 @@
 		<meta name="description" content="">
 		<meta name="keywords" content="">
 		<title>关于华汇</title>
-		<script type="text/javascript" src="./js/vue.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
 		<script type="text/javascript" src="js/jquery.min.js"></script>
 		<script type="text/javascript" src="js/base.js"></script>
 		<script type="text/javascript" src="js/include.js"></script>
@@ -20,7 +20,11 @@
 		<link type="text/css" rel="stylesheet" href="css/swiper.min.css">
 		<link type="text/css" rel="stylesheet" href="css/animate.css">
 	</head>
-	<style>
+	<style type="text/css">
+		[v-cloak] {
+			display:none;
+		}
+		
 		.MedalPic{margin-bottom: 0;}
 		.MedalPic .half{width: auto;}
 		.MedalPic .TwoPic .box:first-child{margin-bottom: 0;}
@@ -89,7 +93,7 @@
 <body>
 	
 	
-	<div id="app">
+	<div id="app"  :style="language=='_e'?'letter-spacing:1px!important':''">
 		<div class="headTop"></div>
 		
 		<include src="header.html"></include>
@@ -108,7 +112,7 @@
 					<div class="detailePag animated fadeInLeft"  v-show="height1+headerHeight+(height1*0.3)<offsetTopNow">
 						<div class="inforCont pdb20">
 							<div class="content ql-editor " style="clear: both;">
-								<p class="p1 " v-html="mainData.content"></p> 
+								<p class="p1 " v-html="mainData['content'+language]"></p> 
 								<!-- @touchmove.prevent -->
 							</div>
 						</div>
@@ -118,7 +122,7 @@
 							<!-- Swiper -->
 							<div class="swiper-container swiper11">
 							    <ul class="swiper-wrapper">
-									<li class="swiper-slide" v-for="item in mainData.mainImg"><img :src="item.url"></li>
+									<li class="swiper-slide" v-for="item in mainData['mainImg'+language]"><img :src="item.url"></li>
 							    </ul>
 								
 								<!--左右箭头 -->
@@ -141,84 +145,19 @@
 						<h1 class="title">公司获奖</h1>
 					</div> -->
 					<div class="allH1 mb70">
-						<h1><span>公司获奖</span> Awards</h1>
+						<h1><span>{{language=='_e'?'Company':(language=='_f'?'公司獲獎':'公司获奖')}}</span> Awards</h1>
 					</div>
 					<div class="MedalPic pr oh hj1 animated fadeInUp height2" v-show="height2+headerHeight+(height2*0.3)<offsetTopNow">
-						
 						<include src="bannerTwo.html"></include>
-						<!-- Swiper -->
-						<!-- <div class="swiper-container2">
-							<ul class="half TwoPic swiper-wrapper">
-								<li class="box swiper-slide" v-for="item in rewardData">
-									<img class="pic" :src="item.mainImg[0].url">
-									<p class="text center flexCenter">
-										<em>{{item.title}}</em>
-									</p>
-								</li>
-							</ul>
-							
-							<div class="ArrowIcon flexRowBetween">
-								<span class="btn btnL swiper-button-prev"><img class="icon" src="images/about-icon6.png" ></span>
-								<span  class="btn btnR swiper-button-next"><img class="icon" src="images/about-icon7.png" ></span>
-							</div>
-						</div> -->
 					</div>
 					<div class="MedalPic pr oh hj2 animated fadeInUp height2" v-show="height2+headerHeight+(height2*0.3)<offsetTopNow">
 						<include src="bannerTwo.html"></include>
-						<!-- Swiper -->
-						<!-- <div class="swiper-container swiper3">
-							<ul class="half TwoPic swiper-wrapper">
-								<li class="box swiper-slide" v-for="item in rewardData">
-									<img class="pic" :src="item.mainImg[0].url">
-									<p class="text center flexCenter">
-										<em>{{item.title}}</em>
-									</p>
-								</li>
-							</ul>
-							
-							<div class="ArrowIcon flexRowBetween">
-								<span class="btn swiper-button-prev"><img class="icon" src="images/about-icon6.png" ></span>
-								<span  class="btn swiper-button-next"><img class="icon" src="images/about-icon7.png" ></span>
-							</div>
-						</div> -->
 					</div>
-					<!-- <div class="MedalPic flexRowBetween">
-						<div class="half TwoPic">
-							<div class="box flexCenter" v-if="rewardData[0]">
-								<img class="pic" :src="rewardData&&rewardData[0]&&rewardData[0].mainImg&&rewardData[0].mainImg[0]?rewardData[0].mainImg[0].url:''" >
-								<p class="text center flexCenter">
-									<em>{{rewardData&&rewardData[0]?rewardData[0].title:''}}</em>
-								</p>
-							</div>
-							<div class="box flexCenter" v-if="rewardData[1]">
-								<img class="pic" :src="rewardData&&rewardData[1]&&rewardData[1].mainImg&&rewardData[1].mainImg[0]?rewardData[1].mainImg[0].url:''" >
-								<p class="text center flexCenter">
-									<em>{{rewardData&&rewardData[1]?rewardData[1].title:''}}</em>
-								</p>
-							</div>
-						</div>
-						<div class="half onePic" v-if="rewardData[2]">
-							<div class="box flexCenter">
-								<img class="pic" class="" :src="rewardData&&rewardData[2]&&rewardData[2].mainImg&&rewardData[2].mainImg[0]?rewardData[2].mainImg[0].url:''">
-								<p class="text center flexCenter">
-									<em>{{rewardData&&rewardData[2]?rewardData[2].title:''}}</em>
-								</p>
-							</div>
-						</div>
-					</div> -->
 				</div>
 				<div class="pdb80">
 					<div class="w1660">
-						<!-- <div class="pubtit flexRowBetween">
-							<div></div>
-							<div class="flexCenter">
-								<img class="icon" src="images/about-icon2.png" >
-								<h1 class="title">招聘信息</h1>
-							</div>
-							<div><a class="flexEnd more" href="recruit.html">更多<img class="arrowR" src="images/home-icon2.png" ></a></div>
-						</div> -->
 						<div class="allH1 mb70">
-							<h1><span>招聘信息</span> Recruit</h1>
+							<h1><span>{{language=='_e'?'Recruitment':(language=='_f'?'招聘資訊':'招聘信息')}}</span> Recruit</h1>
 						</div>
 						<div class="jobPin w1660 height3">
 							<ul class="flex animated fadeInUp" v-show="height3+headerHeight+(height3*0.3)<offsetTopNow">
@@ -233,11 +172,11 @@
 								</li> -->
 								<li class="f5bj" v-for="(item,index) in recruitData" :key="index">
 									<div class="zp">
-										<img :src="item&&item.bannerImg&&item.bannerImg[0]&&item.bannerImg[0].url" >
+										<img :src="item&&item['bannerImg'+language]&&item['bannerImg'+language][0]&&item['bannerImg'+language][0].url" >
 										<div class="txt">
-											<div class="tit avoidOverflow">{{item.title}}</div>
-											<div class="con avoidOverflow3">{{item.description}}</div>
-											<a :href="'recruitDetail.html?id='+item.id" class="more hand">了解更多 ></a>
+											<div class="tit avoidOverflow">{{item['title'+language]}}</div>
+											<div class="con avoidOverflow3">{{item['description'+language]}}</div>
+											<a :href="'recruitDetail.html?id='+item.id" class="more hand">{{language=='_e'?'Learn More':(language=='_f'?'瞭解更多':'了解更多')}} ></a>
 										</div>
 									</div>
 								</li>
@@ -255,35 +194,39 @@
 						<div>
 							<ul>
 								<li>
-									<span class="ll">姓名</span>
+									<span class="ll">{{language=='_e'?'Name':(language=='_f'?'姓名':'姓名')}}</span>
 									<div class="rr">
-										<input type="text" name="" v-model="submitData.title" placeholder="请输入姓名" />
+										<input type="text" name="" v-model="submitData.title" :placeholder="language=='_e'?'Please enter your name':(language=='_f'?'請輸入姓名':'请输入姓名')" />
 									</div>
 								</li>
 								<li>
-									<span class="ll">电话</span>
+									<span class="ll">{{language=='_e'?'Telephone':(language=='_f'?'電話':'电话')}}</span>
 									<div class="rr">
-										<input type="text" name="" v-model="submitData.phone" placeholder="请输入联系电话" onkeyup="this.value=this.value.replace(/\D/g,'')" />
+										<input type="text" name="" v-model="submitData.phone" :placeholder="language=='_e'?'Please enter the contact number':(language=='_f'?'請輸入聯繫電話':'请输入联系电话')" onkeyup="this.value=this.value.replace(/\D/g,'')" />
 									</div>
 								</li>
 								<li>
-									<span class="ll">自我评价</span>
+									<span class="ll">{{language=='_e'?'Self evaluation':(language=='_f'?'自我評價':'自我评价')}}</span>
 									<div class="rr">
-										<textarea style="padding: 0;" type="text" name="" v-model="submitData.description" placeholder="请写出自身亮点，让HR第一眼关注你"></textarea>
+										<textarea style="padding: 0;" type="text" name="" v-model="submitData.description" :placeholder="language=='_e'?'Please write your own highlights, let HR pay attention to you first':(language=='_f'?'請寫出自身亮點，讓HR第一眼關注你':'请写出自身亮点，让HR第一眼关注你')"></textarea>
 						 			</div>
 								</li>
 								<li>
-									 <span class="ll">投递简历</span>
-									<div class="rr flex" style="flex-wrap: wrap;">
-										<input class="" type="file" @change="uploadFile" enctype="multipart/form-data">
+									 <span class="ll">{{language=='_e'?'Send your resume':(language=='_f'?'投遞簡歷':'投递简历')}}</span>
+									<div class="rr flex p-r" style="flex-wrap: wrap;">
+										<input style="opacity: 0;z-index: 20;position: relative;" type="file" @change="uploadFile" enctype="multipart/form-data">
 											<!-- <img src="images/about-icon8.jpg" > -->
 										</input>
+										<div style="position: absolute;">
+											<span style="padding: 0 5px;background-color: #f5f5f5;border: 1px solid #222222;border-radius: 3px;">{{language=='_e'?'Upload file':(language=='_f'?'上傳文件':'上传文件')}}</span>  
+											{{language=='_e'?'Please Select File':(language=='_f'?'請選擇檔案':'请选择文件')}}
+										</div>
 									</div>
 								</li>
 							</ul>
 						</div>
 						<div class="submitbtn pdt40">
-							<button class="moreBtn" type="button"  @click="!isSending?JustaddMessage():''">提交</button>
+							<button class="moreBtn" type="button"  @click="!isSending?JustaddMessage():''">{{language=='_e'?'Submit':(language=='_f'?'提交':'提交')}}</button>
 						</div>
 					</div>
 				</div>
@@ -330,8 +273,9 @@
 					height1:0,
 					height2:0,
 					height3:0,
-					height4:0
+					height4:0,
 					
+					language:''
 		        }
 		    },
 			
@@ -349,6 +293,12 @@
 				};
 				self.handleScroll();
 				window.addEventListener('scroll', this.handleScroll);
+				
+				self.initLanguage();
+				window.base.bus.$on('changelanguage',function(res){
+					self.language = res;
+					self.initLanguage()
+				});
 			},
 			
 			mounted(){
@@ -357,6 +307,16 @@
 			},
 			
 		    methods: {
+				
+				initLanguage(){
+					const self = this;
+					var lang = localStorage.getItem('language');
+					if(lang){
+						self.language = lang;
+					}else{
+						self.language = '';
+					}
+				},
 				
 				//元素到页面顶部高度
 				getHeight(){
@@ -545,7 +505,7 @@
 					postData.paginate = {
 						count: 0,
 						currentPage: 1,
-						pagesize: 2,
+						pagesize: 3,
 						is_page: true,
 					};
 					postData.searchItem = {

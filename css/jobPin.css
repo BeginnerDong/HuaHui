@@ -12,6 +12,7 @@
 
 
 /* 招聘信息 */
+.jp{min-height: 500px;}
 .jobPin li{width: 31%;border-radius: 20px;overflow: hidden;margin-right: 77px;transition: all 0.5s;}
 .jobPin li:nth-child(3n){margin: 0;}
 .jobPin li:hover{box-shadow: 0 0 10px 5px #e1e1e1;}

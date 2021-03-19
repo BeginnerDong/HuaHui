@@ -8,7 +8,7 @@
 		<meta name="description" content="">
 		<meta name="keywords" content="">
 		<title>联系我们</title>
-		<script type="text/javascript" src="./js/vue.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
 		<script type="text/javascript" src="js/jquery.min.js"></script>
 		<script type="text/javascript" src="js/base.js"></script>
 		<script type="text/javascript" src="js/include.js"></script>
@@ -77,7 +77,7 @@
 	</style>
 
 <body>
-	<div id="app">
+	<div id="app" :style="language=='_e'?'letter-spacing:1px!important':''">
 		<div class="headTop"></div>
 		
 		<include src="header.html"></include>
@@ -114,11 +114,11 @@
 					<div class="item clearfix whiteBj flexRowBetween">
 						<div class="pic LL"><img :src="mainData[index]&&mainData[index].bannerImg&&mainData[index].bannerImg[0]?mainData[index].bannerImg[0].url:''" ></div>
 						<div class="infor RR">
-							<p class="compay">{{mainData[index]?mainData[index].title:''}}</p>
-							<p class="adrs">{{mainData[index]?mainData[index].address:''}}</p>
-							<p class="phone">{{mainData[index]?mainData[index].phone:''}}</p>
-							<p class="zipCode">{{mainData[index]?mainData[index].postal_code:''}}</p>
-							<p class="fax">{{mainData[index]?mainData[index].fax:''}}</p>
+							<p class="compay">{{mainData[index]?mainData[index]['title'+langauge]:''}}</p>
+							<p class="adrs">{{mainData[index]?mainData[index]['address'+language]:''}}</p>
+							<p class="phone">{{mainData[index]?mainData[index]['phone'+language]:''}}</p>
+							<p class="zipCode">{{mainData[index]?mainData[index]['postal_code'+language]:''}}</p>
+							<p class="fax">{{mainData[index]?mainData[index]['fax'+language]:''}}</p>
 						</div>
 					</div>
 				</div>
@@ -131,33 +131,33 @@
 				<h1 class="title">在线留言</h1>
 			</div> -->
 			<div class="allH1 mb70">
-				<h1><span>在线留言</span> Message</h1>
+				<h1><span>{{language=='_e'?'Online':(language=='_f'?'線上留言':'在线留言')}}</span> Message</h1>
 			</div>
 			<div class="jianliMsg boxShaow w1200 LL">
 				<div>
 					<ul>
 						<li>
-							<span class="ll">姓名</span>
+							<span class="ll">{{language=='_e'?'Name':(language=='_f'?'姓名':'姓名')}}</span>
 							<div class="rr">
-								<input type="text" name="" v-model="submitData.title" placeholder="请输入姓名" />
+								<input type="text" name="" v-model="submitData.title" :placeholder="language=='_e'?'Please enter your name':(language=='_f'?'請輸入姓名':'请输入姓名')" />
 							</div>
 						</li>
 						<li>
-							<span class="ll">电话</span>
+							<span class="ll">{{language=='_e'?'Telephone':(language=='_f'?'電話':'电话')}}</span>
 							<div class="rr">
-								<input type="text" name="" v-model="submitData.phone" placeholder="请输入联系电话" onkeyup="this.value=this.value.replace(/\D/g,'')" />
+								<input type="text" name="" v-model="submitData.phone" :placeholder="language=='_e'?'Please enter the contact number':(language=='_f'?'請輸入聯繫電話':'请输入联系电话')" onkeyup="this.value=this.value.replace(/\D/g,'')" />
 							</div>
 						</li>
 						<li>
-							<span class="ll">内容</span>
+							<span class="ll">{{language=='_e'?'Content':(language=='_f'?'内容':'内容')}}</span>
 							<div class="rr">
-								<textarea style="padding: 0;" type="text" name="" v-model="submitData.description" placeholder="请输入内容"></textarea>
+								<textarea style="padding: 0;" type="text" name="" v-model="submitData.description" :placeholder="language=='_e'?'Please input the content':(language=='_f'?'請輸入内容':'请输入内容')"></textarea>
 							</div>
 						</li>
 					</ul>
 				</div>
 				<div class="submitbtn pdt40">
-					<button class="moreBtn" type="button" style="width: 164px;" @click="!isSending?JustaddMessage():''">提交</button>
+					<button class="moreBtn" type="button" style="width: 164px;" @click="!isSending?JustaddMessage():''">{{language=='_e'?'Submit':(language=='_f'?'提交':'提交')}}</button>
 				</div>
 			</div>
 		</div>
@@ -213,7 +213,9 @@
 						{imgUrl:'images/contact-usl-img7.jpg',title:'更多'}
 					],
 					bannerCurr:-1,
-					cityWidth:0
+					cityWidth:0,
+					
+					language:''
 		        }
 		    },
 			
@@ -223,9 +225,24 @@
 					self.chooseId = window.base.GetRequest().id
 				};
 		    	self.getMainData();
+				
+				self.initLanguage();
+				window.base.bus.$on('changelanguage',function(res){
+					self.language = res;
+					self.initLanguage()
+				});
 		    },
 		    
 		    methods: {
+				initLanguage(){
+					const self = this;
+					var lang = localStorage.getItem('language');
+					if(lang){
+						self.language = lang;
+					}else{
+						self.language = '';
+					}
+				},
 		    	changeBannerCurr(index){
 					const self = this;
 					self.bannerCurr = index;

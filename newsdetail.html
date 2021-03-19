@@ -8,7 +8,7 @@
 		<meta name="description" content="">
 		<meta name="keywords" content="">
 		<title>详情</title>
-		<script type="text/javascript" src="./js/vue.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
 		<script type="text/javascript" src="js/jquery.min.js"></script>
 		<script type="text/javascript" src="js/base.js"></script>
 		<script type="text/javascript" src="js/include.js"></script>
@@ -47,7 +47,7 @@
 	</style>
 
 <body>
-	<div id="app">
+	<div id="app" :style="language=='_e'?'letter-spacing:1px!important':''">
 		<div class="headTop"></div>
 		
 		<include src="header.html"></include>
@@ -57,12 +57,12 @@
 			<span class="tt flexCenter" 
 			:class="currId==-1?'on':''" @click="changeCurr(-1)">
 				<img class="icon" src="images/case-icon11.png"/>
-				<em>全部</em>
+				<em>{{language=='_e'?'whole':(language=='_f'?'全部':'全部')}}</em>
 			</span>
 			<span class="tt flexCenter" v-for="item in labelData"
 			:class="currId==item.id?'on':''" @click="changeCurr(item.id)">
 				<img class="icon" :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''"/>
-				<em>{{item.title}}</em>
+				<em>{{item['title'+language]}}</em>
 			</span>
 		</div>
 		
@@ -71,24 +71,24 @@
 			<span class="tt flexCenter"
 			:class="currId==-1?'on':''" @click="changeCurr(-1)">
 				<img class="icon" src="images/case-icon11.png"/>
-				<em>全部</em>
+				<em>{{language=='_e'?'whole':(language=='_f'?'全部':'全部')}}</em>
 			</span>
 			<span class="tt flexCenter" v-for="item in labelData"
 			:class="currId==item.id?'on':''" @click="changeCurr(item.id)">
 				<img class="icon" :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''"/>
-				<em>{{item.title}}</em>
+				<em>{{item['title'+language]}}</em>
 			</span>
 		</div>
 		
 		<div class="detailePag pdb80" :class="currId!=5?'dynamic':''">
 			<div class="w1200">
 				<div class="topTit">
-					<h1 class="title center ftn">{{mainData.title}}</h1>	
-					<p class="tex2 fs14 color9 center">华汇音响 {{mainData.create_time}}</p>
+					<h1 class="title center ftn">{{mainData['title'+language]}}</h1>	
+					<p class="tex2 fs14 color9 center">{{language=='_e'?'Huahui Audio':(language=='_f'?'華匯音響':'华汇音响')}} {{mainData.create_time}}</p>
 				</div>
 				<div class="inforCont pdb80">
 					<div class="content ql-editor " style="clear: both;">
-						<p class="p1 " v-html="mainData.content"></p>
+						<p class="p1 " v-html="mainData['content'+language]"></p>
 					</div>
 				</div>
 			</div>
@@ -111,7 +111,9 @@
 					wx_show:2,
 					mainData: {},
 					labelData: [],
-					menu_id:''
+					menu_id:'',
+					
+					language:''
 		        }
 		    },
 			
@@ -122,17 +124,33 @@
 				}; */
 				self.getMainData();
 				self.getLabelData();
+				
+				self.initLanguage();
+				window.base.bus.$on('changelanguage',function(res){
+					self.language = res;
+					self.initLanguage()
+				});
 			},
 			
 			
 		    methods: {
 				
+				initLanguage(){
+					const self = this;
+					var lang = localStorage.getItem('language');
+					if(lang){
+						self.language = lang;
+					}else{
+						self.language = '';
+					}
+				},
+				
 				changeCurr(id){
 					const self = this;
 					if(id>0){
-						window.location.href = 'anliCenter.html?menu_id='+id
+						window.location.href = 'classicCases.html?menu_id='+id
 					}else{
-						window.location.href = 'anliCenter.html'
+						window.location.href = 'classicCases.html'
 					}
 				},
 				

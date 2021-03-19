@@ -8,7 +8,7 @@
 		<meta name="description" content="">
 		<meta name="keywords" content="">
 		<title>招聘</title>
-		<script type="text/javascript" src="./js/vue.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
 		<script type="text/javascript" src="js/jquery.min.js"></script>
 		<script type="text/javascript" src="js/base.js"></script>
 		<script type="text/javascript" src="js/include.js"></script>
@@ -17,12 +17,12 @@
 	</head>
 
 <body>
-	<div id="app">
+	<div id="app" :style="language=='_e'?'letter-spacing:1px!important':''">
 		<div class="headTop"></div>
 		
 		<include src="header.html"></include>
 		
-		<div class="pdb80">
+		<div class="pdb80 jp">
 			<!-- <div class="jobPin">
 				<ul class="flexRowBetween">
 					<li v-for="(item,index) in mainData" :key="index">
@@ -43,9 +43,9 @@
 						<div class="zp">
 							<img :src="item&&item.bannerImg&&item.bannerImg[0]&&item.bannerImg[0].url" >
 							<div class="txt">
-								<div class="tit avoidOverflow4">{{item.title}}</div>
-								<div class="con">{{item.description}}</div>
-								<a :href="'recruitDetail.html?id='+item.id" class="more hand">了解更多 ></a>
+								<div class="tit avoidOverflow">{{item['title'+language]}}</div>
+								<div class="con">{{item['description'+language]}}</div>
+								<a :href="'recruitDetail.html?id='+item.id" class="more hand">{{language=='_e'?'Learn More':(language=='_f'?'瞭解更多':'了解更多')}} ></a>
 							</div>
 						</div>
 					</li>
@@ -87,16 +87,32 @@
 					pageArray: [],
 					
 					allPages: 0,
+					language:''
 		        }
 		    },
 			
 			created () {
 			    const self = this;
 				self.getMainData();
+				
+				self.initLanguage();
+				window.base.bus.$on('changelanguage',function(res){
+					self.language = res;
+					self.initLanguage()
+				});
 			},
 			
 		    methods: {
 				
+				initLanguage(){
+					const self = this;
+					var lang = localStorage.getItem('language');
+					if(lang){
+						self.language = lang;
+					}else{
+						self.language = '';
+					}
+				},
 				
 				getMainData() {
 					const self = this;

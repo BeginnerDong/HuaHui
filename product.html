@@ -33,7 +33,7 @@
 	</style>
 
 <body>
-	<div id="app">
+	<div id="app" :style="language=='_e'?'letter-spacing:1px!important':''">
 		<div class="headTop"></div>
 		
 		<include src="header.html"></include>
@@ -52,9 +52,9 @@
 				<ul class="flex" :class="behavior==1?'Two':''">
 					<li v-for="(item,index) in mainData" :key="index">
 						<a class="flexColumn" :href="'productDeail.html?id='+item.id+'&currId='+currId">
-							<h1 class="tit">{{item.title}}</h1>
+							<h1 class="tit">{{item['title'+language]}}</h1>
 							<div class="pic">
-								<img :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''">
+								<img :src="item['mainImg'+language]&&item['mainImg'+language][0]?item['mainImg'+language][0].url:''">
 							</div>
 						</a>
 					</li>
@@ -99,7 +99,8 @@
 						pagesize: 6,
 						is_page: true,
 					},
-					idArray:[]
+					idArray:[],
+					language:''
 		        }
 		    },
 			
@@ -130,9 +131,25 @@
 					self.changeCurr(self.currId,window.base.GetRequest().behavior)
 					self.getLabelData();
 				}
+				
+				self.initLanguage();
+				window.base.bus.$on('changelanguage',function(res){
+					self.language = res;
+					self.initLanguage()
+				});
 			},
 			
 		    methods: {
+				
+				initLanguage(){
+					const self = this;
+					var lang = localStorage.getItem('language');
+					if(lang){
+						self.language = lang;
+					}else{
+						self.language = '';
+					}
+				},
 				
 				changeCurr(id,behavior){
 					const self = this;

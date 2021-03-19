@@ -8,7 +8,7 @@
 		<meta name="description" content="">
 		<meta name="keywords" content="">
 		<title>案例中心</title>
-		<script type="text/javascript" src="./js/vue.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
 		<script type="text/javascript" src="js/jquery.min.js"></script>
 		<script type="text/javascript" src="js/base.js"></script>
 		<script type="text/javascript" src="js/include.js"></script>
@@ -17,7 +17,10 @@
 		<link type="text/css" rel="stylesheet" href="css/orderNav.css">
 		<link type="text/css" rel="stylesheet" href="css/animate.css">
 	</head>
-	<style>
+	<style type="text/css">
+		[v-cloak] {
+			display:none;
+		}
 		.fxBj{position: absolute;top:0;right: 0;bottom: 0;left: 0;background: rgba(0,0,0,0.3);}
 		/* .orderNav{justify-content: flex-start;} */
 		.ind-dynamic{min-height:200px;}
@@ -34,6 +37,10 @@
 		.news2{display: none;}
 		
 		.anliBox{min-height:600px;position: relative;padding-bottom: 100px!important;}
+		
+		.orderNav .tt{padding: 0 10px;justify-content: initial;position: relative;}
+		.orderNav .tt:hover .titleH{display: block;}
+		.titleH{position: absolute;background-color: #fff;box-shadow: 0 0 5px 5px rgba(0,0,0,0.03);padding: 10px;color: #000000;line-height: 1.5;border-radius: 3px;left: 50%;display: none;min-width: 180px;}
 		
 		
 		@media only screen and (max-width: 1024px){
@@ -101,7 +108,7 @@
 	</style>
 
 <body>
-	<div id="app">
+	<div id="app" :style="language=='_e'?'letter-spacing:1px!important':''">
 		<div class="headTop"></div>
 		
 		<include src="header.html"></include>
@@ -116,30 +123,31 @@
 			</div> -->
 			
 			<!-- 侧边导航显示 -->
-			<div class="orderNav FixOrderNav center orderNavLeft" id="orderNav">
+			<div class="orderNav FixOrderNav center orderNavLeft" id="orderNav" :style="language=='_e'?'letter-spacing:1px!important':''">
 				<span class="tt flexCenter" 
 				:class="currId==-1?'on':''" @click="changeCurr(-1)">
 					<img class="icon" src="images/case-icon.png"/>
-					<em>全部</em>
+					<em>{{language=='_e'?'whole':(language=='_f'?'全部':'全部')}}</em>
 				</span>
 				<span class="tt flexCenter" v-for="item in labelData"
 				:class="currId==item.id?'on':''" @click="changeCurr(item.id)">
 					<img class="icon" :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''"/>
-					<em>{{item.title}}</em>
+					<em class="avoidOverflow">{{item['title'+language]}}</em>
+					<div class="titleH">{{item['title'+language]}}</div>
 				</span>
 			</div>
 			
 			<!-- 手机端顶部导航显示 -->
-			<div class="orderNav FixOrderNav center orderNavTop" id="orderNav">
+			<div class="orderNav FixOrderNav center orderNavTop" id="orderNav" :style="language=='_e'?'letter-spacing:1px!important':''">
 				<span class="tt flexCenter"
 				:class="currId==-1?'on':''" @click="changeCurr(-1)">
 					<img class="icon" src="images/case-icon.png"/>
-					<em>全部</em>
+					<em>{{language=='_e'?'whole':(language=='_f'?'全部':'全部')}}</em>
 				</span>
 				<span class="tt flexCenter" v-for="item in labelData"
 				:class="currId==item.id?'on':''" @click="changeCurr(item.id)">
 					<img class="icon" :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''"/>
-					<em>{{item.title}}</em>
+					<em class="avoidOverflow">{{item['title'+language]}}</em>
 				</span>
 			</div>
 		
@@ -180,26 +188,26 @@
 				
 				<div class="newsItem flexRowBetween" v-if="index%2==0&&(index*cardHeight+headerHeight+(cardHeight*0.3)<offsetTopNow)" >
 					<div class="L animated fadeInLeft">
-						<img :src="item.bannerImg&&item.bannerImg[0]?item.bannerImg[0].url:''"  class="Limg">
+						<img :src="item['bannerImg'+language]&&item['bannerImg'+language][0]?item['bannerImg'+language][0].url:''"  class="Limg">
 					</div>
 					<div class="R animated fadeInRight">
 						<a @click="goDetail(item)">
-							<h1 class="avoidOverflow">{{item.title}}</h1>
+							<h1 class="avoidOverflow">{{item['title'+language]}}</h1>
 						</a>
-						<p class="avoidOverflow5">{{item.description}}</p>
+						<p class="avoidOverflow5">{{item['description'+language]}}</p>
 						<a class="moreBtn"  @click="goDetail(item)">READ MORE ></a>
 					</div>
 				</div>
 				<div class="newsItem flexRowBetween" v-if="index%2!=0&&(index*cardHeight+headerHeight+(cardHeight*0.3)<offsetTopNow)" >
 					<div class="R animated fadeInLeft">
 						<a @click="goDetail(item)">
-							<h1 class="avoidOverflow">{{item.title}}</h1>
+							<h1 class="avoidOverflow">{{item['title'+language]}}</h1>
 						</a>
-						<p class="avoidOverflow5">{{item.description}}</p>
+						<p class="avoidOverflow5">{{item['description'+language]}}</p>
 						<a class="moreBtn" @click="goDetail(item)">READ MORE ></a>
 					</div>
 					<div class="L animated fadeInRight">
-						<img :src="item.bannerImg&&item.bannerImg[0]?item.bannerImg[0].url:''"  class="Limg">
+						<img :src="item['bannerImg'+language]&&item['bannerImg'+language][0]?item['bannerImg'+language][0].url:''"  class="Limg">
 					</div>
 				</div>
 			</div>
@@ -210,13 +218,13 @@
 				
 				<div class="newsItem flexRowBetween" >
 					<div class="L ">
-						<img :src="item.bannerImg&&item.bannerImg[0]?item.bannerImg[0].url:''" class="Limg">
+						<img :src="item['bannerImg'+language]&&item['bannerImg'+language][0]?item.bannerImg[0].url:''" class="Limg">
 					</div>
 					<div class="R ">
 						<a @click="goDetail(item)">
-							<h1>{{item.title}}</h1>
+							<h1>{{item['title'+language]}}</h1>
 						</a>
-						<p class="avoidOverflow5">{{item.description}}</p>
+						<p class="avoidOverflow5">{{item['description'+language]}}</p>
 						<a class="moreBtn"  @click="goDetail(item)">READ MORE ></a>
 					</div>
 				</div>
@@ -271,7 +279,9 @@
 					isCollapse:false,
 					cardHeight:500,
 					headerHeight:123,
-					offsetTopNow:0
+					offsetTopNow:0,
+					
+					language:''
 		        }
 		    },
 			
@@ -293,6 +303,12 @@
 				window.addEventListener('scroll', this.handleScroll);
 				
 				self.getLabelData();
+				
+				self.initLanguage();
+				window.base.bus.$on('changelanguage',function(res){
+					self.language = res;
+					self.initLanguage()
+				});
 			},
 			
 			mounted () {
@@ -300,6 +316,16 @@
 			},
 			
 		    methods: {
+				
+				initLanguage(){
+					const self = this;
+					var lang = localStorage.getItem('language');
+					if(lang){
+						self.language = lang;
+					}else{
+						self.language = '';
+					}
+				},
 				
 				goDetail(item){
 					const self = this;

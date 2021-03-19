@@ -8,7 +8,7 @@
 		<meta name="description" content="">
 		<meta name="keywords" content="">
 		<title>新闻中心</title>
-		<script type="text/javascript" src="./js/vue.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
 		<script type="text/javascript" src="js/jquery.min.js"></script>
 		<script type="text/javascript" src="js/base.js"></script>
 		<script type="text/javascript" src="js/include.js"></script>
@@ -48,7 +48,7 @@
 	</style>
 
 <body>
-	<div id="app">
+	<div id="app" :style="language=='_e'?'letter-spacing:1px!important':''">
 		<div class="headTop"></div>
 		
 		<include src="header.html"></include>
@@ -71,26 +71,26 @@
 					
 					<div class="newsItem flexRowBetween" v-show="index%2==0&&(index*cardHeight+headerHeight+(cardHeight*0.3)<offsetTopNow)">
 						<div class="L animated fadeInLeft">
-							<img :src="item.bannerImg&&item.bannerImg[0]?item.bannerImg[0].url:''" class="Limg">
+							<img :src="item['bannerImg'+language]&&item['bannerImg'+language][0]?item['bannerImg'+language][0].url:''" class="Limg">
 						</div>
 						<div class="R animated fadeInRight">
 							<a :href="'newsdetail.html?id='+item.id+'&type=case'">
-								<h1 class="avoidOverflow">{{item.title}}</h1>
+								<h1 class="avoidOverflow">{{item['title'+language]}}</h1>
 							</a>
-							<p class="avoidOverflow5">{{item.description}}</p>
+							<p class="avoidOverflow5">{{item['description'+language]}}</p>
 							<a class="moreBtn"  :href="'newsdetail.html?id='+item.id+'&type=case'">READ MORE ></a>
 						</div>
 					</div>
 					<div class="newsItem flexRowBetween" v-show="index%2!=0&&(index*cardHeight+headerHeight+(cardHeight*0.3)<offsetTopNow)">
 						<div class="R animated fadeInLeft">
 							<a :href="'newsdetail.html?id='+item.id+'&type=case'">
-								<h1 class="avoidOverflow">{{item.title}}</h1>
+								<h1 class="avoidOverflow">{{item['title'+language]}}</h1>
 							</a>
-							<p class="avoidOverflow5">{{item.description}}</p>
+							<p class="avoidOverflow5">{{item['description'+language]}}</p>
 							<a class="moreBtn"  :href="'newsdetail.html?id='+item.id+'&type=case'">READ MORE ></a>
 						</div>
 						<div class="L animated fadeInRight">
-							<img :src="item.bannerImg&&item.bannerImg[0]?item.bannerImg[0].url:''" class="Limg">
+							<img :src="item['bannerImg'+language]&&item['bannerImg'+language][0]?item['bannerImg'+language][0].url:''" class="Limg">
 						</div>
 					</div>
 				</div>
@@ -99,13 +99,13 @@
 					
 					<div class="newsItem flexRowBetween" v-show="(index*cardHeight+headerHeight+(cardHeight*0.3)<offsetTopNow)">
 						<div class="L animated fadeInLeft">
-							<img :src="item.bannerImg&&item.bannerImg[0]?item.bannerImg[0].url:''" class="Limg">
+							<img :src="item['bannerImg'+language]&&item['bannerImg'+language][0]?item['bannerImg'+language][0].url:''" class="Limg">
 						</div>
 						<div class="R animated fadeInRight">
 							<a :href="'newsdetail.html?id='+item.id+'&type=case'">
-								<h1>{{item.title}}</h1>
+								<h1>{{item['title'+language]}}</h1>
 							</a>
-							<p class="avoidOverflow5">{{item.description}}</p>
+							<p class="avoidOverflow5">{{item['description'+language]}}</p>
 							<a class="moreBtn"  :href="'newsdetail.html?id='+item.id+'&type=case'">READ MORE ></a>
 						</div>
 					</div>
@@ -186,7 +186,9 @@
 					},
 					cardHeight:500,
 					headerHeight:123,
-					offsetTopNow:0
+					offsetTopNow:0,
+					
+					language:''
 		        }
 		    },
 			
@@ -201,9 +203,25 @@
 				self.handleScroll();
 				window.addEventListener('scroll', this.handleScroll);
 				self.getMainData();
+				
+				self.initLanguage();
+				window.base.bus.$on('changelanguage',function(res){
+					self.language = res;
+					self.initLanguage()
+				});
 			},
 			
 		    methods: {
+				
+				initLanguage(){
+					const self = this;
+					var lang = localStorage.getItem('language');
+					if(lang){
+						self.language = lang;
+					}else{
+						self.language = '';
+					}
+				},
 				
 				test:function(width){
 					const self = this;

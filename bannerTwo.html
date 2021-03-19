@@ -4,9 +4,9 @@
 		<div id="list" :style="'left:'+ leftOffset + 'px;width:'+totalWidth+'px'" @mouseenter.stop="stop()" @mouseleave.stop="conti()" >
 			<div class="box" :style="'width:'+widthStandard+'px'" v-for="(item,index) in mainData" :key="index" >
 				<div class="boxItem">
-					<img  class="pic":src="item&&item.mainImg&&item.mainImg[0]&&item.mainImg[0].url"/>
+					<img  class="pic":src="item&&item['mainImg'+language]&&item['mainImg'+language][0]&&item['mainImg'+language][0].url"/>
 					<p class="text center flexCenter">
-						<em>{{item.title}}</em>
+						<em>{{item['title'+language]}}</em>
 					</p>
 				</div>
 			</div>
@@ -86,14 +86,16 @@
 				extraNum:2,
 				startCriticalIndex:0,//左滑触发移位的index
 				endCriticalIndex:2,//向右滑发生亿为的index的递减量相当于总体的index-这个值
-				screenWidth:0
+				screenWidth:0,
+				
+				language:''
 	        }
 	    },
 	    created:function () {
 	        var self = this;
 			self.screenWidth = document.body.clientWidth;
 			self.changeWidth();
-			console.log('self.widthStandard',self.widthStandard)
+			// console.log('self.widthStandard',self.widthStandard)
 			
 			// console.log('屏幕',self.widthStandard)
 			self.totalWidth = self.widthStandard*self.mainData.length;
@@ -122,6 +124,12 @@
 		    }); */
 			self.getMainData()
 			
+			self.initLanguage1();
+			window.base.bus.$on('changelanguage',function(res){
+				console.log('res',res)
+				self.language = res;
+				self.initLanguage1()
+			});
 	    },
 		
 		mounted() {
@@ -131,7 +139,7 @@
 					self.screenWidth = document.body.clientWidth;
 					self.changeWidth();
 				}
-				console.log(self.screenWidth)
+				// console.log(self.screenWidth)
 			};
 		},
 		
@@ -148,6 +156,16 @@
 			self.bannerTimer = null;
 		},
 	    methods: {
+			
+			initLanguage1(){
+				const self = this;
+				var lang = localStorage.getItem('language');
+				if(lang){
+					self.language = lang;
+				}else{
+					self.language = '';
+				}
+			},
 			
 			changeWidth(){
 				const self = this;
@@ -183,9 +201,9 @@
 			
 			conti(){
 				const self = this;
-				console.log('contibefore',self.clock);
+				// console.log('contibefore',self.clock);
 				if(self.clock&&self.isAutoPlay){
-					console.log('continowIndex',self.nowIndex);
+					// console.log('continowIndex',self.nowIndex);
 					self.pause = false;
 					self.clock = false;
 					self.animate()
@@ -205,7 +223,7 @@
 				if(self.nowCents>=self.cents){
 					self.nowCents = 0;
 				};
-				console.log('self.toIndex',self.toIndex)
+				// console.log('self.toIndex',self.toIndex)
 				//self.pause = false;
 				var nowLeftOffset = -self.widthStandard*self.nowIndex;
 				var targetLeft = -self.widthStandard*self.toIndex;
@@ -273,7 +291,7 @@
 					self.clickClock = true;
 				};
 				self.toIndex = self.nowIndex +1;
-				console.log('self.toIndexnext',self.toIndex)
+				// console.log('self.toIndexnext',self.toIndex)
 				self.animate();
 				
 			},
@@ -289,7 +307,7 @@
 					self.clickClock = true;
 				};
 				self.toIndex = self.nowIndex - 1;
-				console.log('self.toIndexself.toIndex',self.toIndex)
+				// console.log('self.toIndexself.toIndex',self.toIndex)
 				self.animate();
 			},
 			

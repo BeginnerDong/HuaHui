@@ -1,4 +1,4 @@
-<div class="footer" id="footer_app">
+<div class="footer" id="footer_app" :style="language=='_e'?'letter-spacing:1px!important':''">
 	<div class="cont w1200 flexRowBetween">
 		<div class="ewm1">
 			<div v-for="(item,index) in mData" :key="index" v-show="index<=1">
@@ -21,21 +21,21 @@
 			<div class="footNav">
 				<ul class="flexRowBetween">
 					<li>
-						<h1>关于华汇</h1>
-						<p><a href="aboutUs.html">公司简介</a></p>
-						<p><a href="recruit.html">招聘信息</a></p>
-						<p><a href="lease.html">租赁公司</a></p>
+						<h1>{{language=='_e'?'About Huahui':(language=='_f'?'關於華匯':'关于华汇')}}</h1>
+						<p><a href="aboutUs.html">{{language=='_e'?'Company profile':(language=='_f'?'公司簡介':'公司简介')}}</a></p>
+						<p><a href="recruit.html">{{language=='_e'?'Recruitment':(language=='_f'?'招聘資訊':'招聘信息')}}</a></p>
+						<p><a href="lease.html">{{language=='_e'?'Leasing Company':(language=='_f'?'租賃公司':'租赁公司')}}</a></p>
 						<!-- <p><a href="#">人才储备</a></p>
 						<p><a href="aboutUs.html">公司获奖</a></p> -->
 					</li>
 					<li>
-						<h1>合作伙伴</h1>
+						<h1>{{language=='_e'?'Cooperative Partner':(language=='_f'?'合作夥伴':'合作伙伴')}}</h1>
 						<div class="liCon">
-							<p><a href="https://www.l-acoustics.com/">L-Acoustics</a></p>
-							<p><a href="http://www.digico.biz/">DiGiCo</a></p>
-							<p><a href="https://calrec.com/">Calrec</a></p>
-							<p><a href="http://blacktrax.cast-soft.com/">BlackTrax</a></p>
-							<p><a href="https://cast-soft.com/wysiwyg-lighting-design/">Wysiwyg</a></p>
+							<p><a href="https://www.l-acoustics.com/" target="_blank">L-Acoustics</a></p>
+							<p><a href="https://www.digico.biz/" target="_blank">DiGiCo</a></p>
+							<p><a href="https://calrec.com/" target="_blank">Calrec</a></p>
+							<p><a href="https://blacktrax.cast-soft.com/" target="_blank">BlackTrax</a></p>
+							<p><a href="https://cast-soft.com/wysiwyg-lighting-design/" target="_blank">Wysiwyg</a></p>
 						</div>
 					</li>
 					<!-- <li>
@@ -77,7 +77,7 @@
 		</a> -->
 	</div>
 	<div class="copy">
-		CopyRight ©2021 华汇音响顾问有限公司 版权所有 &nbsp;&nbsp;&nbsp;&nbsp;<a style="color:#777" target='_blank' href='http://beian.miit.gov.cn/'>粤ICP备2021010871号-1</a>
+		CopyRight ©2021 {{language=='_e'?'Huahui Sound Consultant Co., Ltd Copyright':(language=='_f'?'華匯音響顧問有限公司 版權所有':'华汇音响顾问有限公司 版权所有')}} &nbsp;&nbsp;&nbsp;&nbsp;<a style="color:#777" target='_blank' href='http://beian.miit.gov.cn/'>粤ICP备2021010871号-1</a> <span>&nbsp;&nbsp;{{language=='_e'?'Technical Support':(language=='_f'?'技術支援':'技术支持')}}：<a href="http://www.solelytech.com/" target="_blank" style="color: #666;">{{language=='_e'?'SolelyTech':(language=='_f'?'純粹科技':'纯粹科技')}}</a></span>
 	</div>
 </div>
 
@@ -116,13 +116,21 @@
 				pcData:[],
 				mData:[],
 				show:false,
-				ewmUrl:''
+				ewmUrl:'',
+				
+				language:''
 			}
 		},
 		created: function() {
 			const self = this;
 			self.getPcData();
 			self.getMData();
+			
+			self.initLanguage();
+			window.base.bus.$on('changelanguage',function(res){
+				self.language = res;
+				self.initLanguage()
+			});
 		},
 
 
@@ -134,6 +142,16 @@
 			//window.addEventListener('scroll', this.handleScroll);
 		},
 		methods: {
+			
+			initLanguage(){
+				const self = this;
+				var lang = localStorage.getItem('language');
+				if(lang){
+					self.language = lang;
+				}else{
+					self.language = '';
+				}
+			},
 
 			showEwm(item){
 				const self = this;
@@ -260,7 +278,7 @@
 	}
 	
 	.footer .footNav li{
-		width: 30%;
+		width: 40%;
 	}
 
 	.footer .footNav li h1 {
@@ -291,7 +309,7 @@
 		margin: 40px auto
 	}
 	
-	.footer .footNav li:nth-child(2){width: 70%;}
+	.footer .footNav li:nth-child(2){width: 60%;}
 	.footer .liCon{display: flex;flex-wrap: wrap;width: 100%;}
 	.footer .liCon p{width: 50%;}
 	
@@ -307,6 +325,7 @@
 	
 	@media only screen and (max-width: 1217px){
 		.w1200{width: 100%!important;}
+		.footer{padding-left: 50px;padding-right: 50px;}
 	}
 
 	@media only screen and (max-width: 1024px) {
@@ -385,6 +404,9 @@
 		.footer .Rcont{width: 70%;margin-top: 20px;flex-wrap: wrap;}
 		.footer .footNav{width: 100%;}
 		.footer .R-logo{width: 100%;}
+		
+		.footer .footNav li{margin-right: 0;}
+		.footer .footNav li:nth-child(2){width: 100%;}
 	}
 
 	@media only screen and (max-width: 500px) {

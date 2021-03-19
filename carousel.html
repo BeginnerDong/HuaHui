@@ -84,8 +84,8 @@
 				originOffset:50,
 				offSetStandard:0,
 				behavior:'',
-				id:0
-				
+				id:0,
+				language:''
 	        }
 	    },
 	    created:function () {
@@ -119,6 +119,13 @@
 		    }); */
 			self.getMainData()
 			
+			self.initLanguage2();
+			window.base.bus.$on('changelanguage',function(res){
+				console.log('res',res)
+				self.language = res;
+				self.initLanguage2();
+				self.getMainData()
+			});
 	    },
 		
 		
@@ -128,6 +135,16 @@
 			self.bannerTimer = null;
 		},
 	    methods: {
+			
+			initLanguage2(){
+				const self = this;
+				var lang = localStorage.getItem('language');
+				if(lang){
+					self.language = lang;
+				}else{
+					self.language = '';
+				}
+			},
 			
 			test(e){
 				console.log(e)
@@ -209,11 +226,11 @@
 						
 						
 						self.clock = false;
-						self.title = self.mainData[self.nowIndex].title;
-						self.content = self.mainData[self.nowIndex].description;
+						self.title = self.mainData[self.nowIndex]['title'+self.language];
+						self.content = self.mainData[self.nowIndex]['description'+self.language];
 						self.behavior = self.mainData[self.nowIndex].behavior;
 						self.id = self.mainData[self.nowIndex].id;
-						// console.log('self.autoPlayInterval',self.autoPlayInterval)
+						console.log('self.autoPlayInterval',self.autoPlayInterval)
 						if(self.isAutoPlay){
 							if(self.timeOutEvent){
 								clearTimeout(self.timeOutEvent);
@@ -236,7 +253,7 @@
 				};
 				self.toIndex = self.nowIndex +1;
 				self.animate();
-				console.log('next',self.nowIndex,self.toIndex,)
+				// console.log('next',self.nowIndex,self.toIndex,)
 			},
 			prev:function(){
 				const self = this;

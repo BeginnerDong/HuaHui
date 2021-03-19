@@ -39,7 +39,7 @@
 	</head>
 
 	<body>
-		<div id="app">
+		<div id="app" :style="language=='_e'?'letter-spacing:1px!important':''">
 			<div class="headTop"></div>
 			
 			<include src="header.html"></include>
@@ -51,7 +51,7 @@
 							<span class="arrow arrow-left"></span>
 							<span class="arrow arrow-right"></span>
 							<div class="swiper-wrapper">
-								<div class="swiper-slide flexCenter" v-for="item in mainData.mainImg">
+								<div class="swiper-slide flexCenter" v-for="item in mainData['mainImg'+language]">
 									<img :src="item.url" alt="">
 								</div>
 								<!-- <div class="swiper-slide flexCenter">
@@ -68,14 +68,14 @@
 					</div>
 				</div>
 				<div class="rr">
-					<h1 class="ftn title">{{mainData.title}}</h1>
-					<p class="text2 fs16">{{mainData.small_title}}</p>
+					<h1 class="ftn title">{{mainData['title'+language]}}</h1>
+					<p class="text2 fs16">{{mainData['small_title'+language]}}</p>
 					<div class="preview">
 						<span class="arrow arrow-left"></span>
 						<span class="arrow arrow-right"></span>
 						<div class="swiper-container">
 							<div class="swiper-wrapper">
-								<div class="swiper-slide" v-for="item in mainData.mainImg">
+								<div class="swiper-slide" v-for="item in mainData['mainImg'+language]">
 									<img :src="item.url" alt="">
 								</div>
 								<!-- <div class="swiper-slide">
@@ -96,12 +96,12 @@
 
 			<div class="w1200">
 				<div class="orderNav flexCenter">
-					<span class="tt flexCenter hand" :class="navCurr==1?'on':''" @click="changeNavCurr('1')">参数规格</span>
-					<span class="tt flexCenter hand" :class="navCurr==2?'on':''" @click="changeNavCurr('2')" v-if="mainData.description!=''">视频</span>
+					<span class="tt flexCenter hand" :class="navCurr==1?'on':''" @click="changeNavCurr('1')">{{language=='_e'?'Parameter specification':(language=='_f'?'參數規格':'参数规格')}}</span>
+					<span class="tt flexCenter hand" :class="navCurr==2?'on':''" @click="changeNavCurr('2')" v-if="mainData.description!=''">{{language=='_e'?'Video':(language=='_f'?'視頻':'视频')}}</span>
 				</div>
 				<div class="xqCont">
 					<div class="xqPic" v-show="navCurr==1">
-						<img v-for="item in mainData.bannerImg" :src="item.url">
+						<img v-for="item in mainData['bannerImg'+language]" :src="item.url">
 					</div>
 
 					<div class="videoCont" v-show="navCurr==2">
@@ -122,7 +122,7 @@
 					</div>
 				</div>
 				<div class="anliSetNav" @click="toLoad">
-					<a class="btn">下载</a>
+					<a class="btn">{{language=='_e'?'Download':(language=='_f'?'下載':'下载')}}</a>
 				</div>
 			</div>
 
@@ -145,7 +145,8 @@
 					wx_show: 2,
 					mainData: {},
 					labelData: [],
-					navCurr: 1
+					navCurr: 1,
+					language:''
 				}
 			},
 
@@ -160,9 +161,25 @@
 				// });
 				
 				self.getMainData();
+				
+				self.initLanguage();
+				window.base.bus.$on('changelanguage',function(res){
+					self.language = res;
+					self.initLanguage()
+				});
 			},
 
 			methods: {
+				
+				initLanguage(){
+					const self = this;
+					var lang = localStorage.getItem('language');
+					if(lang){
+						self.language = lang;
+					}else{
+						self.language = '';
+					}
+				},
 
 				toLoad() {
 					const self = this;

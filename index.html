@@ -7,9 +7,10 @@
 		<meta name="renderer" content="webkit">
 		<meta name="description" content="顾问有限公司创建于1997年,是一家专业从事音频产品代理、设计、销售、工程、培训及维保的集团化公司,是业界众多高端音频产品大中华区唯一总代理商。 华汇...">
 		<meta name="keywords" content="">
-		<title>广州华汇音响顾问有限公司</title>
+		<title>Rightway Audio Consultants Ltd</title>
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-		<script type="text/javascript" src="./js/vue.js"></script>
+		<!-- <script type="text/javascript" src="./js/vue.js"></script> -->
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
 		<script type="text/javascript" src="js/jquery.min.js"></script>
 		<script type="text/javascript" src="js/base.js"></script>
 		<script type="text/javascript" src="js/include.js"></script>
@@ -21,9 +22,14 @@
 		<link type="text/css" rel="stylesheet" href="css/ind-brand.css">
 		<link type="text/css" rel="stylesheet" href="css/animate.css">
 	</head>
+	<style type="text/css">
+		[v-cloak] {
+			display:none;
+		}
+	</style>
 
 <body>
-	<div id="app">
+	<div id="app" :style="language=='_e'?'letter-spacing:1px!important':''">
 		<div class="headTop"></div>
 		
 		<include src="header.html"></include>
@@ -33,7 +39,7 @@
 		<!-- 公司简介 -->
 		<div class="aboutUs">
 			<div class="allH1 aboutH1">
-				<h1><span>公司简介</span>About Us</h1>
+				<h1><span>{{language=='_e'?'Company profile':(language=='_f'?'公司簡介':'公司简介')}}</span>About Us</h1>
 			</div>
 			<div class="w1660 flexRowBetween jj">
 				<div class="aboutR aboutR2 animated" :style="video_show?'margin-left:-2000px':'margin-left:0'">
@@ -42,15 +48,15 @@
 						当前浏览器不支持 video直接播放
 					</video>
 					<div class="poster" v-show="poster_show" @click="playM()">
-						<img :src="productData&&productData.mainImg&&productData.mainImg[0]&&productData.mainImg[0].url" class="posterImg" >
+						<img :src="productData&&productData['mainImg'+language]&&productData['mainImg'+language][0]&&productData['mainImg'+language][0].url" class="posterImg" >
 						<img src="./images/download-icon9.png" class="play" >
 					</div>
 					<!-- <div @click="play()">点击播放</div> -->
 				</div>
 				<div class="aboutL animated fadeInLeft" v-show="aboutHeight+headerHeight+(aboutHeight*0.3)<offsetTopNow">
-					<h1>公司简介 <span>About Us</span></h1>
+					<h1>{{language=='_e'?'Company profile':(language=='_f'?'公司簡介':'公司简介')}} <span>About Us</span></h1>
 					<div class="con avoidOverflow6">
-						{{productData.description}}
+						{{productData['description'+language]}}
 					</div>
 					<a class="moreBtn" href="aboutUs.html">READ MORE ></a>
 				</div>
@@ -70,7 +76,7 @@
 		<!-- 经典案例 -->
 		<div class="case" id="case">
 			<div class="allH1">
-				<h1><span>经典案例</span> Cases</h1>
+				<h1><span>{{language=='_f'?'經典案例':(language=='_e'?'Classic cases':'经典案例')}}</span> Cases</h1>
 			</div>
 			
 			<div class="flex con con1 animated fadeInUp" v-show="caseHeight+headerHeight+(caseHeight*0.3)<offsetTopNow">
@@ -93,14 +99,14 @@
 					<div class="swiper-container swiper11" @mouseenter="stopPlay" @mouseleave="autoPlay">
 					    <ul class="swiper-wrapper flex">
 							<li class="swiper-slide item" v-for="(item,index) in artData" :key="index">
-								<img :src="item&&item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''" class="caseImg">
-								<div class="b-name avoidOverflow">{{item.small_title}}</div>
+								<img :src="item&&item['mainImg'+language]&&item['mainImg'+language][0]?item['mainImg'+language][0].url:''" class="caseImg">
+								<div class="b-name avoidOverflow">{{item['small_title'+language]}}</div>
 								<div class="caseMask">
 									<div class="b-f">
 										<div class="b-fCon">
-											<h1 class="avoidOverflow">{{item.title}}</h1>
-											<p class="avoidOverflow3">{{item.description}}</p>
-											<a class="hand" :href="'anliCenter.html?menu_id='+labelData[index].id">READ MORE ></a>
+											<h1 class="avoidOverflow">{{item['title'+language]}}</h1>
+											<p class="avoidOverflow3">{{item['description+language']}}</p>
+											<a class="hand" :href="'classicCases.html?menu_id='+labelData[index].id">READ MORE ></a>
 										</div>
 									</div>
 								</div>
@@ -123,14 +129,14 @@
 				    <ul class="swiper-wrapper">
 						<li class="swiper-slide item" v-for="(item,index) in artData" :key="index">
 							<!-- <img src="images/home-img02.png" > -->
-							<img :src="item&&item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''" >
-							<div class="b-name avoidOverflow">{{item.small_title}}</div>
+							<img :src="item&&item['mainImg'+language]&&item['mainImg'+language][0]?item['mainImg'+language][0].url:''" >
+							<div class="b-name avoidOverflow">{{item['small_title'+language]}}</div>
 							<div class="caseMask">
 								<div class="b-f">
 									<div class="b-fCon">
-										<h1 class="avoidOverflow">{{item.title}}</h1>
-										<p class="avoidOverflow3">{{item.description}}</p>
-										<a class="hand" :href="'anliCenter.html?menu_id='+labelData[index].id">READ MORE ></a>
+										<h1 class="avoidOverflow">{{item['title'+language]}}</h1>
+										<p class="avoidOverflow3">{{item['description'+language]}}</p>
+										<a class="hand" :href="'classicCases.html?menu_id='+labelData[index].id">READ MORE ></a>
 									</div>
 								</div>
 							</div>
@@ -150,43 +156,43 @@
 		<!-- 最新案例 -->
 		<div class="news w1660">
 			<div class="allH1">
-				<h1><span>最新案例</span> News</h1>
+				<h1><span>{{language=='_f'?'最新案例':(language=='_e'?'Latest Cases':'最新案例')}}</span> News</h1>
 			</div>
 			
 			
 				<div id='news1' class="newsItem flexRowBetween" >
 					<div class="L animated fadeInLeft" v-show="newsHeight1+headerHeight+(newsHeight1*0.3)<offsetTopNow">
-						<img :src="newsData&&newsData[0]&&newsData[0].bannerImg&&newsData[0].bannerImg[0]&&newsData[0].bannerImg[0].url" class="Limg">
+						<img :src="newsData&&newsData[0]&&newsData[0]['bannerImg'+language]&&newsData[0]['bannerImg'+language][0]&&newsData[0]['bannerImg'+language][0].url" class="Limg">
 					</div>
 					<div class="R animated fadeInRight" v-show="newsHeight1+headerHeight+(newsHeight1*0.3)<offsetTopNow">
 						<a :href="newsData&&newsData[0]&&newsData[0].id?'newsdetail.html?id='+newsData[0].id:'newsdetail.html'">
-							<h1 class="avoidOverflow">{{newsData&&newsData[0]&&newsData[0].title}}</h1>
+							<h1 class="avoidOverflow">{{newsData&&newsData[0]&&newsData[0]['title'+language]}}</h1>
 						</a>
-						<p class="avoidOverflow5">{{newsData&&newsData[0]&&newsData[0].description}}</p>
+						<p class="avoidOverflow5">{{newsData&&newsData[0]&&newsData[0]['description'+language]}}</p>
 						<a class="moreBtn" :href="newsData&&newsData[0]&&newsData[0].id?'newsdetail.html?id='+newsData[0].id:'newsdetail.html'">READ MORE ></a>
 					</div>
 				</div>
 				<div id='news2' class="newsItem flexRowBetween">
 					<div class="R animated fadeInLeft" v-show="newsHeight2+headerHeight+(newsHeight2*0.3)<offsetTopNow">
 						<a :href="newsData&&newsData[1]&&newsData[1].id?'newsdetail.html?id='+newsData[1].id:'newsdetail.html'">
-							<h1 class="avoidOverflow">{{newsData&&newsData[1]&&newsData[1].title}}</h1>
+							<h1 class="avoidOverflow">{{newsData&&newsData[1]&&newsData[1]['title'+language]}}</h1>
 						</a>
-						<p class="avoidOverflow5">{{newsData&&newsData[1]&&newsData[1].description}}</p>
+						<p class="avoidOverflow5">{{newsData&&newsData[1]&&newsData[1]['description'+language]}}</p>
 						<a class="moreBtn" :href="newsData&&newsData[1]&&newsData[1].id?'newsdetail.html?id='+newsData[1].id:'newsdetail.html'">READ MORE ></a>
 					</div>
 					<div class="L animated fadeInRight" v-show="newsHeight2+headerHeight+(newsHeight2*0.3)<offsetTopNow">
-						<img :src="newsData&&newsData[1]&&newsData[1].bannerImg&&newsData[1].bannerImg[0]?newsData&&newsData[1].bannerImg[0].url:''" class="Limg">
+						<img :src="newsData&&newsData[1]&&newsData[1]['bannerImg'+language]&&newsData[1]['bannerImg'+language][0]?newsData&&newsData[1]['bannerImg'+language][0].url:''" class="Limg">
 					</div>
 				</div>
 				<div id='news3' class="newsItem flexRowBetween">
 					<div class="L animated fadeInLeft" v-show="newsHeight3+headerHeight+(newsHeight3*0.3)<offsetTopNow">
-						<img :src="newsData&&newsData[2]&&newsData[2].bannerImg&&newsData[2].bannerImg[0]?newsData&&newsData[2].bannerImg[0].url:''" class="Limg">
+						<img :src="newsData&&newsData[2]&&newsData[2]['bannerImg'+language]&&newsData[2]['bannerImg'+language][0]?newsData&&newsData[2]['bannerImg'+language][0].url:''" class="Limg">
 					</div>
 					<div class="R animated fadeInRight" v-show="newsHeight3+headerHeight+(newsHeight3*0.3)<offsetTopNow">
 						<a :href="newsData&&newsData[2]&&newsData[2].id?'newsdetail.html?id='+newsData[2].id:'newsdetail.html'">
-							<h1 class="avoidOverflow">{{newsData&&newsData[2]&&newsData[2].title}}</h1>
+							<h1 class="avoidOverflow">{{newsData&&newsData[2]&&newsData[2]['title'+language]}}</h1>
 						</a>
-						<p class="avoidOverflow5">{{newsData&&newsData[2]&&newsData[2].description}}</p>
+						<p class="avoidOverflow5">{{newsData&&newsData[2]&&newsData[2]['description'+language]}}</p>
 						<a class="moreBtn" :href="newsData&&newsData[2]&&newsData[2].id?'newsdetail.html?id='+newsData[2].id:'newsdetail.html'">READ MORE ></a>
 					</div>
 				</div>
@@ -198,8 +204,8 @@
 			<div class="L animated fadeInLeft p-r" v-show="partHeight+headerHeight+(partHeight*0.3)<offsetTopNow">
 				<div class="animated fadeIn" style="float: left;" 
 				v-for="(item,index) in brandData" :key="index" v-show="brandIndex==index">
-					<h1>{{item.title}}</h1>
-					<p class="avoidOverflow6">{{item.description}}</p>
+					<h1>{{item['title'+language]}}</h1>
+					<p class="avoidOverflow6">{{item['description'+language]}}</p>
 					<a :href="'product.html?id='+item.id+'&behavior='+item.behavior">READ MORE ></a>
 				</div>
 			</div>
@@ -227,7 +233,7 @@
 						</a>
 						<a class="flexCenter mgl30 pr o-h qtImg" v-show="index==6"  href="product.html?id=96&behavior=2" style="color: #fff;" @mouseenter="enter(7)" @mouseleave="leave()">
 							<img src="images/home-img012.png" class="qtImg">
-							<div class="Icon flexCenter font31 hand">更多 ></div>
+							<div class="Icon flexCenter font31 hand">{{language=='_e'?'More':(language=='_f'?'更多':'更多')}} ></div>
 						</a>
 					</div>
 				</div>
@@ -260,85 +266,6 @@
 			v-if="footHeight+headerHeight+(footHeight*0.3)<offsetTopNow">
 		</div>
 	
-		
-		<!-- 案例新闻 -->
-		<!-- <div class="pdb80 f5bj">
-			<div class="w1660">
-				<div class="pubtit flexRowBetween">
-					<div></div>
-					<div class="flexCenter">
-						<img class="icon" src="images/home-icon1.png" >
-						<h1 class="title">案例新闻</h1>
-					</div>
-					<div class="flexEnd more moreBox" @click="seltAnliNav">更多<img class="arrowR" src="images/home-icon2.png" ></div>
-				</div>
-				<div class="ind-dynamic">
-					<div v-for="(item,index) in artData">
-						<div class="item flexRowBetween" v-if="index%2==0">
-							<a class="flexRowBetween" :href="'newsdetail.html?id='+item.id">
-								<div class="texbox">
-									<div class="tit avoidOverflow">{{item.title}}</div>
-									<p class="form"></p>
-									<p class="text2">{{item.description}}</p>
-								</div>
-								<div class="fixArrow"></div>
-								<div class="imgBox">
-									<img :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''" >
-								</div>
-							</a>
-						</div>
-						<div class="item flexRowBetween" v-if="index%2!=0">
-							<a class="flexRowBetween" :href="'newsdetail.html?id='+item.id">
-								<div class="fixArrow"></div>
-								<div class="imgBox">
-									<img :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''" >
-								</div>
-								<div class="texbox">
-									<div class="tit">{{item.title}}</div>
-									<p class="form"></p>
-									<p class="text2">{{item.description}}</p>
-								</div>
-							</a>
-						</div>
-						
-					</div>
-					<div class="flexRowBetween anliSet">
-						<a class="btn" href="newsCenter.html">公司动态</a>
-						<a class="btn" href="anliCenter.html">经典案例</a>
-					</div>
-				</div>
-			</div>
-		</div> -->
-		
-		<!-- 品牌中心 -->
-		<!-- <div class="black-bj" style="opacity: 0.6;" v-show="is_show" @click="seltAnliNav"></div>
-		<div class="flexColumn anliSetNav" v-show="is_anliSetNav">
-			<a class="btn" href="newsCenter.html">公司动态</a>
-			<a class="btn" href="anliCenter.html">经典案例</a>
-		</div>
-		
-		<div class="w1200">
-			<div class="pubtit flexRowBetween">
-				<div></div>
-				<div class="flexCenter">
-					<img class="icon" src="images/home-icon3.png" >
-					<h1 class="title">品牌介绍</h1>
-				</div>
-				<div class="moreBox"><a class="flexEnd more" href="brand.html">更多<img class="arrowR" src="images/home-icon2.png" ></a></div>
-			</div>
-			
-			<div class="ind-brandTwo flexRowBetween pdb80">
-				<div class="left flexRowBetween">
-					<div class="child" @mouseenter="enter(index)" @mouseleave="leave()" v-for="(item,index) in brandData" :key="index">
-						<a  :href="'product.html?id='+item.id+'&behavior='+item.behavior">
-							<img class="logo" :src="item.mainImg[0].url" >
-						</a>
-					</div>
-				</div>
-				<div class="right flexCenter"><img class="w" :src="brandData[index]&&brandData[index].headImg&&brandData[index].headImg[0]?brandData[index].headImg[0].url:''" ></div>
-			</div>
-			
-		</div> -->
 		
 		<include src="footer.html"></include>
 		
@@ -422,7 +349,9 @@
 					video_show:false,
 					head_show:false,
 					
-					labelData:[]
+					labelData:[],
+					
+					language:''
 		        }
 		    },
 			
@@ -453,6 +382,12 @@
 					self.head_show = res;
 					console.log('head_show',res)
 				})
+				
+				self.initLanguage();
+				window.base.bus.$on('changelanguage',function(res){
+					self.language = res;
+					self.initLanguage()
+				});
 			},
 			mounted(){
 				const self = this;
@@ -485,6 +420,16 @@
 				});
 			},
 		    methods: {
+				
+				initLanguage(){
+					const self = this;
+					var lang = localStorage.getItem('language');
+					if(lang){
+						self.language = lang;
+					}else{
+						self.language = '';
+					}
+				},
 				
 				//元素到页面顶部高度
 				getHeight(){
@@ -629,13 +574,13 @@
 				autoPlay(){
 					const self = this;
 					self.swiper3.autoplay.start();
-					console.log(start)
+					// console.log('start')
 				},
 				
 				stopPlay(){
 					const self = this;
 					self.swiper3.autoplay.stop();
-					console.log(stop)
+					// console.log(stop)
 				},
 				
 				getArtData(){
@@ -697,9 +642,9 @@
 								})
 							})
 							
-							setTimeout(() => {
-								swiper.slideTo(0, 50, false);
-							}, 50);
+							// setTimeout(() => {
+							// 	swiper.slideTo(0, 50, false);
+							// }, 50);
 				        };    
 				    };
 				    window.base.articleGet(postData, callback);
@@ -856,10 +801,7 @@
 		.ind-brandTwo .more{width: 110px;height: 50px;margin: auto;border: 2px solid #d6191c;border-radius: 10px;font-size: 20px;text-align: center;line-height: 50px;color: #D6191C;}
 		
 		
-		@media only screen and (max-width: 500px){
-			.anliSetNav .btn{width: 120px;line-height: 40px;font-size: 16px; border-radius: 5px;}
-			.anliSet .btn{width: 120px;line-height: 40px;font-size: 16px; border-radius: 5px;}
-		}
+		
 		
 		.ind-brand .half{float: left;width: 32%;margin-right: 2%;}
 		.ind-brand .half:nth-of-type(3n){margin-right: 0;}
@@ -905,6 +847,9 @@
 			
 			.fixArrow{left: 43.5%;}
 			.ind-dynamic>div:nth-of-type(2n) .fixArrow{right: 43.5%;}
+			
+			.anliSetNav .btn{width: 120px;line-height: 40px;font-size: 16px; border-radius: 5px;}
+			.anliSet .btn{width: 120px;line-height: 40px;font-size: 16px; border-radius: 5px;}
 		}
 		@media only screen and (max-width: 375px){
 			.ind-brand .TwoPic .box{height: 135px;}
