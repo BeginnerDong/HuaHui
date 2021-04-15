@@ -21,10 +21,10 @@
 					<a href="seach.html"><img class="icon" src="images/home-icon0.png" ></a>
 				</div>
 				<div class="orderNavTwo pc flexRowBetween fs16" >
-					<div class="tt" :class="currentUrl=='/index.html'?'on':''"><a href="index.html">{{language=='_e'?'Home':(language=='_f'?'首頁':'首页')}}</a></div>
-					<div class="tt" :class="currentUrl=='/aboutUs.html'?'on':''"><a href="aboutUs.html">{{language=='_e'?'AboutUs':(language=='_f'?'關於華匯':'关于华汇')}}</a></div>
-					<div class="tt pr" :class="currentUrl=='/classicCases.html'||(menu_id!=5&&menu_id!=0)?'on':''">
-						<a href="classicCases.html" @click="goCase(1)">{{language=='_e'?'Case':(language=='_f'?'經典案例':'经典案例')}}</a>
+					<!-- <div class="tt" :class="currentUrl=='/index.html'?'on':''"><a href="index.html">{{language=='_e'?'Home':(language=='_f'?'首頁':'首页')}}</a></div> -->
+					<div class="tt" :class="currentUrl=='/about-us.html'?'on':''"><a href="about-us.html">{{language=='_e'?'AboutUs':(language=='_f'?'關於華匯':'关于华汇')}}</a></div>
+					<div class="tt pr" :class="currentUrl=='/classic-cases.html'||(menu_id!=5&&menu_id!=0)?'on':''">
+						<a href="classic-cases.html" @click="goCase(1)">{{language=='_e'?'Case':(language=='_f'?'經典案例':'经典案例')}}</a>
 						<div class="Asamll alAsamll">
 							<div class="Achild" v-for="(item,index) in labelData" :key="item.id">
 								<div class="Aname">
@@ -33,8 +33,8 @@
 							</div>
 						</div>
 					</div>
-					<div class="tt pr"  :class="currentUrl=='/brand.html'?'on':''">
-						<a href="brand.html">{{language=='_e'?'Brand':(language=='_f'?'品牌中心':'品牌中心')}}</a>
+					<div class="tt pr"  :class="currentUrl=='/agent-brand.html'?'on':''">
+						<a href="agent-brand.html">{{language=='_e'?'Brand':(language=='_f'?'品牌中心':'品牌中心')}}</a>
 						<!-- <div class="ppA"> -->
 							<div class="Asamll ppAsamll">
 								<div class="Achild" v-for="(item,index) in brandData" :key="item.id">
@@ -53,10 +53,10 @@
 							</div>
 						<!-- </div> -->
 					</div>
-					<div class="tt" :class="currentUrl=='/newsCenter.html'||menu_id==5?'on':''"><a href="newsCenter.html">{{language=='_e'?'News':(language=='_f'?'公司動態':'公司动态')}}</a></div>
-					<div class="tt" :class="currentUrl=='/loadCenter.html'?'on':''"><a href="loadCenter.html">{{language=='_e'?'Download':(language=='_f'?'下載中心':'下载中心')}}</a></div>
-					<div class="tt" :class="currentUrl=='/contactUs.html'?'on':''"><a href="contactUs.html">{{language=='_e'?'ContantUs':(language=='_f'?'聯繫我們':'联系我们')}}</a></div>
-					<div class="tt" :class="currentUrl=='/lease.html'?'on':''"><a href="lease.html">{{language=='_e'?'Lease':(language=='_f'?'租賃公司':'租赁公司')}}</a></div>
+					<div class="tt" :class="currentUrl=='/news.html'||menu_id==5?'on':''"><a href="news.html">{{language=='_e'?'News':(language=='_f'?'公司動態':'公司动态')}}</a></div>
+					<div class="tt" :class="currentUrl=='/download.html'?'on':''"><a href="download.html">{{language=='_e'?'Download':(language=='_f'?'下載中心':'下载中心')}}</a></div>
+					<div class="tt" :class="currentUrl=='/rental.html'?'on':''"><a href="rental.html">{{language=='_e'?'Rental':(language=='_f'?'租賃網絡':'租赁网络')}}</a></div>
+					<div class="tt" :class="currentUrl=='/contact-us.html'?'on':''"><a href="contact-us.html">{{language=='_e'?'ContantUs':(language=='_f'?'聯繫我們':'联系我们')}}</a></div>
 					
 					<div class="language">
 						<span class="hand" :class="language==''?'lang':''" @click="changeLanguage('')">简</span>/
@@ -78,24 +78,24 @@
 			</div>
 			<a href="seach.html" class="Mseach">
 				<img src="images/input.png" class="input">
-				<input type="text" name="" id="" value="" :placeholder="language=='_e'?'Search...':(language=='_f'?'蒐索...':'搜索...')" />
+				<input type="text" name="" id="" value="" :placeholder="language=='_e'?'Search...':(language=='_f'?'搜索...':'搜索...')" />
 				<img class="icon" src="images/icon-02.png" >
 			</a>
 			
 			<div class="orderNavTwo mobile flexRowBetween fs16">
-				<div class="tt" :class="currentUrl=='/index.html'?'on':''">
+				<!-- <div class="tt" :class="currentUrl=='/index.html'?'on':''">
 					<a @click="go(1)">{{language=='_e'?'Home':(language=='_f'?'首頁':'首页')}}</a>
 					<div class="off">
 						<img src="images/icon-08.png">
 					</div>
-				</div>
-				<div class="tt" :class="currentUrl=='/aboutUs.html'?'on':''"><a  @click="go(2)">{{language=='_e'?'AboutUs':(language=='_f'?'關於華匯':'关于华汇')}}</a>
+				</div> -->
+				<div class="tt" :class="currentUrl=='/about-us.html'?'on':''"><a  @click="go(2)">{{language=='_e'?'AboutUs':(language=='_f'?'關於華匯':'关于华汇')}}</a>
 					<div class="off">
 						<img src="images/icon-08.png">
 					</div>
 				</div>
 				<div class="tt" 
-				:class="currentUrl=='/classicCases.html'||(menu_id!=5&&menu_id!=0)?'on':''">
+				:class="currentUrl=='/classic-cases.html'||(menu_id!=5&&menu_id!=0)?'on':''">
 					<a  @click="go(3)">{{language=='_e'?'Case':(language=='_f'?'經典案例':'经典案例')}}</a>
 					<div class="off" v-show="show1" @click="showOff('one')">
 						<img src="images/icon-08.png">
@@ -112,7 +112,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="tt pr"  :class="currentUrl=='/brand.html'?'on':''">
+				<div class="tt pr"  :class="currentUrl=='/agent-brand.html'?'on':''">
 					<a @click="go(4)">{{language=='_e'?'Brand':(language=='_f'?'品牌中心':'品牌中心')}}</a>
 					<div class="off" v-show="show2" @click="showOff('two')">
 						<img src="images/icon-08.png">
@@ -142,26 +142,26 @@
 					</div>
 				</div>
 				<div class="tt"
-				:class="currentUrl=='/newsCenter.html'?'on':''||menu_id==5"><a @click="go(5)">{{language=='_e'?'News':(language=='_f'?'公司動態':'公司动态')}}</a>
+				:class="currentUrl=='/news.html'?'on':''||menu_id==5"><a @click="go(5)">{{language=='_e'?'News':(language=='_f'?'公司動態':'公司动态')}}</a>
 					<div class="off">
 						<img src="images/icon-08.png">
 					</div>
 				</div>
 				
 				<div class="tt" 
-				:class="currentUrl=='/loadCenter.html'?'on':''"><a @click="go(6)">{{language=='_e'?'Download':(language=='_f'?'下載中心':'下载中心')}}</a>
+				:class="currentUrl=='/download.html'?'on':''"><a @click="go(6)">{{language=='_e'?'Download':(language=='_f'?'下載中心':'下载中心')}}</a>
 					<div class="off">
 						<img src="images/icon-08.png">
 					</div>
 				</div>
 				<div class="tt" 
-				:class="currentUrl=='/contactUs.html'?'on':''"><a @click="go(7)">{{language=='_e'?'ContantUs':(language=='_f'?'聯繫我們':'联系我们')}}</a>
+				:class="currentUrl=='/rental.html'?'on':''"><a @click="go(8)">{{language=='_e'?'Rental':(language=='_f'?'租賃網絡':'租赁网络')}}</a>
 					<div class="off">
 						<img src="images/icon-08.png">
 					</div>
 				</div>
 				<div class="tt" 
-				:class="currentUrl=='/lease.html'?'on':''"><a @click="go(8)">{{language=='_e'?'Lease':(language=='_f'?'租賃公司':'租赁公司')}}</a>
+				:class="currentUrl=='/contact-us.html'?'on':''"><a @click="go(7)">{{language=='_e'?'ContantUs':(language=='_f'?'聯繫我們':'联系我们')}}</a>
 					<div class="off">
 						<img src="images/icon-08.png">
 					</div>
@@ -275,9 +275,9 @@
 				const self = this;
 				sessionStorage.setItem('page',1);
 				if(type==1){
-					window.location.href = 'classicCases.html';
+					window.location.href = 'classic-cases.html';
 				}else{
-					window.location.href = 'classicCases.html?menu_id='+item.id;
+					window.location.href = 'classic-cases.html?menu_id='+item.id;
 				}
 			},
 			
@@ -303,13 +303,13 @@
 							window.location.href = 'index.html';
 							break;
 						case 2:
-							window.location.href = 'aboutUs.html';
+							window.location.href = 'about-us.html';
 							break;
 						case 3:
 							if(item){
-								window.location.href = 'classicCases.html?menu_id='+item.id;
+								window.location.href = 'classic-cases.html?menu_id='+item.id;
 							}else{
-								window.location.href = 'classicCases.html';
+								window.location.href = 'classic-cases.html';
 							}
 							break;
 						case 4:
@@ -319,20 +319,20 @@
 							}else if(item){
 								window.location.href = 'product.html?id='+item.id+'&behavior='+item.behavior;
 							}else{
-								window.location.href = 'brand.html';
+								window.location.href = 'agent-brand.html';
 							}
 							break;
 						case 5:
-							window.location.href = 'newsCenter.html';
+							window.location.href = 'news.html';
 							break;
 						case 6:
-							window.location.href = 'loadCenter.html';
+							window.location.href = 'download.html';
 							break;
 						case 7:
-							window.location.href = 'contactUs.html';
+							window.location.href = 'contact-us.html';
 							break;
 						case 8:
-							window.location.href = 'lease.html';
+							window.location.href = 'rental.html';
 							break;
 						default:
 							break;

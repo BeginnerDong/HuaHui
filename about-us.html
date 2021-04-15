@@ -93,7 +93,7 @@
 <body>
 	
 	
-	<div id="app"  :style="language=='_e'?'letter-spacing:1px!important':''">
+	<div id="app" v-cloak :style="language=='_e'?'letter-spacing:1px!important':''">
 		<div class="headTop"></div>
 		
 		<include src="header.html"></include>
@@ -411,7 +411,11 @@
 									    initialSlide:0,
 									    slidesPerView: 2,
 									    spaceBetween : 20,
-										
+										autoplay:{
+											disableOnInteraction: false,
+											delay: 10000,
+										},
+										speed:6000,
 										pagination: '.swiper-pagination',
 										nextButton: '.swiper-button-next',
 										prevButton: '.swiper-button-prev',

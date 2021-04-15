@@ -190,7 +190,7 @@
 
 					const callback = (res) => {
 						if (res.solely_code == 100000) {
-							window.location.href = 'loadCenter.html?menu_id=' + res.info.menu_id + '&parent=' + res.info.parent_id +
+							window.location.href = 'download.html?menu_id=' + res.info.menu_id + '&parent=' + res.info.parent_id +
 								'&title=' + self.mainData.title
 						} else {
 							alert('无对应可下载项目')

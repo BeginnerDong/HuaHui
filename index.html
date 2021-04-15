@@ -24,12 +24,12 @@
 	</head>
 	<style type="text/css">
 		[v-cloak] {
-			display:none;
+			display:none!important;
 		}
 	</style>
 
 <body>
-	<div id="app" :style="language=='_e'?'letter-spacing:1px!important':''">
+	<div id="app" v-cloak :style="language=='_e'?'letter-spacing:1px!important':''">
 		<div class="headTop"></div>
 		
 		<include src="header.html"></include>
@@ -39,7 +39,7 @@
 		<!-- 公司简介 -->
 		<div class="aboutUs">
 			<div class="allH1 aboutH1">
-				<h1><span>{{language=='_e'?'Company profile':(language=='_f'?'公司簡介':'公司简介')}}</span>About Us</h1>
+				<h1><span >{{language=='_e'?'Company profile':(language=='_f'?'公司簡介':'公司简介')}}</span>About Us</h1>
 			</div>
 			<div class="w1660 flexRowBetween jj">
 				<div class="aboutR aboutR2 animated" :style="video_show?'margin-left:-2000px':'margin-left:0'">
@@ -58,7 +58,7 @@
 					<div class="con avoidOverflow6">
 						{{productData['description'+language]}}
 					</div>
-					<a class="moreBtn" href="aboutUs.html">READ MORE ></a>
+					<a class="moreBtn" href="about-us.html">READ MORE ></a>
 				</div>
 				<div class="aboutR aboutR1 animated fadeInRight" v-show="aboutHeight+headerHeight+(aboutHeight*0.3)<offsetTopNow">
 					<video id="pcVideoPlay" preload="metadata" controls="controls" :src="productData&&productData.video&&productData.video[0]&&productData.video[0].url" x5-video-player-type="h5-page">
@@ -106,7 +106,7 @@
 										<div class="b-fCon">
 											<h1 class="avoidOverflow">{{item['title'+language]}}</h1>
 											<p class="avoidOverflow3">{{item['description+language']}}</p>
-											<a class="hand" :href="'classicCases.html?menu_id='+labelData[index].id">READ MORE ></a>
+											<a class="hand" :href="'classic-cases.html?menu_id='+labelData[index].id">READ MORE ></a>
 										</div>
 									</div>
 								</div>
@@ -136,7 +136,7 @@
 									<div class="b-fCon">
 										<h1 class="avoidOverflow">{{item['title'+language]}}</h1>
 										<p class="avoidOverflow3">{{item['description'+language]}}</p>
-										<a class="hand" :href="'classicCases.html?menu_id='+labelData[index].id">READ MORE ></a>
+										<a class="hand" :href="'classic-cases.html?menu_id='+labelData[index].id">READ MORE ></a>
 									</div>
 								</div>
 							</div>

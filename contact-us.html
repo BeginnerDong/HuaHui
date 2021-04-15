@@ -19,6 +19,9 @@
 		<link type="text/css" rel="stylesheet" href="css/animate.css">
 	</head>
 	<style>
+		[v-cloak] {
+			display:none!important;
+		}
 		/* banner */
 		.fsbanner{min-height: 580px;}
 		.mb70{margin-bottom: 70px;}
@@ -77,7 +80,7 @@
 	</style>
 
 <body>
-	<div id="app" :style="language=='_e'?'letter-spacing:1px!important':''">
+	<div id="app" v-cloak :style="language=='_e'?'letter-spacing:1px!important':''">
 		<div class="headTop"></div>
 		
 		<include src="header.html"></include>
@@ -86,10 +89,8 @@
 			<div class="item pr" :style="'width:'+cityWidth+'%'" :class="bannerCurr==index?'on':''" v-for="(item,index) in mainData" :key="index" 
 			@mousemove="changeBannerCurr(index)" @mouseleave="changeLeave(index)">
 				<img class="pic" :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''" >
-				<div class="bj"><p class="name">{{item.title}}</p></div>
-				
+				<div class="bj"><p class="name">{{item['title'+language]}}</p></div>
 			</div>
-			
 		</div>
 		
 		<div class="">
@@ -114,11 +115,11 @@
 					<div class="item clearfix whiteBj flexRowBetween">
 						<div class="pic LL"><img :src="mainData[index]&&mainData[index].bannerImg&&mainData[index].bannerImg[0]?mainData[index].bannerImg[0].url:''" ></div>
 						<div class="infor RR">
-							<p class="compay">{{mainData[index]?mainData[index]['title'+langauge]:''}}</p>
+							<p class="compay">{{mainData[index]?mainData[index]['title'+language]:''}}</p>
 							<p class="adrs">{{mainData[index]?mainData[index]['address'+language]:''}}</p>
-							<p class="phone">{{mainData[index]?mainData[index]['phone'+language]:''}}</p>
-							<p class="zipCode">{{mainData[index]?mainData[index]['postal_code'+language]:''}}</p>
-							<p class="fax">{{mainData[index]?mainData[index]['fax'+language]:''}}</p>
+							<p class="phone">{{mainData[index]?mainData[index]['phone']:''}}</p>
+							<p class="zipCode">{{mainData[index]?mainData[index]['postal_code']:''}}</p>
+							<p class="fax">{{mainData[index]?mainData[index]['fax']:''}}</p>
 						</div>
 					</div>
 				</div>

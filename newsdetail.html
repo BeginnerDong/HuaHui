@@ -17,6 +17,9 @@
 		<link type="text/css" rel="stylesheet" href="css/orderNav.css">
 	</head>
 	<style type="text/css">
+		[v-cloak] {
+			display:none!important;
+		}
 		.detailePag{min-height: 350px;box-sizing: border-box;}
 		.orderNavTop{display: none;width: 90%;top: 60px;margin-left: 5%;}
 		.ql-align-center{text-align: center;}
@@ -47,7 +50,7 @@
 	</style>
 
 <body>
-	<div id="app" :style="language=='_e'?'letter-spacing:1px!important':''">
+	<div id="app" v-cloak :style="language=='_e'?'letter-spacing:1px!important':''">
 		<div class="headTop"></div>
 		
 		<include src="header.html"></include>
@@ -148,9 +151,9 @@
 				changeCurr(id){
 					const self = this;
 					if(id>0){
-						window.location.href = 'classicCases.html?menu_id='+id
+						window.location.href = 'classic-cases.html?menu_id='+id
 					}else{
-						window.location.href = 'classicCases.html'
+						window.location.href = 'classic-cases.html'
 					}
 				},
 				

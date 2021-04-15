@@ -15,6 +15,9 @@
 		<link type="text/css" rel="stylesheet" href="css/public.css">
 	</head>
 	<style>
+		[v-cloak] {
+			display:none!important;
+		}
 		.lease{min-height: 500px;overflow: hidden;padding: 50px 0 100px;position: relative;}
 		.lease .allH1{margin-bottom: 50px;}
 		.lease .item{width: 50%;box-sizing: border-box;padding: 15px;overflow: hidden;float: left;}
@@ -57,7 +60,7 @@
 	</style>
 
 <body>
-	<div id="app" :style="language=='_e'?'letter-spacing:1px!important':''">
+	<div id="app" v-cloak :style="language=='_e'?'letter-spacing:1px!important':''">
 		<div class="headTop"></div>
 		
 		<include src="header.html"></include>

@@ -18,6 +18,9 @@
 		<link type="text/css" rel="stylesheet" href="css/load.css">
 	</head>
 	<style type="text/css">
+		[v-cloak] {
+			display:none!important;
+		}
 		.seachBox{width: 70%;margin: 50px auto 20px auto;background: #F5F5F5;border-radius: 8px;overflow: hidden;padding: 10px 20px;box-sizing: border-box;}
 		.seachBox .input{width:90%;box-sizing: border-box;}
 		.seachBox .input input{width: 100%;display: block;line-height: 40px;height: 40px;background: none;font-size: 15px;}
@@ -68,14 +71,14 @@
 	</style>
 
 <body>
-	<div id="app" :style="language=='_e'?'letter-spacing:1px!important':''">
+	<div id="app" v-cloak :style="language=='_e'?'letter-spacing:1px!important':''">
 		<div class="headTop"></div>
 		
 		<include src="header.html"></include>
 		
 		<div class="w1100 pdb80">
 			<div class="seachBox flexRowBetween">
-				<div class="input"><input type="text" v-on:keyup.13="search" v-model="title" placeholder="搜索"></div>
+				<div class="input"><input type="text" v-on:keyup.13="search" v-model="title" :placeholder="language=='_e'?'Search...':(language=='_f'?'搜索...':'搜索...')"></div>
 				<div class="seachIcon"><button class="btn" type="button" @click="goSearch"></button></div>
 			</div>
 			
@@ -120,7 +123,7 @@
 						<ul>
 							<li class="flexRowBetween" v-for="(item,index) in mainData" :key="index">
 								<p class="ll">{{item['title'+language]}}</p>
-								<a download :href="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''">
+								<a download :href="item['mainImg'+language]&&item['mainImg'+language][0]?item['mainImg'+language][0].url:''" target="_blank">
 									<span class="rr flexEnd">
 										<img class="icon" src="images/download-icon7.png" >
 										<span>{{language=='_e'?'Download':(language=='_f'?'下載':'下载')}}</span>
@@ -135,7 +138,7 @@
 						<ul class="flexRowBetween">
 							<li v-for="(item,index) in mainData" :key="index">
 								<img class="pic" :src="item['bannerImg'+language]&&item['bannerImg'+language][0]?item['bannerImg'+language][0].url:''">
-								<a download class="download" :href="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''">
+								<a download class="download" :href="item['mainImg'+language]&&item['mainImg'+language][0]?item['mainImg'+language][0].url:''">
 									<img class="icon" src="images/download-icon7.png" >
 								</a>
 							</li>
@@ -160,7 +163,7 @@
 						<ul>
 							<li class="flexRowBetween" v-for="(item,index) in mainData" :key="index">
 								<p class="ll">{{item['title'+language]}}</p>
-								<a download :href="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''">
+								<a download :href="item['mainImg'+language]&&item['mainImg'+language][0]?item['mainImg'+language][0].url:''" target="_blank">
 									<span class="rr flexEnd">
 										<img class="icon" src="images/download-icon7.png" >
 										<span>{{language=='_e'?'Download':(language=='_f'?'下載':'下载')}}</span>
@@ -254,7 +257,15 @@
 						if (self.title != '') {
 							window.location.href = 'seach.html?title='+self.title+'&curr='+self.curr
 						} else {
-							alert('请输入标题搜索')
+							var con = '';
+							if(self.language=='_f'){
+								con = '请输入标题搜索';
+							}else if(self.language == '_e'){
+								con = 'Please enter the title to search'
+							}else{
+								con = '请输入标题搜索'
+							}
+							alert(con)
 						}
 					}
 				},
@@ -362,7 +373,15 @@
 							self.mainData.push.apply(self.mainData,res.info.data);
 							
 						} else {
-							alert('没有数据')
+							var con = '';
+							if(self.language=='_f'){
+								con = '没有数据';
+							}else if(self.language == '_e'){
+								con = 'No Data'
+							}else{
+								con = '沒有數據'
+							}
+							alert(con)
 						};	
 					};
 					window.base.articleGet(postData, callback);

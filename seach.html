@@ -21,6 +21,9 @@
 		<link type="text/css" rel="stylesheet" href="css/seachProdct.css">
 	</head>
 	<style>
+		[v-cloak] {
+			display:none!important;
+		}
 		.orderNav{padding: 0px 0;}
 		.orderNav .tt{font-size: 15px;margin: 0 2.2%;}
 		.orderNav .tt.on{position: relative;}
@@ -85,7 +88,7 @@
 	</style>
 
 <body>
-	<div id="app" :style="language=='_e'?'letter-spacing:1px!important':''">
+	<div id="app" :style="language=='_e'?'letter-spacing:1px!important':''" v-cloak>
 		
 		<div class="head">
 			<div class="cont flexRowBetween w1200">
@@ -93,7 +96,7 @@
 				<div class="seachInput flex fs16 white">
 					<!-- <a class="deltIcon" href="index.html">×</a> -->
 					<div class="input">
-						<input type="text" v-on:keyup.13="search" v-model="title" placeholder="请输入" />
+						<input type="text" v-on:keyup.13="search" v-model="title" :placeholder="language=='_e'?'please enter':(language=='_f'?'請輸入':'请输入')" />
 					</div>
 					<div class="Rseach">
 						<button class="btn" type="button" @click="goSearch"></button>
@@ -397,7 +400,15 @@
 						self.submit()
 					} else {
 						self.canSearch = true;
-						alert('请输入标题搜索')
+						var con = '';
+						if(self.language=='_f'){
+							con = '请输入标题搜索';
+						}else if(self.language == '_e'){
+							con = 'Please enter the title to search'
+						}else{
+							con = '请输入标题搜索'
+						}
+						alert(con)
 					}
 				},
 				
@@ -419,7 +430,15 @@
 							
 						} else {
 							self.canSearch = true;
-							alert('请输入标题搜索')
+							var con = '';
+							if(self.language=='_f'){
+								con = '请输入标题搜索';
+							}else if(self.language == '_e'){
+								con = 'Please enter the title to search'
+							}else{
+								con = '请输入标题搜索'
+							}
+							alert(con)
 						}
 					}
 				},
