@@ -54,7 +54,7 @@
 					<!-- <div @click="play()">点击播放</div> -->
 				</div>
 				<div class="aboutL animated fadeInLeft" v-show="aboutHeight+headerHeight+(aboutHeight*0.3)<offsetTopNow">
-					<h1>{{language=='_e'?'Company profile':(language=='_f'?'公司簡介':'公司简介')}} <span>About Us</span></h1>
+					<h1>{{language=='_e'?'Company Profile':(language=='_f'?'公司簡介':'公司简介')}} <span>About Us</span></h1>
 					<div class="con avoidOverflow6">
 						{{productData['description'+language]}}
 					</div>
@@ -76,7 +76,7 @@
 		<!-- 经典案例 -->
 		<div class="case" id="case">
 			<div class="allH1">
-				<h1><span>{{language=='_f'?'經典案例':(language=='_e'?'Classic cases':'经典案例')}}</span> Cases</h1>
+				<h1><span>{{language=='_f'?'經典案例':(language=='_e'?'Classic Cases':'经典案例')}}</span> Cases</h1>
 			</div>
 			
 			<div class="flex con con1 animated fadeInUp" v-show="caseHeight+headerHeight+(caseHeight*0.3)<offsetTopNow">
@@ -261,7 +261,7 @@
 		
 		<!-- 底部图 -->
 		<div class="footImg animated animated-1.5 fadeInUpBig" >
-			<img :src="footData&&footData.mainImg&&footData.mainImg[0]&&footData.mainImg[0].url"  
+			<img :src="footData&&footData.mainImg&&footData.mainImg[0]&&footData.mainImg[0].url"  style="position: absolute;left: 0;right: 0;bottom: 0;margin: 0 auto;"
 			class="animateds fadeInUp"
 			v-if="footHeight+headerHeight+(footHeight*0.3)<offsetTopNow">
 		</div>

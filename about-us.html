@@ -206,13 +206,13 @@
 									</div>
 								</li>
 								<li>
-									<span class="ll">{{language=='_e'?'Self evaluation':(language=='_f'?'自我評價':'自我评价')}}</span>
+									<span class="ll">{{language=='_e'?'Self Evaluation':(language=='_f'?'自我評價':'自我评价')}}</span>
 									<div class="rr">
 										<textarea style="padding: 0;" type="text" name="" v-model="submitData.description" :placeholder="language=='_e'?'Please write your own highlights, let HR pay attention to you first':(language=='_f'?'請寫出自身亮點，讓HR第一眼關注你':'请写出自身亮点，让HR第一眼关注你')"></textarea>
 						 			</div>
 								</li>
 								<li>
-									 <span class="ll">{{language=='_e'?'Send your resume':(language=='_f'?'投遞簡歷':'投递简历')}}</span>
+									 <span class="ll">{{language=='_e'?'Resume Attached':(language=='_f'?'投遞簡歷':'投递简历')}}</span>
 									<div class="rr flex p-r" style="flex-wrap: wrap;">
 										<input style="opacity: 0;z-index: 20;position: relative;" type="file" @change="uploadFile" enctype="multipart/form-data">
 											<!-- <img src="images/about-icon8.jpg" > -->

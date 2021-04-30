@@ -85,11 +85,11 @@
 			<div class="orderNav flexCenter borderB1">
 				<span class="tt flexCenter" :class="curr==1?'on':''" @click="changeCurr('1')">
 					<img class="icon" :src="curr==1?'images/download-icon4.png':'images/download-icon3.png'"/>
-					<em>{{language=='_e'?'Data':(language=='_f'?'資料':'资料')}}</em>
+					<em>{{language=='_e'?'Specification':(language=='_f'?'資料':'资料')}}</em>
 				</span>
 				<span class="tt flexCenter" :class="curr==2?'on':''" @click="changeCurr('2')">
 					<img class="icon" :src="curr==2?'images/download-icon5.png':'images/download-icon1.png'"/>
-					<em>{{language=='_e'?'High Definition Image':(language=='_f'?'高清圖':'高清图')}}</em>
+					<em>{{language=='_e'?'Image':(language=='_f'?'高清圖':'高清图')}}</em>
 				</span>
 				<span class="tt flexCenter" :class="curr==3?'on':''" @click="changeCurr('3')">
 					<img class="icon" :src="curr==3?'images/download-icon6.png':'images/download-icon2.png'"/>

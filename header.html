@@ -22,7 +22,7 @@
 				</div>
 				<div class="orderNavTwo pc flexRowBetween fs16" >
 					<!-- <div class="tt" :class="currentUrl=='/index.html'?'on':''"><a href="index.html">{{language=='_e'?'Home':(language=='_f'?'首頁':'首页')}}</a></div> -->
-					<div class="tt" :class="currentUrl=='/about-us.html'?'on':''"><a href="about-us.html">{{language=='_e'?'AboutUs':(language=='_f'?'關於華匯':'关于华汇')}}</a></div>
+					<div class="tt" :class="currentUrl=='/about-us.html'?'on':''"><a href="about-us.html">{{language=='_e'?'About Us':(language=='_f'?'關於華匯':'关于华汇')}}</a></div>
 					<div class="tt pr" :class="currentUrl=='/classic-cases.html'||(menu_id!=5&&menu_id!=0)?'on':''">
 						<a href="classic-cases.html" @click="goCase(1)">{{language=='_e'?'Case':(language=='_f'?'經典案例':'经典案例')}}</a>
 						<div class="Asamll alAsamll">
@@ -56,13 +56,13 @@
 					<div class="tt" :class="currentUrl=='/news.html'||menu_id==5?'on':''"><a href="news.html">{{language=='_e'?'News':(language=='_f'?'公司動態':'公司动态')}}</a></div>
 					<div class="tt" :class="currentUrl=='/download.html'?'on':''"><a href="download.html">{{language=='_e'?'Download':(language=='_f'?'下載中心':'下载中心')}}</a></div>
 					<div class="tt" :class="currentUrl=='/rental.html'?'on':''"><a href="rental.html">{{language=='_e'?'Rental':(language=='_f'?'租賃網絡':'租赁网络')}}</a></div>
-					<div class="tt" :class="currentUrl=='/contact-us.html'?'on':''"><a href="contact-us.html">{{language=='_e'?'ContantUs':(language=='_f'?'聯繫我們':'联系我们')}}</a></div>
+					<div class="tt" :class="currentUrl=='/contact-us.html'?'on':''"><a href="contact-us.html">{{language=='_e'?'Contact Us':(language=='_f'?'聯繫我們':'联系我们')}}</a></div>
 					
-					<div class="language">
+					<!-- <div class="language">
 						<span class="hand" :class="language==''?'lang':''" @click="changeLanguage('')">简</span>/
 						<span class="hand" :class="language=='_f'?'lang':''" @click="changeLanguage('_f')">繁</span>/
 						<span class="hand" :class="language=='_e'?'lang':''" @click="changeLanguage('_e')">EN</span>
-					</div>
+					</div> -->
 				</div>
 				
 			</div>
@@ -71,11 +71,11 @@
 		<!-- 移动端显示导航 -->
 		<div class="mNav animated fadeInLeft" v-show="is_showNav">
 			<img class="close" src="images/icon-09.png" @click="shownav" >
-			<div class="language langM">
+			<!-- <div class="language langM">
 				<span class="hand" :class="language==''?'lang':''" @click="changeLanguage2('')">简</span> /
 				<span class="hand" :class="language=='_f'?'lang':''" @click="changeLanguage2('_f')">繁</span> /
 				<span class="hand" :class="language=='_e'?'lang':''" @click="changeLanguage2('_e')">EN</span>
-			</div>
+			</div> -->
 			<a href="seach.html" class="Mseach">
 				<img src="images/input.png" class="input">
 				<input type="text" name="" id="" value="" :placeholder="language=='_e'?'Search...':(language=='_f'?'搜索...':'搜索...')" />
@@ -89,7 +89,7 @@
 						<img src="images/icon-08.png">
 					</div>
 				</div> -->
-				<div class="tt" :class="currentUrl=='/about-us.html'?'on':''"><a  @click="go(2)">{{language=='_e'?'AboutUs':(language=='_f'?'關於華匯':'关于华汇')}}</a>
+				<div class="tt" :class="currentUrl=='/about-us.html'?'on':''"><a  @click="go(2)">{{language=='_e'?'About Us':(language=='_f'?'關於華匯':'关于华汇')}}</a>
 					<div class="off">
 						<img src="images/icon-08.png">
 					</div>
@@ -161,7 +161,7 @@
 					</div>
 				</div>
 				<div class="tt" 
-				:class="currentUrl=='/contact-us.html'?'on':''"><a @click="go(7)">{{language=='_e'?'ContantUs':(language=='_f'?'聯繫我們':'联系我们')}}</a>
+				:class="currentUrl=='/contact-us.html'?'on':''"><a @click="go(7)">{{language=='_e'?'Contact Us':(language=='_f'?'聯繫我們':'联系我们')}}</a>
 					<div class="off">
 						<img src="images/icon-08.png">
 					</div>
@@ -493,6 +493,8 @@
 .orderNavTwo .tt:hover .Aname{height: 45px;}
 /* .Asamll .Achild:hover .Bsamll{opacity: 1;top: 0;} */
 .Asamll .Achild:hover .bBox{height: 400px;padding-top: 10px;padding-left: 5px;}
+
+/* .orderNavTwo .tt:nth-child(7){margin-right: 0;} */
 
 .black-bj2{z-index: 10;/* display: none; */}
 

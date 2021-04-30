@@ -16,7 +16,7 @@
 .aboutL .con{line-height: 2.5;font-size: 14px;margin-bottom: 68px;}
 .aboutR video{width: 100%;height: auto;float: right;}
 .poster{position: absolute;top: 0;left: 0;bottom: 0;right: 0;}
-.posterImg{width: 100%;height: 100%;}
+.posterImg{width: 100%;height: auto;position: absolute;left: 0;right: 0;bottom: 0;top: 0;margin: auto;}
 .play{width: 100rpx;height: 100rpx;position: absolute;top: 0;left: 0;bottom: 0;right: 0;margin: auto;cursor: pointer;}
 .jj{min-height: 520px;}
 

@@ -127,7 +127,7 @@
 				<span class="tt flexCenter" 
 				:class="currId==-1?'on':''" @click="changeCurr(-1)">
 					<img class="icon" src="images/case-icon.png"/>
-					<em>{{language=='_e'?'whole':(language=='_f'?'全部':'全部')}}</em>
+					<em>{{language=='_e'?'All':(language=='_f'?'全部':'全部')}}</em>
 				</span>
 				<span class="tt flexCenter" v-for="item in labelData"
 				:class="currId==item.id?'on':''" @click="changeCurr(item.id)">
@@ -142,7 +142,7 @@
 				<span class="tt flexCenter"
 				:class="currId==-1?'on':''" @click="changeCurr(-1)">
 					<img class="icon" src="images/case-icon.png"/>
-					<em>{{language=='_e'?'whole':(language=='_f'?'全部':'全部')}}</em>
+					<em>{{language=='_e'?'All':(language=='_f'?'全部':'全部')}}</em>
 				</span>
 				<span class="tt flexCenter" v-for="item in labelData"
 				:class="currId==item.id?'on':''" @click="changeCurr(item.id)">
