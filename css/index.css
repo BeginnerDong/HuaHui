@@ -288,7 +288,7 @@
 }
 
 @media only screen and (max-width: 500px){
-	.footImg{height: auto;padding-top: 12%;}
+	.footImg{height: 200px;}
 	
 	.jj{min-height: 420px;}
 	.case{min-height: 500px;}
@@ -340,3 +340,7 @@
 	.swiper-pagination-bullet-active{background-color: initial;border: 1px solid #e1e1e1;width: 7px;height: 7px;margin-bottom: 9px!important;}
 }
 
+
+@media only screen and (max-width: 700px){
+	.footImg{height: 150px;}
+}
