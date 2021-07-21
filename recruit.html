@@ -19,6 +19,8 @@
 		[v-cloak] {
 			display:none!important;
 		}
+		
+		.all-pages{position: initial;}
 	</style>
 
 <body>
@@ -27,7 +29,7 @@
 		
 		<include src="header.html"></include>
 		
-		<div class="pdb80 jp">
+		<div class="pdb80 jp p-r">
 			<!-- <div class="jobPin">
 				<ul class="flexRowBetween">
 					<li v-for="(item,index) in mainData" :key="index">
@@ -163,7 +165,9 @@
 				changePage(e) {
 					var self = this;
 					var dataSet = window.base.getDataSet(e);
+					console.log('232',e)
 					window.base.changePage(dataSet, self);
+					window.scrollTo(0,0);
 				},
 		    }
 		});
