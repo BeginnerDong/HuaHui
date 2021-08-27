@@ -289,11 +289,9 @@
 						parentid:0,
 						type:5
 					};
-					
 					postData.order = {
 						listorder:'asc'
 					};
-					
 					const callback = (res) => {
 						if (res.info.data.length > 0) {
 							self.mainData.push.apply(self.mainData,res.info.data);

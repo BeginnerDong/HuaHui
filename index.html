@@ -213,14 +213,15 @@
 				<div class="flex pdb40 flex-wrap hd">
 					<div class="IconBoxs" 
 					v-for="(item,index) in brandData" :key="index"
-					 v-show="index<=6">
+					v-show="index<=6">
 						<a @mouseenter="enter(index)" :href="'product.html?id='+item.id+'&behavior='+item.behavior"
-						class="IconBox" v-show="index<=6 && index!=0">
+						class="IconBox" v-show="index!=0">
 							<!-- <img src="images/news-img3.jpg" class="bg"> -->
 							<img :src="item&&item.headImg&&item.headImg[0]?item.headImg[0].url:''" class="bg">
 							<div class="Icon flexCenter">
 								<!-- <img src="images/brand-img113.png"> -->
-								<img :src="item.mainImg&&item.mainImg[0]&&item.mainImg[0].url">
+								<img :src="item.mainImg&&item.mainImg[1]&&item.mainImg[1].url"  v-if="item.title=='LightAct'">
+								<img :src="item.mainImg&&item.mainImg[0]&&item.mainImg[0].url" v-else>
 							</div>
 						</a>
 						<a href="product.html?id=96&behavior=2" class="flexCenter mgl30 pr o-h qtImg" v-if="index==2" @mouseenter="enter(7)" @mouseleave="leave()" >
@@ -231,9 +232,15 @@
 							<img src="images/home-img09.png" class="mgl30 qtImg " >
 							<div class="Icon flexCenter mgl30"></div>
 						</a>
-						<a class="flexCenter mgl30 pr o-h qtImg" v-show="index==6"  href="product.html?id=96&behavior=2" style="color: #fff;" @mouseenter="enter(7)" @mouseleave="leave()">
-							<img src="images/home-img012.png" class="qtImg">
-							<div class="Icon flexCenter font31 hand">{{language=='_e'?'More':(language=='_f'?'更多':'更多')}} ></div>
+						<a class="flexCenter mgl30 pr o-h qtImg" v-if="index==6"  
+						:href="'product.html?id='+brandData[0].id+'&behavior='+brandData[0].behavior"
+						style="color: #fff;" @mouseenter="enter(7)" @mouseleave="leave()">
+							<!-- {{brandData[6]&&brandData[6].headImg&&brandData[6].headImg[0]?brandData[6].headImg[0].url:''}} -->
+							<img :src="brandData[0]&&brandData[0].headImg&&brandData[0].headImg[0]&&brandData[0].headImg[0].url" class="qtImg qtImg1">
+							<div class="Icon flexCenter">
+								<img :src="brandData[0].mainImg&&brandData[0].mainImg[0]&&brandData[0].mainImg[0].url">
+							</div>
+							<!-- <div class="Icon flexCenter font31 hand">{{language=='_e'?'More':(language=='_f'?'更多':'更多')}} ></div> -->
 						</a>
 					</div>
 				</div>

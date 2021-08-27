@@ -12,9 +12,11 @@
 			v-swipeleft="{fn:vuetouch,name:'左滑'}"
 			v-swiperight="{fn:vuetouch,name:'右滑'}"
 			@touchmove.prevent>
-				<img :src="item&&item.headImg&&item.headImg[0]&&item.headImg[0].url"/>
+				<img :src="item&&item.headImg&&item.headImg[1]&&item.headImg[1].url"/ v-if="item.title=='Wysiwyg'">
+				<img :src="item&&item.headImg&&item.headImg[0]&&item.headImg[0].url"/ v-else>
 				<div class="Icon flexCenter">
-					<img :src="item.mainImg&&item.mainImg[0]&&item.mainImg[0].url" class="logoImg">
+					<img :src="item.mainImg&&item.mainImg[1]&&item.mainImg[1].url" class="logoImg" v-if="item.title=='LightAct'">
+					<img :src="item.mainImg&&item.mainImg[0]&&item.mainImg[0].url" class="logoImg" v-else>
 				</div>
 			</div>
 		    <!-- <img :src="item.url" :alt="index" v-for="(item,index) in mainData" :key="index"  :style="'width:'+widthStandard+'px'"/> -->
