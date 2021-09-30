@@ -163,7 +163,7 @@
 						<ul>
 							<li class="flexRowBetween" v-for="(item,index) in mainData" :key="index">
 								<p class="ll">{{item['title'+language]}}</p>
-								<a download :href="item['mainImg'+language]&&item['mainImg'+language][0]?item['mainImg'+language][0].url:''" target="_blank">
+								<a download :href="item['mainImg'+language]&&item['mainImg'+language][0]?item['mainImg'+language][0].url:''">
 									<span class="rr flexEnd">
 										<img class="icon" src="images/download-icon7.png" >
 										<span>{{language=='_e'?'Download':(language=='_f'?'下載':'下载')}}</span>
