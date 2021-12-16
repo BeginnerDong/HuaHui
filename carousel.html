@@ -123,7 +123,7 @@
 			
 			self.initLanguage2();
 			window.base.bus.$on('changelanguage',function(res){
-				console.log('res',res)
+				// console.log('res',res)
 				self.language = res;
 				self.initLanguage2();
 				self.getMainData()
@@ -149,7 +149,7 @@
 			},
 			
 			test(e){
-				console.log(e)
+				// console.log(e)
 			},
 			
 			vuetouch:function(s,e){
@@ -232,7 +232,7 @@
 						self.content = self.mainData[self.nowIndex]['description'+self.language];
 						self.behavior = self.mainData[self.nowIndex].behavior;
 						self.id = self.mainData[self.nowIndex].id;
-						console.log('self.autoPlayInterval',self.autoPlayInterval)
+						// console.log('self.autoPlayInterval',self.autoPlayInterval)
 						if(self.isAutoPlay){
 							if(self.timeOutEvent){
 								clearTimeout(self.timeOutEvent);
@@ -265,9 +265,9 @@
 				};
 				self.toIndex = self.nowIndex - 1;
 				self.animate();
-				console.log('self.mainData',self.mainData.length)
-				console.log('self.nowIndex',self.nowIndex,)
-				console.log('self.toIndex',self.toIndex,)
+				// console.log('self.mainData',self.mainData.length)
+				// console.log('self.nowIndex',self.nowIndex,)
+				// console.log('self.toIndex',self.toIndex,)
 			},
 			
 			

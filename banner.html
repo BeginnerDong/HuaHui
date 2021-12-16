@@ -131,7 +131,7 @@
 			    var callback = function(res){
 			        if(res.info.data.length>0&&res.info.data[0]){
 						self.bannerData =res.info.data[0].child;
-						console.log('self.bannerData',self.bannerData)
+						// console.log('self.bannerData',self.bannerData)
 			        };    
 					self.bannerTimer = setInterval(function(){
 						self.changeBanner('+');
@@ -142,7 +142,7 @@
 			
 			toBannerOne:function(e){
 				const self = this;
-				console.log('e',e)
+				// console.log('e',e)
 				clearInterval(self.bannerTimer);
 				// self.bannerData = null;
 				var index = parseInt(e.target.dataset.index);
