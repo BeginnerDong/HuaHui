@@ -70,11 +70,11 @@
 						<a :href="link" target="_blank">{{language=='_e'?'Tmall':(language=='_f'?'天貓商城':'天猫商城')}}</a>
 					</div>
 
-					<!-- <div class="language">
+					<div class="language">
 						<span class="hand" :class="language==''?'lang':''" @click="changeLanguage('')">简</span>/
 						<span class="hand" :class="language=='_f'?'lang':''" @click="changeLanguage('_f')">繁</span>/
 						<span class="hand" :class="language=='_e'?'lang':''" @click="changeLanguage('_e')">EN</span>
-					</div> -->
+					</div>
 				</div>
 
 			</div>
@@ -83,11 +83,11 @@
 		<!-- 移动端显示导航 -->
 		<div class="mNav animated fadeInLeft" v-show="is_showNav">
 			<img class="close" src="images/icon-09.png" @click="shownav">
-			<!-- <div class="language langM">
+			<div class="language langM">
 				<span class="hand" :class="language==''?'lang':''" @click="changeLanguage2('')">简</span> /
 				<span class="hand" :class="language=='_f'?'lang':''" @click="changeLanguage2('_f')">繁</span> /
 				<span class="hand" :class="language=='_e'?'lang':''" @click="changeLanguage2('_e')">EN</span>
-			</div> -->
+			</div>
 			<a href="seach.html" class="Mseach">
 				<img src="images/input.png" class="input">
 				<input type="text" name="" id="" value=""
