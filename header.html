@@ -18,8 +18,8 @@
 			<div style="height: 100%;" class="searchPC">
 				<div class="Rseach">
 					<input type="text" v-on:keydown.enter="goSearch" v-model="title"
-						:placeholder="language=='_e'?'Search content':(language=='_f'?'請輸入你要蒐索的內容':'请输入你要搜索的内容')" />
-					<a href="seach.html"><img class="icon" src="images/home-icon0.png"></a>
+						:placeholder="language=='_e'?'Search content':(language=='_f'?'請輸入你要搜索的内容':'请输入你要搜索的内容')" />
+					<a href="seach.html"><img class="icon" src="images/icon.png"></a>
 				</div>
 				<div class="orderNavTwo pc flexRowBetween fs16">
 					<!-- <div class="tt" :class="currentUrl=='/index.html'?'on':''"><a href="index.html">{{language=='_e'?'Home':(language=='_f'?'首頁':'首页')}}</a></div> -->
@@ -27,7 +27,7 @@
 							href="about-us.html">{{language=='_e'?'About Us':(language=='_f'?'關於華匯':'关于华汇')}}</a></div>
 					<div class="tt pr" :class="currentUrl=='/classic-cases.html'||(menu_id!=5&&menu_id!=0)?'on':''">
 						<a href="classic-cases.html"
-							@click="goCase(1)">{{language=='_e'?'Case':(language=='_f'?'經典案例':'经典案例')}}</a>
+							@click="goCase(1)">{{language=='_e'?'Applications':(language=='_f'?'經典案例':'经典案例')}}</a>
 						<div class="Asamll alAsamll">
 							<div class="Achild" v-for="(item,index) in labelData" :key="item.id">
 								<div class="Aname">
@@ -61,7 +61,7 @@
 					<div class="tt" :class="currentUrl=='/download.html'?'on':''"><a
 							href="download.html">{{language=='_e'?'Download':(language=='_f'?'下載中心':'下载中心')}}</a></div>
 					<div class="tt" :class="currentUrl=='/rental.html'?'on':''"><a
-							href="rental.html">{{language=='_e'?'Rental':(language=='_f'?'租賃網絡':'租赁网络')}}</a></div>
+							href="rental.html">{{language=='_e'?'Fina a Partner':(language=='_f'?'租賃網絡':'租赁网络')}}</a></div>
 					<div class="tt" :class="currentUrl=='/contact-us.html'?'on':''"><a
 							href="contact-us.html">{{language=='_e'?'Contact Us':(language=='_f'?'聯繫我們':'联系我们')}}</a>
 					</div>
@@ -109,7 +109,7 @@
 					</div>
 				</div>
 				<div class="tt" :class="currentUrl=='/classic-cases.html'||(menu_id!=5&&menu_id!=0)?'on':''">
-					<a @click="go(3)">{{language=='_e'?'Case':(language=='_f'?'經典案例':'经典案例')}}</a>
+					<a @click="go(3)">{{language=='_e'?'Applications':(language=='_f'?'經典案例':'经典案例')}}</a>
 					<div class="off" v-show="show1" @click="showOff('one')">
 						<img src="images/icon-08.png">
 					</div>
@@ -167,7 +167,7 @@
 					</div>
 				</div>
 				<div class="tt" :class="currentUrl=='/rental.html'?'on':''"><a
-						@click="go(8)">{{language=='_e'?'Rental':(language=='_f'?'租賃網絡':'租赁网络')}}</a>
+						@click="go(8)">{{language=='_e'?'Fina a Partner':(language=='_f'?'租賃網絡':'租赁网络')}}</a>
 					<div class="off">
 						<img src="images/icon-08.png">
 					</div>

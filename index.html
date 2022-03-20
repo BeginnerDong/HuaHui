@@ -39,7 +39,7 @@
 		<!-- 公司简介 -->
 		<div class="aboutUs">
 			<div class="allH1 aboutH1">
-				<h1><span >{{language=='_e'?'Company profile':(language=='_f'?'公司簡介':'公司简介')}}</span>About Us</h1>
+				<h1><span :class="language=='_e'?'normal':''">{{language=='_e'?'About Us':(language=='_f'?'公司簡介':'公司简介')}}</span>{{language=='_f'?'':'About Us'}}</h1>
 			</div>
 			<div class="w1660 flexRowBetween jj">
 				<div class="aboutR aboutR2 animated" :style="video_show?'margin-left:-2000px':'margin-left:0'">
@@ -54,7 +54,7 @@
 					<!-- <div @click="play()">点击播放</div> -->
 				</div>
 				<div class="aboutL animated fadeInLeft" v-show="aboutHeight+headerHeight+(aboutHeight*0.3)<offsetTopNow">
-					<h1>{{language=='_e'?'Company Profile':(language=='_f'?'公司簡介':'公司简介')}} <span>About Us</span></h1>
+					<h1 :class="language=='_e'?'normal':''">{{language=='_e'?'About Us':(language=='_f'?'公司簡介':'公司简介')}} <span>{{language=='_e'?'':'About Us'}}</span></h1>
 					<div class="con avoidOverflow6">
 						{{productData['description'+language]}}
 					</div>
@@ -76,7 +76,7 @@
 		<!-- 经典案例 -->
 		<div class="case" id="case">
 			<div class="allH1">
-				<h1><span>{{language=='_f'?'經典案例':(language=='_e'?'Classic Cases':'经典案例')}}</span> Cases</h1>
+				<h1><span :class="language=='_e'?'normal':''">{{language=='_f'?'經典案例':(language=='_e'?'Applications':'经典案例')}}</span>{{language=='_e'?'':'Cases'}}</h1>
 			</div>
 			
 			<div class="flex con con1 animated fadeInUp" v-show="caseHeight+headerHeight+(caseHeight*0.3)<offsetTopNow">
@@ -106,7 +106,7 @@
 										<div class="b-fCon">
 											<h1 class="avoidOverflow">{{item['title'+language]}}</h1>
 											<p class="avoidOverflow3">{{item['description+language']}}</p>
-											<a class="hand" :href="'classic-cases.html?menu_id='+labelData[index].id">READ MORE ></a>
+											<a class="hand" :href="'classic-cases.html?menu_id='+labelData[index].id">LEARN MORE ></a>
 										</div>
 									</div>
 								</div>
@@ -156,7 +156,7 @@
 		<!-- 最新案例 -->
 		<div class="news w1660">
 			<div class="allH1">
-				<h1><span>{{language=='_f'?'最新案例':(language=='_e'?'Latest Cases':'最新案例')}}</span> News</h1>
+				<h1><span :class="language=='_e'?'normal':''">{{language=='_f'?'最新案例':(language=='_e'?'News':'最新案例')}}</span> {{language=='_e'?'':'News'}}</h1>
 			</div>
 			
 			

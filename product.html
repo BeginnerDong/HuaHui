@@ -41,7 +41,7 @@
 		<div class="w1100">
 			<div class="orderNav flexCenter borderB1">
 				<span class="tt flexCenter" style="cursor: pointer;" :class="currId==-1?'on':''"
-				@click="changeCurr(-1,0)">全部</span>
+				@click="changeCurr(-1,0)">{{language=='_e'?'All':(language=='_f'?'全部':'全部')}}</span>
 				<span class="tt flexCenter" :class="currId==item.id?'on':''" 
 				@click="changeCurr(item.id,item.behavior)" v-for="(item,index) in labelData" :key="index">{{item['title'+language]}}</span>
 			</div>

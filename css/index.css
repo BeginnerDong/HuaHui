@@ -324,6 +324,7 @@
 	.newsItem{min-height: 430px;padding-bottom: 20px;}
 	.newsItem .L{padding-bottom: 20px;}
 	.newsItem .R h1{font-size: 20px;padding-bottom: 20px;}
+	.newsItem .R span{overflow: hidden;}
 	.newsItem .R p{font-size: 14px;padding-top: 20px;margin-bottom: 20px;min-height: 80px;}
 	.newsItem .R .moreBtn{margin-bottom: 30px;}
 	/* .newsItem .L img{min-height: 270px;} */

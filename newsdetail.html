@@ -79,7 +79,7 @@
 			<span class="tt flexCenter" v-for="item in labelData"
 			:class="currId==item.id?'on':''" @click="changeCurr(item.id)">
 				<img class="icon" :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''"/>
-				<em>{{item['title'+language]}}</em>
+				<em class="avoidOverflow">{{item['title'+language]}}</em>
 			</span>
 		</div>
 		

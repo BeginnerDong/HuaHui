@@ -24,8 +24,8 @@
 		[v-cloak] {
 			display:none!important;
 		}
-		.orderNav{padding: 0px 0;}
-		.orderNav .tt{font-size: 15px;margin: 0 2.2%;}
+		.orderNav{padding: 0px 0;overflow-x: auto;}
+		.orderNav .tt{font-size: 15px;margin: 0 2.2%;flex-shrink: 0;}
 		.orderNav .tt.on{position: relative;}
 		.orderNav .tt.on:after{content: '';width:40px;height: 2px;background: #222;position: absolute;bottom: 0;left: 50%;transform: translateX(-50%);}
 		
@@ -69,6 +69,7 @@
 		
 		@media only screen and (max-width:500px){
 			.seachCont{padding-top: 20px;}
+			.orderNav{justify-content: flex-start;}
 			.orderNav .tt{font-size: 14px;margin: 0 3%;}
 			
 			.HDPicBox ul li{width: 49%;height: 130px;margin-right: 0!important;}
@@ -114,13 +115,13 @@
 		
 		<div class="f5bj">
 			<div class="orderNav flexCenter borderB1">
-				<span class="tt" :class="curr==1?'on':''" @click="changeCurr('1')">{{language=='_e'?'Article':(language=='_f'?'文章':'文章')}}</span>
-				<span class="tt" :class="curr==2?'on':''" @click="changeCurr('2')">{{language=='_e'?'Data':(language=='_f'?'資料':'资料')}}</span>
+				<span class="tt" :class="curr==1?'on':''" @click="changeCurr('1')">{{language=='_e'?'Application':(language=='_f'?'文章':'文章')}}</span>
+				<span class="tt" :class="curr==2?'on':''" @click="changeCurr('2')">{{language=='_e'?'Specification':(language=='_f'?'資料':'资料')}}</span>
 				<span class="tt" :class="curr==3?'on':''" @click="changeCurr('3')">{{language=='_e'?'Image':(language=='_f'?'圖片':'图片')}}</span>
 				<span class="tt" :class="curr==4?'on':''" @click="changeCurr('4')">{{language=='_e'?'Video':(language=='_f'?'視頻':'视频')}}</span>
 				<span class="tt" :class="curr==7?'on':''" @click="changeCurr('7')">{{language=='_e'?'Software':(language=='_f'?'軟件':'软件')}}</span>
 				<span class="tt" :class="curr==5?'on':''" @click="changeCurr('5')">{{language=='_e'?'Product':(language=='_f'?'產品':'产品')}}</span>
-				<span class="tt" :class="curr==6?'on':''" @click="changeCurr('6')">{{language=='_e'?'Recruit':(language=='_f'?'招聘':'招聘')}}</span>
+				<span class="tt" :class="curr==6?'on':''" @click="changeCurr('6')">{{language=='_e'?'Recruitment':(language=='_f'?'招聘':'招聘')}}</span>
 				<!-- <span class="tt" :class="curr==7?'on':''" @click="changeCurr('7')">品牌</span> -->
 			</div>
 		</div>

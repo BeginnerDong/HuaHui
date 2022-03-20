@@ -71,9 +71,9 @@
 			.fsbanner{min-height: 200px;}
 			.fsbanner .item{height: 200px!important;width: 100%!important;border-top: none;border-bottom: none;}
 			.fsbanner .item.on {padding: 0 10px;}
-			.fsbanner .name {font-size: 18px; letter-spacing: 0;    -webkit-writing-mode: initial; writing-mode: initial;line-height: 30px;display: flex;align-items: center;}
+			.fsbanner .name {font-size: 18px; letter-spacing: 1px;line-height: 30px;display: flex;align-items: center;writing-mode: vertical-lr;/*从左向右 从右向左是 writing-mode: vertical-rl;*/writing-mode: tb-lr;/*IE浏览器的从左向右 从右向左是 writing-mode: tb-rl；*/text-align: center;justify-content: center; }
 			.fsbanner .item .pic{width: 100%; height: 100%;right: 0;}
-			.fsbanner .item.on .name{font-size: 20px;letter-spacing: 0;}
+			.fsbanner .item.on .name{font-size: 20px;letter-spacing: 0; }
 			.pdt40{padding-top: 40px;}
 		}
 		
