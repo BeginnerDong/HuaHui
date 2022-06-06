@@ -5,6 +5,7 @@ export default {
 		return {
 			mainData: [],
 			self: this,
+      search_header:'',
 			fields: [{
 					key: 'id',
 					label: '文章ID',
@@ -23,8 +24,8 @@ export default {
 					header_search_type: 'input',
 					header_search_style: 'width:160px;margin-right:2px;',
 					changeFunc: function(e, self) {
-						if (e.target._value) {
-							self.searchItem.title = ['LIKE', ['%' + e.target._value + '%']];
+						if (e.target.value) {
+							self.searchItem.title = ['LIKE', ['%' + e.target.value + '%']];
 						} else {
 							delete self.searchItem.title;
 						};
@@ -68,6 +69,18 @@ export default {
 					application: ['编辑', '添加'],
 					type: 'input',
 					listType: 'normal'
+				},
+				{
+					key: "phone_e",
+					label: '电话(英)',
+					application: ['添加', '编辑'],
+					type: 'input'
+				},
+				{
+					key: "phone_f",
+					label: '电话(繁)',
+					application: ['添加', '编辑'],
+					type: 'input'
 				},
 				{
 					key: 'description',

@@ -2,7 +2,7 @@
   <div class="list">
     <el-header>
       <template v-for="item in fields">
-        <el-input v-if="item.header_search&&item.header_search_type=='input'" :style="item.header_search_style"  @blur="(e)=>{item.changeFunc(e,self)}" :placeholder="item.placeholder" clearable>
+        <el-input v-model="search_header" v-if="item.header_search&&item.header_search_type=='input'" :style="item.header_search_style"  @blur="(e)=>{item.changeFunc(e,self)}" :placeholder="item.placeholder" clearable>
         </el-input>
         <el-select 
           v-if="item.header_search&&item.header_search_type=='select'"

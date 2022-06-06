@@ -276,10 +276,13 @@ export default {
             },
             formData:function(data,self,func){
                 var res = self.getCheckedNodes();
+                console.log('ress2323',res);
                 if(res){
                   var data = {
                     parentid: res.parentid,
                     title:res.title,
+                    title_e:res.title_e,
+                    title_f:res.title_f,
                     mainImg:res.mainImg,
                     mainImg_e:res.mainImg_e,
                     mainImg_f:res.mainImg_f,
@@ -305,7 +308,7 @@ export default {
                     error:'请选择一个菜单'
                   }
                 };
-				console.log('data',data);
+                console.log('data',data);
                 return data||{};
             },
             postData:function(data,self){

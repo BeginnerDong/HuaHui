@@ -160,18 +160,8 @@
 					self.next();
 				}else{
 					self.prev();
-					if(self.toIndex==1){
-						self.nowIndex = 7;
-						self.toIndex = 8;
-					}
 				}
 				
-				// if(self.banner_index<0){
-				// 	self.banner_index = self.bannerData.length-1
-				// };
-				// if(self.banner_index==self.bannerData.length){
-				// 	self.banner_index = 0
-				// };
 			},
 			
 			stop(){
@@ -215,7 +205,7 @@
 						setTimeout(go, self.perTime/self.cents);
 					}else{
 						if(self.toIndex==1){
-							self.leftOffset = -self.widthStandard*(self.mainData.length-2);
+							self.leftOffset = -self.widthStandard*(self.mainData.length-3);
 							self.nowIndex = self.mainData.length-3;
 						}else if(self.toIndex==(self.mainData.length-2)){
 							self.nowIndex = 2;
@@ -232,7 +222,6 @@
 						self.content = self.mainData[self.nowIndex]['description'+self.language];
 						self.behavior = self.mainData[self.nowIndex].behavior;
 						self.id = self.mainData[self.nowIndex].id;
-						// console.log('self.autoPlayInterval',self.autoPlayInterval)
 						if(self.isAutoPlay){
 							if(self.timeOutEvent){
 								clearTimeout(self.timeOutEvent);
@@ -255,15 +244,15 @@
 				};
 				self.toIndex = self.nowIndex +1;
 				self.animate();
-				// console.log('next',self.nowIndex,self.toIndex,)
+				// console.log('next',self.toIndex,self.nowIndex)
 			},
 			prev:function(){
 				const self = this;
-				console.log('prev')
 				if(self.clock){
 					return;
 				};
 				self.toIndex = self.nowIndex - 1;
+				// console.log('prev',self.toIndex,self.nowIndex);
 				self.animate();
 				// console.log('self.mainData',self.mainData.length)
 				// console.log('self.nowIndex',self.nowIndex,)
@@ -288,12 +277,12 @@
 						self.mainData.push(res.info.data[0]);
 						self.mainData.push(res.info.data[1]);
 						self.totalWidth = self.widthStandard*self.mainData.length;
-						self.title = self.mainData[0].title;
-						self.content = self.mainData[0].description;
-						self.behavior = self.mainData[0].behavior;
-						self.id = self.mainData[0].id;
+						self.title = res.info.data[0].title;
+						self.content = res.info.data[0].description;
+						self.behavior = res.info.data[0].behavior;
+						self.id = res.info.data[0].id;
 						// console.log('宽度',self.totalWidth)
-						 //console.log('self.mainData',self.mainData)
+						 console.log('self.mainData',self.mainData)
 						// console.log('self.bannerData',self.bannerData)
 			        };    
 					setTimeout(function(){

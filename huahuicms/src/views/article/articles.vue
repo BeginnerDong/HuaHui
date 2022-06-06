@@ -2,15 +2,16 @@
   <div class="list">
     <el-header>
       <template v-for="item in fields">
+
         <el-input v-model="search_header" v-if="item.header_search&&item.header_search_type=='input'" :style="item.header_search_style"  @blur="(e)=>{item.changeFunc(e,self)}" :placeholder="item.placeholder" clearable>
         </el-input>
-        <el-select 
+        <el-select
           v-if="item.header_search&&item.header_search_type=='select'"
           :style="item.header_search_style"
-          v-model="item.value"  
+          v-model="item.value"
           @change="(value) => {
             item.changeFunc(value,self)
-          }" 
+          }"
           :placeholder="item.placeholder"
           clearable
         >
@@ -31,7 +32,7 @@
           :placeholder="item.placeholder"
           @change="(value) => {
             item.changeFunc(value,self)
-          }" 
+          }"
           change-on-select
           clearable
         >
@@ -48,7 +49,7 @@
           :placeholder="item.placeholder"
           @change="(value) => {
             item.changeFunc(value,self)
-          }" 
+          }"
         >
         </el-date-picker>
 
@@ -78,8 +79,8 @@
 </template>
 
 <script>
-  import dataJs from './data.js'
-  export default dataJs
+  import articlesJs from './articles.js'
+  export default articlesJs
 </script>
 <style scoped lang='less'>
 

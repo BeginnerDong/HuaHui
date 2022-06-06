@@ -5,6 +5,7 @@ export default {
     return {
       mainData: [],
       self:this,
+      search_header:'',
       fields: [
         {
           key: 'id',
@@ -24,8 +25,8 @@ export default {
           header_search_type:'input',
           header_search_style:'width:160px;margin-right:2px;',
           changeFunc:function(e,self){
-            if(e.target._value){
-              self.searchItem.title = ['LIKE',['%'+e.target._value+'%']];
+            if(e.target.value){
+              self.searchItem.title = ['LIKE',['%'+e.target.value+'%']];
             }else{
               delete self.searchItem.title;
             };

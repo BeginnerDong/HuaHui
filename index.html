@@ -10,7 +10,7 @@
 		<title>Rightway Audio Consultants</title>
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 		<!-- <script type="text/javascript" src="./js/vue.js"></script> -->
-		<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+		<script src="https://image.racpro.net/hh/1653299945949vue.js"></script>
 		<script type="text/javascript" src="js/jquery.min.js"></script>
 		<script type="text/javascript" src="js/base.js"></script>
 		<script type="text/javascript" src="js/include.js"></script>
@@ -39,7 +39,7 @@
 		<!-- 公司简介 -->
 		<div class="aboutUs">
 			<div class="allH1 aboutH1">
-				<h1><span :class="language=='_e'?'normal':''">{{language=='_e'?'About Us':(language=='_f'?'公司簡介':'公司简介')}}</span>{{language=='_f'?'':'About Us'}}</h1>
+				<h1><span :class="language=='_e'?'normal':''">{{language=='_e'?'About Us':(language=='_f'?'公司簡介':'公司简介')}}</span>{{language=='_e'?'':'About Us'}}</h1>
 			</div>
 			<div class="w1660 flexRowBetween jj">
 				<div class="aboutR aboutR2 animated" :style="video_show?'margin-left:-2000px':'margin-left:0'">
@@ -100,13 +100,13 @@
 					    <ul class="swiper-wrapper flex">
 							<li class="swiper-slide item" v-for="(item,index) in artData" :key="index">
 								<img :src="item&&item['mainImg'+language]&&item['mainImg'+language][0]?item['mainImg'+language][0].url:''" class="caseImg">
-								<div class="b-name avoidOverflow">{{item['small_title'+language]}}</div>
+								<div class="b-name avoidOverflow">{{item['title'+language]}}</div>
 								<div class="caseMask">
 									<div class="b-f">
 										<div class="b-fCon">
-											<h1 class="avoidOverflow">{{item['title'+language]}}</h1>
-											<p class="avoidOverflow3">{{item['description+language']}}</p>
-											<a class="hand" :href="'classic-cases.html?menu_id='+labelData[index].id">LEARN MORE ></a>
+											<h1 class="avoidOverflow">{{item['small_title'+language]}}</h1>
+											<p class="avoidOverflow3">{{item['description'+language]}}</p>
+											<a class="hand" :href="'classic-cases.html?menu_id='+item.passage1">LEARN MORE ></a>
 										</div>
 									</div>
 								</div>
@@ -214,6 +214,7 @@
 					<div class="IconBoxs" 
 					v-for="(item,index) in brandData" :key="index"
 					v-show="index<=6">
+						<!-- <p style="position: absolute;">{{item.title}}</p> -->
 						<a @mouseenter="enter(index)" :href="'product.html?id='+item.id+'&behavior='+item.behavior"
 						class="IconBox" v-show="index!=0">
 							<!-- <img src="images/news-img3.jpg" class="bg"> -->
@@ -224,21 +225,22 @@
 								<img :src="item.mainImg&&item.mainImg[0]&&item.mainImg[0].url" v-else>
 							</div>
 						</a>
-						<a href="product.html?id=96&behavior=2" class="flexCenter mgl30 pr o-h qtImg" v-if="index==2" @mouseenter="enter(7)" @mouseleave="leave()" >
+						<a :href="'product.html?id='+brandData[0].id+'&behavior='+brandData[0].behavior"
+						class="flexCenter mgl30 pr o-h qtImg" v-if="index==2" @mouseenter="enter(8)" @mouseleave="leave()" >
 							<img src="images/home-img06.png" class="mgl30 qtImg ">
 							<div class="Icon flexCenter mgl30"></div>
 						</a>
-						<a href="product.html?id=96&behavior=2" class="flexCenter mgl30 pr o-h qtImg" v-if="index==4" @mouseenter="enter(7)" @mouseleave="leave()">
+						<a class="flexCenter mgl30 pr o-h qtImg" v-if="index==4" style="cursor: auto;">
 							<img src="images/home-img09.png" class="mgl30 qtImg " >
 							<div class="Icon flexCenter mgl30"></div>
 						</a>
-						<a class="flexCenter mgl30 pr o-h qtImg" v-if="index==6"  
-						:href="'product.html?id='+brandData[0].id+'&behavior='+brandData[0].behavior"
+						<a class="flexCenter mgl30 pr o-h qtImg" v-if="index==6"
+						:href="'product.html?id='+brandData[7].id+'&behavior='+brandData[7].behavior"
 						style="color: #fff;" @mouseenter="enter(7)" @mouseleave="leave()">
 							<!-- {{brandData[6]&&brandData[6].headImg&&brandData[6].headImg[0]?brandData[6].headImg[0].url:''}} -->
-							<img :src="brandData[0]&&brandData[0].headImg&&brandData[0].headImg[0]&&brandData[0].headImg[0].url" class="qtImg qtImg1">
+							<img :src="brandData[7]&&brandData[7].headImg&&brandData[7].headImg[0]&&brandData[7].headImg[0].url" class="qtImg qtImg1">
 							<div class="Icon flexCenter">
-								<img :src="brandData[0].mainImg&&brandData[0].mainImg[0]&&brandData[0].mainImg[0].url">
+								<img :src="brandData[7].mainImg&&brandData[7].mainImg[0]&&brandData[7].mainImg[0].url">
 							</div>
 							<!-- <div class="Icon flexCenter font31 hand">{{language=='_e'?'More':(language=='_f'?'更多':'更多')}} ></div> -->
 						</a>
@@ -358,7 +360,9 @@
 					
 					labelData:[],
 					
-					language:''
+					language:'',
+					
+					otherData:{}
 		        }
 		    },
 			
@@ -393,7 +397,9 @@
 				self.initLanguage();
 				window.base.bus.$on('changelanguage',function(res){
 					self.language = res;
-					self.initLanguage()
+					self.initLanguage();
+					location.reload();
+					// self.refushSwiper();
 				});
 			},
 			mounted(){
@@ -599,9 +605,14 @@
 					    pagesize:6, 
 					    is_page: true, 
 					};
+				 //    postData.searchItem = {
+					// 	thirdapp_id:2,
+					// 	type:1
+					// };
 				    postData.searchItem = {
 						thirdapp_id:2,
-						type:1
+						type:1,
+						menu_id:158
 					};
 					postData.order = {
 						listorder:'desc'
@@ -609,52 +620,55 @@
 				    var callback = function(res){
 				        if(res.info.data.length>0&&res.info.data[0]){
 							self.artData.push.apply(self.artData,res.info.data)
-							
-							setTimeout(function(){
-								self.swiper3 = new Swiper('.swiper11', {
-									loop: true,
-									initialSlide:0,
-								    slidesPerView: 3,
-								    spaceBetween : 0,
-									speed:1500,
-									autoplay:{
-										delay: 5000,
-									},
-									navigation: {
-									  nextEl: '.swiper-next',
-									  prevEl: '.swiper-prev',
-									},
-									observer: true,//修改swiper自己或子元素时，自动初始化swiper
-									observeParents: true,//修改swiper的父元素时，自动初始化swiper
-								})
-							},1000)
-							
-							setTimeout(function(){
-								var swiper = new Swiper('.swiper1', {
-								    loop: true,
-								    initialSlide:0,
-								    slidesPerView: 1,
-								    spaceBetween : 20,
-									speed:1000,
-									autoplay:{
-										disableOnInteraction: false,
-										delay: 5000,
-									},
-									pagination: {
-									    el: '.swiper-pagination',
-									},
-									
-									observer: true,//修改swiper自己或子元素时，自动初始化swiper
-									observeParents: true,//修改swiper的父元素时，自动初始化swiper
-								})
-							})
-							
+							self.refushSwiper();
 							// setTimeout(() => {
 							// 	swiper.slideTo(0, 50, false);
 							// }, 50);
 				        };    
 				    };
 				    window.base.articleGet(postData, callback);
+				},
+				
+				refushSwiper(){
+					const self = this;
+					setTimeout(function(){
+						self.swiper3 = new Swiper('.swiper11', {
+							loop: true,
+							initialSlide:0,
+						    slidesPerView: 3,
+						    spaceBetween : 0,
+							speed:1500,
+							autoplay:{
+								delay: 5000,
+							},
+							navigation: {
+							  nextEl: '.swiper-next',
+							  prevEl: '.swiper-prev',
+							},
+							observer: true,//修改swiper自己或子元素时，自动初始化swiper
+							observeParents: true,//修改swiper的父元素时，自动初始化swiper
+						})
+					},500)
+					
+					setTimeout(function(){
+						var swiper = new Swiper('.swiper1', {
+						    loop: true,
+						    initialSlide:0,
+						    slidesPerView: 1,
+						    spaceBetween : 20,
+							speed:1000,
+							autoplay:{
+								disableOnInteraction: false,
+								delay: 5000,
+							},
+							pagination: {
+							    el: '.swiper-pagination',
+							},
+							
+							observer: true,//修改swiper自己或子元素时，自动初始化swiper
+							observeParents: true,//修改swiper的父元素时，自动初始化swiper
+						})
+					},500)
 				},
 				
 				getNewsData() {
@@ -692,7 +706,8 @@
 					};
 					postData.searchItem = {
 						parentid:0,
-						type:5
+						type:5,
+						// id:['not in',[157]]
 					};
 					postData.order = {
 						listorder:'asc'

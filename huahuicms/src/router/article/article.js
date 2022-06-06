@@ -15,6 +15,7 @@ export default {
   meta:{
     children:[
       '3-/article/article/article',
+      '3-/article/article/articles',
       '3-/article/article/data',
       '3-/article/article/image',
       '3-/article/article/video',
@@ -47,6 +48,27 @@ export default {
         },
       ],
       component: Article.Article
+    },
+    {
+      path: 'articles',
+      name: '首页轮播案例',
+      icon: 'reorder',
+      id:'3-/article/article/articles',
+      child_button:[
+        {
+          name:'添加',
+          id:'/article/article/articles-添加'
+        },
+        {
+          name:'编辑',
+          id:'/article/article/articles-编辑'
+        },
+        {
+          name:'删除选中',
+          id:'/article/article/articles-删除选中'
+        },
+      ],
+      component: Article.Articles
     },
     {
       path: 'data',

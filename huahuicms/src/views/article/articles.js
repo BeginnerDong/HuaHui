@@ -1,5 +1,5 @@
 export default {
-  name: 'company',
+  name: 'articles',
   components: {},
   data () {
     return {
@@ -16,15 +16,16 @@ export default {
         },
         {
           key: 'title',
-          label: '公司名称',
+          label: '名称',
           application:['编辑','添加'],
           type:'input',
           listType:'normal',
-          placeholder:'请输入公司名称',
+          placeholder:'请输入名称',
           header_search:true,
           header_search_type:'input',
           header_search_style:'width:160px;margin-right:2px;',
           changeFunc:function(e,self){
+            console.log('e.target.value',e,self)
             if(e.target.value){
               self.searchItem.title = ['LIKE',['%'+e.target.value+'%']];
             }else{
@@ -33,98 +34,78 @@ export default {
             self.initMainData();
           },
         },
+				{
+				  key: "title_e",
+				  label: '名称(英)',
+				  application:['添加','编辑'],
+				  type:'input'
+				},
+				{
+				  key: "title_f",
+				  label: '名称(繁)',
+				  application:['添加','编辑'],
+				  type:'input'
+				},
         {
-          key: "title_e",
-          label: '公司名称(英)',
-          application:['添加','编辑'],
-          type:'input'
-        },
-        {
-          key: "title_f",
-          label: '公司名称(繁)',
-          application:['添加','编辑'],
-          type:'input'
-        },
-        // {
-        //   key: 'description',
-        //   label: '描述',
-        //   application:['编辑','添加'],
-        //   type:'input',
-        //   listType:'normal'
-        // },
-        {
-          key: 'address',
-          label: '地址',
+          key: 'small_title',
+          label: '描述标题',
           application:['编辑','添加'],
           type:'input',
           listType:'normal'
         },
         {
-          key: "address_e",
-          label: '地址(英)',
+          key: "small_title_e",
+          label: '描述标题(英)',
           application:['添加','编辑'],
           type:'input'
         },
         {
-          key: "address_f",
-          label: '地址(繁)',
+          key: "small_title_f",
+          label: '描述标题(繁)',
           application:['添加','编辑'],
           type:'input'
         },
         {
-          key: 'phone',
-          label: '电话',
+          key: 'description',
+          label: '描述',
           application:['编辑','添加'],
           type:'input',
           listType:'normal'
         },
         {
-          key: 'postal_code',
-          label: '邮编',
-          application:['编辑','添加'],
-          type:'input',
-          listType:'normal'
-        },
-        // {
-        //   key: "postal_code_e",
-        //   label: '邮编(英)',
-        //   application:['添加','编辑'],
-        //   type:'input'
-        // },
-        // {
-        //   key: "postal_code_f",
-        //   label: '邮编(繁)',
-        //   application:['添加','编辑'],
-        //   type:'input'
-        // },
-        {
-          key: 'fax',
-          label: '传真',
-          application:['编辑','添加'],
-          type:'input',
-          listType:'normal'
+          key: "description_e",
+          label: '描述(英)',
+          application:['添加','编辑'],
+          type:'input'
         },
         {
-          key: "menu_id",
-          label: '菜单',
+          key: "description_f",
+          label: '描述(繁)',
+          application:['添加','编辑'],
+          type:'input'
+        },
+        {
+          key: "passage1",
+          label: '跳转菜单',
           application:['编辑','添加'],
-          type:'cascader',
+          type:'select',
           options:'labelOptions',
           listType:'normal',
           formatter:function(val,tests){
-            return  val.label[val.menu_id]['title'];
+            return  val.menu.title?val.menu.title:'';
           },
-          placeholder:'请选择菜单',
+          placeholder:'请选择跳转菜单',
           header_search:true,
-          header_search_type:'cascader',
+          header_search_type:'select',
           header_search_value:'',
           header_search_style:'width:160px;margin-right:2px;',
           changeFunc:function(value,self){
-            if(!value){
-              delete self.searchItem.menu_id;
+            if(value>=0){
+              self.searchItem.passage1 = value
             }else{
-              self.searchItem.menu_id = value[value.length-1]
+              delete self.searchItem.passage1;
             };
+            console.log('value',value,self.searchItem)
             self.initMainData();
           },
           defaultProps: {
@@ -141,18 +122,19 @@ export default {
           limit:1,
         },
         {
-          key: "bannerImg",
-          label: '详情图',
-          application:['编辑','添加'],
+          key: "mainImg_e",
+          label: '主图(英)',
+          application:['添加','编辑'],
           type:'qiupload',
           limit:1,
         },
-        // {
-        //   key: "content",
-        //   label: '内容',
-        //   application:['编辑','添加'],
-        //   type:'vueEditor',
-        // },
+        {
+          key: "mainImg_f",
+          label: '主图(繁)',
+          application:['添加','编辑'],
+          type:'qiupload',
+          limit:1,
+        },
         {
           key: 'listorder',
           label: '自定义排序',
@@ -206,7 +188,7 @@ export default {
         {
           label: '操作',
           listType:'deal',
-          width:300
+          width:100
         },
 
       ],
@@ -289,7 +271,8 @@ export default {
                 return data
               },
               postData:function(data,self){
-                data.type = 6;
+                data.type = 1;
+                data.menu_id = 158;
                 var postData = {
                   data:data
                 };
@@ -309,7 +292,8 @@ export default {
           layout: 'total, sizes, prev, pager, next, jumper',
       },
       searchItem:{
-        type:6,
+        type:1,
+        menu_id:158
       },
       optionData:{
         labelOptions:[]
@@ -360,11 +344,11 @@ export default {
       const self =this;
       const postData = {};
       postData.searchItem ={
-        type:['=',6],
-        id:['=',4],
+        type:['=',1],
+        parentid:8
       };
       postData.token = self.$store.getters.getToken;
-      postData.order = {
+      postData.order ={
         listorder:'desc'
       };
 
@@ -388,20 +372,30 @@ export default {
     async initMainData() {
 
       const self = this;
-      const postData = {};
+      const postData  = {};
       postData.paginate = self.$$cloneForm(self.paginate);
       postData.token = self.$store.getters.getToken;
       if (self.searchItem) {
         postData.searchItem = self.$$cloneForm(self.searchItem)
       };
-      postData.searchItem.menu_id = 4;
       if(JSON.stringify(self.getBefore) != "{}"){
         postData.getBefore = self.$$cloneForm(self.getBefore);
       };
+      postData.getAfter = {
+        menu:{
+          tableName:'Label',
+          middleKey:'passage1',
+          key:'id',
+          condition:'=',
+          info:['title']
+        }
+      }
       var res = await self.$$api_article_get({data: postData});
       self.mainData = res.info.data;
       self.paginate.count = res.info.total;
-
+      for(var i=0;i<self.mainData.length;i++){
+        self.mainData[i].passage1 = parseInt(self.mainData[i].passage1)
+      }
     },
 
 

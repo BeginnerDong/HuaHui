@@ -3,6 +3,7 @@
  */
 
 import Article from './article.vue'
+import Articles from './articles.vue'
 import Data from './data.vue'
 import Image from './image.vue'
 import Video from './video.vue'
@@ -15,6 +16,7 @@ import Cooperation from './cooperation.vue'
 
 export default {
   Article,
+  Articles,
   Data,
   Image,
   Video,

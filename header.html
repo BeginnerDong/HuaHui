@@ -37,7 +37,7 @@
 						</div>
 					</div>
 					<div class="tt pr" :class="currentUrl=='/agent-brand.html'?'on':''">
-						<a href="agent-brand.html">{{language=='_e'?'Brand':(language=='_f'?'品牌中心':'品牌中心')}}</a>
+						<a href="agent-brand.html">{{language=='_e'?'Brands':(language=='_f'?'品牌中心':'品牌中心')}}</a>
 						<!-- <div class="ppA"> -->
 						<div class="Asamll ppAsamll">
 							<div class="Achild" v-for="(item,index) in brandData" :key="item.id">
@@ -61,7 +61,7 @@
 					<div class="tt" :class="currentUrl=='/download.html'?'on':''"><a
 							href="download.html">{{language=='_e'?'Download':(language=='_f'?'下載中心':'下载中心')}}</a></div>
 					<div class="tt" :class="currentUrl=='/rental.html'?'on':''"><a
-							href="rental.html">{{language=='_e'?'Fina a Partner':(language=='_f'?'租賃網絡':'租赁网络')}}</a></div>
+							href="rental.html">{{language=='_e'?'Find a Partner':(language=='_f'?'租賃網絡':'租赁网络')}}</a></div>
 					<div class="tt" :class="currentUrl=='/contact-us.html'?'on':''"><a
 							href="contact-us.html">{{language=='_e'?'Contact Us':(language=='_f'?'聯繫我們':'联系我们')}}</a>
 					</div>
@@ -126,7 +126,7 @@
 					</div>
 				</div>
 				<div class="tt pr" :class="currentUrl=='/agent-brand.html'?'on':''">
-					<a @click="go(4)">{{language=='_e'?'Brand':(language=='_f'?'品牌中心':'品牌中心')}}</a>
+					<a @click="go(4)">{{language=='_e'?'Brands':(language=='_f'?'品牌中心':'品牌中心')}}</a>
 					<div class="off" v-show="show2" @click="showOff('two')">
 						<img src="images/icon-08.png">
 					</div>
@@ -167,7 +167,7 @@
 					</div>
 				</div>
 				<div class="tt" :class="currentUrl=='/rental.html'?'on':''"><a
-						@click="go(8)">{{language=='_e'?'Fina a Partner':(language=='_f'?'租賃網絡':'租赁网络')}}</a>
+						@click="go(8)">{{language=='_e'?'Find a Partner':(language=='_f'?'租賃網絡':'租赁网络')}}</a>
 					<div class="off">
 						<img src="images/icon-08.png">
 					</div>
@@ -521,7 +521,8 @@
 
 				postData.searchItem = {
 					parentid: 0,
-					type: 5
+					type: 5,
+					id:['not in',[157]]
 				};
 				postData.order = {
 					listorder: 'asc'

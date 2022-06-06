@@ -70,8 +70,8 @@
 	
 	.jianliMsg{width: 95%;}
 	.jianliMsg li{padding: 15px 0;font-size: 13px;}
-	.jianliMsg li .ll{width: 25%; font-size: 13px;}
-	.jianliMsg li .rr{width: 75%;}
+	.jianliMsg li .ll{width: 30%; font-size: 13px;}
+	.jianliMsg li .rr{width: 70%;}
 	.jianliMsg .submitbtn .btn{width: 86%!important;}
 	
 	.hj1{display: none;}

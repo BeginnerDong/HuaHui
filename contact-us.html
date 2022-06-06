@@ -7,8 +7,8 @@
 		<meta name="renderer" content="webkit">
 		<meta name="description" content="">
 		<meta name="keywords" content="">
-		<title>联系我们</title>
-		<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+		<title>Contact Us</title>
+		<script src="https://image.racpro.net/hh/1653299945949vue.js"></script>
 		<script type="text/javascript" src="js/jquery.min.js"></script>
 		<script type="text/javascript" src="js/base.js"></script>
 		<script type="text/javascript" src="js/include.js"></script>
@@ -132,7 +132,7 @@
 				<h1 class="title">在线留言</h1>
 			</div> -->
 			<div class="allH1 mb70">
-				<h1><span>{{language=='_e'?'Online':(language=='_f'?'線上留言':'在线留言')}}</span> Message</h1>
+				<h1><span :class="language=='_e'?'normal':''">{{language=='_e'?'Online':(language=='_f'?'線上留言':'在线留言')}}</span> {{language=='_e'?'':'Message'}}</h1>
 			</div>
 			<div class="jianliMsg boxShaow w1200 LL">
 				<div>
@@ -140,19 +140,19 @@
 						<li>
 							<span class="ll">{{language=='_e'?'Name':(language=='_f'?'姓名':'姓名')}}</span>
 							<div class="rr">
-								<input type="text" name="" v-model="submitData.title" :placeholder="language=='_e'?'Please enter your name':(language=='_f'?'請輸入姓名':'请输入姓名')" />
+								<input type="text" name="" v-model="submitData.title" :placeholder="language=='_e'?'':(language=='_f'?'請輸入姓名':'请输入姓名')" />
 							</div>
 						</li>
 						<li>
-							<span class="ll">{{language=='_e'?'Telephone':(language=='_f'?'電話':'电话')}}</span>
+							<span class="ll">{{language=='_e'?'Phone Number':(language=='_f'?'電話':'电话')}}</span>
 							<div class="rr">
-								<input type="text" name="" v-model="submitData.phone" :placeholder="language=='_e'?'Please enter the contact number':(language=='_f'?'請輸入聯繫電話':'请输入联系电话')" onkeyup="this.value=this.value.replace(/\D/g,'')" />
+								<input type="text" name="" v-model="submitData.phone" :placeholder="language=='_e'?'':(language=='_f'?'請輸入聯繫電話':'请输入联系电话')" onkeyup="this.value=this.value.replace(/\D/g,'')" />
 							</div>
 						</li>
 						<li>
-							<span class="ll">{{language=='_e'?'Content':(language=='_f'?'内容':'内容')}}</span>
+							<span class="ll">{{language=='_e'?'Your message':(language=='_f'?'内容':'内容')}}</span>
 							<div class="rr">
-								<textarea style="padding: 0;" type="text" name="" v-model="submitData.description" :placeholder="language=='_e'?'Please input the content':(language=='_f'?'請輸入内容':'请输入内容')"></textarea>
+								<textarea style="padding: 0;" type="text" name="" v-model="submitData.description" :placeholder="language=='_e'?'':(language=='_f'?'請填寫所屬城市及需要咨詢的項目名稱或業務內容':'请填写所属城市及需要咨询的项目名称或业务内容')"></textarea>
 							</div>
 						</li>
 					</ul>
