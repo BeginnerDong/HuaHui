@@ -28,6 +28,13 @@ export default {
           listType:'normal'
         },
         {
+          key: 'content',
+          label: '区域',
+          application:['编辑','添加'],
+          type:'input',
+          listType:'normal'
+        },
+        {
           key: 'description',
           label: '留言',
           application:['编辑','添加'],
@@ -83,11 +90,11 @@ export default {
             self.initMainData();
           },
         },
-        {
-          label: '操作',
-          listType:'deal',
-          width:300
-        },
+        // {
+        //   label: '操作',
+        //   listType:'deal',
+        //   width:300
+        // },
 
       ],
 

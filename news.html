@@ -260,10 +260,12 @@
 					const postData = {};
 					postData.paginate = window.base.cloneForm(self.paginate);
 					postData.searchItem = {
-						menu_id: 5
+						// menu_id: 5
+						type:1,
+						menu_id:['not in',[5]]
 					};
 					postData.order = {
-						listorder:'asc'
+						create_time:'desc'
 					};
 					const callback = (res) => {
 						if (res.info.data.length > 0) {

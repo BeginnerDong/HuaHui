@@ -228,16 +228,23 @@
 						const self = this;
 						self.index = index;
 						clearInterval(self.bannerTimer);
-						for(var i=0; i<self.mainData.length; i++){
-							if(i == index){
-								$('.brandNavPic1').eq(i).css({backgroundSize:'100% 100%'});
-								$('.brandNavPic1 .navMask').eq(i).css({opacity:'1'});
-							}else{
-								$('.brandNavPic1').eq(i).css({backgroundSize:'auto 100%'});
-								$('.brandNavPic1 .navMask').eq(i).css({opacity:'0'});
-							}
+						var timer = null;
+						if (timer) {
+						    clearTimeout(timer)
 						}
-						$('.brandNavPic1').eq(index).css({width:'65%'}).siblings().css({width:'8.33%'});
+						timer = setTimeout(() => {
+							console.log('我滚啦');
+							for(var i=0; i<self.mainData.length; i++){
+								if(i == index){
+									$('.brandNavPic1').eq(i).css({backgroundSize:'100% 100%'});
+									$('.brandNavPic1 .navMask').eq(i).css({opacity:'1'});
+								}else{
+									$('.brandNavPic1').eq(i).css({backgroundSize:'auto 100%'});
+									$('.brandNavPic1 .navMask').eq(i).css({opacity:'0'});
+								}
+							}
+							$('.brandNavPic1').eq(index).css({width:'65%'}).siblings().css({width:'8.33%'});
+						}, 100)
 					},
 					
 					noActive(i){

@@ -13,6 +13,7 @@ import Software from './software.vue'
 import Recruit from './recruit.vue'
 import Company from './company.vue'
 import Cooperation from './cooperation.vue'
+import HomeCase from './homeCase.vue'
 
 export default {
   Article,
@@ -26,4 +27,5 @@ export default {
   Recruit,
   Company,
   Cooperation,
+  HomeCase
 }

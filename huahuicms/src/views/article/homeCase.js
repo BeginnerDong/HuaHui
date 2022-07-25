@@ -1,5 +1,5 @@
 export default {
-	name: 'article',
+	name: 'homeCase',
 	components: {},
 	data() {
 		return {
@@ -82,35 +82,35 @@ export default {
 					application: ['添加', '编辑'],
 					type: 'input'
 				},
-				{
-					key: "menu_id",
-					label: '菜单',
-					application: ['编辑', '添加'],
-					type: 'cascader',
-					options: 'labelOptions',
-					listType: 'normal',
-					formatter: function(val, tests) {
-						return val.label[val.menu_id]['title'];
-					},
-					placeholder: '请选择菜单',
-					header_search: true,
-					header_search_type: 'cascader',
-					header_search_value: '',
-					header_search_style: 'width:160px;margin-right:2px;',
-					changeFunc: function(value, self) {
-						if (!value) {
-							delete self.searchItem.menu_id;
-						} else {
-							self.searchItem.menu_id = value[value.length - 1]
-						};
-						self.initMainData();
-					},
-					defaultProps: {
-						label: 'title',
-						value: 'id',
-						children: 'child',
-					},
-				},
+				// {
+				// 	key: "menu_id",
+				// 	label: '菜单',
+				// 	application: ['编辑', '添加'],
+				// 	type: 'cascader',
+				// 	options: 'labelOptions',
+				// 	listType: 'normal',
+				// 	formatter: function(val, tests) {
+				// 		return val.label[val.menu_id]['title'];
+				// 	},
+				// 	placeholder: '请选择菜单',
+				// 	header_search: true,
+				// 	header_search_type: 'cascader',
+				// 	header_search_value: '',
+				// 	header_search_style: 'width:160px;margin-right:2px;',
+				// 	changeFunc: function(value, self) {
+				// 		if (!value) {
+				// 			delete self.searchItem.menu_id;
+				// 		} else {
+				// 			self.searchItem.menu_id = value[value.length - 1]
+				// 		};
+				// 		self.initMainData();
+				// 	},
+				// 	defaultProps: {
+				// 		label: 'title',
+				// 		value: 'id',
+				// 		children: 'child',
+				// 	},
+				// },
 				{
 					key: "home_show",
 					label: '首页最新',
@@ -249,7 +249,7 @@ export default {
 				{
 					label: '操作',
 					listType: 'deal',
-					width: 300
+					width: 100
 				},
 
 			],
@@ -333,6 +333,7 @@ export default {
 						},
 						postData: function(data, self) {
 							data.type = 1;
+							data.menu_id = 158;
 							var postData = {
 								data: data
 							};
@@ -353,6 +354,7 @@ export default {
 			},
 			searchItem: {
 				type: 1,
+				menu_id: 158
 			},
 			optionData: {
 				labelOptions: []
@@ -393,7 +395,7 @@ export default {
 		 */
 		init() {
 			this.initMainData()
-			this.initMenuData()
+			// this.initMenuData()
 		},
 
 
@@ -403,16 +405,7 @@ export default {
 			const postData = {};
 			postData.searchItem = {
 				type: ['=', 1],
-				id: ['in', [5, 8]]
 			};
-			postData.getAfter = {
-				child: {
-					tableName: 'Label',
-					middleKey: 'id',
-					key: 'parentid',
-					condition: '='
-				}
-			}
 			postData.token = self.$store.getters.getToken;
 			postData.order = {
 				listorder: 'desc'

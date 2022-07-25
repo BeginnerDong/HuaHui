@@ -172,5 +172,26 @@ export default {
       ],
       component: Label.Software
     },
+    {
+      path: 'area',
+      name: '租赁公司区域',
+      icon: 'reorder',
+      id:'3-/label/articleMenu/area',
+      child_button:[
+        {
+          name:'添加',
+          id:'/label/articleMenu/area-添加'
+        },
+        {
+          name:'编辑',
+          id:'/label/articleMenu/area-编辑'
+        },
+        {
+          name:'删除选中',
+          id:'/label/articleMenu/area-删除选中'
+        },
+      ],
+      component: Label.Area
+    },
   ]
 }

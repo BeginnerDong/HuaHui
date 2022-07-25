@@ -104,6 +104,19 @@ window.base = {
 	    });
 	},
 	
+	getCompanyInfo(param, callback) {
+	
+		var allParams = {
+			url: 'Project/Solely/getCompanyInfo',
+			type: 'post',
+			data: param,
+			sCallback: function(data) {
+				callback && callback(data);
+			}
+		};
+		this.getData(allParams);
+	},
+	
 	getParent(param, callback) {
 	
 		var allParams = {

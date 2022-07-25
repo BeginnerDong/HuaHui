@@ -10,6 +10,7 @@ import AreaMenu from './areaMenu/'
 import SubjectMenu from './subjectMenu/'
 import Sku from './sku.vue'
 import SkuItem from './skuItem.vue'
+import Area from './area.vue'
 
 export default {
   Article,
@@ -22,5 +23,6 @@ export default {
   AreaMenu,
   SubjectMenu,
   Sku,
-  SkuItem
+  SkuItem,
+  Area
 }

@@ -3,7 +3,8 @@
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<meta name="viewport"
+			content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 		<meta name="renderer" content="webkit">
 		<meta name="description" content="">
 		<meta name="keywords" content="">
@@ -12,184 +13,590 @@
 		<script type="text/javascript" src="js/jquery.min.js"></script>
 		<script type="text/javascript" src="js/base.js"></script>
 		<script type="text/javascript" src="js/include.js"></script>
+
+		<script type="text/javascript"
+			src="https://api.map.baidu.com/api?v=3.0&ak=bIm3oK3DAoQdmLiLRIrCmWoDz30EPGOk&s=1"></script>
+		<!-- <script type="text/javascript" src="js/echarts.min.js"></script> -->
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-gl/dist/echarts-gl.min.js"></script>
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-stat/dist/ecStat.min.js"></script>
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/dataTool.min.js">
+		</script>
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/map/js/china.js"></script>
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/map/js/world.js"></script>
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/bmap.min.js"></script>
+
 		<link type="text/css" rel="stylesheet" href="css/public.css">
+		<link type="text/css" rel="stylesheet" href="css/orderNav.css">
 	</head>
 	<style>
 		[v-cloak] {
-			display:none!important;
+			display: none !important;
 		}
-		.lease{min-height: 500px;overflow: hidden;padding: 50px 0 100px;position: relative;}
-		.lease .allH1{margin-bottom: 50px;}
-		.lease .item{width: 50%;box-sizing: border-box;padding: 15px;overflow: hidden;float: left;}
-		.lease .itemBox{width: 100%;margin: auto;box-shadow: 0 0 5px 5px rgba(0,0,0,0.05);overflow: hidden;padding: 20px 60px;border-radius: 10px;display: flex;align-items: center;height: 260px;position: relative;transition: all 0.5s;box-sizing: border-box;}
-		.lease .itemLogo{width: 20%;float: left;}
-		.lease .itemCon{float: left;padding-left: 60px;}
-		.lease .itemCon div{padding: 5px 0;display: flex;align-items: center;}
-		.lease .itemCon div p{flex: 1;word-break:break-all;}
-		.lease .itemCon div a{word-break:break-all;}
+
+		.lease {
+			min-height: 500px;
+			overflow: hidden;
+			padding: 50px 0 100px;
+			position: relative;
+		}
+
+		.lease .allH1 {
+			margin-bottom: 50px;
+		}
+
+		.lease .item {
+			width: 50%;
+			box-sizing: border-box;
+			padding: 15px;
+			overflow: hidden;
+			float: left;
+		}
+
+		.lease .itemBox {
+			width: 100%;
+			margin: auto;
+			box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.05);
+			overflow: hidden;
+			padding: 20px 60px;
+			border-radius: 10px;
+			display: flex;
+			align-items: center;
+			height: 260px;
+			position: relative;
+			transition: all 0.5s;
+			box-sizing: border-box;
+		}
+
+		.lease .itemLogo {
+			width: 20%;
+			float: left;
+		}
+
+		.lease .itemCon {
+			float: left;
+			padding-left: 60px;
+		}
+
+		.lease .itemCon div {
+			padding: 5px 0;
+			display: flex;
+			align-items: center;
+		}
+
+		.lease .itemCon div p {
+			flex: 1;
+			word-break: break-all;
+		}
+
+		.lease .itemCon div a {
+			word-break: break-all;
+		}
+
 		/* .lease .itemMask{position: absolute;top: 0;left: 0;right: -110%;bottom: 0;background-color: rgba(0,0,0,0.03);margin: auto;transition: all 0.5s;width: 10%;height: 100%;}
 		.lease .itemBox:hover .itemMask{right: 0;left: -110%;} */
-		.lease .itemBox:hover{box-shadow: 0 0 10px 10px rgba(0,0,0,0.05);}
-		
-		@media only screen and (max-width: 1440px){
-			.lease .itemBox{height: 240px;}
+		.lease .itemBox:hover {
+			box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.05);
 		}
 		
-		@media only screen and (max-width: 1100px){
-			.lease .item{width: 100%;}
-			.lease{padding: 30px 0 100px;}
+		.echartsBox{width: 100%;height:700px;}
+
+		@media only screen and (max-width: 1440px) {
+			.lease .itemBox {
+				height: 240px;
+			}
 		}
-		
-		@media only screen and (max-width: 700px){
-			.lease .itemBox{height: 200px;}
+
+		@media only screen and (max-width: 1100px) {
+			.lease .item {
+				width: 100%;
+			}
+
+			.lease {
+				padding: 30px 0 100px;
+			}
 		}
-		
-		@media only screen and (max-width: 700px){
-			.lease .itemBox{font-size: 12px;}
+
+		@media only screen and (max-width: 700px) {
+			.lease .itemBox {
+				height: 200px;
+				font-size: 12px;
+			}
+			.echartsBox{height:400px;}
+			.Rseach{
+				position: absolute;
+				right: 0;
+			}
 		}
-		
-		@media only screen and (max-width: 480px){
-			.lease .itemLogo{width: 100%;float: initial;margin-bottom: 10px;}
-			.lease{padding: 20px 0 90px;}
-			.lease .allH1{margin-bottom: 30px;}
-			.lease .item{padding: 10px 15px;}
-			.lease .itemBox{height: auto;width: initial;padding: 10px;display: block;}
-			.lease .itemCon{padding-left: 20px;float: initial;}
+
+		@media only screen and (max-width: 500px) {
+			.echartsBox{height:280px;}
 		}
-		
+
+		@media only screen and (max-width: 480px) {
+			.lease .itemLogo {
+				width: 100%;
+				float: initial;
+				margin-bottom: 10px;
+			}
+
+			.lease {
+				padding: 20px 0 90px;
+			}
+
+			.lease .allH1 {
+				margin-bottom: 30px;
+			}
+
+			.lease .item {
+				padding: 10px 15px;
+			}
+
+			.lease .itemBox {
+				height: auto;
+				width: initial;
+				padding: 10px;
+				display: block;
+			}
+
+			.lease .itemCon {
+				padding-left: 20px;
+				float: initial;
+			}
+		}
 	</style>
 
-<body>
-	<div id="app" v-cloak :style="language=='_e'?'letter-spacing:1px!important':''">
-		<div class="headTop"></div>
-		
-		<include src="header.html"></include>
-		
-		<div class="lease w1660">
-			<div class="allH1">
-				<h1><span :class="language=='_e'?'normal':''">{{language=='_e'?'Rental Agent':(language=='_f'?'租賃公司':'租赁公司')}}</span> {{language=='_e'?'':'Rental'}}</h1>
-			</div>
-			
-			<div class="item"
-			v-for="(item,index) in mainData" :key="index">
-				<div class="itemBox">
-					<!-- <img :src="item&&item['mainImg'+language]&&item['mainImg'+language][0]&&item['mainImg'+language][0].url" class="itemLogo"> -->
-					<img :src="item&&item.mainImg&&item.mainImg[0]&&item.mainImg[0].url" class="itemLogo">
-					<!-- <div class="itemCon">
+	<body>
+		<div id="app" v-cloak :style="language=='_e'?'letter-spacing:1px!important':''">
+			<div class="headTop"></div>
+
+			<include src="header.html"></include>
+
+			<!-- 为 ECharts 准备一个定义了宽高的 DOM -->
+			<div id="main" class="echartsBox"></div>
+
+			<div class="lease w1660">
+				<div class="allH1" style="display: flex;justify-content: space-between;">
+					<h1 style="flex: 1;"><span
+							:class="language=='_e'?'normal':''">{{language=='_e'?'Rental Agent':(language=='_f'?'租賃公司':'租赁公司')}}</span>
+						{{language=='_e'?'':'Rental'}}
+					</h1>
+					<div class="Rseach" style="padding-top: 0;">
+						<input type="text" v-on:keydown.enter="getMainData(true)" v-model="title"
+							:placeholder="language=='_e'?'Search content':(language=='_f'?'請輸入你要搜索的主要設備':'请输入你要搜索的设备名称')" />
+						<a @click="getMainData(true);"><img class="icon" src="images/icon.png"></a>
+					</div>
+				</div>
+
+				<div class="w1100" style="padding-bottom: 10px;">
+					<div class="orderNav flexCenter borderB1">
+						<span class="tt flexCenter" style="cursor: pointer;" :class="currId==-1?'on':''"
+							@click="currId=-1;getMainData(true);">{{language=='_e'?'All':(language=='_f'?'全部':'全部')}}</span>
+						<span class="tt flexCenter" style="cursor: pointer;" :class="currId==item.id?'on':''"
+							@click="currId=item.id;getMainData(true);" v-for="(item,index) in labelData"
+							:key="index">{{item['title'+language]}}</span>
+					</div>
+				</div>
+
+				<div class="item" v-for="(item,index) in mainData" :key="index">
+					<div class="itemBox">
+						<!-- <img :src="item&&item['mainImg'+language]&&item['mainImg'+language][0]&&item['mainImg'+language][0].url" class="itemLogo"> -->
+						<img :src="item&&item.mainImg&&item.mainImg[0]&&item.mainImg[0].url" class="itemLogo">
+						<!-- <div class="itemCon">
 						<div>名称：{{item.title}}</div>
 						<div>地址：{{item.address}}</div>
 						<div>电话：{{item.phone}}</div>
 						<div><a :href="item.description" target="_blank">官网：{{item.description}}</a></div>
 					</div> -->
-					<div class="itemCon">
-						<div><span>{{language=='_e'?'Name of Company':(language=='_f'?'名稱':'名称')}}：</span><p>{{item['title'+language]}}</p></div>
-						<!-- <div><span>{{language=='_e'?'Leasing Company':(language=='_f'?'租賃公司':'英文')}}：</span><p>{{item['address'+language]}}</p></div> -->
-						<div><span>{{language=='_e'?'Phone Number':(language=='_f'?'電話':'电话')}}：</span><p>{{item['phone'+language]}}</p></div>
-						<div><span>{{language=='_e'?'Email':(language=='_f'?'郵箱':'邮箱')}}：</span><p>{{item.description}}</p></div>
-						<div><span>{{language=='_e'?'Main System':(language=='_f'?'主擴':'主扩')}}：</span><p>{{item['mainEX'+language]}}</p></div>
-						<div><span>{{language=='_e'?'Console System':(language=='_f'?'調音台':'调音台')}}：</span><p>{{item['mixer'+language]}}</p></div>
+						<div class="itemCon">
+							<div><span>{{language=='_e'?'Name of Company':(language=='_f'?'名稱':'名称')}}：</span>
+								<p>{{item['title'+language]}}</p>
+							</div>
+							<!-- <div><span>{{language=='_e'?'Leasing Company':(language=='_f'?'租賃公司':'英文')}}：</span><p>{{item['address'+language]}}</p></div> -->
+							<div><span>{{language=='_e'?'Phone Number':(language=='_f'?'電話':'电话')}}：</span>
+								<p>{{item['phone'+language]}}</p>
+							</div>
+							<div><span>{{language=='_e'?'Email':(language=='_f'?'郵箱':'邮箱')}}：</span>
+								<p>{{item.description}}</p>
+							</div>
+							<div><span>{{language=='_e'?'Main System':(language=='_f'?'主擴':'主扩')}}：</span>
+								<p>{{item['mainEX'+language]}}</p>
+							</div>
+							<div><span>{{language=='_e'?'Console System':(language=='_f'?'調音台':'调音台')}}：</span>
+								<p>{{item['mixer'+language]}}</p>
+							</div>
+						</div>
+						<div class="itemMask"></div>
 					</div>
-					<div class="itemMask"></div>
+				</div>
+
+				<div class="all-pages mgt30">
+					<span class="no-prev flexCenter"><img data-type="back" @click="changePage" class="arrow"
+							src="images/case-icon5.png"></span>
+					<span v-for="item in pageArray" :class="item == paginate.currentPage?'on':''"
+						@click="linkTo(item)">{{item}}</span>
+					<span class="next flexCenter"><img class="arrow" data-type="next" @click="changePage"
+							src="images/case-icon4.png"></span>
 				</div>
 			</div>
-			
-			<div class="all-pages mgt30" >
-				<span class="no-prev flexCenter" ><img data-type="back" @click="changePage" class="arrow" src="images/case-icon5.png"></span>
-				<span v-for="item in pageArray" :class="item == paginate.currentPage?'on':''" @click="linkTo(item)">{{item}}</span>
-				<span class="next flexCenter" ><img class="arrow" data-type="next" @click="changePage" src="images/case-icon4.png"></span>
-			</div>
-		</div>
-		
-		
-		<include src="footer.html"></include>
-		
-	</div>
-</body>
 
-	
+
+			<include src="footer.html"></include>
+
+		</div>
+	</body>
+
+
 	<script type="text/javascript">
 		var app = new Vue({
-		    el: '#app',
-		    data:function(){
-		        return {
-		        	mainData:[],
+			el: '#app',
+			data: function() {
+				return {
+					mainData: [],
 					pageArray: [1],
 					allPages: 0,
-					paginate:{
+					paginate: {
 						count: 0,
 						currentPage: 1,
 						pagesize: 8,
 						is_page: true,
 					},
-					language:''
-		        }
-		    },
-			
+					language: '',
+					labelData: [],
+					currId: -1,
+
+					title: ''
+				}
+			},
+
 			created() {
 				const self = this;
-				self.getMainData();
-				
+				self.getLabelData();
+
 				self.initLanguage();
-				window.base.bus.$on('changelanguage',function(res){
+				window.base.bus.$on('changelanguage', function(res) {
 					self.language = res;
 					self.initLanguage()
 				});
+
 			},
-			
-		    methods: {
-				
-				initLanguage(){
+
+			methods: {
+
+				createEcharts: function(newData, location) {
+					var self = this;
+					// 基于准备好的dom，初始化echarts实例
+					var myChart = echarts.init(document.getElementById('main'));
+					// 指定图表的配置项和数据
+					const convertData = function(data) {
+						var res = [];
+						for (var i = 0; i < newData.length; i++) {
+							var geoCoord = [parseFloat(location[i].lng), parseFloat(location[i].lat)];
+							if (geoCoord) {
+								res.push({
+									name: data[i].name,
+									value: geoCoord.concat(data[i].value)
+								});
+							}
+						}
+						console.log('res', res, data)
+						return res;
+					};
+					var option = {
+						title: {
+							text: '',
+							left: 'center'
+						},
+						tooltip: {
+							trigger: 'item',
+							show:false
+						},
+						legend: {
+							selectedMode: false
+						},
+						color: ['#c11719'],
+						bmap: {
+							center: [104.114129, 37.550339],
+							zoom: 5,
+							roam: true,
+							mapStyle: {
+								styleJson: [{
+										featureType: 'water',
+										elementType: 'all',
+										stylers: {
+											color: '#F8F5EC'
+										}
+									},
+									{
+										featureType: 'land',
+										elementType: 'all',
+										stylers: {
+											color: '#DECBA0'
+										}
+									},
+									{
+										featureType: 'railway',
+										elementType: 'all',
+										stylers: {
+											visibility: 'off'
+										}
+									},
+									{
+										featureType: 'highway',
+										elementType: 'all',
+										stylers: {
+											color: '#fdfdfd'
+										}
+									},
+									{
+										featureType: 'highway',
+										elementType: 'labels',
+										stylers: {
+											visibility: 'off'
+										}
+									},
+									{
+										featureType: 'arterial',
+										elementType: 'geometry',
+										stylers: {
+											color: '#fefefe'
+										}
+									},
+									{
+										featureType: 'arterial',
+										elementType: 'geometry.fill',
+										stylers: {
+											color: '#fefefe'
+										}
+									},
+									{
+										featureType: 'poi',
+										elementType: 'all',
+										stylers: {
+											visibility: 'off'
+										}
+									},
+									{
+										featureType: 'green',
+										elementType: 'all',
+										stylers: {
+											visibility: 'off'
+										}
+									},
+									{
+										featureType: 'subway',
+										elementType: 'all',
+										stylers: {
+											visibility: 'off'
+										}
+									},
+									{
+										featureType: 'manmade',
+										elementType: 'all',
+										stylers: {
+											color: '#d1d1d1'
+										}
+									},
+									{
+										featureType: 'local',
+										elementType: 'all',
+										stylers: {
+											color: '#d1d1d1'
+										}
+									},
+									{
+										featureType: 'arterial',
+										elementType: 'labels',
+										stylers: {
+											visibility: 'off'
+										}
+									},
+									{
+										featureType: 'boundary',
+										elementType: 'all',
+										stylers: {
+											color: '#fefefe'
+										}
+									},
+									{
+										featureType: 'building',
+										elementType: 'all',
+										stylers: {
+											color: '#d1d1d1'
+										}
+									},
+									{
+										featureType: 'label',
+										elementType: 'labels.text.fill',
+										stylers: {
+											color: '#999999'
+										}
+									}
+								]
+							}
+						},
+						series: [
+							{
+								name: '公司信息',
+								type: 'effectScatter',
+								coordinateSystem: 'bmap',
+								data: convertData(newData),
+								symbolSize: function(val) {
+									return val[2] / 10;
+								},
+								encode: {
+									value: 2
+								},
+								showEffectOn: 'render',
+								rippleEffect: {
+									brushType: 'stroke'
+								},
+								label: {
+									formatter: '{b}',
+									position: 'right',
+									show: true
+								},
+								itemStyle: {
+									shadowBlur: 10,
+									shadowColor: '#333'
+								},
+								emphasis: {
+									scale: true
+								},
+								zlevel: 1,
+								show: false
+							}
+						]
+					};
+
+					// 使用刚指定的配置项和数据显示图表。
+					myChart.setOption(option);
+					console.log('myChart', myChart, option)
+				},
+
+				initLanguage() {
 					const self = this;
 					var lang = localStorage.getItem('language');
-					if(lang){
+					if (lang) {
 						self.language = lang;
-					}else{
+					} else {
 						self.language = '';
 					}
 				},
+
+				getLabelData() {
+					const self = this;
+					const postData = {};
+					postData.searchItem = {
+						parentid: 121
+					};
+					postData.order = {
+						listorder: 'asc'
+					};
+					const callback = (res) => {
+						if (res.info.data.length > 0) {
+							self.labelData = res.info.data;
+							self.currId = self.labelData[0].id;
+							self.getMainData();
+						} else {
+							self.getMainData()
+						};
+					};
+					window.base.labelGet(postData, callback);
+				},
+
+				getMainData(isNew) {
+					const self = this;
+					const postData = {};
+					if (isNew) {
+						self.mainData = [];
+						self.paginate.currentPage = 1;
+					}
+					postData.searchItem = {
+						type: 8
+					};
+					if (self.currId > -1) {
+						postData.searchItem.area_id = self.currId;
+					}
+					if (self.title) {
+						postData.searchItem['mainEX' + self.language] = ['LIKE', ['%' + self.title + '%']]
+					}
+					postData.order = {
+						listorder: 'desc'
+					};
+					postData.paginate = window.base.cloneForm(self.paginate);
+					const callback = (res) => {
+						if (res.info.data.length > 0) {
+							self.mainData.push.apply(self.mainData, res.info.data);
+							self.paginate['count'] = res.info.total;
+							window.base.computePageArr(self);
+							self.getCompanyInfo();
+						} else {
+							alert('没有数据')
+						};
+					};
+					window.base.articleGet(postData, callback);
+				},
 				
-				getMainData() {
+				getCompanyInfo() {
 					const self = this;
 					const postData = {};
 					postData.searchItem = {
 						type: 8
 					};
-					postData.order = {
-						listorder:'desc'
-					};
-					postData.paginate = window.base.cloneForm(self.paginate);
+					if (self.currId > -1) {
+						postData.searchItem.area_id = self.currId;
+					}
+					if (self.title) {
+						postData.searchItem['mainEX' + self.language] = ['LIKE', ['%' + self.title + '%']]
+					}
 					const callback = (res) => {
-						if (res.info.data.length > 0) {
-							self.mainData.push.apply(self.mainData,res.info.data);
-							self.paginate['count'] = res.info.total;
-							window.base.computePageArr(self);
-						} else {
-							alert('没有数据')
-						};	
+						if (res.info.length > 0) {
+							var data = res.info;
+							
+							var newData = [];
+							var location = [];
+							data.forEach((item, index) => {
+								console.log('item.lng && item.lat',item.lng , item.lat)
+								if (item.lng && item.lat) {
+									newData.push({
+										name: item['title' + self.language],
+										value: 0
+									})
+									location.push({
+										lng: parseFloat(item.lng),
+										lat: parseFloat(item.lat)
+									})
+								}
+							})
+							console.log('newData', newData, location)
+							setTimeout(function() {
+								self.createEcharts(newData, location);
+							}, 1000)
+						};
 					};
-					window.base.articleGet(postData, callback);
+					window.base.getCompanyInfo(postData, callback);
 				},
-				
+
 				linkTo(item) {
 					var self = this;
 					console.log(item);
 					self.linkPage = item;
 					window.base.linkTo(self);
-					window.scrollTo(0,0);
+					window.scrollTo(0, 0);
 					console.log(self.pageArray)
 				},
-				
+
 				changePage(e) {
 					var self = this;
 					var dataSet = window.base.getDataSet(e);
 					console.log('232')
 					window.base.changePage(dataSet, self);
-					window.scrollTo(0,0);
+					window.scrollTo(0, 0);
 				},
-				
-		    }
+
+			}
 		});
 	</script>
 	<style>
-
-</html>
+		</html>

@@ -142,32 +142,43 @@ export default {
 				//   listType:'normal'
 				// },
 				{
-					key: "menu_id",
-					label: '菜单',
+					key: "lng",
+					label: '经度',
+					application: ['添加', '编辑'],
+					type: 'input'
+				},
+				{
+					key: "lat",
+					label: '纬度',
+					application: ['添加', '编辑'],
+					type: 'input'
+				},
+				{
+					key: "area_id",
+					label: '区域',
 					application: ['编辑', '添加'],
-					type: 'cascader',
+					type: 'select',
 					options: 'labelOptions',
 					listType: 'normal',
 					formatter: function(val, tests) {
-						return val.label[val.menu_id]['title'];
+						return val.area&&val.area['title']?val.area['title']:'';
 					},
-					placeholder: '请选择菜单',
+					placeholder: '请选择区域',
 					header_search: true,
-					header_search_type: 'cascader',
+					header_search_type: 'select',
 					header_search_value: '',
 					header_search_style: 'width:160px;margin-right:2px;',
 					changeFunc: function(value, self) {
 						if (!value) {
-							delete self.searchItem.menu_id;
+							delete self.searchItem.area_id;
 						} else {
-							self.searchItem.menu_id = value[value.length - 1]
+							self.searchItem.area_id = value
 						};
 						self.initMainData();
 					},
 					defaultProps: {
 						label: 'title',
-						value: 'id',
-						children: 'child',
+						value: 'id'
 					},
 				},
 				{
@@ -177,19 +188,6 @@ export default {
 					type: 'qiupload',
 					limit: 1,
 				},
-				// {
-				//   key: "bannerImg",
-				//   label: '详情图',
-				//   application:['编辑','添加'],
-				//   type:'qiupload',
-				//   limit:1,
-				// },
-				// {
-				//   key: "content",
-				//   label: '内容',
-				//   application:['编辑','添加'],
-				//   type:'vueEditor',
-				// },
 				{
 					key: 'listorder',
 					label: '自定义排序',
@@ -305,6 +303,7 @@ export default {
 						},
 						postData: function(data, self) {
 							data.type = 8;
+							data.menu_id = 121;
 							var postData = {
 								data: data
 							};
@@ -375,6 +374,7 @@ export default {
 			const postData = {};
 			postData.searchItem = {
 				type: ['=', 8],
+				parentid:121
 			};
 			postData.token = self.$store.getters.getToken;
 			postData.order = {
@@ -412,6 +412,15 @@ export default {
 			if (JSON.stringify(self.getBefore) != "{}") {
 				postData.getBefore = self.$$cloneForm(self.getBefore);
 			};
+			postData.getAfter = {
+				area:{
+					tableName:'Label',
+					middleKey:'area_id',
+					key:'id',
+					condition:'=',
+					info:['title']
+				}
+			}
 			var res = await self.$$api_article_get({
 				data: postData
 			});

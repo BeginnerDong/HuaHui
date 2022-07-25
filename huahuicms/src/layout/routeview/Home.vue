@@ -80,4 +80,5 @@
     margin-bottom: 60px;
   }
 
+.ql-editor{height: 500px;}
 </style>

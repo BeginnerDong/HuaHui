@@ -160,7 +160,7 @@
 			</div>
 			
 			
-				<div id='news1' class="newsItem flexRowBetween" >
+				<div id='news1' class="newsItem flexRowBetween" v-if="newsData&&newsData[0]">
 					<div class="L animated fadeInLeft" v-show="newsHeight1+headerHeight+(newsHeight1*0.3)<offsetTopNow">
 						<img :src="newsData&&newsData[0]&&newsData[0]['bannerImg'+language]&&newsData[0]['bannerImg'+language][0]&&newsData[0]['bannerImg'+language][0].url" class="Limg">
 					</div>
@@ -172,7 +172,7 @@
 						<a class="moreBtn" :href="newsData&&newsData[0]&&newsData[0].id?'newsdetail.html?id='+newsData[0].id:'newsdetail.html'">READ MORE ></a>
 					</div>
 				</div>
-				<div id='news2' class="newsItem flexRowBetween">
+				<div id='news2' class="newsItem flexRowBetween" v-if="newsData&&newsData[1]">
 					<div class="R animated fadeInLeft" v-show="newsHeight2+headerHeight+(newsHeight2*0.3)<offsetTopNow">
 						<a :href="newsData&&newsData[1]&&newsData[1].id?'newsdetail.html?id='+newsData[1].id:'newsdetail.html'">
 							<h1 class="avoidOverflow">{{newsData&&newsData[1]&&newsData[1]['title'+language]}}</h1>
@@ -184,7 +184,7 @@
 						<img :src="newsData&&newsData[1]&&newsData[1]['bannerImg'+language]&&newsData[1]['bannerImg'+language][0]?newsData&&newsData[1]['bannerImg'+language][0].url:''" class="Limg">
 					</div>
 				</div>
-				<div id='news3' class="newsItem flexRowBetween">
+				<div id='news3' class="newsItem flexRowBetween" v-if="newsData&&newsData[2]">
 					<div class="L animated fadeInLeft" v-show="newsHeight3+headerHeight+(newsHeight3*0.3)<offsetTopNow">
 						<img :src="newsData&&newsData[2]&&newsData[2]['bannerImg'+language]&&newsData[2]['bannerImg'+language][0]?newsData&&newsData[2]['bannerImg'+language][0].url:''" class="Limg">
 					</div>
@@ -399,7 +399,6 @@
 					self.language = res;
 					self.initLanguage();
 					location.reload();
-					// self.refushSwiper();
 				});
 			},
 			mounted(){
@@ -680,15 +679,15 @@
 					    is_page: true, 
 					};
 					postData.searchItem = {
-						thirdapp_id: 2
+						thirdapp_id: 2,
+						home_show:1
 					};
-					postData.order = {
-						listorder:'desc'
-					};
+					// postData.order = {
+					// 	listorder:'desc'
+					// };
 					const callback = (res) => {
 						if (res.info.data.length > 0) {
 							self.newsData.push.apply(self.newsData,res.info.data);
-							
 						}
 					};
 					window.base.articleGet(postData, callback);

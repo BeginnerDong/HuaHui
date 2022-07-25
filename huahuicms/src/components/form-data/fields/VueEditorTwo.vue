@@ -143,6 +143,9 @@
 		</quill-editor>
 	</div>
 </template>
+<style>
+	.ql-editor{height: 500px!important;}
+</style>
 <script>
 	import Common from './js/Common';
 	import func from '../../../register/func.js';

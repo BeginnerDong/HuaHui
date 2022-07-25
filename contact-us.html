@@ -150,6 +150,12 @@
 							</div>
 						</li>
 						<li>
+							<span class="ll">{{language=='_e'?'Area':(language=='_f'?'區域':'区域')}}</span>
+							<div class="rr">
+								<input type="text" name="" v-model="submitData.content" :placeholder="language=='_e'?'':(language=='_f'?'請輸入區域':'请输入区域')" />
+							</div>
+						</li>
+						<li>
 							<span class="ll">{{language=='_e'?'Your message':(language=='_f'?'内容':'内容')}}</span>
 							<div class="rr">
 								<textarea style="padding: 0;" type="text" name="" v-model="submitData.description" :placeholder="language=='_e'?'':(language=='_f'?'請填寫所屬城市及需要咨詢的項目名稱或業務內容':'请填写所属城市及需要咨询的项目名称或业务内容')"></textarea>
@@ -199,7 +205,8 @@
 						phone:'',
 						description:'',
 						type:2,
-						thirdapp_id:2
+						thirdapp_id:2,
+						content:''
 					},
 					isSending:false,
 					chooseId:-1,
@@ -304,7 +311,8 @@
 								self.submitData = {
 									nama:'',
 									phone:'',
-									description:''
+									description:'',
+									content:''
 								}
 							}	
 						};

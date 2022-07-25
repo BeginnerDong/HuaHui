@@ -183,6 +183,13 @@
 				</div>
 			</div> -->
 			
+			<div class="w1660">
+				<div style="float: right;display: flex;">
+					<img src="../HuaHui/images/paixu.png" style="width:20px" alt="">
+					<span class="hand" style="padding:0 10px;" :style="listorder==1?'color:#C11719':''" @click="listorder=1;getMainData(true);">按时间排序</span>
+					<span class="hand" style="padding:0 10px;" :style="listorder==2?'color:#C11719':''" @click='listorder=2;getMainData(true);'>按综合排序</span>
+				</div>
+			</div>
 			
 			<div class="news w1660 news1" v-for="(item,index) in mainData">
 				
@@ -281,7 +288,9 @@
 					headerHeight:123,
 					offsetTopNow:0,
 					
-					language:''
+					language:'',
+					
+					listorder:1
 		        }
 		    },
 			
@@ -396,34 +405,43 @@
 								self.currId = window.base.GetRequest().menu_id;
 								self.getMainData()
 							}else{
-								
 								//self.currId = self.labelData[0].id;
 								self.getMainData()
 							}
 						} else {
 							
 						};
-						
-						
 					};
 					window.base.labelGet(postData, callback);
 				},
 				
-				getMainData() {
+				getMainData(isNew) {
 					const self = this;
 					const postData = {};
+					if(isNew){
+						self.mainData = [];
+						self.paginate.currentPage  = 1;
+					}
 					postData.paginate = window.base.cloneForm(self.paginate);
 					postData.searchItem = {
-						thirdapp_id: 2
+						thirdapp_id: 2,
+						type:1,
+						case_show:0
 					};
 					if(self.currId>0){
 						postData.searchItem.menu_id= self.currId
 					}else{
 						postData.searchItem.menu_id = ['in',self.idArray]
 					};
-					postData.order = {
-						listorder:'asc'
-					};
+					if(self.listorder==1){
+						postData.order = {
+							create_time:'desc'
+						}
+					}else{
+						postData.order = {
+							listorder:'asc'
+						}
+					}
 					const callback = (res) => {
 						if (res.info.data.length > 0) {
 							self.mainData.push.apply(self.mainData,res.info.data);

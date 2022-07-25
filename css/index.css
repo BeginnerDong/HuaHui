@@ -82,6 +82,10 @@
 
 .o-h{overflow: hidden;}
 
+
+.swiper-button-prev:after, .swiper-rtl .swiper-button-next:after{content: ''!important;}
+
+
 /* 企业动态 */
 .ind-dynamic .item{margin-bottom: 60px;position: relative;}
 .ind-dynamic .item a{align-items: flex-start; width: 100%;}
@@ -164,6 +168,8 @@
 @media only screen and (max-width: 1630px){
 	.part3 .L{width: 30%;}
 	.newsItem .L img{max-height: 350px;}
+	
+	.part3 .L p{min-height:initial}
 }
 
 @media only screen and (max-width: 1410px){
