@@ -360,6 +360,12 @@ class Solely{
 				$newData['title'] = $value['title'];
 				$newData['title_e'] = $value['title_e'];
 				$newData['title_f'] = $value['title_f'];
+				$newData['phone'] = $value['phone'];
+				$newData['phone_e'] = $value['phone_e'];
+				$newData['phone_f'] = $value['phone_f'];
+				$newData['description'] = $value['description'];
+				$newData['description_e'] = $value['description_e'];
+				$newData['description_f'] = $value['description_f'];
 				$newData['lng'] = $value['lng'];
 				$newData['lat'] = $value['lat'];
 				array_push($res,$newData);

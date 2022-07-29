@@ -98,8 +98,51 @@
 		.lease .itemBox:hover {
 			box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.05);
 		}
-		
-		.echartsBox{width: 100%;height:700px;}
+
+		.echartsBox {
+			width: 100%;
+			height: 800px;
+		}
+
+		.selectBox {
+			width: 250px;
+			padding: 15px;
+			background-color: #fff;
+			margin: 15px;
+		}
+
+		.sel_txt {
+			font-size: 22px;
+		}
+
+		.selectBox select,
+		.selectBox .select {
+			background-color: #eee;
+			border: none;
+			border-bottom: 1px solid #adadad;
+			height: 50px;
+			width: 100%;
+			padding-left: 10px;
+			box-sizing: border-box;
+			margin-top: 15px;
+		}
+
+		.selectBox .select {
+			display: flex;
+			align-items: center;
+		}
+
+		.selectBox input {
+			background-color: #eee;
+			flex: 1;
+			width: initial;
+		}
+
+		.selectBox .icon {
+			width: 18px;
+			height: 18px;
+			margin: 0 10px;
+		}
 
 		@media only screen and (max-width: 1440px) {
 			.lease .itemBox {
@@ -122,15 +165,44 @@
 				height: 200px;
 				font-size: 12px;
 			}
-			.echartsBox{height:400px;}
-			.Rseach{
+
+			.echartsBox {
+				height: 600px;
+			}
+
+			.Rseach {
 				position: absolute;
 				right: 0;
 			}
 		}
 
 		@media only screen and (max-width: 500px) {
-			.echartsBox{height:280px;}
+			.echartsBox {
+				height: 600px;
+			}
+
+			.selectBox {
+				width: 180px;
+			}
+
+			.sel_txt {
+				font-size: 16px;
+			}
+
+			.selectBox select,
+			.selectBox .select {
+				height: 30px;
+			}
+
+			.selectBox input {
+				width: 100px;
+			}
+
+			.selectBox .icon {
+				width: 15px;
+				height: 15px;
+				margin: 0 10px;
+			}
 		}
 
 		@media only screen and (max-width: 480px) {
@@ -173,9 +245,30 @@
 			<include src="header.html"></include>
 
 			<!-- 为 ECharts 准备一个定义了宽高的 DOM -->
-			<div id="main" class="echartsBox"></div>
+			<div style="position: relative;">
+				<div id="main" class="echartsBox"></div>
+				<div style="position: absolute;top: 0;">
+					<div class="boxShaow borderB1 bg-white selectBox">
+						<div class="sel_txt">{{language=='_e'?'Find A Partner':(language=='_f'?'尋找合作夥伴':'寻找合作伙伴')}}
+						</div>
+						<select id="currId">
+							<option :value="0">{{language=='_e'?'All':(language=='_f'?'全部':'全部')}}</option>
+							<option v-for="(item,index) in labelData" :key="index" :value="item.id">
+								{{item['title'+language]}}
+							</option>
+						</select>
 
-			<div class="lease w1660">
+						<div class="select">
+							<input type="text" v-on:keydown.enter="getMainData(true)" v-model="title"
+								:placeholder="language=='_e'?'Search content':(language=='_f'?'輸入搜索(設備名稱，名稱)':'输入搜索(设备名称，名称)')" />
+							<img class="icon" src="images/icon.png" @click="getMainData(true)">
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+			<!-- <div class="lease w1660">
 				<div class="allH1" style="display: flex;justify-content: space-between;">
 					<h1 style="flex: 1;"><span
 							:class="language=='_e'?'normal':''">{{language=='_e'?'Rental Agent':(language=='_f'?'租賃公司':'租赁公司')}}</span>
@@ -200,19 +293,11 @@
 
 				<div class="item" v-for="(item,index) in mainData" :key="index">
 					<div class="itemBox">
-						<!-- <img :src="item&&item['mainImg'+language]&&item['mainImg'+language][0]&&item['mainImg'+language][0].url" class="itemLogo"> -->
 						<img :src="item&&item.mainImg&&item.mainImg[0]&&item.mainImg[0].url" class="itemLogo">
-						<!-- <div class="itemCon">
-						<div>名称：{{item.title}}</div>
-						<div>地址：{{item.address}}</div>
-						<div>电话：{{item.phone}}</div>
-						<div><a :href="item.description" target="_blank">官网：{{item.description}}</a></div>
-					</div> -->
 						<div class="itemCon">
 							<div><span>{{language=='_e'?'Name of Company':(language=='_f'?'名稱':'名称')}}：</span>
 								<p>{{item['title'+language]}}</p>
 							</div>
-							<!-- <div><span>{{language=='_e'?'Leasing Company':(language=='_f'?'租賃公司':'英文')}}：</span><p>{{item['address'+language]}}</p></div> -->
 							<div><span>{{language=='_e'?'Phone Number':(language=='_f'?'電話':'电话')}}：</span>
 								<p>{{item['phone'+language]}}</p>
 							</div>
@@ -238,7 +323,7 @@
 					<span class="next flexCenter"><img class="arrow" data-type="next" @click="changePage"
 							src="images/case-icon4.png"></span>
 				</div>
-			</div>
+			</div> -->
 
 
 			<include src="footer.html"></include>
@@ -279,9 +364,23 @@
 					self.initLanguage()
 				});
 
+				$(document).ready(function() {
+					$("#currId").change(function() {
+						var selected = $(this).children('option:selected').val();
+						self.currId = document.getElementById("currId").value
+						self.getMainData(true);
+						console.log('selected', selected)
+					});
+				});
 			},
 
 			methods: {
+
+				changeId: function() {
+					const self = this;
+					var id = document.getElementById("currId").value;
+					console.log('id', id)
+				},
 
 				createEcharts: function(newData, location) {
 					var self = this;
@@ -295,7 +394,9 @@
 							if (geoCoord) {
 								res.push({
 									name: data[i].name,
-									value: geoCoord.concat(data[i].value)
+									value: geoCoord.concat(data[i].value),
+									description: data[i].description,
+									phone: data[i].phone
 								});
 							}
 						}
@@ -309,7 +410,21 @@
 						},
 						tooltip: {
 							trigger: 'item',
-							show:false
+							formatter(params) {
+								// console.log('params', params.data)
+								let firstParams = params.data;
+								let sndParams = params[1]; //显示的小圆点
+								let firstHtml =
+										'<span style="display:inline-block;margin-right:5px;border-radius:10px;width:10px;' +
+										'height:10px;background-color:rgb(215,42,38)"></span>'
+								let sndHtml =
+									'<span style="display:inline-block;margin-right:5px;border-radius:10px;width:10px;' +
+									'height:10px;background-color:rgb(44,71,85)"></span>'
+								
+								return "<b>"+firstParams.name + "</b>:<br>" + firstHtml + firstParams.phone
+										+"<br>" + sndHtml + firstParams.description;
+							},
+							// show: false
 						},
 						legend: {
 							selectedMode: false
@@ -435,38 +550,36 @@
 								]
 							}
 						},
-						series: [
-							{
-								name: '公司信息',
-								type: 'effectScatter',
-								coordinateSystem: 'bmap',
-								data: convertData(newData),
-								symbolSize: function(val) {
-									return val[2] / 10;
-								},
-								encode: {
-									value: 2
-								},
-								showEffectOn: 'render',
-								rippleEffect: {
-									brushType: 'stroke'
-								},
-								label: {
-									formatter: '{b}',
-									position: 'right',
-									show: true
-								},
-								itemStyle: {
-									shadowBlur: 10,
-									shadowColor: '#333'
-								},
-								emphasis: {
-									scale: true
-								},
-								zlevel: 1,
-								show: false
-							}
-						]
+						series: [{
+							name: '公司信息',
+							type: 'effectScatter',
+							coordinateSystem: 'bmap',
+							data: convertData(newData),
+							symbolSize: function(val) {
+								return val[2] / 10;
+							},
+							encode: {
+								value: 2
+							},
+							showEffectOn: 'render',
+							rippleEffect: {
+								brushType: 'stroke'
+							},
+							label: {
+								formatter: '{b}',
+								position: 'right',
+								show: true
+							},
+							itemStyle: {
+								shadowBlur: 10,
+								shadowColor: '#333'
+							},
+							emphasis: {
+								scale: true
+							},
+							zlevel: 1,
+							show: false
+						}]
 					};
 
 					// 使用刚指定的配置项和数据显示图表。
@@ -519,7 +632,9 @@
 						postData.searchItem.area_id = self.currId;
 					}
 					if (self.title) {
-						postData.searchItem['mainEX' + self.language] = ['LIKE', ['%' + self.title + '%']]
+						postData.searchItem['mainEX' + self.language + '|title' + self.language] = ['LIKE', ['%' +
+							self.title + '%'
+						]]
 					}
 					postData.order = {
 						listorder: 'desc'
@@ -537,7 +652,7 @@
 					};
 					window.base.articleGet(postData, callback);
 				},
-				
+
 				getCompanyInfo() {
 					const self = this;
 					const postData = {};
@@ -548,19 +663,25 @@
 						postData.searchItem.area_id = self.currId;
 					}
 					if (self.title) {
-						postData.searchItem['mainEX' + self.language] = ['LIKE', ['%' + self.title + '%']]
+						postData.searchItem['mainEX' + self.language + '|title' + self.language] = ['LIKE', ['%' +
+							self.title + '%'
+						]]
 					}
 					const callback = (res) => {
 						if (res.info.length > 0) {
 							var data = res.info;
-							
+
 							var newData = [];
 							var location = [];
 							data.forEach((item, index) => {
-								console.log('item.lng && item.lat',item.lng , item.lat)
+								console.log('item.lng && item.lat', item.lng, item.lat)
+								var tit1 = self.language=='_e'?'Phone Number':(self.language=='_f'?'電話':'电话');
+								var tit2 = self.language=='_e'?'Email':(self.language=='_f'?'郵箱':'邮箱');
 								if (item.lng && item.lat) {
 									newData.push({
 										name: item['title' + self.language],
+										phone: tit1+': '+item['phone' + self.language],
+										description: tit2+': '+item['description' + self.language],
 										value: 0
 									})
 									location.push({
