@@ -357,6 +357,7 @@ class Solely{
 		foreach($Article as $key=>$value){
 			if(!(empty($value['lng'])&&empty($value['lat']))){
 				$newData = [];
+				$newData['mainImg'] = $value['mainImg'];
 				$newData['title'] = $value['title'];
 				$newData['title_e'] = $value['title_e'];
 				$newData['title_f'] = $value['title_f'];
@@ -366,6 +367,12 @@ class Solely{
 				$newData['description'] = $value['description'];
 				$newData['description_e'] = $value['description_e'];
 				$newData['description_f'] = $value['description_f'];
+				$newData['mainEX'] = $value['mainEX'];
+				$newData['mainEX_e'] = $value['mainEX_e'];
+				$newData['mainEX_f'] = $value['mainEX_f'];
+				$newData['mixer'] = $value['mixer'];
+				$newData['mixer_e'] = $value['mixer_e'];
+				$newData['mixer_f'] = $value['mixer_f'];
 				$newData['lng'] = $value['lng'];
 				$newData['lat'] = $value['lat'];
 				array_push($res,$newData);

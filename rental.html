@@ -15,7 +15,8 @@
 		<script type="text/javascript" src="js/include.js"></script>
 
 		<script type="text/javascript"
-			src="https://api.map.baidu.com/api?v=3.0&ak=bIm3oK3DAoQdmLiLRIrCmWoDz30EPGOk&s=1"></script>
+			src="https://api.map.baidu.com/api?v=2.0&ak=bIm3oK3DAoQdmLiLRIrCmWoDz30EPGOk&s=1"></script>
+		<!-- <script type="text/javascript" src="https://api.map.baidu.com/api?v=3.0&ak=9XwBG0tPbEYXMM1wSICMZ70G5HFt1dRf&s=1"></script> -->
 		<!-- <script type="text/javascript" src="js/echarts.min.js"></script> -->
 		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
 		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-gl/dist/echarts-gl.min.js"></script>
@@ -105,7 +106,7 @@
 		}
 
 		.selectBox {
-			width: 250px;
+			width: 300px;
 			padding: 15px;
 			background-color: #fff;
 			margin: 15px;
@@ -142,6 +143,52 @@
 			width: 18px;
 			height: 18px;
 			margin: 0 10px;
+		}
+
+		.selectBox .select1 {
+			border-top: 1px solid #adadad;
+			margin-top: 20px;
+			max-height: 300px;
+			overflow-y: auto;
+		}
+
+		.selectBox .select1 .t {
+			padding-top: 15px;
+		}
+
+		.selectBox .select1 .t1 {
+			padding: 15px 0;
+			border-bottom: 1px solid #c7c7c7;
+		}
+
+		.selectBox .select1 .t2 {
+			font-size: 14px;
+		}
+
+		.selectBox .select1 .t3 {
+			font-size: 12px;
+			color: #888;
+			padding-top: 5px;
+		}
+
+		.select1::-webkit-scrollbar {
+			width: 10px;
+			height: 10px;
+		}
+
+		.select1::-webkit-scrollbar-thumb {
+			transition: alll 0.3s;
+			background-color: rgba(193, 193, 193, 0.1);
+			background-clip: padding-box;
+			border-width: 3px;
+			border-color: transparent;
+			border-style: solid;
+			border-radius: 5px;
+		}
+
+		.select1::-webkit-scrollbar-thumb:hover {
+			background-color: rgba(189, 189, 189, 0.3);
+			background-clip: border-box;
 		}
 
 		@media only screen and (max-width: 1440px) {
@@ -203,6 +250,10 @@
 				height: 15px;
 				margin: 0 10px;
 			}
+
+			.selectBox .select1 {
+				max-height: 200px;
+			}
 		}
 
 		@media only screen and (max-width: 480px) {
@@ -251,17 +302,39 @@
 					<div class="boxShaow borderB1 bg-white selectBox">
 						<div class="sel_txt">{{language=='_e'?'Find A Partner':(language=='_f'?'尋找合作夥伴':'寻找合作伙伴')}}
 						</div>
-						<select id="currId">
+						<!-- <select id="currId">
 							<option :value="0">{{language=='_e'?'All':(language=='_f'?'全部':'全部')}}</option>
 							<option v-for="(item,index) in labelData" :key="index" :value="item.id">
 								{{item['title'+language]}}
+							</option>
+						</select> -->
+						<div class="select">
+							<input type="text" v-on:keydown.enter="getMainData(true)" v-model="title1"
+								:placeholder="language=='_e'?'Search content(City, Company Name)':(language=='_f'?'輸入搜索(城市、公司名稱)':'输入搜索(城市、公司名称)')" />
+							<img class="icon" src="images/icon.png" @click="getMainData(true)">
+						</div>
+
+						<select id="currId1">
+							<option :value="0">{{language=='_e'?'Main System':(language=='_f'?'主擴':'主扩')}}</option>
+							<option v-for="(item,index) in arrData" :key="index" :value="item">
+								{{item}}
 							</option>
 						</select>
 
 						<div class="select">
 							<input type="text" v-on:keydown.enter="getMainData(true)" v-model="title"
-								:placeholder="language=='_e'?'Search content':(language=='_f'?'輸入搜索(設備名稱，名稱)':'输入搜索(设备名称，名称)')" />
+								:placeholder="language=='_e'?'Search content':(language=='_f'?'輸入搜索(調音台)':'输入搜索(调音台)')" />
 							<img class="icon" src="images/icon.png" @click="getMainData(true)">
+						</div>
+
+						<div class="select1">
+							<div class="t">{{mainData.length}}{{language=='_e'?'results':(language=='_f'?'個結果':'个结果')}}
+							</div>
+							<div class="t1" v-for="(item,index) in mainData">
+								<p class="t2">{{item['title'+language]}}</p>
+								<p class="t3">{{item['mainEX'+language]}}-{{item['mixer'+language]}}</p>
+								<p class="t3">{{item['phone'+language]}}</p>
+							</div>
 						</div>
 
 					</div>
@@ -348,15 +421,18 @@
 					},
 					language: '',
 					labelData: [],
-					currId: -1,
+					currId: 0,
+					arrData: ['K1', 'K2', 'K3', 'Kara II', 'Kiva II', 'A系列'],
 
-					title: ''
+					title: '',
+					title1: '',
+					currId1: ''
 				}
 			},
 
 			created() {
 				const self = this;
-				self.getLabelData();
+				self.getMainData();
 
 				self.initLanguage();
 				window.base.bus.$on('changelanguage', function(res) {
@@ -369,7 +445,12 @@
 						var selected = $(this).children('option:selected').val();
 						self.currId = document.getElementById("currId").value
 						self.getMainData(true);
-						console.log('selected', selected)
+					});
+					$("#currId1").change(function() {
+						var selected = $(this).children('option:selected').val();
+						self.currId1 = parseInt(selected) == 0 ? '' : selected;
+						self.getMainData(true);
+						console.log('selected', self.currId1)
 					});
 				});
 			},
@@ -394,9 +475,12 @@
 							if (geoCoord) {
 								res.push({
 									name: data[i].name,
+									mainImg: data[i].mainImg,
 									value: geoCoord.concat(data[i].value),
 									description: data[i].description,
-									phone: data[i].phone
+									phone: data[i].phone,
+									mainEX: data[i].mainEX,
+									mixer: data[i].mixer,
 								});
 							}
 						}
@@ -415,25 +499,31 @@
 								let firstParams = params.data;
 								let sndParams = params[1]; //显示的小圆点
 								let firstHtml =
-										'<span style="display:inline-block;margin-right:5px;border-radius:10px;width:10px;' +
-										'height:10px;background-color:rgb(215,42,38)"></span>'
+									'<span style="display:inline-block;margin-right:5px;border-radius:10px;width:10px;' +
+									'height:10px;background-color:rgb(215,42,38)"></span>'
 								let sndHtml =
 									'<span style="display:inline-block;margin-right:5px;border-radius:10px;width:10px;' +
 									'height:10px;background-color:rgb(44,71,85)"></span>'
-								
-								return "<b>"+firstParams.name + "</b>:<br>" + firstHtml + firstParams.phone
-										+"<br>" + sndHtml + firstParams.description;
+
+								return "<div style='display:flex;align-items:center'><img style='width:100px;height:100px' src="+ firstParams.mainImg[0].url
+									+"><div style='color:#222;padding-left:5px;font-size:14px'>名称：" + firstParams.name + 
+									"<br>" + firstParams.phone +
+									"<br>" + firstParams.description +
+									"<br>" + firstParams.mainEX +
+									"<br>" + firstParams.mixer +'</div></div>';
 							},
 							// show: false
 						},
 						legend: {
-							selectedMode: false
+							selectedMode: false,
+							show: false
 						},
 						color: ['#c11719'],
 						bmap: {
 							center: [104.114129, 37.550339],
-							zoom: 5,
+							zoom: 6,
 							roam: true,
+							mapType: 'china',
 							mapStyle: {
 								styleJson: [{
 										featureType: 'water',
@@ -553,10 +643,11 @@
 						series: [{
 							name: '公司信息',
 							type: 'effectScatter',
+							mapType: 'china',
 							coordinateSystem: 'bmap',
 							data: convertData(newData),
 							symbolSize: function(val) {
-								return val[2] / 10;
+								return 15;
 							},
 							encode: {
 								value: 2
@@ -566,19 +657,21 @@
 								brushType: 'stroke'
 							},
 							label: {
-								formatter: '{b}',
+								formatter: '{b}: {@score}',
 								position: 'right',
 								show: true
-							},
-							itemStyle: {
-								shadowBlur: 10,
-								shadowColor: '#333'
 							},
 							emphasis: {
 								scale: true
 							},
 							zlevel: 1,
-							show: false
+							show: false,
+							itemStyle: {
+								color: '#c11719',
+								shadowBlur: 10,
+								shadowColor: '#9a9a9a',
+								borderJoin: 'miter'
+							},
 						}]
 					};
 
@@ -628,22 +721,35 @@
 					postData.searchItem = {
 						type: 8
 					};
-					if (self.currId > -1) {
+					postData.getAfter = {
+						area: {
+							tableName: 'Label',
+							middleKey: 'area_id',
+							key: 'id',
+							condition: '=',
+							info: ['title', 'title_e', 'title_f']
+						}
+					}
+					/* if (self.currId > -1) {
 						postData.searchItem.area_id = self.currId;
+					} */
+					if (self.currId1) {
+						postData.searchItem['mainEX' + self.language] = ['LIKE', ['%' + self.currId1 + '%']];
 					}
 					if (self.title) {
-						postData.searchItem['mainEX' + self.language + '|title' + self.language] = ['LIKE', ['%' +
-							self.title + '%'
-						]]
+						postData.searchItem['mixer' + self.language] = ['LIKE', ['%' + self.title + '%']]
+					}
+					if (self.title1) {
+						postData.searchItem['title' + self.language] = ['LIKE', ['%' + self.title1 + '%']]
 					}
 					postData.order = {
 						listorder: 'desc'
 					};
-					postData.paginate = window.base.cloneForm(self.paginate);
+					// postData.paginate = window.base.cloneForm(self.paginate);
 					const callback = (res) => {
 						if (res.info.data.length > 0) {
 							self.mainData.push.apply(self.mainData, res.info.data);
-							self.paginate['count'] = res.info.total;
+							// self.paginate['count'] = res.info.total;
 							window.base.computePageArr(self);
 							self.getCompanyInfo();
 						} else {
@@ -659,13 +765,17 @@
 					postData.searchItem = {
 						type: 8
 					};
-					if (self.currId > -1) {
-						postData.searchItem.area_id = self.currId;
+					// if (self.currId > -1) {
+					// 	postData.searchItem.area_id = self.currId;
+					// }
+					if (self.currId1) {
+						postData.searchItem['mainEX' + self.language] = ['LIKE', ['%' + self.currId1 + '%']];
 					}
 					if (self.title) {
-						postData.searchItem['mainEX' + self.language + '|title' + self.language] = ['LIKE', ['%' +
-							self.title + '%'
-						]]
+						postData.searchItem['mainEX' + self.language] = ['LIKE', ['%' + self.title + '%']]
+					}
+					if (self.title1) {
+						postData.searchItem['title' + self.language] = ['LIKE', ['%' + self.title1 + '%']]
 					}
 					const callback = (res) => {
 						if (res.info.length > 0) {
@@ -675,13 +785,23 @@
 							var location = [];
 							data.forEach((item, index) => {
 								console.log('item.lng && item.lat', item.lng, item.lat)
-								var tit1 = self.language=='_e'?'Phone Number':(self.language=='_f'?'電話':'电话');
-								var tit2 = self.language=='_e'?'Email':(self.language=='_f'?'郵箱':'邮箱');
+								var tit1 = self.language == '_e' ? 'Phone Number' : (self.language ==
+									'_f' ? '電話' : '电话');
+								var tit2 = self.language == '_e' ? 'Email' : (self.language == '_f' ?
+									'郵箱' : '邮箱');
+								var tit3 = self.language == '_e' ? 'Main System' : (self.language ==
+									'_f' ? '主擴' : '主扩');
+								var tit4 = self.language == '_e' ? 'Console System' : (self.language ==
+									'_f' ? '調音台' : '调音台');
 								if (item.lng && item.lat) {
 									newData.push({
 										name: item['title' + self.language],
-										phone: tit1+': '+item['phone' + self.language],
-										description: tit2+': '+item['description' + self.language],
+										mainImg: item.mainImg,
+										phone: tit1 + ': ' + item['phone' + self.language],
+										description: tit2 + ': ' + item['description' + self
+											.language],
+										mainEX: tit3 + ': ' + item['mainEX' + self.language],
+										mixer: tit4 + ': ' + item['mixer' + self.language],
 										value: 0
 									})
 									location.push({
