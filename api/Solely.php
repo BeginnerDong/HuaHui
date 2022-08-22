@@ -373,6 +373,9 @@ class Solely{
 				$newData['mixer'] = $value['mixer'];
 				$newData['mixer_e'] = $value['mixer_e'];
 				$newData['mixer_f'] = $value['mixer_f'];
+				$newData['passage1'] = $value['passage1'];
+				$newData['passage1_e'] = $value['passage1_e'];
+				$newData['passage1_f'] = $value['passage1_f'];
 				$newData['lng'] = $value['lng'];
 				$newData['lat'] = $value['lat'];
 				array_push($res,$newData);

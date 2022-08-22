@@ -740,7 +740,7 @@
 						postData.searchItem['mixer' + self.language] = ['LIKE', ['%' + self.title + '%']]
 					}
 					if (self.title1) {
-						postData.searchItem['title' + self.language] = ['LIKE', ['%' + self.title1 + '%']]
+						postData.searchItem['title' + self.language+'|passage1' + self.language] = ['LIKE', ['%' + self.title1 + '%']]
 					}
 					postData.order = {
 						listorder: 'desc'
@@ -775,7 +775,7 @@
 						postData.searchItem['mainEX' + self.language] = ['LIKE', ['%' + self.title + '%']]
 					}
 					if (self.title1) {
-						postData.searchItem['title' + self.language] = ['LIKE', ['%' + self.title1 + '%']]
+						postData.searchItem['title' + self.language+'|passage1' + self.language] = ['LIKE', ['%' + self.title1 + '%']]
 					}
 					const callback = (res) => {
 						if (res.info.length > 0) {

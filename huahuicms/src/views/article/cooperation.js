@@ -154,33 +154,52 @@ export default {
 					type: 'input'
 				},
 				{
-					key: "area_id",
-					label: '区域',
+					key: 'passage1',
+					label: '省份',
 					application: ['编辑', '添加'],
-					type: 'select',
-					options: 'labelOptions',
-					listType: 'normal',
-					formatter: function(val, tests) {
-						return val.area&&val.area['title']?val.area['title']:'';
-					},
-					placeholder: '请选择区域',
-					header_search: true,
-					header_search_type: 'select',
-					header_search_value: '',
-					header_search_style: 'width:160px;margin-right:2px;',
-					changeFunc: function(value, self) {
-						if (!value) {
-							delete self.searchItem.area_id;
-						} else {
-							self.searchItem.area_id = value
-						};
-						self.initMainData();
-					},
-					defaultProps: {
-						label: 'title',
-						value: 'id'
-					},
+					type: 'input',
+					listType: 'normal'
 				},
+				{
+					key: "passage1_e",
+					label: '省份(英)',
+					application: ['添加', '编辑'],
+					type: 'input'
+				},
+				{
+					key: "passage1_f",
+					label: '省份(繁)',
+					application: ['添加', '编辑'],
+					type: 'input'
+				},
+				// {
+				// 	key: "area_id",
+				// 	label: '区域',
+				// 	application: ['编辑', '添加'],
+				// 	type: 'select',
+				// 	options: 'labelOptions',
+				// 	listType: 'normal',
+				// 	formatter: function(val, tests) {
+				// 		return val.area&&val.area['title']?val.area['title']:'';
+				// 	},
+				// 	placeholder: '请选择区域',
+				// 	header_search: true,
+				// 	header_search_type: 'select',
+				// 	header_search_value: '',
+				// 	header_search_style: 'width:160px;margin-right:2px;',
+				// 	changeFunc: function(value, self) {
+				// 		if (!value) {
+				// 			delete self.searchItem.area_id;
+				// 		} else {
+				// 			self.searchItem.area_id = value
+				// 		};
+				// 		self.initMainData();
+				// 	},
+				// 	defaultProps: {
+				// 		label: 'title',
+				// 		value: 'id'
+				// 	},
+				// },
 				{
 					key: "mainImg",
 					label: 'LOGO',
