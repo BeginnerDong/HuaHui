@@ -350,11 +350,14 @@ class Solely{
 	{
 		$modelData = [];
 		$modelData['searchItem'] = $data['searchItem'];
-		$Article = BeforeModel::CommonGet('Article',$modelData)['data'];
+		if(isset($data['paginate'])){
+			$modelData['paginate'] = $data['paginate'];
+		};
+		$Article = BeforeModel::CommonGet('Article',$modelData);
 		
 		
 		$res = [];
-		foreach($Article as $key=>$value){
+		foreach($Article['data'] as $key=>$value){
 			if(!(empty($value['lng'])&&empty($value['lat']))){
 				$newData = [];
 				$newData['mainImg'] = $value['mainImg'];

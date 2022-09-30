@@ -108,24 +108,49 @@ export default {
 					application: ['添加', '编辑'],
 					type: 'input'
 				},
+				// {
+				// 	key: 'mixer',
+				// 	label: '调音台',
+				// 	application: ['编辑', '添加'],
+				// 	type: 'input',
+				// 	listType: 'normal'
+				// },
+				// {
+				// 	key: "mixer_e",
+				// 	label: '调音台(英)',
+				// 	application: ['添加', '编辑'],
+				// 	type: 'input'
+				// },
+				// {
+				// 	key: "mixer_f",
+				// 	label: '调音台(繁)',
+				// 	application: ['添加', '编辑'],
+				// 	type: 'input'
+				// },
 				{
-					key: 'mixer',
+					key: "mixer_id",
 					label: '调音台',
 					application: ['编辑', '添加'],
-					type: 'input',
-					listType: 'normal'
-				},
-				{
-					key: "mixer_e",
-					label: '调音台(英)',
-					application: ['添加', '编辑'],
-					type: 'input'
-				},
-				{
-					key: "mixer_f",
-					label: '调音台(繁)',
-					application: ['添加', '编辑'],
-					type: 'input'
+					type: 'cascader',
+					options: 'mixerOptions',
+					listType: 'normal',
+					formatter: function(val, tests) {
+						if(val.mixer&&val.mixer.length>0){
+							var data = [];
+							val.mixer.forEach((item,index)=>{
+								data.push(item.title);
+							})
+							return data.join(',')
+						}
+					},
+					multi:true,
+					placeholder: '请选择调音台',
+					defaultProps: {
+						label: 'title',
+						value: 'id',
+						multiple: true
+					},
+					style:'width: 100%;'
 				},
 				// {
 				//   key: 'postal_code',
@@ -153,53 +178,60 @@ export default {
 					application: ['添加', '编辑'],
 					type: 'input'
 				},
-				{
-					key: 'passage1',
-					label: '省份',
-					application: ['编辑', '添加'],
-					type: 'input',
-					listType: 'normal'
-				},
-				{
-					key: "passage1_e",
-					label: '省份(英)',
-					application: ['添加', '编辑'],
-					type: 'input'
-				},
-				{
-					key: "passage1_f",
-					label: '省份(繁)',
-					application: ['添加', '编辑'],
-					type: 'input'
-				},
 				// {
-				// 	key: "area_id",
-				// 	label: '区域',
+				// 	key: 'passage1',
+				// 	label: '省份',
 				// 	application: ['编辑', '添加'],
-				// 	type: 'select',
-				// 	options: 'labelOptions',
-				// 	listType: 'normal',
-				// 	formatter: function(val, tests) {
-				// 		return val.area&&val.area['title']?val.area['title']:'';
-				// 	},
-				// 	placeholder: '请选择区域',
-				// 	header_search: true,
-				// 	header_search_type: 'select',
-				// 	header_search_value: '',
-				// 	header_search_style: 'width:160px;margin-right:2px;',
-				// 	changeFunc: function(value, self) {
-				// 		if (!value) {
-				// 			delete self.searchItem.area_id;
-				// 		} else {
-				// 			self.searchItem.area_id = value
-				// 		};
-				// 		self.initMainData();
-				// 	},
-				// 	defaultProps: {
-				// 		label: 'title',
-				// 		value: 'id'
-				// 	},
+				// 	type: 'input',
+				// 	listType: 'normal'
 				// },
+				// {
+				// 	key: "passage1_e",
+				// 	label: '省份(英)',
+				// 	application: ['添加', '编辑'],
+				// 	type: 'input'
+				// },
+				// {
+				// 	key: "passage1_f",
+				// 	label: '省份(繁)',
+				// 	application: ['添加', '编辑'],
+				// 	type: 'input'
+				// },
+				{
+					key: "area_id",
+					label: '区域',
+					application: ['编辑', '添加'],
+					type: 'cascader',
+					options: 'labelOptions',
+					listType: 'normal',
+					formatter: function(val, tests) {
+						if(val.area&&val.area.length>0){
+							var data = [];
+							val.area.forEach((item,index)=>{
+								data.push(item.title);
+							})
+							return data.join('-')
+						}
+					},
+					multi:true,
+					placeholder: '请选择区域',
+					header_search: true,
+					header_search_type: 'cascader',
+					header_search_value: '',
+					header_search_style: 'width:160px;margin-right:2px;',
+					changeFunc: function(value, self) {
+						if (!value) {
+							delete self.searchItem.area_id;
+						} else {
+							self.searchItem.area_id = value
+						};
+						self.initMainData();
+					},
+					defaultProps: {
+						label: 'title',
+						value: 'id'
+					},
+				},
 				{
 					key: "mainImg",
 					label: 'LOGO',
@@ -271,6 +303,20 @@ export default {
 								},
 								data: data
 							};
+							if(data.area_id){
+								postData.data.area_id = data.area_id.join(',')
+							}
+							if(data.mixer_id){
+								var arr = [];
+								data.mixer_id.forEach((item,index)=>{
+									item.forEach((v,i)=>{
+										if(arr.indexOf(v)==-1){
+											arr.push(v)
+										}
+									})
+								})
+								postData.data.mixer_id = arr.join(',')
+							}
 							return postData;
 						}
 					},
@@ -326,6 +372,9 @@ export default {
 							var postData = {
 								data: data
 							};
+							if(data.area_id){
+								postData.data.area_id = data.area_id.join(',')
+							}
 							return postData;
 						}
 					},
@@ -345,7 +394,8 @@ export default {
 				type: 8,
 			},
 			optionData: {
-				labelOptions: []
+				labelOptions: [],
+				mixerOptions:[]
 			},
 			otherData: {},
 			getBefore: {},
@@ -393,7 +443,7 @@ export default {
 			const postData = {};
 			postData.searchItem = {
 				type: ['=', 8],
-				parentid:121
+				id:['not in',[121]]
 			};
 			postData.token = self.$store.getters.getToken;
 			postData.order = {
@@ -410,7 +460,8 @@ export default {
 			};
 
 			if (res) {
-				self.optionData.labelOptions = res.info.data;
+				self.optionData.labelOptions = res.info.data[0].child;
+				self.optionData.mixerOptions = res.info.data[1].child;
 			};
 
 		},
@@ -436,16 +487,48 @@ export default {
 					tableName:'Label',
 					middleKey:'area_id',
 					key:'id',
-					condition:'=',
-					info:['title']
+					condition:'FIND_IN_SET',
+					type:'or',
+					order:{
+						id:'asc'
+					}
+					// info:['title']
+				},
+				mixer:{
+					tableName:'Label',
+					middleKey:'mixer_id',
+					key:'id',
+					condition:'FIND_IN_SET',
+					type:'or',
+					order:{
+						id:'asc'
+					}
 				}
 			}
 			var res = await self.$$api_article_get({
 				data: postData
 			});
+			for(var i=0;i<res.info.data.length;i++){
+				res.info.data[i].area_id = res.info.data[i].area_id?res.info.data[i].area_id.split(','):[];
+				res.info.data[i].mixer_id = [];
+				if(res.info.data[i].mixer.length>0){
+					var arr = []
+					res.info.data[i].mixer.forEach((item,index)=>{
+						arr.push(item.parentid);
+					})
+					var brr = [];
+					res.info.data[i].mixer.forEach((item,index)=>{
+						if(arr.indexOf(item.id)==-1){
+							brr.push(item);
+							res.info.data[i].mixer_id.push([parseInt(item.parentid),parseInt(item.id)])
+						}
+					})
+					res.info.data[i].mixer = brr;
+				}
+			}
 			self.mainData = res.info.data;
 			self.paginate.count = res.info.total;
-
+			console.log('mainData',self.mainData)
 		},
 
 

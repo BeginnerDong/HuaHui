@@ -33,6 +33,13 @@ export default {
 					type: 'input'
 				},
 				{
+				  key: "parentid",
+				  label: '父级ID',
+				  application:['添加','编辑'],
+				  type:'cascader',
+				  options:'labelOptions',
+				},
+				{
 					key: "listorder",
 					label: '排序',
 					application: ['添加', '编辑'],
@@ -125,7 +132,7 @@ export default {
 								data: data
 							};
 							postData.data.type = 8;
-							postData.data.parentid = 121;
+							// postData.data.parentid = 121;
 							return postData;
 						}
 					},
@@ -233,7 +240,7 @@ export default {
 				layout: 'total, sizes, prev, pager, next, jumper',
 			},
 			searchItem: {
-				type: 8
+				type: ['in',[8,9]]
 			},
 			optionData: {
 				labelOptions: []

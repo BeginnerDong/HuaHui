@@ -13,6 +13,11 @@
 		<script type="text/javascript" src="js/jquery.min.js"></script>
 		<script type="text/javascript" src="js/base.js"></script>
 		<script type="text/javascript" src="js/include.js"></script>
+		<link type="text/css" rel="stylesheet" href="css/public.css">
+		<link type="text/css" rel="stylesheet" href="css/orderNav.css">
+
+		<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+		<script src="https://unpkg.com/element-ui/lib/index.js"></script>
 
 		<script type="text/javascript"
 			src="https://api.map.baidu.com/api?v=2.0&ak=bIm3oK3DAoQdmLiLRIrCmWoDz30EPGOk&s=1"></script>
@@ -27,12 +32,14 @@
 		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/map/js/world.js"></script>
 		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/bmap.min.js"></script>
 
-		<link type="text/css" rel="stylesheet" href="css/public.css">
-		<link type="text/css" rel="stylesheet" href="css/orderNav.css">
 	</head>
 	<style>
 		[v-cloak] {
 			display: none !important;
+		}
+
+		.el-pager li.active {
+			color: #c11719;
 		}
 
 		.lease {
@@ -128,6 +135,20 @@
 			margin-top: 15px;
 		}
 
+		.el-cascader,.el-select {
+			background-color: #eee;
+			border: none;
+			border-bottom: 1px solid #adadad;
+			height: 50px;
+			width: 100%;
+			margin-top: 15px;
+		}
+
+		.el-cascader .el-input .el-input__inner,.el-select .el-input .el-input__inner {
+			height: 50px;
+			line-height: 50px;
+		}
+		
 		.selectBox .select {
 			display: flex;
 			align-items: center;
@@ -287,6 +308,12 @@
 				float: initial;
 			}
 		}
+
+		.el-cascader .el-input .el-input__inner,.el-select .el-input .el-input__inner {
+			width: 100%;
+			border-radius: 0;
+			border: none;
+		}
 	</style>
 
 	<body>
@@ -308,33 +335,65 @@
 								{{item['title'+language]}}
 							</option>
 						</select> -->
+						<el-cascader style="width: 100%;" :options="areaData" v-model="area_id"
+							:placeholder="language=='_e'?'Search area':(language=='_f'?'選擇區域':'选择区域')"
+							:props="{ checkStrictly: true,label:'title',value:'id',children:'child' }" clearable>
+						</el-cascader>
 						<div class="select">
-							<input type="text" v-on:keydown.enter="getMainData(true)" v-model="title1"
-								:placeholder="language=='_e'?'Search content(City, Company Name)':(language=='_f'?'輸入搜索(城市、公司名稱)':'输入搜索(城市、公司名称)')" />
-							<img class="icon" src="images/icon.png" @click="getMainData(true)">
+							<!-- v-on:keydown.enter="getMainData(true)" -->
+							<input type="text" v-model="title1"
+								:placeholder="language=='_e'?'Search content(City, Company Name)':(language=='_f'?'輸入搜索(公司名稱)':'输入搜索(公司名称)')" />
+							<img class="icon" src="images/icon.png">
 						</div>
 
-						<select id="currId1">
+						<!-- <select id="currId1">
 							<option :value="0">{{language=='_e'?'Main System':(language=='_f'?'主擴':'主扩')}}</option>
 							<option v-for="(item,index) in arrData" :key="index" :value="item">
 								{{item}}
 							</option>
-						</select>
+						</select> -->
+						<el-select v-model="currId1" style="width: 100%;"
+						:placeholder="language=='_e'?'Main System':(language=='_f'?'主擴':'主扩')">
+							<el-option v-for="item in arrData" :key="item.title" :label="item.title"
+						 	:value="item.title">
+							</el-option>
+						</el-select>
 
-						<div class="select">
-							<input type="text" v-on:keydown.enter="getMainData(true)" v-model="title"
+						<!-- <div class="select">
+							<input type="text" v-model="title"
 								:placeholder="language=='_e'?'Search content':(language=='_f'?'輸入搜索(調音台)':'输入搜索(调音台)')" />
-							<img class="icon" src="images/icon.png" @click="getMainData(true)">
+							<img class="icon" src="images/icon.png">
+						</div> -->
+						<el-cascader style="width: 100%;" :options="mixerData" v-model="mixer_id"
+							:placeholder="language=='_e'?'Search content':(language=='_f'?'輸入搜索(調音台)':'输入搜索(调音台)')"
+							:props="{ checkStrictly: true,label:'title',value:'id',children:'child' }" clearable>
+						</el-cascader>
+
+						<div class="select hand" style="justify-content: center;" @click="getMainData(true)">
+							搜索
 						</div>
 
 						<div class="select1">
-							<div class="t">{{mainData.length}}{{language=='_e'?'results':(language=='_f'?'個結果':'个结果')}}
+							<div class="t">{{total}}{{language=='_e'?'results':(language=='_f'?'個結果':'个结果')}}
 							</div>
-							<div class="t1" v-for="(item,index) in mainData">
-								<p class="t2">{{item['title'+language]}}</p>
-								<p class="t3">{{item['mainEX'+language]}}-{{item['mixer'+language]}}</p>
-								<p class="t3">{{item['phone'+language]}}</p>
+							<div class="t1 flex" v-for="(item,index) in mainData">
+								<div class="pr-1" style="flex: 1;width: 100px;">
+									<p class="t2">{{item['title'+language]}}</p>
+									<p class="t3" :class="item.show?'':'avoidOverflow'">{{item['mainEX'+language]}}</p>
+									<p class="t3" v-if="item.show">{{item['mixer'+language]}}</p>
+									<p class="t3" v-if="item.show">{{item['phone'+language]}}</p>
+								</div>
+								<div class="hand" style="font-size: 30px;" @click="item.show=!item.show">
+									{{!item.show?'+':'-'}}
+								</div>
 							</div>
+						</div>
+
+						<div class="flex" style="padding-top: 15px;justify-content: center;">
+							<el-pagination small @current-change="handleCurrentChange"
+								:current-page.sync="paginate.currentPage" :page-size="paginate.pagesize"
+								layout="prev, pager, next" :total="total">
+							</el-pagination>
 						</div>
 
 					</div>
@@ -416,23 +475,41 @@
 					paginate: {
 						count: 0,
 						currentPage: 1,
-						pagesize: 8,
+						pagesize: 10,
 						is_page: true,
 					},
 					language: '',
-					labelData: [],
+					areaData: [],
 					currId: 0,
-					arrData: ['K1', 'K2', 'K3', 'Kara II', 'Kiva II', 'A系列'],
+					arrData: [{
+						title: 'K1'
+					}, {
+						title: 'K2'
+					}, {
+						title: 'K3'
+					}, {
+						title: 'Kara II'
+					}, {
+						title: 'Kiva II'
+					}, {
+						title: 'A系列'
+					}],
+					mixerData: [],
 
 					title: '',
 					title1: '',
-					currId1: ''
+					currId1: '',
+
+					total: 0,
+
+					area_id: [],
+					mixer_id: []
 				}
 			},
 
 			created() {
 				const self = this;
-				self.getMainData();
+				self.getLabelData();
 
 				self.initLanguage();
 				window.base.bus.$on('changelanguage', function(res) {
@@ -440,22 +517,26 @@
 					self.initLanguage()
 				});
 
-				$(document).ready(function() {
-					$("#currId").change(function() {
-						var selected = $(this).children('option:selected').val();
-						self.currId = document.getElementById("currId").value
-						self.getMainData(true);
-					});
-					$("#currId1").change(function() {
-						var selected = $(this).children('option:selected').val();
-						self.currId1 = parseInt(selected) == 0 ? '' : selected;
-						self.getMainData(true);
-						console.log('selected', self.currId1)
-					});
-				});
+				// $(document).ready(function() {
+				// 	$("#currId").change(function() {
+				// 		var selected = $(this).children('option:selected').val();
+				// 		self.currId = document.getElementById("currId").value
+				// 		// self.getMainData(true);
+				// 	});
+				// 	$("#currId1").change(function() {
+				// 		var selected = $(this).children('option:selected').val();
+				// 		self.currId1 = parseInt(selected) == 0 ? '' : selected;
+				// 		// self.getMainData(true);
+				// 		console.log('selected', self.currId1)
+				// 	});
+				// });
 			},
 
 			methods: {
+
+				handleCurrentChange: function(val) {
+					console.log(`当前页: ${val}`);
+				},
 
 				changeId: function() {
 					const self = this;
@@ -484,7 +565,7 @@
 								});
 							}
 						}
-						console.log('res', res, data)
+						// console.log('res', res, data)
 						return res;
 					};
 					var option = {
@@ -493,6 +574,7 @@
 							left: 'center'
 						},
 						tooltip: {
+							confine: true,
 							trigger: 'item',
 							formatter(params) {
 								// console.log('params', params.data)
@@ -505,12 +587,23 @@
 									'<span style="display:inline-block;margin-right:5px;border-radius:10px;width:10px;' +
 									'height:10px;background-color:rgb(44,71,85)"></span>'
 
-								return "<div style='display:flex;align-items:center'><img style='width:100px;height:100px' src="+ firstParams.mainImg[0].url
-									+"><div style='color:#222;padding-left:5px;font-size:14px'>名称：" + firstParams.name + 
-									"<br>" + firstParams.phone +
-									"<br>" + firstParams.description +
-									"<br>" + firstParams.mainEX +
-									"<br>" + firstParams.mixer +'</div></div>';
+								if (firstParams.mainImg.length > 0) {
+									return "<div style='display:flex;align-items:center'><img style='width:100px;height:100px' src=" +
+										firstParams.mainImg[0].url +
+										"><div style='color:#222;padding-left:5px;font-size:14px'>名称：" +
+										firstParams.name +
+										"<br>" + firstParams.phone +
+										"<br>" + firstParams.description +
+										"<br>" + firstParams.mainEX +
+										"<br>" + firstParams.mixer + '</div></div>';
+								} else {
+									return "<div style='display:flex;align-items:center'><div style='color:#222;padding-left:5px;font-size:14px'>名称：" +
+										firstParams.name +
+										"<br>" + firstParams.phone +
+										"<br>" + firstParams.description +
+										"<br>" + firstParams.mainEX +
+										"<br>" + firstParams.mixer + '</div></div>';
+								}
 							},
 							// show: false
 						},
@@ -657,7 +750,7 @@
 								brushType: 'stroke'
 							},
 							label: {
-								formatter: '{b}: {@score}',
+								formatter: '{b}',
 								position: 'right',
 								show: true
 							},
@@ -694,19 +787,18 @@
 					const self = this;
 					const postData = {};
 					postData.searchItem = {
-						parentid: 121
+						type: ['=', 8],
+						id: ['not in', [121]]
 					};
 					postData.order = {
 						listorder: 'asc'
 					};
 					const callback = (res) => {
 						if (res.info.data.length > 0) {
-							self.labelData = res.info.data;
-							self.currId = self.labelData[0].id;
-							self.getMainData();
-						} else {
-							self.getMainData()
-						};
+							self.areaData = res.info.data[0].child;
+							self.mixerData = res.info.data[1].child;
+						}
+						self.getMainData()
 					};
 					window.base.labelGet(postData, callback);
 				},
@@ -730,26 +822,41 @@
 							info: ['title', 'title_e', 'title_f']
 						}
 					}
-					/* if (self.currId > -1) {
-						postData.searchItem.area_id = self.currId;
-					} */
+					postData.FIND_IN_SET = []
+					if (self.area_id.length > 0) {
+						postData.FIND_IN_SET.push({
+							arr: self.area_id,
+							key: 'area_id',
+							type: 'and'
+						})
+					}
+					if (self.mixer_id.length > 0) {
+						postData.FIND_IN_SET.push({
+							arr: self.mixer_id,
+							key: 'mixer_id',
+							type: 'and'
+						})
+					}
 					if (self.currId1) {
 						postData.searchItem['mainEX' + self.language] = ['LIKE', ['%' + self.currId1 + '%']];
 					}
-					if (self.title) {
-						postData.searchItem['mixer' + self.language] = ['LIKE', ['%' + self.title + '%']]
-					}
+					// if (self.title) {
+					// 	postData.searchItem['mixer' + self.language] = ['LIKE', ['%' + self.title + '%']]
+					// }
 					if (self.title1) {
-						postData.searchItem['title' + self.language+'|passage1' + self.language] = ['LIKE', ['%' + self.title1 + '%']]
+						postData.searchItem['title' + self.language] = ['LIKE', ['%' + self.title1 + '%']]
 					}
 					postData.order = {
 						listorder: 'desc'
 					};
-					// postData.paginate = window.base.cloneForm(self.paginate);
+					postData.paginate = window.base.cloneForm(self.paginate);
 					const callback = (res) => {
 						if (res.info.data.length > 0) {
+							for (var i = 0; i < res.info.data.length; i++) {
+								res.info.data[i].show = false;
+							}
 							self.mainData.push.apply(self.mainData, res.info.data);
-							// self.paginate['count'] = res.info.total;
+							self.total = res.info.total;
 							window.base.computePageArr(self);
 							self.getCompanyInfo();
 						} else {
@@ -765,26 +872,36 @@
 					postData.searchItem = {
 						type: 8
 					};
-					// if (self.currId > -1) {
-					// 	postData.searchItem.area_id = self.currId;
-					// }
+					postData.FIND_IN_SET = []
+					if (self.area_id.length > 0) {
+						postData.FIND_IN_SET.push({
+							arr: self.area_id,
+							key: 'area_id',
+							type: 'and'
+						})
+					}
+					if (self.mixer_id.length > 0) {
+						postData.FIND_IN_SET.push({
+							arr: self.mixer_id,
+							key: 'mixer_id',
+							type: 'and'
+						})
+					}
 					if (self.currId1) {
 						postData.searchItem['mainEX' + self.language] = ['LIKE', ['%' + self.currId1 + '%']];
 					}
-					if (self.title) {
-						postData.searchItem['mainEX' + self.language] = ['LIKE', ['%' + self.title + '%']]
-					}
 					if (self.title1) {
-						postData.searchItem['title' + self.language+'|passage1' + self.language] = ['LIKE', ['%' + self.title1 + '%']]
+						postData.searchItem['title' + self.language] = ['LIKE', ['%' +
+							self.title1 + '%'
+						]]
 					}
 					const callback = (res) => {
-						if (res.info.length > 0) {
-							var data = res.info;
-
-							var newData = [];
-							var location = [];
+						var newData = [];
+						var location = [];
+						if (res.info.data.length > 0) {
+							var data = res.info.data;
 							data.forEach((item, index) => {
-								console.log('item.lng && item.lat', item.lng, item.lat)
+								// console.log('item.lng && item.lat', item.lng, item.lat)
 								var tit1 = self.language == '_e' ? 'Phone Number' : (self.language ==
 									'_f' ? '電話' : '电话');
 								var tit2 = self.language == '_e' ? 'Email' : (self.language == '_f' ?
@@ -811,12 +928,12 @@
 								}
 							})
 							console.log('newData', newData, location)
-							setTimeout(function() {
-								self.createEcharts(newData, location);
-							}, 1000)
 						};
+						setTimeout(function() {
+							self.createEcharts(newData, location);
+						}, 1000)
 					};
-					window.base.getCompanyInfo(postData, callback);
+					window.base.articleGet(postData, callback);
 				},
 
 				linkTo(item) {
