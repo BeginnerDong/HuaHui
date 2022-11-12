@@ -191,9 +191,15 @@ export default {
                 if(res){
                   var data = {
                     parentid: res.parentid,
-                    title:res.title,
-                    mainImg:res.mainImg,
-                    description:res.description,
+                    title: res.title,
+                    title_e: res.title_e,
+                    title_f: res.title_f,
+                    mainImg: res.mainImg,
+                    mainImg_e: res.mainImg_e,
+                    mainImg_f: res.mainImg_f,
+                    description: res.description,
+                    description_e: res.description_e,
+                    description_f: res.description_f,
                     listorder:res.listorder,
                     url:res.url,
                     status:res.status

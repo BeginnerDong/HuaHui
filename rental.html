@@ -109,7 +109,7 @@
 
 		.echartsBox {
 			width: 100%;
-			height: 800px;
+			min-height: 800px;
 		}
 
 		.selectBox {
@@ -117,6 +117,8 @@
 			padding: 15px;
 			background-color: #fff;
 			margin: 15px;
+			display: flex;
+			flex-direction: column;
 		}
 
 		.sel_txt {
@@ -133,6 +135,21 @@
 			padding-left: 10px;
 			box-sizing: border-box;
 			margin-top: 15px;
+		}
+		
+		.elIput .el-input__inner{
+			background-color: #eee;
+			border: none;
+			border-bottom: 1px solid #adadad;
+			height: 50px;
+			width: 100%!important;
+			margin-top: 15px;
+			border-radius: 0;
+			line-height: 50px;
+		}
+		.elIput .el-input__suffix{
+			line-height: 50px;
+			margin-top:10px;
 		}
 
 		.el-cascader,.el-select {
@@ -169,8 +186,9 @@
 		.selectBox .select1 {
 			border-top: 1px solid #adadad;
 			margin-top: 20px;
-			max-height: 300px;
+			/* max-height: 300px; */
 			overflow-y: auto;
+			/* flex:1 */
 		}
 
 		.selectBox .select1 .t {
@@ -318,15 +336,15 @@
 
 	<body>
 		<div id="app" v-cloak :style="language=='_e'?'letter-spacing:1px!important':''">
-			<div class="headTop"></div>
+			<div class="headTop" id="headTop"></div>
 
 			<include src="header.html"></include>
 
 			<!-- 为 ECharts 准备一个定义了宽高的 DOM -->
 			<div style="position: relative;">
-				<div id="main" class="echartsBox"></div>
+				<div id="main" class="echartsBox" :style="{height:height+'px'}"></div>
 				<div style="position: absolute;top: 0;">
-					<div class="boxShaow borderB1 bg-white selectBox">
+					<div class="boxShaow borderB1 bg-white selectBox" style="max-height: 900px;" :style="{height:height-60+'px'}">
 						<div class="sel_txt">{{language=='_e'?'Find A Partner':(language=='_f'?'尋找合作夥伴':'寻找合作伙伴')}}
 						</div>
 						<!-- <select id="currId">
@@ -335,15 +353,15 @@
 								{{item['title'+language]}}
 							</option>
 						</select> -->
-						<el-cascader style="width: 100%;" :options="areaData" v-model="area_id"
-							:placeholder="language=='_e'?'Search area':(language=='_f'?'選擇區域':'选择区域')"
-							:props="{ checkStrictly: true,label:'title',value:'id',children:'child' }" clearable>
+						<el-cascader style="width: 100%;" :options="areaData" v-model="area_id" clearable 
+							:placeholder="language=='_e'?'Select the Region':(language=='_f'?'選擇區域':'选择区域')"
+							:props="{ checkStrictly: true,label:'title'+language,value:'id',children:'child' }" clearable>
 						</el-cascader>
-						<div class="select">
+						<div>
 							<!-- v-on:keydown.enter="getMainData(true)" -->
-							<input type="text" v-model="title1"
-								:placeholder="language=='_e'?'Search content(City, Company Name)':(language=='_f'?'輸入搜索(公司名稱)':'输入搜索(公司名称)')" />
-							<img class="icon" src="images/icon.png">
+							<!-- <input type="text" v-model="title1" /> -->
+							<el-input class="elIput" v-model="title1" :placeholder="language=='_e'?'Enter Search (Company Name)':(language=='_f'?'輸入搜索（公司名稱）':'输入搜索（公司名称）')" clearable></el-input>
+							<!-- <img class="icon" src="images/icon.png"> -->
 						</div>
 
 						<!-- <select id="currId1">
@@ -352,10 +370,10 @@
 								{{item}}
 							</option>
 						</select> -->
-						<el-select v-model="currId1" style="width: 100%;"
-						:placeholder="language=='_e'?'Main System':(language=='_f'?'主擴':'主扩')">
-							<el-option v-for="item in arrData" :key="item.title" :label="item.title"
-						 	:value="item.title">
+						<el-select v-model="currId1" style="width: 100%;" clearable
+						:placeholder="language=='_e'?'Loudspeaker System':(language=='_f'?'主擴':'主扩')">
+							<el-option v-for="item in arrData" :key="item['title'+language]" :label="item['title'+language]"
+						 	:value="item['title'+language]">
 							</el-option>
 						</el-select>
 
@@ -364,23 +382,25 @@
 								:placeholder="language=='_e'?'Search content':(language=='_f'?'輸入搜索(調音台)':'输入搜索(调音台)')" />
 							<img class="icon" src="images/icon.png">
 						</div> -->
-						<el-cascader style="width: 100%;" :options="mixerData" v-model="mixer_id"
-							:placeholder="language=='_e'?'Search content':(language=='_f'?'輸入搜索(調音台)':'输入搜索(调音台)')"
+						<el-cascader style="width: 100%;" :options="mixerData" v-model="mixer_id" clearable
+							:placeholder="language=='_e'?'Mixing System':(language=='_f'?'調音臺':'调音台')"
 							:props="{ checkStrictly: true,label:'title',value:'id',children:'child' }" clearable>
 						</el-cascader>
 
 						<div class="select hand" style="justify-content: center;" @click="getMainData(true)">
-							搜索
+							{{language=='_e'?'Search':(language=='_f'?'搜索':'搜索')}}
 						</div>
 
 						<div class="select1">
-							<div class="t">{{total}}{{language=='_e'?'results':(language=='_f'?'個結果':'个结果')}}
+							<div class="t">{{total}}{{language=='_e'?'result(s)':(language=='_f'?'個結果':'个结果')}}
 							</div>
 							<div class="t1 flex" v-for="(item,index) in mainData">
 								<div class="pr-1" style="flex: 1;width: 100px;">
 									<p class="t2">{{item['title'+language]}}</p>
 									<p class="t3" :class="item.show?'':'avoidOverflow'">{{item['mainEX'+language]}}</p>
-									<p class="t3" v-if="item.show">{{item['mixer'+language]}}</p>
+									<p class="t3" v-if="item.show">
+										<span v-for="(v,i) in item.mixer" :key="i">{{v['title'+language]}}、</span>
+									</p>
 									<p class="t3" v-if="item.show">{{item['phone'+language]}}</p>
 								</div>
 								<div class="hand" style="font-size: 30px;" @click="item.show=!item.show">
@@ -475,7 +495,7 @@
 					paginate: {
 						count: 0,
 						currentPage: 1,
-						pagesize: 10,
+						pagesize: 6,
 						is_page: true,
 					},
 					language: '',
@@ -503,43 +523,38 @@
 					total: 0,
 
 					area_id: [],
-					mixer_id: []
+					mixer_id: [],
+					
+					height:800
 				}
 			},
 
 			created() {
-				const self = this;
+				var self = this;
+				// setTimeout(function(){
+				// 	var h = document.getElementById("headTop").offsetHeight;
+				// 	self.height = window.screen.height - h;
+				// },1000)
 				self.getLabelData();
-
-				self.initLanguage();
+				self.getMainLabelData();
+				self.initLanguage(1);
 				window.base.bus.$on('changelanguage', function(res) {
 					self.language = res;
-					self.initLanguage()
+					self.initLanguage(2)
 				});
-
-				// $(document).ready(function() {
-				// 	$("#currId").change(function() {
-				// 		var selected = $(this).children('option:selected').val();
-				// 		self.currId = document.getElementById("currId").value
-				// 		// self.getMainData(true);
-				// 	});
-				// 	$("#currId1").change(function() {
-				// 		var selected = $(this).children('option:selected').val();
-				// 		self.currId1 = parseInt(selected) == 0 ? '' : selected;
-				// 		// self.getMainData(true);
-				// 		console.log('selected', self.currId1)
-				// 	});
-				// });
 			},
 
 			methods: {
 
 				handleCurrentChange: function(val) {
 					console.log(`当前页: ${val}`);
+					var self = this;
+					self.paginate.currentPage = val;
+					self.getMainData();
 				},
 
 				changeId: function() {
-					const self = this;
+					var self = this;
 					var id = document.getElementById("currId").value;
 					console.log('id', id)
 				},
@@ -549,7 +564,7 @@
 					// 基于准备好的dom，初始化echarts实例
 					var myChart = echarts.init(document.getElementById('main'));
 					// 指定图表的配置项和数据
-					const convertData = function(data) {
+					var convertData = function(data) {
 						var res = [];
 						for (var i = 0; i < newData.length; i++) {
 							var geoCoord = [parseFloat(location[i].lng), parseFloat(location[i].lat)];
@@ -752,7 +767,7 @@
 							label: {
 								formatter: '{b}',
 								position: 'right',
-								show: true
+								show: false
 							},
 							emphasis: {
 								scale: true
@@ -773,19 +788,39 @@
 					console.log('myChart', myChart, option)
 				},
 
-				initLanguage() {
-					const self = this;
+				initLanguage(type) {
+					var self = this;
 					var lang = localStorage.getItem('language');
 					if (lang) {
 						self.language = lang;
 					} else {
 						self.language = '';
 					}
+					if(type==2){
+						location.reload();
+					}
+				},
+
+				getMainLabelData() {
+					var self = this;
+					var postData = {};
+					postData.searchItem = {
+						type: 10
+					};
+					postData.order = {
+						listorder: 'asc'
+					};
+					var callback = (res) => {
+						if (res.info.data.length > 0) {
+							self.arrData = res.info.data;
+						}
+					};
+					window.base.labelGet(postData, callback);
 				},
 
 				getLabelData() {
-					const self = this;
-					const postData = {};
+					var self = this;
+					var postData = {};
 					postData.searchItem = {
 						type: ['=', 8],
 						id: ['not in', [121]]
@@ -793,7 +828,7 @@
 					postData.order = {
 						listorder: 'asc'
 					};
-					const callback = (res) => {
+					var callback = (res) => {
 						if (res.info.data.length > 0) {
 							self.areaData = res.info.data[0].child;
 							self.mixerData = res.info.data[1].child;
@@ -804,9 +839,10 @@
 				},
 
 				getMainData(isNew) {
-					const self = this;
-					const postData = {};
+					var self = this;
+					var postData = {};
 					if (isNew) {
+						self.total = 0;
 						self.mainData = [];
 						self.paginate.currentPage = 1;
 					}
@@ -820,6 +856,13 @@
 							key: 'id',
 							condition: '=',
 							info: ['title', 'title_e', 'title_f']
+						},
+						mixer:{
+							tableName: 'Label',
+							middleKey: 'mixer_id',
+							key: 'id',
+							condition: 'FIND_IN_SET',
+							type:'or'
 						}
 					}
 					postData.FIND_IN_SET = []
@@ -850,28 +893,48 @@
 						listorder: 'desc'
 					};
 					postData.paginate = window.base.cloneForm(self.paginate);
-					const callback = (res) => {
+					var callback = (res) => {
+						var h = document.getElementById("headTop").offsetHeight;
+						self.height = window.screen.height - h;
 						if (res.info.data.length > 0) {
 							for (var i = 0; i < res.info.data.length; i++) {
 								res.info.data[i].show = false;
 							}
-							self.mainData.push.apply(self.mainData, res.info.data);
+							self.mainData = res.info.data;
+							// self.mainData.push.apply(self.mainData, res.info.data);
 							self.total = res.info.total;
 							window.base.computePageArr(self);
-							self.getCompanyInfo();
+							
 						} else {
 							alert('没有数据')
 						};
+						self.getCompanyInfo();
 					};
 					window.base.articleGet(postData, callback);
 				},
 
 				getCompanyInfo() {
-					const self = this;
-					const postData = {};
+					var self = this;
+					var postData = {};
 					postData.searchItem = {
 						type: 8
 					};
+					postData.getAfter = {
+						area: {
+							tableName: 'Label',
+							middleKey: 'area_id',
+							key: 'id',
+							condition: '=',
+							info: ['title', 'title_e', 'title_f']
+						},
+						mixer:{
+							tableName: 'Label',
+							middleKey: 'mixer_id',
+							key: 'id',
+							condition: 'FIND_IN_SET',
+							type:'or'
+						}
+					}
 					postData.FIND_IN_SET = []
 					if (self.area_id.length > 0) {
 						postData.FIND_IN_SET.push({
@@ -895,7 +958,7 @@
 							self.title1 + '%'
 						]]
 					}
-					const callback = (res) => {
+					var callback = (res) => {
 						var newData = [];
 						var location = [];
 						if (res.info.data.length > 0) {
@@ -910,6 +973,12 @@
 									'_f' ? '主擴' : '主扩');
 								var tit4 = self.language == '_e' ? 'Console System' : (self.language ==
 									'_f' ? '調音台' : '调音台');
+								var mixer = [];
+								if(item.mixer.length>0){
+									item.mixer.forEach((v,i)=>{
+										mixer.push(v['title'+self.language])
+									})
+								}
 								if (item.lng && item.lat) {
 									newData.push({
 										name: item['title' + self.language],
@@ -918,7 +987,7 @@
 										description: tit2 + ': ' + item['description' + self
 											.language],
 										mainEX: tit3 + ': ' + item['mainEX' + self.language],
-										mixer: tit4 + ': ' + item['mixer' + self.language],
+										mixer: tit4 + ': ' + mixer.join('、'),
 										value: 0
 									})
 									location.push({

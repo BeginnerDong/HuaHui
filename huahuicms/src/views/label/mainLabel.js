@@ -1,5 +1,5 @@
 export default {
-	name: 'article',
+	name: 'mainLabel',
 	components: {},
 	data() {
 		return {
@@ -10,7 +10,7 @@ export default {
 			},
 			fields: [{
 					key: 'id',
-					label: '类别ID',
+					label: '区域ID',
 					application: [],
 					type: 'input',
 				},
@@ -33,83 +33,10 @@ export default {
 					type: 'input'
 				},
 				{
-					key: "description",
-					label: '描述',
-					application: ['添加', '编辑'],
-					type: 'input'
-				},
-				{
-					key: "description_e",
-					label: '描述(英)',
-					application: ['添加', '编辑'],
-					type: 'input'
-				},
-				{
-					key: "description_f",
-					label: '描述(繁)',
-					application: ['添加', '编辑'],
-					type: 'input'
-				},
-				{
-					key: "url",
-					label: '跳转链接',
-					application: ['添加', '编辑'],
-					type: 'input'
-				},
-				{
 					key: "listorder",
 					label: '排序',
 					application: ['添加', '编辑'],
 					type: 'input'
-				},
-				{
-					key: "parentid",
-					label: '父级ID',
-					application: ['添加', '编辑'],
-					type: 'cascader',
-					options: 'labelOptions',
-				},
-				{
-					key: "mainImg",
-					label: '图标',
-					application: ['添加', '编辑'],
-					type: 'qiupload',
-					limit: 1,
-				},
-				{
-					key: "mainImg_e",
-					label: '图标(英)',
-					application: ['添加', '编辑'],
-					type: 'qiupload',
-					limit: 1,
-				},
-				{
-					key: "mainImg_f",
-					label: '图标(繁)',
-					application: ['添加', '编辑'],
-					type: 'qiupload',
-					limit: 1,
-				},
-				{
-					key: "bannerImg",
-					label: '二维码',
-					application: ['添加', '编辑'],
-					type: 'qiupload',
-					limit: 1,
-				},
-				{
-					key: "bannerImg_e",
-					label: '二维码(英)',
-					application: ['添加', '编辑'],
-					type: 'qiupload',
-					limit: 1,
-				},
-				{
-					key: "bannerImg_f",
-					label: '二维码(繁)',
-					application: ['添加', '编辑'],
-					type: 'qiupload',
-					limit: 1,
 				},
 				{
 					key: "status",
@@ -149,6 +76,16 @@ export default {
 				},
 			],
 
+			search_data: {
+				fields: [{
+					key: 'title',
+					label: '标题'
+				}],
+				default_value: {
+					title: ''
+				}
+			},
+
 			// 需要给分页组件传的信息
 			pagination: {
 				current_page: 1,
@@ -187,7 +124,8 @@ export default {
 							var postData = {
 								data: data
 							};
-							postData.data.type = 1;
+							postData.data.type = 10;
+							// postData.data.parentid = 121;
 							return postData;
 						}
 					},
@@ -213,17 +151,9 @@ export default {
 									title: res.title,
 									title_e: res.title_e,
 									title_f: res.title_f,
-									mainImg: res.mainImg,
-									mainImg_e: res.mainImg_e,
-									mainImg_f: res.mainImg_f,
-									bannerImg: res.bannerImg,
-									bannerImg_e: res.bannerImg_e,
-									bannerImg_f: res.bannerImg_f,
-									description: res.description,
-									description_f: res.description_f,
-									description_e: res.description_e,
+									lng: res.lng,
+									lat: res.lat,
 									listorder: res.listorder,
-									url: res.url,
 									status: res.status
 								};
 							} else {
@@ -293,15 +223,6 @@ export default {
 				}
 			],
 
-			search_data: {
-				fields: [{
-					key: 'title',
-					label: '标题'
-				}],
-				default_value: {
-					title: ''
-				}
-			},
 
 			paginate: {
 				count: 0,
@@ -312,7 +233,7 @@ export default {
 				layout: 'total, sizes, prev, pager, next, jumper',
 			},
 			searchItem: {
-				type: 1
+				type: 10
 			},
 			optionData: {
 				labelOptions: []
@@ -374,7 +295,6 @@ export default {
 
 			if (res) {
 				self.mainData = res.info.data;
-				self.optionData.labelOptions = res.info.data;
 			};
 		},
 

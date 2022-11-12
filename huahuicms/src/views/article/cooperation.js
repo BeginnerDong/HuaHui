@@ -108,13 +108,13 @@ export default {
 					application: ['添加', '编辑'],
 					type: 'input'
 				},
-				// {
-				// 	key: 'mixer',
-				// 	label: '调音台',
-				// 	application: ['编辑', '添加'],
-				// 	type: 'input',
-				// 	listType: 'normal'
-				// },
+				{
+					key: 'mixer',
+					label: '调音台(旧)',
+					application: ['编辑', '添加'],
+					type: 'input',
+					listType: 'normal'
+				},
 				// {
 				// 	key: "mixer_e",
 				// 	label: '调音台(英)',
@@ -135,9 +135,9 @@ export default {
 					options: 'mixerOptions',
 					listType: 'normal',
 					formatter: function(val, tests) {
-						if(val.mixer&&val.mixer.length>0){
+						if(val.mixerArr&&val.mixerArr.length>0){
 							var data = [];
-							val.mixer.forEach((item,index)=>{
+							val.mixerArr.forEach((item,index)=>{
 								data.push(item.title);
 							})
 							return data.join(',')
@@ -494,7 +494,7 @@ export default {
 					}
 					// info:['title']
 				},
-				mixer:{
+				mixerArr:{
 					tableName:'Label',
 					middleKey:'mixer_id',
 					key:'id',
@@ -511,19 +511,19 @@ export default {
 			for(var i=0;i<res.info.data.length;i++){
 				res.info.data[i].area_id = res.info.data[i].area_id?res.info.data[i].area_id.split(','):[];
 				res.info.data[i].mixer_id = [];
-				if(res.info.data[i].mixer.length>0){
+				if(res.info.data[i].mixerArr.length>0){
 					var arr = []
-					res.info.data[i].mixer.forEach((item,index)=>{
+					res.info.data[i].mixerArr.forEach((item,index)=>{
 						arr.push(item.parentid);
 					})
 					var brr = [];
-					res.info.data[i].mixer.forEach((item,index)=>{
+					res.info.data[i].mixerArr.forEach((item,index)=>{
 						if(arr.indexOf(item.id)==-1){
 							brr.push(item);
 							res.info.data[i].mixer_id.push([parseInt(item.parentid),parseInt(item.id)])
 						}
 					})
-					res.info.data[i].mixer = brr;
+					res.info.data[i].mixerArr = brr;
 				}
 			}
 			self.mainData = res.info.data;

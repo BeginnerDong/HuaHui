@@ -11,6 +11,7 @@ import SubjectMenu from './subjectMenu/'
 import Sku from './sku.vue'
 import SkuItem from './skuItem.vue'
 import Area from './area.vue'
+import MainLabel from './mainLabel.vue'
 
 export default {
   Article,
@@ -24,5 +25,6 @@ export default {
   SubjectMenu,
   Sku,
   SkuItem,
-  Area
+  Area,
+  MainLabel
 }

@@ -33,11 +33,16 @@ export default {
 					type: 'input'
 				},
 				{
-				  key: "parentid",
-				  label: '父级ID',
-				  application:['添加','编辑'],
-				  type:'cascader',
-				  options:'labelOptions',
+					key: "parentid",
+					label: '父级ID',
+					application: ['添加', '编辑'],
+					type: 'cascader',
+					options: 'labelOptions',
+					defaultProps: {
+						label: 'title',
+						value: 'id',
+						children: 'child',
+					},
 				},
 				{
 					key: "listorder",
@@ -240,7 +245,7 @@ export default {
 				layout: 'total, sizes, prev, pager, next, jumper',
 			},
 			searchItem: {
-				type: ['in',[8,9]]
+				type: ['in', [8, 9]]
 			},
 			optionData: {
 				labelOptions: []
@@ -302,7 +307,7 @@ export default {
 
 			if (res) {
 				self.mainData = res.info.data[0].child;
-				self.optionData.labelOptions = res.info.data;
+				self.optionData.labelOptions = res.info.data[0].child;
 			};
 		},
 

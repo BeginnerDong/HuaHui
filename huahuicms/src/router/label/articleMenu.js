@@ -174,7 +174,7 @@ export default {
     },
     {
       path: 'area',
-      name: '租赁公司区域',
+      name: '租赁公司菜单',
       icon: 'reorder',
       id:'3-/label/articleMenu/area',
       child_button:[
@@ -192,6 +192,27 @@ export default {
         },
       ],
       component: Label.Area
+    },
+    {
+      path: 'mainLabel',
+      name: '主扩类别',
+      icon: 'reorder',
+      id:'3-/label/articleMenu/mainLabel',
+      child_button:[
+        {
+          name:'添加',
+          id:'/label/articleMenu/mainLabel-添加'
+        },
+        {
+          name:'编辑',
+          id:'/label/articleMenu/mainLabel-编辑'
+        },
+        {
+          name:'删除选中',
+          id:'/label/articleMenu/mainLabel-删除选中'
+        },
+      ],
+      component: Label.MainLabel
     },
   ]
 }

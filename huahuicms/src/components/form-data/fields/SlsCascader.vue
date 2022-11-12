@@ -27,7 +27,7 @@
 			},
 			cascader_data: {
 				get: function() {
-					if (this.data.defaultProps.multiple) {
+					if (this.data.defaultProps&&this.data.defaultProps.multiple) {
 						return this.submit_data[this.data.key]
 					} else if (this.data.multi) {
 						return func.changeInt(this.submit_data[this.data.key])
@@ -88,7 +88,7 @@
 			onChange(val) {
 				console.log('onChange111', val)
 				if (val && val.length > 0) {
-					if (this.data.defaultProps.multiple) {
+					if (this.data.defaultProps&&this.data.defaultProps.multiple) {
 						var changeData = val;
 					} else if (this.data.multi) {
 						var changeData = val;
@@ -122,7 +122,8 @@
 				this.submit_data[this.data.key] = []
 			}
 			this.temp_field_obj[this.data.key] = []
-			if (this.data.defaultProps.multiple) {
+			console.log('this.data.defaultProps',this.data)
+			if (this.data.defaultProps&&this.data.defaultProps.multiple) {
 				this.defaultProps.multiple = true
 			}
 		},
