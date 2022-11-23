@@ -862,7 +862,10 @@
 							middleKey: 'mixer_id',
 							key: 'id',
 							condition: 'FIND_IN_SET',
-							type:'or'
+							type:'or',
+							searchItem:{
+								parentid:['not in',[166]]
+							}
 						}
 					}
 					postData.FIND_IN_SET = []
@@ -932,7 +935,10 @@
 							middleKey: 'mixer_id',
 							key: 'id',
 							condition: 'FIND_IN_SET',
-							type:'or'
+							type:'or',
+							searchItem:{
+								parentid:['not in',[166]]
+							}
 						}
 					}
 					postData.FIND_IN_SET = []
