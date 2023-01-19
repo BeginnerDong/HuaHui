@@ -301,7 +301,13 @@ export default {
               },
               formData:function(data,self,func){
                 var data = {
-                  content:''
+                  content:'',
+                  mainImg: [],
+                  mainImg_e:[],
+                  mainImg_f:[],
+                  bannerImg: [],
+                  bannerImg_e:[],
+                  bannerImg_f:[],
                 };
                 return data
               },

@@ -384,7 +384,7 @@
 						</div> -->
 						<el-cascader style="width: 100%;" :options="mixerData" v-model="mixer_id" clearable
 							:placeholder="language=='_e'?'Mixing System':(language=='_f'?'調音臺':'调音台')"
-							:props="{ checkStrictly: true,label:'title',value:'id',children:'child' }" clearable>
+							:props="{ checkStrictly: true,label:'title'+language,value:'id',children:'child' }" clearable>
 						</el-cascader>
 
 						<div class="select hand" style="justify-content: center;" @click="getMainData(true)">
@@ -884,7 +884,12 @@
 						})
 					}
 					if (self.currId1) {
-						postData.searchItem['mainEX' + self.language] = ['LIKE', ['%' + self.currId1 + '%']];
+						postData.FIND_IN_SET.push({
+							arr: [self.currId1],
+							key: 'mainEX' + self.language,
+							type: 'or'
+						})
+						// postData.searchItem['mainEX' + self.language] = self.currId1;
 					}
 					// if (self.title) {
 					// 	postData.searchItem['mixer' + self.language] = ['LIKE', ['%' + self.title + '%']]
@@ -957,7 +962,12 @@
 						})
 					}
 					if (self.currId1) {
-						postData.searchItem['mainEX' + self.language] = ['LIKE', ['%' + self.currId1 + '%']];
+						postData.FIND_IN_SET.push({
+							arr: [self.currId1],
+							key: 'mainEX' + self.language,
+							type: 'or'
+						})
+						// postData.searchItem['mainEX' + self.language] = self.currId1;
 					}
 					if (self.title1) {
 						postData.searchItem['title' + self.language] = ['LIKE', ['%' +

@@ -158,6 +158,11 @@ export default {
 							var data = {
 								title: '',
 								mainImg: [],
+								mainImg_e:[],
+								mainImg_f:[],
+								bannerImg: [],
+								bannerImg_e:[],
+								bannerImg_f:[],
 								description: '',
 							};
 							return data;

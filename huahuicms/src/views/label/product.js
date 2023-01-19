@@ -247,7 +247,18 @@ export default {
                 self.resetChecked();
                 var data = {
                   title:'',
-                  mainImg:[],
+                  mainImg: [],
+                  mainImg_e:[],
+                  mainImg_f:[],
+                  bannerImg: [],
+                  bannerImg_e:[],
+                  bannerImg_f:[],
+                  headImg: [],
+                  headImg_e:[],
+                  headImg_f:[],
+                  phoneImg: [],
+                  phoneImg_e:[],
+                  phoneImg_f:[],
                   description:'',
                 };
                 return data;
