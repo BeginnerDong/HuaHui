@@ -260,6 +260,9 @@ export default {
                   bannerImg: [],
                   bannerImg_e:[],
                   bannerImg_f:[],
+                  video: [],
+                  video_e: [],
+                  video_f: [],
                 };
                 return data
               },

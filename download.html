@@ -148,12 +148,12 @@
 					<!-- 视频 -->
 					<div class="videoBox" v-show="curr==3">
 						<ul class="flexRowBetween">
-							<li v-for="(item,index) in mainData" :key="index">
+							<li v-for="(item,index) in mainData" :key="index" @click="goLink(item.description)" class="hand">
 								<img class="pic" :src="item['video'+language]&&item['video'+language][0]?item['video'+language][0].url:''">
 							<!-- 	<img class="video" src="images/download-img4.png" > -->
-								<a class="download" :href="item.description" target="_blank">
+								<!-- <a class="download" :href="item.description" target="_blank">
 									<img class="icon" src="images/play11.png" >
-								</a>
+								</a> -->
 							</li>
 						</ul>
 					</div>
@@ -224,6 +224,11 @@
 			},
 			
 		    methods: {
+				
+				goLink:function(path){
+					const self = this;
+					window.open(path);
+				},
 				
 				initLanguage(){
 					const self = this;
