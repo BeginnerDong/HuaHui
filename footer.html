@@ -31,12 +31,15 @@
 					<li>
 						<h1>{{language=='_e'?'Partnerships':(language=='_f'?'合作夥伴':'合作伙伴')}}</h1>
 						<div class="liCon">
-							<p><a href="https://www.l-acoustics.com/" target="_blank">L-Acoustics</a></p>
+							<p v-for="(item,index) in brandData" :key="index">
+								<a :href="item.url" target="_blank">{{item['title'+language]}}</a>
+							</p>
+							<!-- <p><a href="https://www.l-acoustics.com/" target="_blank">L-Acoustics</a></p>
 							<p><a href="https://www.digico.biz/" target="_blank">DiGiCo</a></p>
 							<p><a href="https://calrec.com/" target="_blank">Calrec</a></p>
 							<p><a href="https://blacktrax.cast-soft.com/" target="_blank">BlackTrax</a></p>
 							<p><a href="https://lightact.io/" target="_blank">LightAct</a></p>
-							<p><a href="https://cast-soft.com/wysiwyg-lighting-design/" target="_blank">Wysiwyg</a></p>
+							<p><a href="https://cast-soft.com/wysiwyg-lighting-design/" target="_blank">Wysiwyg</a></p> -->
 						</div>
 					</li>
 					<!-- <li>
@@ -118,6 +121,7 @@
 				mData:[],
 				show:false,
 				ewmUrl:'',
+				brandData: [],
 				
 				language:''
 			}
@@ -126,7 +130,7 @@
 			const self = this;
 			self.getPcData();
 			self.getMData();
-			
+			self.getBrandData();
 			self.initLanguage();
 			window.base.bus.$on('changelanguage',function(res){
 				self.language = res;
@@ -175,6 +179,25 @@
 					scrollTop: 0
 				}, "slow"); //回到顶部
 				
+			},
+			
+			getBrandData: function(){
+			    var self = this;
+			    var postData = {};
+				postData.searchItem = {
+					parentid:0,
+					type:5,
+					// id:['not in',[157]]
+				};
+				postData.order = {
+					listorder:'asc'
+				};
+			    var callback = function(res){
+			        if(res.info.data.length>0&&res.info.data[0]){
+						self.brandData =res.info.data;
+			        };    
+			    };
+			    window.base.labelGet(postData, callback);
 			},
 			
 			getPcData: function(id){

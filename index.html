@@ -14,8 +14,10 @@
 		<script type="text/javascript" src="js/jquery.min.js"></script>
 		<script type="text/javascript" src="js/base.js"></script>
 		<script type="text/javascript" src="js/include.js"></script>
-		<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">    
-		<script type="text/javascript" src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+		<!-- <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">    
+		<script type="text/javascript" src="https://unpkg.com/swiper/swiper-bundle.min.js"></script> -->
+		<link href="https://cdn.bootcdn.net/ajax/libs/Swiper/10.2.0/swiper-bundle.min.css" rel="stylesheet">
+		<script src="https://cdn.bootcdn.net/ajax/libs/Swiper/10.2.0/swiper-bundle.min.js"></script>
 		<link type="text/css" rel="stylesheet" href="css/public.css">
 		<link type="text/css" rel="stylesheet" href="css/index.css">
 		<!-- <link type="text/css" rel="stylesheet" href="css/swiper.min.css"> -->
@@ -226,13 +228,21 @@
 							</div>
 						</a>
 						<a :href="'product.html?id='+brandData[0].id+'&behavior='+brandData[0].behavior"
-						class="flexCenter mgl30 pr o-h qtImg" v-if="index==2" @mouseenter="enter(8)" @mouseleave="leave()" >
-							<img src="images/home-img06.png" class="mgl30 qtImg ">
-							<div class="Icon flexCenter mgl30"></div>
+						class="flexCenter mgl30 pr o-h qtImg qtImg2" v-if="index==2" @mouseenter="enter(8)" @mouseleave="leave()" >
+							<!-- <img src="images/home-img06.png" class="qtImg qtImg2"> -->
+							<!-- <div class="Icon flexCenter "></div> -->
+							<img :src="brandData[8]&&brandData[8].headImg&&brandData[8].headImg[0]&&brandData[8].headImg[0].url" class="qtImg qtImg2" >
+							<div class="Icon flexCenter">
+								<img :src="brandData[8]&&brandData[8].mainImg&&brandData[8].mainImg[0]&&brandData[8].mainImg[0].url" >
+							</div>
 						</a>
-						<a class="flexCenter mgl30 pr o-h qtImg" v-if="index==4" style="cursor: auto;">
-							<img src="images/home-img09.png" class="mgl30 qtImg " >
-							<div class="Icon flexCenter mgl30"></div>
+						<a class="flexCenter mgl30 pr o-h qtImg qtImg3" v-if="index==4" style="cursor: auto;"
+						:href="'product.html?id='+brandData[9].id+'&behavior='+brandData[9].behavior">
+							<!-- <img src="images/home-img09.png" class="mgl30 qtImg qtImg3" > -->
+							<img :src="brandData[9]&&brandData[9].headImg&&brandData[9].headImg[0]&&brandData[9].headImg[0].url" class="qtImg qtImg3" >
+							<div class="Icon flexCenter">
+								<img :src="brandData[9]&&brandData[9].mainImg&&brandData[9].mainImg[0]&&brandData[9].mainImg[0].url" >
+							</div>
 						</a>
 						<a class="flexCenter mgl30 pr o-h qtImg" v-if="index==6"
 						:href="'product.html?id='+brandData[7].id+'&behavior='+brandData[7].behavior"
@@ -699,7 +709,7 @@
 					postData.paginate = {
 					    count: 0, 
 					    currentPage: 1, 
-					    pagesize:8, 
+					    pagesize:9, 
 					    is_page: true, 
 					};
 					postData.searchItem = {
